@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.UserInfoMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.UserInfo">
+		<id column="OPENID" property="openid" jdbcType="VARCHAR"/>
+		<result column="USERID" property="userid" jdbcType="VARCHAR"/>
+		<result column="NICKNAME"  property="nickname" jdbcType="VARCHAR"/>
+		<result column="SEX" property="sex" jdbcType="VARCHAR"/>
+		<result column="LANGUAGE"  property="language" jdbcType="VARCHAR"/>
+		<result column="INSERTTIME"  property="inserttime" jdbcType="VARCHAR"/>
+		<result column="INSERTTYPE"  property="inserttype" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		 OPENID, USERID, NICKNAME, SEX, LANGUAGE, INSERTTIME, INSERTTYPE 
+	</sql>
+	<!-- 查询 -->
+	<select id="getUsers" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_USERINFO
+	</select>
+</mapper>
