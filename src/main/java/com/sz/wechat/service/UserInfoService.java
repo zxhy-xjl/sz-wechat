@@ -2,6 +2,8 @@ package com.sz.wechat.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
 import com.sz.wechat.dao.UserInfoMapper;
 import com.sz.wechat.entity.UserInfo;
 /**
@@ -23,7 +25,8 @@ public class UserInfoService {
 	 * 获取所有用户信息 
 	 * @return 用户信息集合
 	 */
-	public List<UserInfo> getUsers(){
+	public List<UserInfo> getUsers(int page, int pageSize){
+		PageHelper.startPage(page, pageSize);
 		return this.userInfoMapper.getUsers();
 	}
 }

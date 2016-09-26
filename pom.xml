@@ -134,6 +134,11 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
 		<!-- 导入 log 日志jar 包 -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -145,6 +150,12 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
+		</dependency>
+		<!-- 导入 Page 包 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.0.3</version>
 		</dependency>
   </dependencies>
   <build>
