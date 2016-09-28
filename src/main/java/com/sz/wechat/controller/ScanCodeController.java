@@ -37,7 +37,7 @@ public class ScanCodeController {
 		Map<String,Object> map = ScanCodeUtils.getScanCode();
 		JsonVo  jsonVo = new JsonVo();
 		ScanCode scanCode = null;
-		if(null != map){
+		if(null != map){ 
 			scanCode = new ScanCode();
 			scanCode.setTicket(String.valueOf(map.get("jsapi_ticket")));
 			scanCode.setNonce(String.valueOf(map.get("nonceStr")));
