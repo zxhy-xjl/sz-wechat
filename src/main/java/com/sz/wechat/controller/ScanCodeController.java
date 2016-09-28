@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,16 +33,11 @@ public class ScanCodeController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@ResponseBody
 	@RequestMapping(value = "/scanCode/sign")
-	public ModelAndView  sign(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
+	public JsonVo  sign(){
 		Map<String,Object> map = ScanCodeUtils.getScanCode();
 		JsonVo  jsonVo = new JsonVo();
 		ScanCode scanCode = null;
-		 ModelAndView mv = new ModelAndView();
 		if(null != map){
-			 mv.addObject("jsapi_ticket", map.get("jsapi_ticket"));
-			 mv.addObject("nonceStr", map.get("nonceStr"));
-			 mv.addObject("timestamp", map.get("timestamp"));
-			 mv.addObject("signature", map.get("signature"));
 			scanCode = new ScanCode();
 			scanCode.setTicket(String.valueOf(map.get("jsapi_ticket")));
 			scanCode.setNonce(String.valueOf(map.get("nonceStr")));
@@ -52,8 +45,7 @@ public class ScanCodeController {
 			scanCode.setSignature(String.valueOf(map.get("signature")));
 		}
 		jsonVo.setResult(scanCode);
-		mv.setViewName("scanCode.jsp");
-		return mv;
+		return jsonVo;
 	}
 
 /*	public static void main(String[] args) {

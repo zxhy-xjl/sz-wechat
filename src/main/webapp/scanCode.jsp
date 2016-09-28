@@ -10,7 +10,6 @@
 <title>扫一扫</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<link rel="stylesheet" href="<%=path%>/style/mui.min.css">
 <script type="text/javascript">
 function getCode(){
 	  $.ajax({
@@ -67,8 +66,6 @@ wx.error(function(res){
 <input type="hidden" id="timestamp">
 <input type="hidden" id="nonceStr">
 <input type="hidden" id="signature">
-<div class="mui-input-row">
-	<input id='id_securityCode_input' type="text" class="mui-input-clear mui-input">
-</div>
+<input id='id_securityCode_input' type="text" >
 </body>
 </html>
