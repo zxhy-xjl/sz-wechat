@@ -1,5 +1,4 @@
 package com.sz.wechat.utils;
-
 import java.security.MessageDigest;
 import java.util.Formatter;
 import java.util.HashMap;
@@ -28,14 +27,16 @@ public class ScanCodeUtils {
 	 * wechatJSSDK的ticket请求URL地址
 	 */
 	private final static String WECHAT_JSSDK_TICKET_URL="https://api.weixin.qq.com/cgi-bin/ticket/getticket?";
-
+	/**
+	 * 扫一扫页面
+	 */
 		
 		
 	/**
-	 * 读取
+	 * 读取扫一扫所需要参数
 	 * @return
 	 */
-	public static Map<String,Object> getScanCode(){
+	public static Map<String,Object> getScanCode(String flag){
 		String token = getJSSDKAccessToken();
 		String ticket = "";
 		if("".equals(ticket)){
@@ -43,16 +44,17 @@ public class ScanCodeUtils {
 		}
 		if(!"".equals(token)){
 			ticket = getJSSDKTicket(token);
-			System.out.println("ticket:"+ticket);
 		}
-		String url = "http://www.haoschoool.com/sz-wechat/scanCode.jsp";
 		String nonceStr = create_nonce_str();
 		String timeStamp = create_timestamp();
+		String wechat_scancode_url="http://www.haoschoool.com/sz-wechat/scanCode.jsp";
+		if(!"".equals(flag)){
+			wechat_scancode_url=wechat_scancode_url+"?flag="+flag;
+		}
 		String url_1 = "jsapi_ticket=" + ticket +
                 "&noncestr=" + nonceStr +
                 "&timestamp=" + timeStamp +
-                "&url=" + url;
-		System.out.println(url_1);
+                "&url=" + wechat_scancode_url;
 		String signature = "";
 		try {
 			MessageDigest crypt = MessageDigest.getInstance("SHA-1");
@@ -63,7 +65,7 @@ public class ScanCodeUtils {
 			e.printStackTrace();
 		}
 		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("url", url);
+		hashMap.put("url", wechat_scancode_url);
 		hashMap.put("jsapi_ticket",ticket);
 		hashMap.put("nonceStr",nonceStr);
 		hashMap.put("timestamp",timeStamp);
@@ -90,7 +92,7 @@ public class ScanCodeUtils {
 	 * @return ticket
 	 */
 	private static String getJSSDKTicket(String access_token){
-		String resultStr = "";
+		String resultStr = "";//设置返回值
 		String url = WECHAT_JSSDK_TICKET_URL +"access_token="+access_token+"&type=jsapi";
 		JSONObject json = HttpRequestUtils.httpGet(url);
 		if(null != json){

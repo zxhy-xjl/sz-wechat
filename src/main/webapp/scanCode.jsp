@@ -7,14 +7,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name=”viewport” content=”width=device-width, initial-scale=1″ />
 <title>扫一扫</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
+var flag ;
+$(function(){
+	flag = GetRequest();
+	getCode();
+});
+function GetRequest() { 
+	var url = location.search; //获取url中"?"符后的字串 
+	var theRequest = new Object(); 
+	if (url.indexOf("?") != -1) { 
+		var str = url.substr(1); 
+		strs = str.split("&"); 
+		for(var i = 0; i < strs.length; i ++) { 
+		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+		} 
+	} 
+	return theRequest; 
+} 
+/**
+ * 获取到扫一扫参数
+ */
 function getCode(){ 
 	  $.ajax({
 		type:'post',
-		url:'<%=path%>/scanCode/sign.do',
+		url:'<%=path%>/scanCode/sign.do?flag='+flag['flag'],
 		success:function(data){
 			if(data.result){
 				var obj = data.result;
@@ -27,6 +48,9 @@ function getCode(){
 	});  
 }
 
+/**
+ *设置扫一扫参数
+ */
 function getConfig(){
 	wx.config({
 		debug:false,
@@ -37,8 +61,10 @@ function getConfig(){
 	    jsApiList: ['scanQRCode']
 	}); 
 }
+/**
+ * 调用扫一扫接口
+ */
 wx.ready(function(){
-	getCode();
 	  wx.scanQRCode({
 	        // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
 	        needResult : 1,
@@ -54,9 +80,17 @@ wx.ready(function(){
 	            }else{
 	                $("#id_securityCode_input").val(url);
 	            }
+	            if(1 == flag['flag']){
+	            	 window.location.href="<%=path%>/jsp/scanCodeFeedBack.jsp";
+	            }else{
+	            	window.location.href="<%=path%>/jsp/tableware.jsp";
+	            }
 	        }
 	    });
 });
+/**
+ * 弹出异常
+ */
 wx.error(function(res){
 	alert(res.errMsg)
 })

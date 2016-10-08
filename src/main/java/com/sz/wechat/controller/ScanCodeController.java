@@ -1,16 +1,10 @@
 package com.sz.wechat.controller;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
@@ -25,7 +19,7 @@ public class ScanCodeController {
 
 	
 	/**
-	 * 
+	 * 扫一扫
 	 * @param request
 	 * @param modelMap
 	 * @return
@@ -33,8 +27,9 @@ public class ScanCodeController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@ResponseBody
 	@RequestMapping(value = "/scanCode/sign")
-	public JsonVo  sign(){
-		Map<String,Object> map = ScanCodeUtils.getScanCode();
+	public JsonVo  sign(HttpServletRequest request, HttpServletResponse response){
+		String flag = request.getParameter("flag");
+		Map<String,Object> map = ScanCodeUtils.getScanCode(flag);
 		JsonVo  jsonVo = new JsonVo();
 		ScanCode scanCode = null;
 		if(null != map){ 
