@@ -26,18 +26,18 @@ function pagejump()
     height:17px;/*1个星星的高度 */ 
     overflow:hidden; 
     vertical-align:middle; 
-    background:url(../img/star.gif) repeat-x 0 -17px;} 
+    background:url(../public/images/star.gif) repeat-x 0 -17px;} 
 .vote-star i{ 
     display:inline-block;/*内联元素转换成块元素，并不换行 */ 
     height:17px;/*1个星星的高度*/ 
-    background:url(../img/star.gif) repeat-x 0 0;} 
+    background:url(../public/images/star.gif) repeat-x 0 0;} 
 </style> 
 </head>
 <body>
 <div id="baseinfo">
 <table>
 <tr>
-<td><img src="../img/food.jpg" height="100px" width="100px"/></td>
+<td><img src="../public/images/food.jpg" height="100px" width="100px"/></td>
 <td><label style="font-size: 26px;font-weight:bold">海底捞（大行宫店）</label><br><br>
 <label style="font-size: 26px;font-weight:bold">综合得分：<font color="red">87</font>分</label><br>
 </td>
