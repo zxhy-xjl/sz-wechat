@@ -83,7 +83,7 @@ wx.ready(function(){
 	            if(1 == flag['flag']){
 	            	 window.location.href="<%=path%>/jsp/scanCodeFeedBack.jsp";
 	            }else{
-	            	window.location.href="<%=path%>/jsp/tableware.jsp";
+	            	 window.location.href="<%=path%>/jsp/tableware.jsp";
 	            }
 	        }
 	    });

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -55,11 +56,9 @@ public class UserInfoController {
 			sb = new StringBuilder();
 			for (UserInfo userInfo : listUserInfo) {
 				sb.append("<li class=\"mui-table-view-cell mui-media\">");
-				sb.append("<a href=\"property-detail.html?index=" +userInfo.getOpenid()+ "\">");
 				sb.append("	<div class=\"mui-media-body\">");
 				sb.append("		<h4 class=\"mui-ellipsis\">" +userInfo.getNickname()+ "</h4>");
 				sb.append("	</div>");
-				sb.append("</a>");
 				sb.append("</li>");
 			}
 		}
