@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主界面</title>
-<script type="text/javascript" src="<%=path%>/public/script/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%=path%>/public/script/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/jqueryPage.js"></script>
 </head>
 <style>
@@ -23,10 +23,19 @@ function doPost(){
 		type:'post',
 		url:'<%=path%>/userInfo/users.do',
 		success:function(data){
-			for(var i = 0;i<data.length;i++){
+			/*  for (var i in data.result) {
+	            alert(i + ":" + data.result[i]);
+	        }  */
+		alert(data.result.html);
+			/* for(var i = 0;i<data.length;i++){
 				alert("ID:"+data[i]['openid']);
-			}
-		}
+			} */
+		},
+		error: function(e) { 
+			for (var i in e) {
+	            alert(i + ":" + e[i]);
+	        }
+			} 
 	});
 }
 $(function(){
