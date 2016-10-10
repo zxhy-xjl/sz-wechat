@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.CompanyInfoMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.CompanyInfo">
+		<id column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
+		<result column="COMPANYNAME" property="companyname" jdbcType="VARCHAR"/>
+		<result column="COMPANYTYPE" property="companytype" jdbcType="VARCHAR"/>
+		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
+		<result column="REGISTCAPITAL" property="registcapital" jdbcType="VARCHAR"/>
+		<result column="CREATETIME" property="createtime" jdbcType="VARCHAR"/>
+		<result column="COMPANYADDRESS" property="COMPANYADDRESS" jdbcType="VARCHAR"/>
+		<result column="OPERATESTART" property="operatestart" jdbcType="VARCHAR"/>
+		<result column="OPERATEEND" property="operateend" jdbcType="VARCHAR"/>
+		<result column="OPERATESCOPE" property="operatescope" jdbcType="VARCHAR"/>
+		<result column="REGISTEROFFICE" property="registeroffice" jdbcType="VARCHAR"/>
+		<result column="FILETIME" property="filetime" jdbcType="VARCHAR"/>
+		<result column="COMPANYSTATUS" property="companystatus" jdbcType="VARCHAR"/>
+		<result column="COMPANYINTRO" property="companyintro" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		COMPANYCODE, COMPANYNAME, COMPANYTYPE, LEGALPERSON, REGISTCAPITAL, CREATETIME, COMPANYADDRESS, OPERATESTART, OPERATEEND, OPERATESCOPE, REGISTEROFFICE, FILETIME, COMPANYSTATUS, COMPANYINTRO
+	</sql>
+	<!-- 查询 -->
+	<select id="getCompanyByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT <include refid="Base_Column_List"/> FROM SZ_COMPANYINFO WHERE  COMPANYCODE = #{companycode,jdbcType=VARCHAR}
+	</select>
+</mapper>
