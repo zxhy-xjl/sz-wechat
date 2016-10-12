@@ -74,9 +74,14 @@ public class ScanCodeController {
 				String companyCode = companyArr [companyArr.length-companyArr.length];
 				String tablenum = companyArr[companyArr.length-1];
 				CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
-				modelAndView.addObject("CompanyInfo", companyInfo);
-				modelAndView.addObject("tableNum",tablenum);
-				modelAndView.setViewName("/scanCodeFeedBack");
+				if(null != companyInfo){
+					modelAndView.addObject("CompanyInfo", companyInfo);
+					modelAndView.addObject("tableNum",tablenum);
+					modelAndView.setViewName("/scanCodeFeedBack");
+				}else{
+					modelAndView.addObject("companyCode", companyCode);
+					modelAndView.setViewName("/companyError");
+				}
 			}
 		}
 		return modelAndView;

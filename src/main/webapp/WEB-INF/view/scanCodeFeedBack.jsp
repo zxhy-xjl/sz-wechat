@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
 <title>${CompanyInfo.companyname}</title>
+<link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 <style type="text/css">
 #score{
@@ -62,19 +63,17 @@ function getScore(){
 </script>
 <body style="background-color:#E9E9E9;">
 <div id="content" style="height: 100%">
-	<div id="heard" style="text-align:center;font-family:'楷体','楷体_GB2312';font-size:20px;line-height:100px;">
-		此餐厅卫生得分
-	</div>
+	<div style="height:50px"></div>
 	<div id="score" style="text-align:center;line-height:230px;">
 	</div>
 	<div id="info" style="text-align:center;line-height:50px;">
-		<a href="#" style="font-family:'楷体','楷体_GB2312';font-size:24px;text-decoration:none;color:#4B4B4B">点击查看详情</a>
+		<a href="#" style="font-family:'楷体','楷体_GB2312';font-size:20px;text-decoration:none;color:#4B4B4B">点击查看详情</a>
 	</div>
 	<div id="showMsg" style="text-align:center;line-height:150px;">
 	</div>
-	<div id="btn" style="text-align:center;line-height:150px;">
-		<input id="" type="button" value="去点餐" style="background-color:#F5A623;border:0;width:100px;height:30px;" onclick="javascript:jumpTo()">	
-	</div>
+	<div class="button-sp-area" style="text-align:center;"> 
+         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#F3BE67;width:150px;height:30px">去点餐</a> 
+    </div> 
 </div>
 </body>
 </html>
