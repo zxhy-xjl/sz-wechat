@@ -81,7 +81,7 @@ wx.ready(function(){
 	                $("#id_securityCode_input").val(url);
 	            }
 	            if(1 == flag['flag']){
-	            	 window.location.href="<%=path%>/jsp/scanCodeFeedBack.jsp";
+	            	 window.location.href="<%=path%>/checkScanCode.do?company="+$('#id_securityCode_input').val();
 	            }else{
 	            	 window.location.href="<%=path%>/jsp/tableware.jsp";
 	            }

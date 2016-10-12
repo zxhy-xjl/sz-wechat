@@ -9,7 +9,7 @@
 		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
 		<result column="REGISTCAPITAL" property="registcapital" jdbcType="VARCHAR"/>
 		<result column="CREATETIME" property="createtime" jdbcType="VARCHAR"/>
-		<result column="COMPANYADDRESS" property="COMPANYADDRESS" jdbcType="VARCHAR"/>
+		<result column="COMPANYADDRESS" property="companyaddress" jdbcType="VARCHAR"/>
 		<result column="OPERATESTART" property="operatestart" jdbcType="VARCHAR"/>
 		<result column="OPERATEEND" property="operateend" jdbcType="VARCHAR"/>
 		<result column="OPERATESCOPE" property="operatescope" jdbcType="VARCHAR"/>

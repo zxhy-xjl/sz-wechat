@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.SupervisePunishMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.SupervisePunish">
+		<id column="ADMINPENALTYBOOK" property="adminpenaltybook" jdbcType="VARCHAR"/>
+		<result column="CASENAME" property="casename" jdbcType="VARCHAR"/>
+		<result column="UNLAWFULACT" property="unlawfulact" jdbcType="VARCHAR"/>
+		<result column="NLAWFULCOMPANYNAME" property="nlawfulcompanyname" jdbcType="VARCHAR"/>
+		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
+		<result column="UNLAWFULFACT" property="unlawfulfact" jdbcType="VARCHAR"/>
+		<result column="PENALTYTYPE" property="penaltytype" jdbcType="VARCHAR"/>
+		<result column="ADMINPENALTYTYPEANDTIME" property="adminpenaltytypeandtime" jdbcType="VARCHAR"/>
+		<result column="PENALTYOFFICE" property="penaltyoffice" jdbcType="VARCHAR"/>
+		<result column="PUNISHMENTDATE" property="punishmentdate" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		ADMINPENALTYBOOK, CASENAME, UNLAWFULACT, UNLAWFULCOMPANYNAME, LEGALPERSON, UNLAWFULFACT, PENALTYTYPE, ADMINPENALTYTYPEANDTIME, PENALTYOFFICE, PUNISHMENTDATE
+	</sql>
+	<!-- 查询 -->
+	<select id="getSuperviseLikeCompanyName"  resultMap="BaseResultMap" parameterType="com.sz.wechat.entity.SupervisePunish">
+		SELECT  <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE (TO_CHAR(SYSDATE,'yyyymmdd') - REPLACE(PUNISHMENTDATE,'-','')) &lt;= 10000 AND  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
+	</select>
+</mapper>
