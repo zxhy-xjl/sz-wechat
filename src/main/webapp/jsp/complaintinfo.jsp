@@ -27,7 +27,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 <label>投诉内容：</label><br><br>
 <textarea rows="5" >服务态度非常恶劣，简直无法形容。</textarea><br>
 <label>处理流程：</label><br>
-<img src="../img/complaintflow.jpg"   /> <br>
+<img src="../public/images/complaintflow.jpg"   /> <br>
 <label>处理时间：2016年9月29日</label><br>
 <label>处理部门：XX市质监局</label><br>
 <label>处理结果：</label><br>

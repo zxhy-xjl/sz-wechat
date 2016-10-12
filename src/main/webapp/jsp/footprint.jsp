@@ -78,7 +78,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
   <tr onclick="pagejump()">
   <td>
   <label>上海</label><br>
-  <img src="../img/food.jpg" height="60px" width="60px"  />
+  <img src="../public/images/food.jpg" height="60px" width="60px"  />
   </td>
   <td>
   <label>2016年9月29日 19:20</label><br>
@@ -93,7 +93,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
     <tr onclick="pagejump()">
   <td>
   <label>江苏 南京</label><br>
-<img src="../img/food.jpg" height="60px" width="60px"  />  
+<img src="../public/images/food.jpg" height="60px" width="60px"  />  
   </td>
   <td>
   <label>2016年9月29日 19:20</label><br>
@@ -108,7 +108,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
   <tr onclick="pagejump()">
   <td>
   <label>河南 郑州</label><br>
-<img src="../img/food.jpg" height="60px" width="60px"  />  
+<img src="../public/images/food.jpg" height="60px" width="60px"  />  
   </td>
   <td>
   <label>2016年9月29日 19:20</label><br>
