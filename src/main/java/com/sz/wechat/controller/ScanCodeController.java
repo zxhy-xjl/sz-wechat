@@ -216,7 +216,6 @@ public class ScanCodeController {
 		return jsonVo;
 	}
 	
-	
 	/**
 	 * 评分
 	 * @param request
