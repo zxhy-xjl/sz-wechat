@@ -199,14 +199,14 @@ public class ScanCodeController {
 				public int compare(CompanyInfo o1, CompanyInfo o2) {
 					int num1 = o1.getScore();
 					int num2 = o2.getScore();
-					return num1 - num2;
+					return num2 - num1;
 				}
 			});
 			int sort = 0;
 			double proportion = 0;
-			for (int i=0;i< companyScoreList.size();i++) {
-				if (companyCode.equals(companyList.get(i).getCompanycode())){
-					sort = i+1;
+			for (int i=0;i <= companyScoreList.size();i++) {
+				if (companyCode.equals(companyScoreList.get(i).getCompanycode())){
+					sort = i;
 					break;
 				}
 			}
