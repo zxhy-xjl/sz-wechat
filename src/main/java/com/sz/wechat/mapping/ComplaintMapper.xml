@@ -12,13 +12,18 @@
 		<result column="DISPOSETIME" property="disposetime" jdbcType="VARCHAR"/>
 		<result column="DISPOSEDEP" property="disposedep" jdbcType="VARCHAR"/>
 		<result column="COMPLAINTYPE" property="complaintype" jdbcType="VARCHAR"/>
+		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT, EVALUATE, DISPOSETIME, DISPOSEDEP, COMPLAINTYPE 
+		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT, EVALUATE, DISPOSETIME, DISPOSEDEP, COMPLAINTYPE,DISPOSERESULT
 	</sql>
 	<!-- 查询 -->
-	<select id="getComplaintBycomplainTypeAndcompanyId" resultMap="BaseResultMap">
-		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND COMPANYID = #{0} AND COMPLAINTYPE  = #{1} 
+	<select id="getComplaintScoreByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
+	</select>
+	
+	<select id="getComplaintByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND DISPOSERESULT IS NOT NULL AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
 	</select>
 </mapper>

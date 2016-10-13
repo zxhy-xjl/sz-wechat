@@ -41,6 +41,11 @@ public class Complaint {
 	 * 投诉类型 1-店铺，2-卫生，3-服务
 	 */
 	private String complaintype;
+	/**
+	 *政府处理意见
+	 */
+	private String disposeresult;
+	
 	public String getPid() {
 		return pid;
 	}
@@ -94,5 +99,11 @@ public class Complaint {
 	}
 	public void setComplaintype(String complaintype) {
 		this.complaintype = complaintype;
+	}
+	public String getDisposeresult() {
+		return disposeresult;
+	}
+	public void setDisposeresult(String disposeresult) {
+		this.disposeresult = disposeresult;
 	}
 }

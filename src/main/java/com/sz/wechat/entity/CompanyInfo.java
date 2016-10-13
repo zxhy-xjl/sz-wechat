@@ -62,6 +62,10 @@ public class CompanyInfo {
 	 * 商家介绍
 	 */
 	private String companyintro;
+	/**
+	 * 积分
+	 */
+	private int score;
 	public String getCompanycode() {
 		return companycode;
 	}
@@ -142,6 +146,12 @@ public class CompanyInfo {
 	}
 	public String getCompanyintro() {
 		return companyintro;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 	public void setCompanyintro(String companyintro) {
 		this.companyintro = companyintro;

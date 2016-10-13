@@ -29,13 +29,30 @@ text-align:center;
  * 初始化
  */
 $(function(){
+	getPercentage();
 	getScore();
 });
 
+/**
+ * 得到占比
+ */
+function getPercentage(){
+	var msgHtml = '';
+	$.ajax({
+		type:'post',
+		url:'<%=path%>/proportionCompany.do?companyCode=${CompanyInfo.companycode}',
+		success:function(data){
+			if(data){
+				var score = data.result;
+				msgHtml ='<font color="#333333">您选择的店铺评分高于南京市<font color="red">'+score+'%</font>商家</font>';
+				$("#showMsg").html(msgHtml);
+			}
+		}
+	});
+}
 var score = 0;
 function getScore(){
 	var scoreHtml ='';
-	var msgHtml = '';
 	$.ajax({
 		type:'post',
 		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
@@ -44,18 +61,14 @@ function getScore(){
 				var score = data.result;
 				if(score<65){
 					scoreHtml = '<font size="14px" color="red">'+data.result+'分</font>';
-					msgHtml ='<font color="#333333">您选择的店铺评分高于南京市<font color="red">20%</font>商家</font>';
 				}
 				if(score>65 && score<80){
 					scoreHtml = '<font size="14px" color="#629527">'+data.result+'分</font>';
-					msgHtml ='<font color="#333333">您选择的店铺评分高于南京市<font color="red">70%</font>商家</font>';
 				}
 				if(score>80){
 					scoreHtml = '<font size="14px" color="#63B109">'+data.result+'分</font>';
-					msgHtml ='<font color="#333333">您选择的店铺评分高于南京市<font color="red">90%</font>商家</font>';
 				}
 				$("#score").html(scoreHtml);
-				$("#showMsg").html(msgHtml);
 			}
 		}
 	});

@@ -13,10 +13,15 @@ public interface ComplaintMapper {
 
 	
 	/**
-	 * 查询企业投诉反馈信息
+	 * 查询企业投诉反馈评分（一年有效期）
 	 * @param companyId 企业Code
-	 * @param complaintType 投诉类型
 	 * @return
 	 */
-	public List<Complaint> getComplaintBycomplainTypeAndcompanyId(String companyId,String complaintType);
+	public List<Complaint> getComplaintScoreByCompanyId(String companyId);
+	/**
+	 * 查询企业投诉反馈信息（一年有效期）
+	 * @param companyId 企业Code
+	 * @return
+	 */
+	public List<Complaint> getComplaintByCompanyId(String companyId);
 }

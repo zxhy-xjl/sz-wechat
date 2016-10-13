@@ -42,6 +42,13 @@ public class CompanyInfoService {
 	public CompanyInfo getCompanyByCode(String companyCode){
 		return this.companyInfoMapper.getCompanyByCode(companyCode);
 	}
+	/**
+	 * 查询所有的餐饮企业信息
+	 * @return
+	 */
+	public List<CompanyInfo> getCompanyInfo(){
+		return this.companyInfoMapper.getCompanyInfo();
+	}
 	
 	/**
 	 * 根据当事人名称查询监管信息
@@ -53,12 +60,19 @@ public class CompanyInfoService {
 	}
 	
 	/**
-	 * 查询企业投诉信息
+	 * 查询企业反馈评分（一年有效期）
 	 * @param companyId 企业ID
-	 * @param complaintType 投诉类型
 	 * @return
 	 */
-	public List<Complaint>  getComplaintBycomplainTypeAndcompanyId(String companyId,String complaintType){
-		return this.complaintMapper.getComplaintBycomplainTypeAndcompanyId(companyId, complaintType);
+	public List<Complaint>  getComplaintScoreByCompanyId(String companyId){
+		return this.complaintMapper.getComplaintScoreByCompanyId(companyId);
+	}
+	/**
+	 * 查询企业投诉反馈信息（一年有效期）
+	 * @param companyId 企业ID
+	 * @return
+	 */
+	public List<Complaint> getComplaintByCompanyId(String companyId){
+		return this.complaintMapper.getComplaintByCompanyId(companyId);
 	}
 }
