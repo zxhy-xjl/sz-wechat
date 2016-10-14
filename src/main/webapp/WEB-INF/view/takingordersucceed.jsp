@@ -16,7 +16,7 @@ body{
 	position:relative;
 }
 #footer {
-	position:absolute; z-index:0;
+	position:absolute; z-index:2;
 	bottom:0; left:0;
 	width:100%;
 	height:40px;
@@ -30,7 +30,7 @@ $(function(){
 })
 </script>
 <body style="background-color:#E9E9E9;">
-<div id="content" style="border:1px solid red;;">
+<div id="content" >
 	<div id="head" style="text-align:center;line-height:150px;">
 		<img alt="" src="<%=path%>/public/images/success.png" width="138" height="138">
 	</div>
@@ -42,7 +42,7 @@ $(function(){
 	</div>
 	<div id="footer" >
 		 <div class="button-sp-area">
-            <a href="javascript:;" style="width:150px;" class="weui-btn weui-btn_plain-default weui-btn_plain-disabled">按钮</a>
+            <a href="javascript:;" style="width:150px;" class="weui-btn weui-btn_plain-default weui-btn_plain-disabled">查看订单详情</a>
         </div>
 	</div>
 </div>
