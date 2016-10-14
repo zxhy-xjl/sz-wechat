@@ -50,6 +50,9 @@ function getPercentage(){
 		}
 	});
 }
+/**
+ * 获取积分
+ */
 var score = 0;
 function getScore(){
 	var scoreHtml ='';
@@ -73,8 +76,14 @@ function getScore(){
 		}
 	});
 }
+/**
+ * 跳转至点菜页面
+ */
+function toTakingOrder(){
+	window.location.href="<%=path%>/toTakingOrder.do";
+}
 </script>
-<body style="background-color:#E9E9E9;">
+<body style="backgroundp-color:#E9E9E9;">
 <div id="content" style="height: 100%">
 	<div style="height:50px"></div>
 	<div id="score" style="text-align:center;line-height:230px;">
@@ -85,7 +94,7 @@ function getScore(){
 	<div id="showMsg" style="text-align:center;line-height:150px;">
 	</div>
 	<div class="button-sp-area" style="text-align:center;"> 
-         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#F3BE67;width:150px;height:30px">去点餐</a> 
+         <a href="javascript:toTakingOrder();" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#F3BE67;width:150px;height:30px">去点餐</a> 
     </div> 
 </div>
 </body>

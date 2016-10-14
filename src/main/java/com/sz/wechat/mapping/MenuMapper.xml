@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.MenuMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.Menu">
+		<id column="MENUID" property="menuid" jdbcType="VARCHAR"/>
+		<result column="MENUNAME" property="menuname" jdbcType="VARCHAR"/>
+		<result column="MENUTYPE" property="menutype" jdbcType="VARCHAR"/>
+		<result column="FEATURE" property="feature" jdbcType="VARCHAR"/>
+		<result column="PRICE" property="price" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		 MENUID, MENUNAME, MENUTYPE, FEATURE, PRICE, MENUPHOTO
+	</sql>
+	<!-- 查询 -->
+	<select id="getMenu" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_MENU
+	</select>
+</mapper>
