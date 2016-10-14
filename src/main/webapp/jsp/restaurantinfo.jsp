@@ -11,10 +11,49 @@
 <title>餐厅详情</title>
 <script type="text/javascript">
 
+var text = null;
+var xmlHttpRequest = null;
+var json = null;
+window.onload=function()//用window的onload事件，窗体加载完毕的时候
+{   text = <%=request.getParameter("userinfo")%>;
+     json = JSON.stringify(text); 
+	var newurl = window.location.href;
+	var url = "<%=path%>/insertLog.do?json="+json+"&url="+newurl;
+	if(window.ActiveXObject) {   			//IE的
+		xmlHttpRequest = new ActionXObject("Microsoft.XMLHTTP");
+	}
+	else if(window.XMLHttpRequest) {		//除IE外的
+		xmlHttpRequest = new XMLHttpRequest();
+	}
+	if(xmlHttpRequest != null) {
+		
+		xmlHttpRequest.open("GET", url, true);
+		//xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		//关联好ajax的回调函数
+		xmlHttpRequest.onreadystatechange = ajaxCall;
+		
+		//真正向服务器发送请求
+		xmlHttpRequest.send();
+	}
+}
+
+function ajaxCall(){
+	
+	if(xmlHttpRequest.readyState == 4 ) {  		//完全得到服务器的响应
+		if(xmlHttpRequest.status == 200) {	
+			console.log('保存成功！'); 
+		}else
+			{				
+			console.log('保存失败！'); 
+			}
+	
+	}
+	
+}
 
 function pagejump()
 {
-	window.location.href="complaintinfo.jsp?flag=1";  		
+	window.location.href="<%=path%>/jsp/complaintinfo.jsp?userinfo="+json;  		
 }
 
 </script>

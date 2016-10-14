@@ -11,7 +11,9 @@
 <title>足迹</title>
 <script type="text/javascript">
 var xmlHttpRequest = null;
+var xmlHttpRequestLog = null;
 var code = null;
+var text = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
 	code = "<%=request.getParameter("code")%>";
@@ -41,8 +43,28 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 			if(xmlHttpRequest.status == 200) {		//没有异常
 				//var tableformap = document.createElement("div");
 			
-				var text = xmlHttpRequest.responseText;
+				 text = xmlHttpRequest.responseText;
 				var json = eval('(' + text + ')'); 
+				var newurl = window.location.href;
+				var urllog = "<%=path%>/insertLog.do?json="+text+"&url="+newurl;
+				if(window.ActiveXObject) {   			//IE的
+					xmlHttpRequestLog = new ActionXObject("Microsoft.XMLHTTP");
+				}
+				else if(window.XMLHttpRequest) {		//除IE外的
+					xmlHttpRequestLog = new XMLHttpRequest();
+				}
+				if(xmlHttpRequestLog != null) {
+					
+					xmlHttpRequestLog.open("GET", urllog, true);
+					//xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					//关联好ajax的回调函数
+					xmlHttpRequestLog.onreadystatechange = ajaxCallLog;
+					
+					//真正向服务器发送请求
+					xmlHttpRequestLog.send();
+				}
+				
+				
 			    document.getElementById("openid").value=json.openid;
 				document.getElementById("nickname").innerText=json.nickname;
 				if(json.sex==1)
@@ -64,11 +86,23 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 	} 
 	  }
 	
-
+	function ajaxCallLog(){
+		
+		if(xmlHttpRequestLog.readyState == 4 ) {  		//完全得到服务器的响应
+			if(xmlHttpRequestLog.status == 200) {	
+				console.log('保存成功！'); 
+			}else
+				{				
+				console.log('保存失败！'); 
+				}
+		
+		}
+		
+	}
 	
 	function pagejump()
 	{
-		window.location.href="restaurantinfo.jsp";  		
+		window.location.href="restaurantinfo.jsp?userinfo="+text;  		
 	}
 </script>
 </head>
