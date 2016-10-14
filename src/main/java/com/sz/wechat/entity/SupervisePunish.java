@@ -1,12 +1,15 @@
 package com.sz.wechat.entity;
 
+import java.io.Serializable;
+
 /**
  * 监管处罚得分
  * @author sway
  *
  */
-public class SupervisePunish {
+public class SupervisePunish implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 行政处罚决定书文号
 	 */

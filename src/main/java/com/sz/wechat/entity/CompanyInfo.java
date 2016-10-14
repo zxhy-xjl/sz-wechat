@@ -1,11 +1,14 @@
 package com.sz.wechat.entity;
+import java.io.Serializable;
+
 /**
  * 企业信息数据结构
  * @author sway
  *
  */
-public class CompanyInfo {
+public class CompanyInfo implements Serializable  {
 
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 企业注册码
 	 */

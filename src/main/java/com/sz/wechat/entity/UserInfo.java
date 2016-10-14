@@ -1,11 +1,15 @@
 package com.sz.wechat.entity;
+
+import java.io.Serializable;
+
 /**
  * 用户信息数据结构
  * @author sway
  *
  */
-public class UserInfo {
+public class UserInfo implements Serializable  {
  
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 从微信接口获取
 	 */

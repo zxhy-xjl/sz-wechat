@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.ConsumerecMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.Consumerec">
+		<id column="PID" property="pid" jdbcType="VARCHAR"/>
+		<result column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
+		<result column="MENUID" property="menuid" jdbcType="VARCHAR"/>
+		<result column="BUYNUM" property="buynum" jdbcType="VARCHAR"/>
+		<result column="PAYTYPE" property="paytype" jdbcType="VARCHAR"/>
+		<result column="BILLUNIT" property="billunit" jdbcType="VARCHAR"/>
+		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
+		<result column="PAYTIME" property="paytime" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		 PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME
+	</sql>
+	<!-- 插入-->
+	 <insert id="batchInsertConsumerec" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";" >
+			INSERT INTO SZ_CONSUMEREC  (PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME)
+			VALUES
+        	(#{item.pid,jdbcType=VARCHAR},#{item.companycode,jdbcType=VARCHAR},#{item.menuid,jdbcType=VARCHAR},#{item.buynum,jdbcType=VARCHAR},#{item.paytype,jdbcType=VARCHAR},#{item.billunit,jdbcType=VARCHAR},#{item.openid,jdbcType=VARCHAR},#{item.paytime,jdbcType=VARCHAR})
+    	</foreach>
+	 </insert>
+</mapper>

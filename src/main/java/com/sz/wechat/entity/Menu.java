@@ -1,5 +1,6 @@
 package com.sz.wechat.entity;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 /**
@@ -7,8 +8,9 @@ import java.sql.Blob;
  * @author sway
  *
  */
-public class Menu {
+public class Menu implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 菜单ID
 	 */

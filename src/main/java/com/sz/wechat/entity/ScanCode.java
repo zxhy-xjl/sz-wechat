@@ -1,12 +1,15 @@
 package com.sz.wechat.entity;
 
+import java.io.Serializable;
+
 /**
  * 扫一扫数据结构
  * @author sway
  *
  */
-public class ScanCode {
+public class ScanCode implements Serializable  {
 
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 入场券
 	 */
