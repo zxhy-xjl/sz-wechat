@@ -9,7 +9,7 @@
 		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
 		<result column="REGISTCAPITAL" property="registcapital" jdbcType="VARCHAR"/>
 		<result column="CREATETIME" property="createtime" jdbcType="VARCHAR"/>
-		<result column="COMPANYADDRESS" property="COMPANYADDRESS" jdbcType="VARCHAR"/>
+		<result column="COMPANYADDRESS" property="companyaddress" jdbcType="VARCHAR"/>
 		<result column="OPERATESTART" property="operatestart" jdbcType="VARCHAR"/>
 		<result column="OPERATEEND" property="operateend" jdbcType="VARCHAR"/>
 		<result column="OPERATESCOPE" property="operatescope" jdbcType="VARCHAR"/>
@@ -23,7 +23,10 @@
 		COMPANYCODE, COMPANYNAME, COMPANYTYPE, LEGALPERSON, REGISTCAPITAL, CREATETIME, COMPANYADDRESS, OPERATESTART, OPERATEEND, OPERATESCOPE, REGISTEROFFICE, FILETIME, COMPANYSTATUS, COMPANYINTRO
 	</sql>
 	<!-- 查询 -->
-	<select id="getCompanyByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	<select id="getCompanyByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT <include refid="Base_Column_List"/> FROM SZ_COMPANYINFO WHERE  COMPANYCODE = #{companycode,jdbcType=VARCHAR}
+	</select>
+	<select id="getCompanyInfo" resultMap="BaseResultMap" >
+		SELECT <include refid="Base_Column_List"/> FROM SZ_COMPANYINFO
 	</select>
 </mapper>

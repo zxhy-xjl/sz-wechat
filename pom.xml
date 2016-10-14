@@ -163,6 +163,11 @@
 		    <version>2.4</version>
 		    <classifier>jdk15</classifier><!--指定jdk版本-->  
 		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	<dependency>
     <groupId>commons-beanutils</groupId>
     <artifactId>commons-beanutils</artifactId>

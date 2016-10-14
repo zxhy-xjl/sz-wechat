@@ -1,4 +1,6 @@
 package com.sz.wechat.dao;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import com.sz.wechat.entity.CompanyInfo;
 /**
@@ -15,4 +17,10 @@ public interface CompanyInfoMapper {
 	 * @return 企业公司数据实体类 
 	 */
 	public CompanyInfo  getCompanyByCode(String companyCode);
+	
+	/**
+	 * 查询所有的餐饮企业
+	 * @return
+	 */
+	public List<CompanyInfo> getCompanyInfo();
 }
