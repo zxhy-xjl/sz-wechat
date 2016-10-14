@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sz.wechat.entity.CodeDict;
 import com.sz.wechat.entity.Menu;
+import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.MenuService;
 
 /***
@@ -22,6 +25,11 @@ public class MenuController {
 	 */
 	@Autowired
 	private MenuService menuService;
+	/**
+	 * 字典数据逻辑层
+	 */
+	@Autowired
+	private CodeDictService codeDictService;
 	
 
 	/**
@@ -32,14 +40,8 @@ public class MenuController {
 	public ModelAndView toTakingOrder(){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Menu> menuList = this.menuService.getMenu();
-		List<Menu> menuTypeList = new ArrayList<>();
-		Menu menu = new Menu();
-		menu.setMenutype("0");
-		menuTypeList.add(menu);
-		menu = new Menu();
-		menu.setMenutype("1");
-		menuTypeList.add(menu);
-		modelAndView.addObject("menuTypeList", menuTypeList);
+		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
+		modelAndView.addObject("dictList", dictList);
 		modelAndView.addObject("menuList",menuList);
 		modelAndView.setViewName("/takingorders");
 		return modelAndView;

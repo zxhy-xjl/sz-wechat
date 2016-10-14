@@ -126,12 +126,12 @@ function selPrice(flag,id){
 <body style="background-color:#E9E9E9;">
 <div id="content">
 	<table border="0" align="center" width="100%" style="border-collapse:collapse;" >
-		<c:forEach items="${menuTypeList}" var="item" varStatus="status">
-			<tr>
-				<td colspan="5"><h2><c:if test="${item.menutype == '0'}">凉菜</c:if><c:if test="${item.menutype == '1'}">热菜</c:if></h2></td>
-			</tr>
+		<c:forEach items="${dictList}" var="item" varStatus="status">
+				<tr>
+					<td colspan="5"><h2><c:if test="${item.code_id == '0'}">${item.codedescript}</c:if><c:if test="${item.code_id == '1'}">${item.codedescript}</c:if></h2></td>
+				</tr>
 			<c:forEach items="${menuList}" var="item1" varStatus="status">
-				<c:if test="${item.menutype ==  item1.menutype}">
+				<c:if test="${item.code_id ==  item1.menutype}">
 					<tr style="background-color:white;">
 						<td width="100px" ><img alt="" src="<%=path%>/public/images/food.png" width="150px" height="100px"></td>
 						<td style="line-height:25px;">
