@@ -35,5 +35,14 @@ public class ConsumerecService {
 	public List<Consumerec> selectConsumerecByOddNumber(String oddNumber){
 		return this.consumerecMapper.selectConsumerecByOddNumber(oddNumber);
 	}
+	
+	/**
+	 * 修改支付状态
+	 * @param consumerec
+	 * @return
+	 */
+	public int updatePayByOddNumber(Consumerec consumerec){
+		return this.consumerecMapper.updatePayByOddNumber(consumerec);
+	}
 
 }
