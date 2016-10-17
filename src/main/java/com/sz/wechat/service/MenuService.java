@@ -25,4 +25,13 @@ public class MenuService {
 	public List<Menu> getMenu(){
 		return this.menuMapper.getMenu();
 	}
+	
+	/**
+	 * 根据主键编号获取菜单信息
+	 * @param menuId
+	 * @return
+	 */
+	public Menu getMenuByMenuId(String menuId){
+		return this.menuMapper.getMenuByMenuId(menuId);
+	}
 }

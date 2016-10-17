@@ -15,24 +15,25 @@
 body{
 	position:relative;
 }
-#footer {
-	position:absolute; z-index:2;
-	bottom:0; left:0;
-	width:100%;
-	height:40px;
-	padding:0;
-}
 </style>
 </head>
 <script type="text/javascript">
 $(function(){
 	$("#content").height($(window).height());
 })
+
+/**
+ * 跳转至详细页面
+ */
+function toMenuView(){
+	window.location.href="<%=path%>/toMenuView.do?oddNumber=${oddNumber}";
+}
 </script>
 <body style="background-color:#E9E9E9;">
-<div id="content" >
-	<div id="head" style="text-align:center;line-height:150px;">
-		<img alt="" src="<%=path%>/public/images/success.png" width="138" height="138">
+<div id="content">
+	<div style="height:90px"></div>
+	<div id="head" style="text-align:center;line-height:200px;">
+		<img alt="" src="<%=path%>/public/images/success.png" width="100" height="100">
 	</div>
 	<div style="text-align:center;line-height:50px;height:100px;">
 		<font color="#85B64B">下单成功</font>
@@ -42,7 +43,7 @@ $(function(){
 	</div>
 	<div id="footer" >
 		 <div class="button-sp-area">
-            <a href="javascript:;" style="width:150px;" class="weui-btn weui-btn_plain-default weui-btn_plain-disabled">查看订单详情</a>
+            <a href="javascript:toMenuView();" style="width:150px;" class="weui-btn weui-btn_plain-default weui-btn_plain-disabled">查看订单详情</a>
         </div>
 	</div>
 </div>

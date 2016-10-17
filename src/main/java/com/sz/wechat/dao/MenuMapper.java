@@ -15,5 +15,11 @@ public interface MenuMapper {
 	 * @return
 	 */
 	public List<Menu> getMenu();
+	
+	/**
+	 * 根据主键编号获取菜单信息
+	 * @return
+	 */
+	public Menu getMenuByMenuId(String menuId);
 
 }

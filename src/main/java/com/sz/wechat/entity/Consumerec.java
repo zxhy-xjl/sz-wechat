@@ -41,6 +41,15 @@ public class Consumerec  implements Serializable   {
 	 * 消费时间
 	 */
 	private String paytime;
+	
+	/**
+	 * 单号
+	 */
+	private String oddnumber;
+	/**
+	 * 单价
+	 */
+	private String price;
 	public String getPid() {
 		return pid;
 	}
@@ -91,5 +100,17 @@ public class Consumerec  implements Serializable   {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getOddnumber() {
+		return oddnumber;
+	}
+	public void setOddnumber(String oddnumber) {
+		this.oddnumber = oddnumber;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 }

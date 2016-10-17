@@ -1,15 +1,14 @@
 package com.sz.wechat.controller;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CodeDict;
 import com.sz.wechat.entity.Consumerec;
@@ -17,8 +16,6 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
-
-import sun.misc.UUDecoder;
 
 /***
  * 菜单控制器
@@ -78,6 +75,7 @@ public class MenuController  {
 			String [] menuArr_0 = null;
 			Consumerec consumerec = null;
 			List<Consumerec> list = new ArrayList<>();
+			String oddNumber = UUID.randomUUID().toString();
 			for(String menu:menuArr){
 				menuArr_0 = menu.split(":");
 				consumerec = new Consumerec();
@@ -85,11 +83,51 @@ public class MenuController  {
 				consumerec.setMenuid(menuArr_0[0]);
 				consumerec.setBuynum(menuArr_0[1]);
 				consumerec.setCompanycode(companyCode);
+				consumerec.setOddnumber(oddNumber);
 				list.add(consumerec);
 			}
 			this.consumerecService.batchInsertConsumerec(list);
+			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.setViewName("/takingordersucceed");
 		}
-		modelAndView.setViewName("/takingordersucceed");
 	return modelAndView;	
+	}
+	
+	/**
+	 * 跳转至查看下单页面
+	 * @return
+	 */
+	@RequestMapping(value = "/toMenuView")
+	public ModelAndView toDownMenu(HttpServletRequest request, HttpServletResponse response){
+		String oddNumber = request.getParameter("oddNumber");
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String,Object> _map = null;
+		List<Map<String,Object>> mapList = new ArrayList<>();
+		if(!"".equals(oddNumber)){
+			List<Consumerec> consumerecList = consumerecService.selectConsumerecByOddNumber(oddNumber);
+			int allPrice = 0;
+			int buyNum = 0;
+			if(null != consumerecList && consumerecList.size() > 0){
+				Menu menu = null;
+				for (Consumerec consumerec : consumerecList) {
+					_map = new HashMap<>();
+					 menu = this.menuService.getMenuByMenuId(consumerec.getMenuid());
+					_map.put("menuname",menu.getMenuname());
+					_map.put("menunum",consumerec.getBuynum());
+					_map.put("price",menu.getPrice());
+					_map.put("menutype",menu.getMenutype());
+					allPrice = allPrice + (Integer.parseInt(menu.getPrice())*Integer.parseInt(consumerec.getBuynum()));
+					buyNum = buyNum + Integer.parseInt(consumerec.getBuynum());
+					mapList.add(_map);
+				}
+			}
+			List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
+			modelAndView.addObject("dictList", dictList);
+			modelAndView.addObject("menuList", mapList);
+			modelAndView.addObject("allPrice", allPrice);
+			modelAndView.addObject("buyNum", buyNum);
+			modelAndView.setViewName("/takingorderdetails");
+		}
+		return modelAndView;
 	}
 }

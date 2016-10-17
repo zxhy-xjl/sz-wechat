@@ -18,5 +18,12 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public int batchInsertConsumerec(List<Consumerec> list);
+	
+	/**
+	 * 通过单号查询订单
+	 * @param oddNumber 订单号
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByOddNumber(String oddNumber);
 
 }

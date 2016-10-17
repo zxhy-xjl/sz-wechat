@@ -19,12 +19,21 @@ public class ConsumerecService {
 	private ConsumerecMapper consumerecMapper;
 
 	/**
-	 * 
+	 * 批量插入订单数据
 	 * @param list
 	 * @return
 	 */
 	public int batchInsertConsumerec(List<Consumerec> list){
 		 return this.consumerecMapper.batchInsertConsumerec(list);
+	}
+	
+	/**
+	 * 通过订单号获取订单信息
+	 * @param oddNumber
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByOddNumber(String oddNumber){
+		return this.consumerecMapper.selectConsumerecByOddNumber(oddNumber);
 	}
 
 }
