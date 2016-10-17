@@ -80,7 +80,7 @@ function getScore(){
  * 跳转至点菜页面
  */
 function toTakingOrder(){
-	window.location.href="<%=path%>/toTakingOrder.do";
+	window.location.href="<%=path%>/toTakingOrder.do?companyCode=${CompanyInfo.companycode}";
 }
 </script>
 <body style="backgroundp-color:#E9E9E9;">
