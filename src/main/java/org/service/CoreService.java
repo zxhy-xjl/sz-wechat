@@ -11,7 +11,7 @@ import org.util.MessageUtil;
 /**
  * 核心服务类
  * 
- * @author liufeng
+ * @author linhd
  * @date 2013-05-20
  */
 public class CoreService {
@@ -36,6 +36,7 @@ public class CoreService {
 			String toUserName = requestMap.get("ToUserName");
 			// 消息类型
 			String msgType = requestMap.get("MsgType");
+			String userContent = requestMap.get("Content");
 
 			// 回复文本消息
 			TextMessage textMessage = new TextMessage();
@@ -46,12 +47,17 @@ public class CoreService {
 			textMessage.setFuncFlag(0);
 
 			// 文本消息
-			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
+			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
 				respContent = "您发送的是文本消息！";
 			}
 			// 图片消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "您发送的是图片消息！";
+			}
+			else if(userContent.contains("餐具"))
+			{
+				respContent = "1.看包装。上面应印有生产厂家的明确信息，如厂址、电话等；2.观察是否注明出厂日期或保质期；3.将餐具打开，先闻闻，有无刺鼻、发霉味道。";
+				
 			}
 			// 地理位置消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
