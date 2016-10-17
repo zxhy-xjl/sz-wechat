@@ -53,7 +53,7 @@ function ajaxCall(){
 
 function pagejump()
 {
-	window.location.href="<%=path%>/jsp/complaintinfo.jsp?userinfo="+json;  		
+	window.location.href="<%=path%>/jsp/complaintinfo.jsp?userinfo="+json+"&flag=1";  		
 }
 
 </script>

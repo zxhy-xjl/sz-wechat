@@ -105,53 +105,42 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 		window.location.href="restaurantinfo.jsp?userinfo="+text;  		
 	}
 </script>
+<style type="text/css">
+table tr:nth-child(2n){background-color: #e9e9e9}
+
+</style>
 </head>
 <body>
-  <div id="printinfo">
-  <table>
-  <tr onclick="pagejump()">
+  <div id="printinfo" > 
+  <table style="width:100%;border-collapse: collapse;border-spacing: 10px;">
+  
+  <tr onclick="pagejump()" >
+  <td>
+  <label style="font-size: 10px;">2016年9月29日 19:20</label>
+  
+  </td>
   <td>
   <label>上海</label><br>
-  <img src="../public/images/food.jpg" height="60px" width="60px"  />
-  </td>
-  <td>
-  <label>2016年9月29日 19:20</label><br>
-  <label>海底捞（大行宫店）</label><br>
-  <label>地址：中山北路888号</label><br>
-  <label>联系电话：025-88888888</label><br>
+  <label><font style="font-weight: bold">海底捞（大行宫店）</font></label><br>
+  
   </td>  
   <td>
- <label style="color: red;font-size: 30px;">87分</label>
+ <label style="color: red;font-size: 20px;">87分</label><br/>
   </td>
   </tr>
-    <tr onclick="pagejump()">
-  <td>
-  <label>江苏 南京</label><br>
-<img src="../public/images/food.jpg" height="60px" width="60px"  />  
-  </td>
-  <td>
-  <label>2016年9月29日 19:20</label><br>
-  <label>某餐厅（XXX店）</label><br>
-  <label style="color: red">您有一个投诉正在处理中。</label><br>
-  <label>合计：8道菜</label><br>
-  </td>  
-  <td>
- <label >50分</label>
-  </td>
-  </tr>
+    
   <tr onclick="pagejump()">
   <td>
-  <label>河南 郑州</label><br>
-<img src="../public/images/food.jpg" height="60px" width="60px"  />  
+    <label style="font-size: 10px;">2016年9月29日 19:20</label><br>
+ 
   </td>
   <td>
-  <label>2016年9月29日 19:20</label><br>
-  <label>魏家米皮（文化一路店）</label><br>
-  <label>地址：文化路800号</label><br>
-  <label>联系电话：0371-66666666</label><br>
+ <label>河南 郑州</label><br>
+  <label><font style="font-weight: bold">魏家米皮（文化一路店）</font></label><br>
+   <label style="color: #d4a351;">您有一个投诉正在处理中</label>
   </td>  
   <td>
- <label style="color: red;font-size: 30px;">99分</label>
+ <label style="color: red;font-size: 20px;">99分</label>
   </td>
   </tr>
   

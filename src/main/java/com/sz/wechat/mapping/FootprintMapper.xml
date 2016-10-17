@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.FootprintMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.Footprint">
+		<result column="PID" property="pid" jdbcType="VARCHAR"/>
+		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
+		<result column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
+		<result column="SCORE" property="score" jdbcType="VARCHAR"/>
+		<result column="COMPLAINTFLAG" property="complaintflag" jdbcType="VARCHAR"/>
+		<result column="VISITTIME" property="visittime" jdbcType="VARCHAR"/>
+		<result column="PAYSTATUS" property="paystatus" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		PID, OPENID, COMPANYCODE, SCORE, COMPLAINTFLAG, VISITTIME, PAYSTATUS
+	</sql>
+<select id="getFootprintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
+	</select>
+</mapper>
