@@ -171,7 +171,7 @@ public class MenuController  {
 	/**
 	 * 执行修改支付信息
 	 * @param request
-	 * @param response
+	 * @param responsed
 	 * @return
 	 */
 	@RequestMapping(value = "/doPay")
@@ -185,9 +185,11 @@ public class MenuController  {
 		consumerec.setPaytype(paytype);
 		consumerec.setBillunit(invoice);
 		this.consumerecService.updatePayByOddNumber(consumerec);
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HHmm:ss");
 		modelAndView.setViewName("/doPay");
 		modelAndView.addObject("allprice", request.getParameter("allprice"));
 		modelAndView.addObject("oddNumber",oddNumber);
+		modelAndView.addObject("paytime",df.format(new Date()));
 		return modelAndView;
 	}
 	
