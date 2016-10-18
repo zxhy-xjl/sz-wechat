@@ -20,9 +20,18 @@ public class Footprint {
 	private String visittime;
 	//付款状态  1-已付款 2-未付款
 	private String paystatus;
-
+    //企业名称
+	private String companyname;
 	public String getPid() {
 		return pid;
+	}
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
 	}
 
 	public void setPid(String pid) {

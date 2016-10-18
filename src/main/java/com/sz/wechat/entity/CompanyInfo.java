@@ -66,6 +66,10 @@ public class CompanyInfo implements Serializable  {
 	 */
 	private String companyintro;
 	/**
+	 * 联系方式
+	 */
+	private String lxfs;
+	/**
 	 * 积分
 	 */
 	private int score;
@@ -158,5 +162,11 @@ public class CompanyInfo implements Serializable  {
 	}
 	public void setCompanyintro(String companyintro) {
 		this.companyintro = companyintro;
+	}
+	public String getLxfs() {
+		return lxfs;
+	}
+	public void setLxfs(String lxfs) {
+		this.lxfs = lxfs;
 	}
 }

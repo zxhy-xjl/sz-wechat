@@ -34,9 +34,11 @@ public class FootprintController {
 	
 	
 	
+
 	@RequestMapping(value = "/toFootprint",method = RequestMethod.GET)
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
 		String openid = request.getParameter("openid");
+
 		ModelAndView modelAndView = new ModelAndView();
 		List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid("oehpaw8_fgOEWtPk0S0gLidH60xg");
 		modelAndView.addObject("footprintList", footprintlist);

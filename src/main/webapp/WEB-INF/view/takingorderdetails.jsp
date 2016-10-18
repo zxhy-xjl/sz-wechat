@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
 <title>订单详情页</title>
+<script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 <style type="text/css">
 .dotline {
 BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dotted; BORDER-TOP-STYLE: dotted
@@ -36,9 +37,16 @@ html,body {
 </style>
 </head>
 <script type="text/javascript">
+	function doSubmit(){
+		$("#detailForm").submit();
+	}
 </script>
 <body style="background-color:#E9E9E9;">
 <div id="content">
+<form id="detailForm" action="<%=path%>/toMenuOrder.do" method="post">
+<input value="${oddNumber}" name="oddNumber"  type="hidden">
+<input value="${allPrice}" name="allPrice" type="hidden">
+</form>
 	<table border="0" align="center" width="100%" style="border-collapse:collapse;" >
 		<c:forEach items="${dictList}" var="item" varStatus="statu">
 			<c:set  value="" var="flag" scope="page"/>

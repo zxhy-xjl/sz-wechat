@@ -1,5 +1,7 @@
 package com.sz.wechat.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
+import com.sz.wechat.vo.JsonVo;
 
 /***
  * 菜单控制器
@@ -126,8 +129,66 @@ public class MenuController  {
 			modelAndView.addObject("menuList", mapList);
 			modelAndView.addObject("allPrice", allPrice);
 			modelAndView.addObject("buyNum", buyNum);
+			modelAndView.addObject("oddNumber", oddNumber);
 			modelAndView.setViewName("/takingorderdetails");
 		}
 		return modelAndView;
 	}
+	
+	/**
+	 * 跳转至结账页面 
+	 * @return
+	 */
+	@RequestMapping(value = "/toMenuOrder")
+	public ModelAndView toMenuOrder(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView modelAndView = new ModelAndView();
+		String oddNumber = request.getParameter("oddNumber");
+		String allPrice = request.getParameter("allPrice");
+		Map<String,Object> _map = null;
+		List<Map<String,Object>> mapList = new ArrayList<>();
+		if(!"".equals(oddNumber)){
+			List<Consumerec> consumerecList = consumerecService.selectConsumerecByOddNumber(oddNumber);
+			if(null != consumerecList && consumerecList.size() > 0){
+				Menu menu = null;
+				for (Consumerec consumerec : consumerecList) {
+					_map = new HashMap<>();
+					 menu = this.menuService.getMenuByMenuId(consumerec.getMenuid());
+					_map.put("menuname",menu.getMenuname());
+					_map.put("menunum",consumerec.getBuynum());
+					_map.put("price",menu.getPrice());
+					mapList.add(_map);
+				}
+			}
+			modelAndView.addObject("menuList", mapList);
+			modelAndView.addObject("allPrice", allPrice);
+			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.setViewName("/takingordersa");
+		}
+		return modelAndView;
+	}
+	
+	
+	/**
+	 * 执行修改支付信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/doPay")
+	public ModelAndView doPay(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView modelAndView = new ModelAndView();
+		String oddNumber = request.getParameter("oddNumber");
+		String paytype = request.getParameter("paytype");
+		String invoice = request.getParameter("invoice");
+		Consumerec consumerec = new Consumerec();
+		consumerec.setOddnumber(oddNumber);
+		consumerec.setPaytype(paytype);
+		consumerec.setBillunit(invoice);
+		this.consumerecService.updatePayByOddNumber(consumerec);
+		modelAndView.setViewName("/doPay");
+		modelAndView.addObject("allprice", request.getParameter("allprice"));
+		modelAndView.addObject("oddNumber",oddNumber);
+		return modelAndView;
+	}
+	
 }

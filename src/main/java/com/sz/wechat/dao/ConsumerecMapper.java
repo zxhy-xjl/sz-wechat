@@ -25,5 +25,12 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public List<Consumerec> selectConsumerecByOddNumber(String oddNumber);
+	
+	/**
+	 * 修改支付状态
+	 * @param consumerec
+	 * @return
+	 */
+	public int updatePayByOddNumber(Consumerec consumerec);
 
 }
