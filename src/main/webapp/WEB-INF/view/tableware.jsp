@@ -34,7 +34,7 @@
 		 
 	}
 	function doSubmit(){
-		window.location.href="<%=path%>/scanCode.jsp?flag=1";
+		window.location.href="<%=path%>/toTakingOrder.do";
 	}
 </script>
 <body style="background-color:#E9E9E9">
