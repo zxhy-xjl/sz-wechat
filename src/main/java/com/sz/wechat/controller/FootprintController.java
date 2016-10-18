@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,11 +39,13 @@ public class FootprintController {
 	@RequestMapping(value = "/toFootprint",method = RequestMethod.GET)
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
 		String openid = request.getParameter("openid");
-
+		HttpSession ss = (HttpSession)request.getSession();
+        ss.setAttribute("myopenid","oehpaw8_fgOEWtPk0S0gLidH60xg");
 		ModelAndView modelAndView = new ModelAndView();
 		List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid("oehpaw8_fgOEWtPk0S0gLidH60xg");
 		modelAndView.addObject("footprintList", footprintlist);
 		modelAndView.setViewName("/footprint");
+	 
 		return modelAndView;
 		
 	}

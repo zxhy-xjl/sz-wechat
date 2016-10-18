@@ -17,15 +17,16 @@ var code = null;
 var text = null;
 var json = null;
 
+var openid ="<%=session.getAttribute("myopenid")%>";
 
 
 
 
-
-function pagejump(company)
+function pagejump(company,visittime)
 {
 	console.log(company);
-	window.location.href="<%=path%>/toRestaurant.do?companycode="+company;
+	console.log(visittime);
+	window.location.href="<%=path%>/toRestaurant.do?companycode="+company+"&paytime="+visittime;
 }
 </script>
 <style type="text/css">
@@ -40,7 +41,7 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 				<tr style="background-color: #E9E9E9;">
 					<td><label style="font-size: 15px;">&nbsp;&nbsp;${item.visittime}上海</label></td>
 				</tr>
-				<tr style="background-color: white;" onclick="pagejump('${item.companycode}')">
+				<tr style="background-color: white;" onclick="pagejump('${item.companycode}','${item.visittime}')">
 					<td><label><font style="font-weight: bold">&nbsp;&nbsp;${item.companyname}</font></label><br>
 						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '1'}">&nbsp;&nbsp;您有一个投诉正在处理中</c:if></label>
 					</td>

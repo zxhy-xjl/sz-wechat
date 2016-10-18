@@ -16,7 +16,11 @@ var code = null;
 var text = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
-	code = "<%=request.getParameter("code")%>";
+	//var openid ="<%=session.getAttribute("openid")%>";
+	
+	//window.location.href = "<%=path%>/toFootprint.do?openid="+openid;
+	
+	 code = "<%=request.getParameter("code")%>";
 	var url = "<%=path%>/Oauth2Servlet.do?code="+code;
 	if(window.ActiveXObject) {   			//IE的
 		xmlHttpRequest = new ActionXObject("Microsoft.XMLHTTP");
@@ -33,11 +37,11 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 		
 		//真正向服务器发送请求
 		xmlHttpRequest.send();
-	}
+	} 
 }
 
 
-	function ajaxCall() {
+ 	function ajaxCall() {
 		
 		if(xmlHttpRequest.readyState == 4 ) {  		//完全得到服务器的响应
 			if(xmlHttpRequest.status == 200) {		//没有异常
@@ -51,7 +55,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 	} 
 	  }
 	}	
-
+ 
 	
 
 </script>

@@ -1,5 +1,7 @@
 package com.sz.wechat.dao;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import com.sz.wechat.entity.Consumerec;
 
@@ -33,4 +35,16 @@ public interface ConsumerecMapper {
 	 */
 	public int updatePayByOddNumber(Consumerec consumerec);
 
+	/**
+	 * 通过下单时间号查询订单
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByPaytime(@Param(value="payTime")String paytime,@Param(value="companyCode") String companycode);
+	/**
+	 * 通过openid和companycode查询订单
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByOpenidandCompanycode(@Param(value="openid")String openid,@Param(value="companycode") String companycode);
 }

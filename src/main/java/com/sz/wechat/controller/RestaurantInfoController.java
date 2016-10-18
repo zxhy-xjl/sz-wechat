@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Consumerec;
 import com.sz.wechat.entity.Footprint;
+import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
+import com.sz.wechat.service.ConsumerecService;
+import com.sz.wechat.service.MenuService;
 
 /**
  * 餐厅详情控制层
@@ -33,10 +38,47 @@ public class RestaurantInfoController {
 	@Autowired
 	private CompanyInfoService companyInfoService;
 	
+	@Autowired
+	private ConsumerecService consumerecService;
+	
+	@Autowired
+	private MenuService menuService;
+	/**
+	 * 餐厅详情页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/toRestaurant",method = RequestMethod.GET)
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
-	{
+	{ 
+		HttpSession ss = (HttpSession)request.getSession();
+		String openid = ss.getAttribute("myopenid").toString();
 		String companycode = request.getParameter("companycode");
+		String paytime = request.getParameter("paytime");
+		List<Consumerec> consumelist2 = this.consumerecService.selectConsumerecByOpenidandCompanycode(openid, companycode);
+		//计算历次总价
+		float totalprice=0;
+		for(int u=0;u<consumelist2.size();u++)
+		{
+			Menu menu = this.menuService.getMenuByMenuId(consumelist2.get(u).getMenuid());
+			if(menu.getPrice()!=null)
+				totalprice+=Float.parseFloat(menu.getPrice())*Float.parseFloat(consumelist2.get(u).getBuynum());
+				
+		}
+		//计算单次总价
+		float price=0;
+		List<Consumerec> consumelist = this.consumerecService.selectConsumerecByPaytime(paytime, companycode);
+		for(int i=0;i<consumelist.size();i++)
+		{
+			Menu menu = this.menuService.getMenuByMenuId(consumelist.get(i).getMenuid());
+			
+			if(menu.getPrice()!=null)
+			price+=Float.parseFloat(menu.getPrice())*Float.parseFloat(consumelist.get(i).getBuynum());
+			
+		}
+		
+		//计算餐厅评分
 		CompanyInfo companyInfo2 = companyInfoService.getCompanyByCode(companycode);
 		ModelAndView modelAndView = new ModelAndView();
 		String keyWord="警告";
@@ -141,6 +183,10 @@ public class RestaurantInfoController {
 		}
 		//CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companycode);
 		modelAndView.addObject("CompanyInfo", companyInfo2);
+		modelAndView.addObject("consumelist", consumelist);
+		modelAndView.addObject("price", price);
+		modelAndView.addObject("totalprice", totalprice);
+		modelAndView.addObject("paytime", paytime);
 		modelAndView.setViewName("/restaurantinfo");
 		
 		return modelAndView;

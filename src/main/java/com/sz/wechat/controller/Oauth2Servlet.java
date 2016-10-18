@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,8 @@ public class Oauth2Servlet {
 
             
 	        response.setContentType("text/html; charset=utf-8");
+	        HttpSession ss = (HttpSession)request.getSession();
+	        ss.setAttribute("serial",userinfoObject.get("openid")); 
 	        PrintWriter out = response.getWriter();
 	   /*     out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 	        out.println("<HTML>");

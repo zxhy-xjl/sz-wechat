@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -15,7 +16,7 @@
 
 function pagejump()
 {
-	window.location.href="<%=path%>/jsp/complaintinfo.jsp?userinfo="+json+"&flag=1";  		
+	window.location.href="<%=path%>/toComplain.do";  		
 }
 
 </script>
@@ -51,8 +52,8 @@ function pagejump()
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
 <label>${CompanyInfo.companyintro}</label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> 11123 </font>元</label><br>
-<label>2016年9月29日  16:00 消费<font color="red">882</font>元           【查看详情】</label>
+<label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> ${totalprice} </font>元</label><br>
+<label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元           【查看详情】</label>
 </div>
 <br>
 <div class="star" style="text-align: center;"> 
