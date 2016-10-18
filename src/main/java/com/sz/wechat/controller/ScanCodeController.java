@@ -59,7 +59,7 @@ public class ScanCodeController {
 	
 	
 	/**
-	 * 扫码获取验证
+	 * 扫码获取验证（扫桌）
 	 * @param request
 	 * @param response
 	 */
@@ -317,4 +317,28 @@ public class ScanCodeController {
 		}
 		return jsonVo;
 	}
+	
+	/**
+	 * 扫一扫验证（扫餐具）
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/checkScanCodeTableWare")
+	public ModelAndView checkScanCodeTableWare(HttpServletRequest request, HttpServletResponse response){
+		String company = request.getParameter("company");
+		ModelAndView modelAndView = new ModelAndView();
+		if(!"".equals(company)){
+			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(company);
+			if(null != companyInfo){
+				modelAndView.addObject("CompanyInfo", companyInfo);
+				modelAndView.setViewName("/tableware");
+			}else{
+				modelAndView.addObject("companyCode", company);
+				modelAndView.setViewName("/companyError");
+			}
+		}
+		return modelAndView;
+	}
+	
 }

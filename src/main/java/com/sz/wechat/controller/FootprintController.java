@@ -27,7 +27,7 @@ public class FootprintController {
 	
 	
 	
-	@RequestMapping(value = "/insertLog",method = RequestMethod.POST)
+	@RequestMapping(value = "/insertLog1",method = RequestMethod.POST)
 	public ModelAndView footprintGet(){
 		
 		ModelAndView modelAndView = new ModelAndView();

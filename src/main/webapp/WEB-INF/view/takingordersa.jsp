@@ -35,6 +35,7 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 <body style="background-color:#E9E9E9;">
 <form action="<%=path%>/doPay.do" id="payForm" method="post">
 <input type="hidden" name="oddNumber" value="${oddNumber}">
+<input type="hidden" name="allprice" value="${allPrice}">
 <div id="content">
 	<div style="width:200px;margin-left:20px;"><h2>订单概要:</h2></div>
 	<div id="dd" style="background-color:white;text-align:center;">

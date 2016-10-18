@@ -83,7 +83,7 @@ wx.ready(function(){
 	            if(1 == flag['flag']){
 	            	 window.location.href="<%=path%>/checkScanCode.do?company="+$('#id_securityCode_input').val();
 	            }else{
-	            	 window.location.href="<%=path%>/jsp/tableware.jsp";
+	            	 window.location.href="<%=path%>/checkScanCodeTableWare.do?company="+$('#id_securityCode_input').val();
 	            }
 	        }
 	    });

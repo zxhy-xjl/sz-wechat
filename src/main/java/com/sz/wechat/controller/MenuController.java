@@ -1,5 +1,7 @@
 package com.sz.wechat.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,16 +167,16 @@ public class MenuController  {
 		return modelAndView;
 	}
 	
+	
 	/**
 	 * 执行修改支付信息
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/doPay")
-	public JsonVo doPay(HttpServletRequest request, HttpServletResponse response){
-		JsonVo  jsonVo = new JsonVo();
+	public ModelAndView doPay(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView modelAndView = new ModelAndView();
 		String oddNumber = request.getParameter("oddNumber");
 		String paytype = request.getParameter("paytype");
 		String invoice = request.getParameter("invoice");
@@ -183,7 +185,10 @@ public class MenuController  {
 		consumerec.setPaytype(paytype);
 		consumerec.setBillunit(invoice);
 		this.consumerecService.updatePayByOddNumber(consumerec);
-		return jsonVo;
+		modelAndView.setViewName("/doPay");
+		modelAndView.addObject("allprice", request.getParameter("allprice"));
+		modelAndView.addObject("oddNumber",oddNumber);
+		return modelAndView;
 	}
 	
 }
