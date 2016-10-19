@@ -49,7 +49,17 @@ public class Complaint implements Serializable  {
 	 *政府处理意见
 	 */
 	private String disposeresult;
+	/**
+	 *openid
+	 */
+	private String openid;
 	
+	public String getOpenid() {
+		return openid;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 	public String getPid() {
 		return pid;
 	}

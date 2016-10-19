@@ -23,16 +23,17 @@ font-family: SimHei;
 </head>
 <body style="background-color:#E9E9E9;">
 <div id="baseinfo">
-<label>投诉餐厅： 某餐厅（XXX店）</label><br><br>
-<label>投诉内容：</label><img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/><br>
-<textarea rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
-<br><br>
-<video id="video" style='width:64px;height:48px'></video>
-<button id="paizhao" onclick="photo()">拍照</button>
-<canvas id="canvas" width="64" height="48"></canvas>
+<label>投诉餐厅： ${companyname}</label><br><br>
+<label>投诉内容：</label>
+
+<%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
+<textarea id="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
+<input type="file" accept="image/*"  capture="camera" ><br>
+<br>
 </div>
 <div id="shadowdiv" style="text-align: center;">
-<input type="button" value="投诉" onclick="finishcomplaint()" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+
+<input type="button" value="投诉" onclick="finishcomplaint(' ${companyname}','${companycode}')" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
 </div>
 <script type="text/javascript">
 var flag = null;
@@ -73,9 +74,11 @@ function photo()
 	context.drawImage(video,0,0,64,48);
 
 	}
-function finishcomplaint()
+function finishcomplaint(companyname,companycode)
 {
-	window.location.href="<%=path%>/jsp/complaintsuccess.jsp";
+	var complaintcontent = document.getElementById("complaintcontent").value;
+	
+	window.location.href="<%=path%>/toInsertComplaint.do?complaintcontent="+complaintcontent+"&companyname="+companyname+"&companycode="+companycode;
 	
 	}
 

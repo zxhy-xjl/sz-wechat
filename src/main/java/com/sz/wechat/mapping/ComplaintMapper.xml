@@ -13,10 +13,11 @@
 		<result column="DISPOSEDEP" property="disposedep" jdbcType="VARCHAR"/>
 		<result column="COMPLAINTYPE" property="complaintype" jdbcType="VARCHAR"/>
 		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
+		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT, EVALUATE, DISPOSETIME, DISPOSEDEP, COMPLAINTYPE,DISPOSERESULT
+		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT, EVALUATE, DISPOSETIME, DISPOSEDEP, COMPLAINTYPE,DISPOSERESULT,OPENID
 	</sql>
 	<!-- 查询 -->
 	<select id="getComplaintScoreByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -26,4 +27,13 @@
 	<select id="getComplaintByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND DISPOSERESULT IS NOT NULL AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
 	</select>
+	
+	<!--插入  -->
+	 <insert id="insertComplaint" parameterType="com.sz.wechat.entity.Complaint">
+  insert into SZ_COMPLAINT
+   (PID,COMPANYID,COMPLAINTIME,DISPOSESTATUS,COMPLAINCONTENT,EVALUATE,DISPOSETIME,DISPOSEDEP,COMPLAINTYPE,DISPOSERESULT,OPENID)
+    values
+   (#{pid},#{companyid},#{complaintime},#{disposestatus},#{complaincontent},#{evaluate},#{disposetime},#{disposedep},#{complaintype},#{disposeresult},#{openid})
+ </insert>
+	
 </mapper>

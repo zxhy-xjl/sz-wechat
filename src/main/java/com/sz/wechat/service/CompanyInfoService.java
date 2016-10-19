@@ -75,4 +75,14 @@ public class CompanyInfoService {
 	public List<Complaint> getComplaintByCompanyId(String companyId){
 		return this.complaintMapper.getComplaintByCompanyId(companyId);
 	}
+	/**
+	 * 插入投诉信息
+	 * @param complaint
+	 * @return
+	 */
+	public int insertComplaint(Complaint complaint)
+	{
+		return this.complaintMapper.insertComplaint(complaint);
+		
+	}
 }

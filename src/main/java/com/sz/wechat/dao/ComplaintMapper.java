@@ -24,4 +24,12 @@ public interface ComplaintMapper {
 	 * @return
 	 */
 	public List<Complaint> getComplaintByCompanyId(String companyId);
+	
+	/**
+	 * 插入投诉信息
+	 * @param complaint 
+	 * @return
+	 */
+	public int insertComplaint(Complaint complaint);
+
 }
