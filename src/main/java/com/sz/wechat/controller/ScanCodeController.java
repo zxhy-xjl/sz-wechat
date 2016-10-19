@@ -239,6 +239,9 @@ public class ScanCodeController {
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
 			if(null != companyInfo){
 				//资质类
+				if("".equals(companyInfo.getLicence())){
+					
+				}
 				//营业执照
 				//餐饮服务许可证
 				
