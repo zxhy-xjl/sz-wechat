@@ -47,7 +47,7 @@ function detailsinfo(oddNumber){
 	
 	
 	console.log(oddNumber);
-	window.location.href="<%=path%>/toMenuView.do?oddNumber="+oddNumber;
+	window.location.href="<%=path%>/toMenuView.do?oddNumber="+oddNumber+"&flag=0";
 }
 
 
