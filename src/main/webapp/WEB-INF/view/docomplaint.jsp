@@ -32,7 +32,7 @@ font-family: SimHei;
 <canvas id="canvas" width="64" height="48"></canvas>
 </div>
 <div id="shadowdiv" style="text-align: center;">
-<input type="button" value="投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+<input type="button" value="投诉" onclick="finishcomplaint()" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
 </div>
 <script type="text/javascript">
 var flag = null;
@@ -72,6 +72,11 @@ function photo()
 {
 	context.drawImage(video,0,0,64,48);
 
+	}
+function finishcomplaint()
+{
+	window.location.href="<%=path%>/jsp/complaintsuccess.jsp";
+	
 	}
 
 </script>
