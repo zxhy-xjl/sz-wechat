@@ -36,6 +36,7 @@ $(function(){
 /**
  * 得到占比
  */
+ var ratio = 0;
 function getPercentage(){
 	var msgHtml = '';
 	$.ajax({
@@ -43,9 +44,10 @@ function getPercentage(){
 		url:'<%=path%>/proportionCompany.do?companyCode=${CompanyInfo.companycode}',
 		success:function(data){
 			if(data){
-				var score = data.result;
-				msgHtml ='<font color="#333333">您选择的店铺评分高于南京市<font color="red">'+score+'%</font>商家</font>';
+				ratio = data.result;
+				msgHtml ='<font color="#333333">您选择的店铺评分高于上海市<font color="red">'+ratio+'%</font>商家</font>';
 				$("#showMsg").html(msgHtml);
+				$("#ratio").val(ratio);
 			}
 		}
 	});
@@ -61,17 +63,18 @@ function getScore(){
 		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
 		success:function(data){
 			if(data){
-				var score = data.result;
+				score = data.result;
 				if(score<65){
-					scoreHtml = '<font size="14px" color="red">'+data.result+'分</font>';
+					scoreHtml = '<font size="14px" color="red">'+score+'分</font>';
 				}
 				if(score>65 && score<80){
-					scoreHtml = '<font size="14px" color="#629527">'+data.result+'分</font>';
+					scoreHtml = '<font size="14px" color="#629527">'+score+'分</font>';
 				}
 				if(score>80){
-					scoreHtml = '<font size="14px" color="#63B109">'+data.result+'分</font>';
+					scoreHtml = '<font size="14px" color="#63B109">'+score+'分</font>';
 				}
 				$("#score").html(scoreHtml);
+				$("#scoreinput").val(score);
 			}
 		}
 	});
@@ -82,14 +85,25 @@ function getScore(){
 function toTakingOrder(){
 	window.location.href="<%=path%>/toTakingOrder.do?companyCode=${CompanyInfo.companycode}";
 }
+/**
+ * 跳转至评分详细页面
+ */
+function toGradeInfo(){
+	$("#scoreForm").submit();
+}
 </script>
-<body style="backgroundp-color:#E9E9E9;">
+<body style="background-color:#E9E9E9">
+<form id="scoreForm" action="<%=path%>/toGradeInfo.do" method="post" >
+<input id="scoreinput" name="score" type="hidden">
+<input id="companyname" name="companyname" type="hidden" value="${CompanyInfo.companyname}">
+<input id="ratio" name="ratio" type="hidden">
+</form>
 <div id="content" style="height: 100%">
 	<div style="height:50px"></div>
 	<div id="score" style="text-align:center;line-height:230px;">
 	</div>
 	<div id="info" style="text-align:center;line-height:50px;">
-		<a href="#" style="font-family:'楷体','楷体_GB2312';font-size:20px;text-decoration:none;color:#4B4B4B">点击查看详情</a>
+		<a href="javascript:toGradeInfo()" style="font-family:'楷体','楷体_GB2312';font-size:20px;text-decoration:none;color:#4B4B4B">点击查看详情</a>
 	</div>
 	<div id="showMsg" style="text-align:center;line-height:150px;">
 	</div>

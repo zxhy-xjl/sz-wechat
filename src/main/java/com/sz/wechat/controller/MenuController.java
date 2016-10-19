@@ -130,6 +130,7 @@ public class MenuController  {
 			modelAndView.addObject("allPrice", allPrice);
 			modelAndView.addObject("buyNum", buyNum);
 			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.addObject("flag",request.getParameter("flag"));
 			modelAndView.setViewName("/takingorderdetails");
 		}
 		return modelAndView;

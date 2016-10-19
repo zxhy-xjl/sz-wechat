@@ -37,6 +37,12 @@ html,body {
 </style>
 </head>
 <script type="text/javascript">
+	var flag =${flag}
+	$(function(){
+		if(0==flag){
+			$("#footer").hide();
+		}
+	});
 	function doSubmit(){
 		$("#detailForm").submit();
 	}

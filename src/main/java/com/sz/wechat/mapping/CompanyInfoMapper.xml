@@ -17,6 +17,10 @@
 		<result column="FILETIME" property="filetime" jdbcType="VARCHAR"/>
 		<result column="COMPANYSTATUS" property="companystatus" jdbcType="VARCHAR"/>
 		<result column="COMPANYINTRO" property="companyintro" jdbcType="VARCHAR"/>
+		<result column="LICENCE" property="licence" jdbcType="VARCHAR"/>
+		<result column="CERTIFICATETIME" property="certificatetime" jdbcType="VARCHAR"/>
+		<result column="VALIDTIME" property="validtime" jdbcType="VARCHAR"/>
+		<result column="APTITUDESTATE" property="aptitudestate" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">

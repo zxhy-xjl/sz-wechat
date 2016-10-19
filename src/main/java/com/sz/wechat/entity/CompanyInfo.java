@@ -73,6 +73,22 @@ public class CompanyInfo implements Serializable  {
 	 * 积分
 	 */
 	private int score;
+	/**
+	 * 许可证号
+	 */
+	private String licence;
+	/**
+	 * 发证日期
+	 */
+	private String certificatetime;
+	/**
+	 * 有效日期
+	 */
+	private String validtime;
+	/**
+	 * 资质状态
+	 */
+	private String aptitudestate;//资质状态
 	public String getCompanycode() {
 		return companycode;
 	}
@@ -168,5 +184,29 @@ public class CompanyInfo implements Serializable  {
 	}
 	public void setLxfs(String lxfs) {
 		this.lxfs = lxfs;
+	}
+	public String getLicence() {
+		return licence;
+	}
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+	public String getCertificatetime() {
+		return certificatetime;
+	}
+	public void setCertificatetime(String certificatetime) {
+		this.certificatetime = certificatetime;
+	}
+	public String getValidtime() {
+		return validtime;
+	}
+	public void setValidtime(String validtime) {
+		this.validtime = validtime;
+	}
+	public String getAptitudestate() {
+		return aptitudestate;
+	}
+	public void setAptitudestate(String aptitudestate) {
+		this.aptitudestate = aptitudestate;
 	}
 }

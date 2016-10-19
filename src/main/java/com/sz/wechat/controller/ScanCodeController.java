@@ -341,4 +341,21 @@ public class ScanCodeController {
 		return modelAndView;
 	}
 	
+	/**
+	 * 跳转至查看评分详细
+	 * @return
+	 */
+	@RequestMapping(value = "/toGradeInfo")
+	public ModelAndView toGradeInfo(HttpServletRequest request, HttpServletResponse response){
+		String companyname = request.getParameter("companyname");
+		String score = request.getParameter("score");
+		String ratio = request.getParameter("ratio");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/gradeInfo");
+		modelAndView.addObject("companyname", companyname);
+		modelAndView.addObject("score",score);
+		modelAndView.addObject("ratio",ratio);
+		return modelAndView;
+	}		
+	
 }
