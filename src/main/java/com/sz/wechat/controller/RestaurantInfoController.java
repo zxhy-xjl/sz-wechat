@@ -183,7 +183,7 @@ public class RestaurantInfoController {
 		}
 		//CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companycode);
 		modelAndView.addObject("CompanyInfo", companyInfo2);
-		modelAndView.addObject("consumelist", consumelist);
+		modelAndView.addObject("oddnumber", consumelist.get(0).getOddnumber());
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("totalprice", totalprice);
 		modelAndView.addObject("paytime", paytime);
