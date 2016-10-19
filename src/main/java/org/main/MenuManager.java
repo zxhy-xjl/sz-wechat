@@ -28,8 +28,8 @@ public class MenuManager {
 		
 		
 		//String myUrl = "http://www.haoschoool.com/sz_wechattest/Oauth2Servlet";
-		//String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/jsp/userinfo.jsp","utf-8"); 
-		//System.out.println(myUrl);
+	/*	String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/toFootprint.do","utf-8"); 
+		System.out.println(myUrl);*/
 		
 /*		//获取所有图片素材
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=hoALATJUjYJ9skmta816xD90GY0Xre4SQm3FO3Hq7qLhU9VzVzZWa7aGs7UdMTz2VCjc-JSIWEteo9BZoq22aMLGBgLJYL7sDr0l3UikqPMDZVeAFAQMI";
@@ -47,7 +47,7 @@ public class MenuManager {
 		
 		//图文消息mediaid:vqwx7kVbaYu50eukSirkCIuUdnAge8jlUKY-uFnP5Ws
 		// 第三方用户唯一凭证
-		String appId = "wx4203dd1ae2c80664";
+     	String appId = "wx4203dd1ae2c80664";
 		// 第三方用户唯一凭证密钥
 		String appSecret = "68e330a8bc86b7ddc369e0f3da4a893e";
 
@@ -167,7 +167,7 @@ public class MenuManager {
 
 		ViewButton mainBtn2 = new ViewButton();
 		mainBtn2.setName("足迹");
-		mainBtn2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4203dd1ae2c80664&redirect_uri=http%3A%2F%2Fwww.haoschoool.com%2Fsz-wechat%2Fjsp%2Ffootprint.jsp&response_type=code&scope=snsapi_userinfo&state=222#wechat_redirect");
+		mainBtn2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4203dd1ae2c80664&redirect_uri=http%3A%2F%2Fwww.haoschoool.com%2Fsz-wechat%2FtoFootprint.do&response_type=code&scope=snsapi_userinfo&state=222#wechat_redirect");
 		mainBtn2.setType("view");
 		//mainBtn2.setSub_button(new CommonButton[] {});
 

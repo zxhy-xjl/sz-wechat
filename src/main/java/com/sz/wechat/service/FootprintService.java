@@ -3,6 +3,8 @@
  */
 package com.sz.wechat.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class FootprintService {
 	@Autowired
 	private FootprintMapper footprintMapper;
 	
-	public Footprint getFootprintByOpenid(String openid)
+	public List<Footprint> getFootprintByOpenid(String openid)
 	{
 		return this.footprintMapper.getFootprintByOpenid(openid);
 		
