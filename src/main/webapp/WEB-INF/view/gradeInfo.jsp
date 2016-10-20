@@ -46,27 +46,26 @@ function getScore(){
  * 得到百分比
  */
 function getPercentage(){
-	var msgHtml = '';
-	msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
+	 var msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
 	$("#ratio").html(msgHtml);
 }
 </script>
 <body style="background-color:#E9E9E9">
 <div id="content">
-	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%">
+	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%;">
 	</div>
-	<div id="ratio" style="width:500px;float:right;margin-right:50%;margin-top:3%;">
+	<div id="ratio" style="width:65%;float:right;margin-top:10%;">
 	</div>
-	<div id="hr" style="padding-top:8%;">
+	<div id="hr" style="padding-top:35%;">
 		<hr color="#B9B9B9">
 	</div>
 	<div id="showMsg">
-		<table border="0" width="100%" style="border-collapse:collapse;" >
+		<table border="0" width="100%" style="border-collapse:collapse;font-family:YouYuan" >
 			<c:forEach items="${allgradelist}"  var="item" varStatus="status">
 				<c:set  value="" var="flag" scope="page"/>
 				<c:if test="${flag!=item.type}">
 					<tr>
-						<td style="padding-left:10%">${item.allscore}</td>
+						<td style="padding-left:5%">${item.allscore}</td>
 					</tr>
 					<c:set  value="${item.type}" var="flag" scope="page"/>
 				</c:if>
@@ -74,11 +73,12 @@ function getPercentage(){
 				<c:if test="${item.type == item1.type}">
 					<tr style="background-color:white;">
 						<td><c:if test="${item1.name != ''}">${item1.name}</c:if><c:if test="${item1.error != ''}">${item1.error}</c:if></td>
-						<td>${item1.score}</td>
+						<td>-${item1.score}</td>
 						<td>${item1.result}</td>
 					</tr>
 				</c:if>
 				</c:forEach>
+				<tr height="10px"><td></td></tr>
 			</c:forEach>
 			
 			

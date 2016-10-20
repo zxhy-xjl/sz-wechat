@@ -1,7 +1,9 @@
 package com.sz.wechat.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -333,6 +335,7 @@ public class ScanCodeController {
 				int gradeStat=0;
 				allscore = 0;
 				List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companyCode);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				//投诉
 				if(null != complaintList && complaintList.size() > 0){
 					for (Complaint complaint : complaintList) {
@@ -340,7 +343,7 @@ public class ScanCodeController {
 							if(score > 2){
 								score = score - 2;
 								allscore = allscore + 2;
-								grade = new Grade("complaint","2","","",complaint.getComplaincontent());
+								grade = new Grade("complaint","2","",df.format(new Date()),complaint.getComplaincontent());
 								_mapList.add(grade);
 							}else{
 								score = 0;
