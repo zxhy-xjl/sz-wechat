@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
+	HttpSession session = request.getSession(); 
 %>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
 <title>餐具信息</title>
 <link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
+<script type="text/javascript" src="<%=path%>/public/script/jweixin-1.1.0.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
 <script type="text/javascript">
@@ -36,13 +38,16 @@
 	function doSubmit(){
 		window.location.href="<%=path%>/toTakingOrder.do";
 	}
+	function tots(){
+		window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+	}
 </script>
 <body style="background-color:#E9E9E9">
 <div id="content">
 	<div>
 		<table border="0" width="100%" align="center">
 			<tr>
-				<td align="right">企业名称：</td>
+				<td align="right" width="20%">企业名称：</td>
 				<td>${CompanyInfo.companyname}</td>
 			</tr>
 			<tr>
@@ -65,27 +70,27 @@
 			<tr>
 				<td colspan="2" >
 					<div style="margin-left:5%">
-						<p>1、工商营业执照</p>
-						<p>2、卫生许可证cc
-						<p>3、行政处罚单</p>
-						<p>4、投诉</p>
-						<p>5、评论</p>	
+						<p>1、营业执照注册号</p>
+						<p>2、行政处罚单</p>
+						<p>3、投诉</p>
+						<p>4、评论</p>	
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"  align="center">
 					<div>
-						<textarea rows="6" cols="55" placeholder="你想说点啥" ></textarea>
+						<textarea id="textare" rows="6" cols="55" placeholder="你想说点啥" ></textarea>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td align="center">
-					<img alt="" src="<%=path%>/public/images/photo.png" width="43" height="42" style="margin-left:-25%" >
+				<td>
+					<input type="file" accept="image/*"  capture="camera" style="width:100%" >
+					<%-- <img alt="" src="<%=path%>/public/images/photo.png" onclick="javascript:text()" width="43" height="42" style="margin-left:-25%" > --%>
 				</td>
 				<td align="right">
-					<img alt="" src="<%=path%>/public/images/sub.png" width="85" height="42" style="margin-right:5%">
+					<img alt="" src="<%=path%>/public/images/sub.png" onclick="javascript:tots();" width="85" height="42" style="margin-right:5%">
 				</td>
 			</tr>
 		</table>

@@ -47,4 +47,5 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public List<Consumerec> selectConsumerecByOpenidandCompanycode(@Param(value="openid")String openid,@Param(value="companycode") String companycode);
+	
 }

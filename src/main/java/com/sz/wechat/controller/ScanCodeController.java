@@ -6,18 +6,16 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Grade;
@@ -51,7 +49,7 @@ public class ScanCodeController {
 	@RequestMapping(value = "/scanCode/sign")
 	public JsonVo  sign(HttpServletRequest request, HttpServletResponse response){
 		String flag = request.getParameter("flag");
-		Map<String,Object> map = ScanCodeUtils.getScanCode(flag);
+		Map<String,Object> map = ScanCodeUtils.getScanCode(flag,"");
 		JsonVo  jsonVo = new JsonVo();
 		ScanCode scanCode = null;
 		if(null != map){ 
@@ -83,6 +81,8 @@ public class ScanCodeController {
 				CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
 				if(null != companyInfo){
 					modelAndView.addObject("CompanyInfo", companyInfo);
+					HttpSession session = request.getSession();
+					session.setAttribute("code",companyInfo.getCompanycode());
 					modelAndView.addObject("tableNum",tablenum);
 					modelAndView.setViewName("/scanCodeFeedBack");
 				}else{
@@ -399,6 +399,10 @@ public class ScanCodeController {
 		if(!"".equals(company)){
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(company);
 			if(null != companyInfo){
+				Map<String,Object> map = ScanCodeUtils.getScanCode("2","http://www.haoschoool.com/sz-wechat/checkScanCodeTableWare.do?company="+company);
+				modelAndView.addObject("nonceStr", String.valueOf(map.get("nonceStr")));
+				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
+				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
 				modelAndView.setViewName("/tableware");
 			}else{

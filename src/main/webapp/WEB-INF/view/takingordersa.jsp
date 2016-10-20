@@ -21,6 +21,12 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 </style>
 </head>
 <script type="text/javascript">
+	$(function(){
+		if(0 !="${defaultAdd}"){
+			$("#invoicetype").attr("checked",true);
+			$("#bill").val("${bill}")
+		}
+	});
 	function doSubmit(){
 		var cashpay = $("#cashpay").val();
 		var wechatpay = $("#wechatpay").val();
@@ -65,12 +71,12 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 				</div>
 				<div class="mui-input-row mui-radio">
 					<label>微信</label>
-					<input id="wechatpay" name="paytype" type="radio" value="1">
+					<input id="wechatpay" name="paytype" type="radio" value="1" checked>
 				</div>
-				<div class="mui-input-row mui-radio ">
+				<!-- <div class="mui-input-row mui-radio ">
 					<label>支付宝</label>
 					<input id="allpay" name="paytype" type="radio" value="2">
-				</div>
+				</div> -->
 			</form>
 		</div>
 	</div>
@@ -78,8 +84,10 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 	<div style="background-color:white;line-height:17px;color:#333;text-align:center;">
 		<table border="0" align="center" width="98%"  style="border-collapse:collapse;">
 			<tr style="line-height:50px;">
-				<td width="80%"  >
-					开票单位：<input id="" name="invoice" >
+				<td width="80%" align="left">
+				<div style="margin-left:7%">
+					开票单位：<input id="invoice" name="invoice" type="text" style="width:60%;" >				
+				</div>
 				</td>
 				<td width="48%"></td>
 				<td colspan="1"></td>
@@ -88,7 +96,7 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 				<td align="left">
 					<div style="margin-left:5%">
 						<label>默认添加</label>
-						<input name="invoice" value="1" type="checkbox">
+						<input id="invoicetype" name="invoicetype" value="1" type="checkbox">
 					</div>
 				</td>
 				<td width="60%"></td>

@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
+HttpSession session = request.getSession(); 
 %>
 <html>
 <head>
@@ -12,8 +13,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
-var flag ;
+var flag = 0 ;
 $(function(){
+	
 	flag = GetRequest();
 	getCode();
 });
@@ -80,10 +82,18 @@ wx.ready(function(){
 	            }else{
 	                $("#id_securityCode_input").val(url);
 	            }
+	            
+	            if(3 == flag['flag']){
+	            	window.location.href="<%=path%>/toComplain.do?companycode="+$('#id_securityCode_input').val()+"&flag=2";
+	            	return;
+	            }
 	            if(1 == flag['flag']){
 	            	 window.location.href="<%=path%>/checkScanCode.do?company="+$('#id_securityCode_input').val();
-	            }else{
+	            	 return;
+	            }
+	            if(2 == flag['flag']){}{
 	            	 window.location.href="<%=path%>/checkScanCodeTableWare.do?company="+$('#id_securityCode_input').val();
+	            	 return;
 	            }
 	        }
 	    });
@@ -100,6 +110,6 @@ wx.error(function(res){
 <input type="hidden" id="timestamp">
 <input type="hidden" id="nonceStr">
 <input type="hidden" id="signature">
-<input id='id_securityCode_input' type="text" >
+<input id='id_securityCode_input' type="hidden" >
 </body>
 </html>
