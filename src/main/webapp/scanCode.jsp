@@ -15,7 +15,6 @@ HttpSession session = request.getSession();
 <script type="text/javascript">
 var flag = 0 ;
 $(function(){
-	
 	flag = GetRequest();
 	getCode();
 });

@@ -32,6 +32,7 @@ text-align:center;
 $(function(){
 	getPercentage();
 	getScore();
+
 });
 
 /**

@@ -15,6 +15,11 @@
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
 <script type="text/javascript">
+	$(function(){
+		<%
+		String code = (String)session.getAttribute("code"); 
+		%>
+	});
 	function doScore(obj){
 		var id = obj.id;
 		var size = id.substring(id.length-1,id.length);
@@ -38,11 +43,19 @@
 	function doSubmit(){
 		window.location.href="<%=path%>/toTakingOrder.do";
 	}
+	
 	function tots(){
-		window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+		var codeObj = $("#codei");
+		if(codeObj.val() =="" || codeObj.val() == "null" ){
+			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+		}else{
+			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&flag=2";
+		}
+		
 	}
 </script>
 <body style="background-color:#E9E9E9">
+<input id="codei" type="hidden" value="<%=code%>">
 <div id="content">
 	<div>
 		<table border="0" width="100%" align="center">
