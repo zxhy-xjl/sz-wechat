@@ -56,6 +56,7 @@ function getPercentage(){
  * 获取积分
  */
 var score = 0;
+var listObj;
 function getScore(){
 	var scoreHtml ='';
 	$.ajax({
@@ -97,6 +98,7 @@ function toGradeInfo(){
 <input id="scoreinput" name="score" type="hidden">
 <input id="companyname" name="companyname" type="hidden" value="${CompanyInfo.companyname}">
 <input id="ratio" name="ratio" type="hidden">
+<input id="listObj" name="listObj"  type="hidden">
 </form>
 <div id="content" style="height: 100%">
 	<div style="height:50px"></div>
