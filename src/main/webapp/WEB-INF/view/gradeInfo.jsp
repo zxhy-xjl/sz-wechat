@@ -74,7 +74,7 @@ function getPercentage(){
 					<tr style="background-color:white;">
 						<td><c:if test="${item1.name != ''}">${item1.name}</c:if><c:if test="${item1.error != ''}">${item1.error}</c:if></td>
 						<td>-${item1.score}</td>
-						<td>${item1.result}</td>
+						<td align="right">${item1.result}</td>
 					</tr>
 				</c:if>
 				</c:forEach>
