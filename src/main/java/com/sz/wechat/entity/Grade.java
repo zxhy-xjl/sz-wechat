@@ -47,7 +47,7 @@ public class Grade implements Serializable {
 	
 	public Grade(String type,String allscore){
 		this.type=type;
-		this.allscore=allscore;
+		this.allscore=allscore; 
 	}
 	
  
