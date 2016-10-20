@@ -42,7 +42,7 @@ public class UserInfoController {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ResponseBody
-	@RequestMapping(value = "/userInfo/users")
+	@RequestMapping(value = "/userInfo")
 	public ModelMap getUsers(HttpServletRequest request, ModelMap modelMap){
 		PageParam page = DataGridHepler.parseRequest(request);
 		log.debug("page:" + page.getPage());
