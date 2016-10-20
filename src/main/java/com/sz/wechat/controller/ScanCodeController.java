@@ -335,7 +335,7 @@ public class ScanCodeController {
 				int gradeStat=0;
 				allscore = 0;
 				List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companyCode);
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 				//投诉
 				if(null != complaintList && complaintList.size() > 0){
 					for (Complaint complaint : complaintList) {
