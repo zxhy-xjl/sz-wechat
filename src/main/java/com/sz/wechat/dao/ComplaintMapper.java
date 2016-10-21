@@ -25,6 +25,10 @@ public interface ComplaintMapper {
 	 */
 	public List<Complaint> getComplaintByCompanyId(String companyId);
 	
+	
+	public List<Complaint> getComplaintByOpenid(String Openid);
+	public Complaint getComplaintInfoByPid(String pid);
+	
 	/**
 	 * 插入投诉信息
 	 * @param complaint 

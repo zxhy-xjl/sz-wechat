@@ -65,6 +65,7 @@ public class Oauth2Servlet {
 	        response.setContentType("text/html; charset=utf-8");
 	        HttpSession ss = (HttpSession)request.getSession();
 	        ss.setAttribute("openid",userinfoObject.get("openid")); 
+	        ss.setAttribute("nickname",userinfoObject.get("nickname")); 
 	        PrintWriter out = response.getWriter();
 	   /*     out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 	        out.println("<HTML>");

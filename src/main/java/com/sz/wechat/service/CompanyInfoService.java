@@ -85,4 +85,17 @@ public class CompanyInfoService {
 		return this.complaintMapper.insertComplaint(complaint);
 		
 	}
+	
+	public List<Complaint> getComplaintByOpenid(String Openid)
+	{
+		return this.complaintMapper.getComplaintByOpenid(Openid);
+		
+	}
+	
+	 public Complaint getComplaintInfoByPid(String pid)
+	{
+		return this.complaintMapper.getComplaintInfoByPid(pid);
+	}
+
+
 }

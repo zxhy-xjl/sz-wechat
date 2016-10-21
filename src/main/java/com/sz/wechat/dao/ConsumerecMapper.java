@@ -47,4 +47,11 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public List<Consumerec> selectConsumerecByOpenidandCompanycode(@Param(value="openid")String openid,@Param(value="companycode") String companycode);
+	/**
+	 * 通过openid查询订单
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByOpenid(@Param(value="openid")String openid);
+
 }

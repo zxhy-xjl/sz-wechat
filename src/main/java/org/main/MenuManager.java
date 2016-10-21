@@ -28,8 +28,8 @@ public class MenuManager {
 		
 		
 		//String myUrl = "http://www.haoschoool.com/sz_wechattest/Oauth2Servlet";
-	/*	String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/toFootprint.do","utf-8"); 
-		System.out.println(myUrl);*/
+		String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/toFootprint.do?aaa=1","utf-8"); 
+		System.out.println(myUrl);
 		
 /*		//获取所有图片素材
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=hoALATJUjYJ9skmta816xD90GY0Xre4SQm3FO3Hq7qLhU9VzVzZWa7aGs7UdMTz2VCjc-JSIWEteo9BZoq22aMLGBgLJYL7sDr0l3UikqPMDZVeAFAQMI";
@@ -47,7 +47,7 @@ public class MenuManager {
 		
 		//图文消息mediaid:vqwx7kVbaYu50eukSirkCIuUdnAge8jlUKY-uFnP5Ws
 		// 第三方用户唯一凭证
-     	String appId = "wx4203dd1ae2c80664";
+/*     	String appId = "wx4203dd1ae2c80664";
 		// 第三方用户唯一凭证密钥
 		String appSecret = "68e330a8bc86b7ddc369e0f3da4a893e";
 
@@ -66,7 +66,7 @@ public class MenuManager {
 			else
 				System.out.println("菜单创建失败，错误码：" + result);
 				//log.info("菜单创建失败，错误码：" + result);
-		}
+		}*/
 	}
 
 	/**

@@ -37,6 +37,10 @@
 	 <select id="selectConsumerecByOpenidandCompanycode" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR} AND COMPANYCODE = #{companycode,jdbcType=VARCHAR}
 	 </select>
+	 
+	 <select id="selectConsumerecByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
+	 	SELECT DISTINCT ODDNUMBER,COMPANYCODE,PAYTIME,PAYTYPE FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR}
+	 </select>
 	 <!-- 修改 -->
 	 <update id="updatePayByOddNumber" parameterType="com.sz.wechat.entity.Consumerec">
 	 	update SZ_CONSUMEREC set PAYTYPE = #{paytype,jdbcType=VARCHAR},BILLUNIT=#{billunit,jdbcType=VARCHAR},PAYTIME=to_char(sysdate,'yyyyhhdd') WHERE ODDNUMBER=#{oddnumber,jdbcType=VARCHAR}

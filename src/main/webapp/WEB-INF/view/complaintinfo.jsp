@@ -76,9 +76,9 @@ function ajaxCall(){
 
 <tr style="height:40px;background-color: white;">
 <td><br />
-<label >&nbsp;&nbsp;<font style="" size="3">投诉餐厅：</font></label><br /><br />
-<label >&nbsp;&nbsp;<font style="" size="3">投诉时间：</font></label><br /><br />
-<label >&nbsp;&nbsp;<font style="" size="3">投诉描述：</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">投诉餐厅：${companyname }</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">投诉时间：${complaint.complaintime }</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
 </td>
 </tr>
 <tr style="height:50px;background-color: #e9e9e9;">
@@ -89,9 +89,9 @@ function ajaxCall(){
 </tr>
 <tr style="height:40px;background-color: white;">
 <td><br>
-<label >&nbsp;&nbsp;<font style="" size="3">处理时间：</font></label><br /><br />
-<label >&nbsp;&nbsp;<font style="" size="3">处理部门：</font></label><br /><br />
-<label >&nbsp;&nbsp;<font style="" size="3">处理结果：</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">处理时间：${complaint.disposetime }</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">处理部门：${complaint.disposedep }</font></label><br /><br />
+<label >&nbsp;&nbsp;<font style="" size="3">处理结果：${complaint.disposeresult }</font></label><br /><br />
 
 </td>
 </tr>
