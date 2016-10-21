@@ -9,7 +9,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,6 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
-import com.sz.wechat.vo.JsonVo;
 
 /***
  * 菜单控制器
@@ -148,7 +146,7 @@ public class MenuController  {
 		ModelAndView modelAndView = new ModelAndView();
 		String oddNumber = request.getParameter("oddNumber");
 		String allPrice = request.getParameter("allPrice");
-		String companyCode = (String) httpSession.getAttribute("companyCode");
+		//String companyCode = (String) httpSession.getAttribute("companyCode");
 		Map<String,Object> _map = null;
 		List<Map<String,Object>> mapList = new ArrayList<>();
 		if(!"".equals(oddNumber)){
