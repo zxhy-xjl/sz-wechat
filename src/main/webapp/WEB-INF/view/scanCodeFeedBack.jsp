@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
-HttpSession session = request.getSession(); 
 %>
 <html>
 <head>
@@ -47,7 +46,7 @@ function getPercentage(){
 		success:function(data){
 			if(data){
 				ratio = data.result;
-				msgHtml ='<font color="#333333">您选择的店铺评分高于上海市<font color="red">'+ratio+'%</font>商家</font>';
+				msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
 				$("#showMsg").html(msgHtml);
 				$("#ratio").val(ratio);
 			}
