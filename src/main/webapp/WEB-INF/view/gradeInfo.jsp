@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8" session="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -24,6 +24,7 @@ var ratio = ${ratio}
 $(function(){
 	getScore();
 	getPercentage();
+	getlistObj();
 });
 /**
  * 获取分数
@@ -45,19 +46,43 @@ function getScore(){
  * 得到百分比
  */
 function getPercentage(){
-	var msgHtml = '';
-	msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
+	 var msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
 	$("#ratio").html(msgHtml);
 }
 </script>
 <body style="background-color:#E9E9E9">
 <div id="content">
-	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%">
+	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%;">
 	</div>
-	<div id="ratio" style="width:500px;float:right;margin-right:50%;margin-top:3%;">
+	<div id="ratio" style="width:65%;float:right;margin-top:10%;">
 	</div>
-	<div id="hr" style="padding-top:8%;">
+	<div id="hr" style="padding-top:35%;">
 		<hr color="#B9B9B9">
+	</div>
+	<div id="showMsg"style="font-family:YouYuan;width:100%">
+		<table border="0" align="center" width="100%" style="border-collapse:collapse;" >
+			<c:forEach items="${allgradelist}"  var="item" varStatus="status">
+					<c:set  value="" var="flag" scope="page"/>
+				<c:if test="${flag!=item.type}">
+					<tr style="padding:25px;">
+						<td style="padding-left:3%">${item.allscore}</td>
+					</tr>
+					<c:set  value="${item.type}" var="flag" scope="page"/>
+				</c:if>
+				<c:forEach items="${gradeList}" var="item1" varStatus="status">
+				<c:if test="${item.type == item1.type}">
+					<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
+					<tr style="background-color:white">
+						<td style="padding-left:3%"><c:if test="${item1.name != ''}">${item1.name}</c:if><c:if test="${item1.error != ''}">${item1.error}</c:if></td>
+						<td>-${item1.score}</td>
+						<td align="right">${item1.result}</td>
+					</tr>
+					<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
+				</c:if>
+				</c:forEach>
+				<tr height="10px"><td></td></tr>
+			</c:forEach>
+		</table>
 	</div>
 </div>
 </body>

@@ -50,6 +50,12 @@ public class Consumerec  implements Serializable   {
 	 * 单价
 	 */
 	private String price;
+	
+	/**
+	 * 默认添加
+	 */
+	private String  defaultadd;
+		
 	public String getPid() {
 		return pid;
 	}
@@ -112,5 +118,11 @@ public class Consumerec  implements Serializable   {
 	}
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	public String getDefaultadd() {
+		return defaultadd;
+	}
+	public void setDefaultadd(String defaultadd) {
+		this.defaultadd = defaultadd;
 	}
 }

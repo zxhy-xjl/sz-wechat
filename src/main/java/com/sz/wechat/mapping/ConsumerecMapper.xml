@@ -12,17 +12,18 @@
 		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
 		<result column="PAYTIME" property="paytime" jdbcType="VARCHAR"/>
 		<result column="ODDNUMBER" property="oddnumber" jdbcType="VARCHAR"/>
+		<result column="DEFAULTADD" property="defaultadd" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		 PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME,ODDNUMBER
+		 PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME,ODDNUMBER,DEFAULTADD
 	</sql>
 	<!-- 插入-->
 	 <insert id="batchInsertConsumerec" parameterType="java.util.List">
 		<foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";" >
-			INSERT INTO SZ_CONSUMEREC  (PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME,ODDNUMBER)
+			INSERT INTO SZ_CONSUMEREC  (PID,COMPANYCODE,MENUID,BUYNUM,PAYTYPE,BILLUNIT,OPENID,PAYTIME,ODDNUMBER,DEFAULTADD)
 			VALUES
-        	(#{item.pid,jdbcType=VARCHAR},#{item.companycode,jdbcType=VARCHAR},#{item.menuid,jdbcType=VARCHAR},#{item.buynum,jdbcType=VARCHAR},#{item.paytype,jdbcType=VARCHAR},#{item.billunit,jdbcType=VARCHAR},#{item.openid,jdbcType=VARCHAR},#{item.paytime,jdbcType=VARCHAR},#{item.oddnumber,jdbcType=VARCHAR})
+        	(#{item.pid,jdbcType=VARCHAR},#{item.companycode,jdbcType=VARCHAR},#{item.menuid,jdbcType=VARCHAR},#{item.buynum,jdbcType=VARCHAR},#{item.paytype,jdbcType=VARCHAR},#{item.billunit,jdbcType=VARCHAR},#{item.openid,jdbcType=VARCHAR},#{item.paytime,jdbcType=VARCHAR},#{item.oddnumber,jdbcType=VARCHAR},#{item.defaultadd,jdbcType=VARCHAR})
     	</foreach>
 	 </insert>
 	 <!-- 查询  -->

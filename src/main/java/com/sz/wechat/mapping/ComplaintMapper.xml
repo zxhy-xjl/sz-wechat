@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="getComplaintByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
-		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND DISPOSERESULT IS NOT NULL AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND DISPOSESTATUS = 3 AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
 	</select>
 	<select id="getComplaintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND OPENID = #{openid,jdbcType=VARCHAR} 

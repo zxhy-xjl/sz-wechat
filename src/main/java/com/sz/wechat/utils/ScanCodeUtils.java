@@ -36,7 +36,7 @@ public class ScanCodeUtils {
 	 * 读取扫一扫所需要参数
 	 * @return
 	 */
-	public static Map<String,Object> getScanCode(String flag){
+	public static Map<String,Object> getScanCode(String flag,String url){
 		String token = getJSSDKAccessToken();
 		String ticket = "";
 		if("".equals(ticket)){
@@ -47,9 +47,14 @@ public class ScanCodeUtils {
 		}
 		String nonceStr = create_nonce_str();
 		String timeStamp = create_timestamp();
-		String wechat_scancode_url="http://www.haoschoool.com/sz-wechat/scanCode.jsp";
-		if(!"".equals(flag)){
-			wechat_scancode_url=wechat_scancode_url+"?flag="+flag;
+		String wechat_scancode_url = "";
+		if("".equals(url)){
+			wechat_scancode_url="http://www.haoschoool.com/sz-wechat/scanCode.jsp";
+			if(!"".equals(flag)){
+				wechat_scancode_url=wechat_scancode_url+"?flag="+flag;
+			}
+		}else{
+			wechat_scancode_url = url;
 		}
 		String url_1 = "jsapi_ticket=" + ticket +
                 "&noncestr=" + nonceStr +
@@ -119,14 +124,14 @@ public class ScanCodeUtils {
 	 * 获取随机ID
 	 * @return
 	 */
-	private static String create_nonce_str() {
+	public static String create_nonce_str() {
         return UUID.randomUUID().toString();
     }
 	/**
 	 * 获取时间戳
 	 * @return
 	 */
-	private static String create_timestamp() {
+	public static String create_timestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
 }

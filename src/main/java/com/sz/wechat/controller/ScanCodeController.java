@@ -1,11 +1,14 @@
 package com.sz.wechat.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
@@ -43,7 +47,7 @@ public class ScanCodeController {
 	@RequestMapping(value = "/scanCode/sign")
 	public JsonVo  sign(HttpServletRequest request, HttpServletResponse response){
 		String flag = request.getParameter("flag");
-		Map<String,Object> map = ScanCodeUtils.getScanCode(flag);
+		Map<String,Object> map = ScanCodeUtils.getScanCode(flag,"");
 		JsonVo  jsonVo = new JsonVo();
 		ScanCode scanCode = null;
 		if(null != map){ 
@@ -75,6 +79,8 @@ public class ScanCodeController {
 				CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
 				if(null != companyInfo){
 					modelAndView.addObject("CompanyInfo", companyInfo);
+					HttpSession session = request.getSession();
+					session.setAttribute("code",companyInfo.getCompanycode());
 					modelAndView.addObject("tableNum",tablenum);
 					modelAndView.setViewName("/scanCodeFeedBack");
 				}else{
@@ -117,7 +123,13 @@ public class ScanCodeController {
 				score = 100;
 				//资质类
 				//营业执照
+				if("".equals(companyInfo.getCompanyrecode()) || null == companyInfo.getCompanyrecode()){
+					score = score - 30;
+				}
 				//餐饮服务许可证
+				if("".equals(companyInfo.getLicence())|| null == companyInfo.getLicence()){
+					score = score - 30;
+				}
 				//处罚类
 				SupervisePunish supervisePunish = new SupervisePunish();
 				supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
@@ -225,10 +237,11 @@ public class ScanCodeController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ResponseBody
 	@RequestMapping(value = "/superviseScore")
-	public JsonVo checkScore(HttpServletRequest request, HttpServletResponse response){
+	public JsonVo checkScore(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		String companyCode = request.getParameter("companyCode");
 		JsonVo  jsonVo = new JsonVo();
 		int score = 100;
+		int allscore=0;
 		String keyWord="警告";
 		String keyWord_0="罚款";
 		String keyWord_1="没收";
@@ -237,15 +250,31 @@ public class ScanCodeController {
 		if(!"".equals(companyCode)){
 			StringBuffer sb  = new StringBuffer();
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
+			Grade grade = null;
+			List<Grade> _mapList = new ArrayList<>();
+			List<Grade> _mapList1 = new ArrayList<>();
 			if(null != companyInfo){
 				//资质类
-				if("".equals(companyInfo.getLicence())){
-					
-				}
 				//营业执照
+				if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
+					score = score - 30;
+					allscore = allscore+ 30;
+					grade = new Grade("aptitude","30","营业执照","无","");
+					_mapList.add(grade);
+					 
+				}
 				//餐饮服务许可证
-				
+				if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
+					score = score - 30;
+					allscore = allscore+ 30;
+					grade = new Grade("aptitude","30","餐饮服务许可证","无","");
+					_mapList.add(grade);
+				}
+				//总分
+				grade = new Grade("aptitude","资质"+"-"+String.valueOf(allscore));
+				_mapList1.add(grade);
 				//处罚类
+				allscore = 0;
 				SupervisePunish supervisePunish = new SupervisePunish();
 				supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
 				List<SupervisePunish> list = this.companyInfoService.getSuperviseLikeCompanyName(supervisePunish);
@@ -253,68 +282,102 @@ public class ScanCodeController {
 					//根据关键字判断
 					for (SupervisePunish _supervisePunish : list) {
 						String illegalType = _supervisePunish.getPenaltytype();
+						String pentype = _supervisePunish.getPenaltytype();
 						//判断是否存在吊销执照
 						if(illegalType.indexOf(keyword_3)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 5;
+							allscore = allscore + 5;
+							grade = new Grade("punish","5","","",pentype);
+							_mapList.add(grade);
 						}
 						//停产停业
 						if(illegalType.indexOf(keyword_2)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 4;
+							allscore = allscore + 4;
+							grade = new Grade("punish","4","","",pentype);
+							_mapList.add(grade);
 						}
 						//没收违法所得
 						if(illegalType.indexOf(keyWord_1)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 3;
+							allscore = allscore + 3;
+							grade = new Grade("punish","3","","",pentype);
+							_mapList.add(grade);
 						}
 						//罚款
 						if(illegalType.indexOf(keyWord_0)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 2;
+							allscore = allscore + 2;
+							grade = new Grade("punish","2","","",pentype);
+							_mapList.add(grade);
 						}
 						//警告
 						if(illegalType.indexOf(keyWord)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 1;
+							allscore = allscore + 1;
+							grade = new Grade("punish","1","","",pentype);
+							_mapList.add(grade);
 						}
+						//总分
+						grade = new Grade("punish","处罚"+"-"+String.valueOf(allscore));
+						_mapList1.add(grade);
 					}
 				}
 				//投诉类
-				int grade = 5;
+				int allgrade = 5;
 				int gradeStat=0;
-				int complaintStat=0;
+				allscore = 0;
 				List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companyCode);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 				//投诉
 				if(null != complaintList && complaintList.size() > 0){
 					for (Complaint complaint : complaintList) {
 						if(null != complaint){
-							complaintStat = complaintStat + 2;
+							if(score > 2){
+								score = score - 2;
+								allscore = allscore + 2;
+								grade = new Grade("complaint","2","",df.format(new Date()),complaint.getComplaincontent());
+								_mapList.add(grade);
+							}else{
+								score = 0;
+								break;
+							}
 						}
 					}
-					if(score > complaintStat){
-						score = score - complaintStat;
-					}else{
-						score = 0;
-					}
-					complaintStat = 0;
+					//总分
+					grade = new Grade("complaint","投诉"+"-"+String.valueOf(allscore));
+					_mapList1.add(grade);
 				}
 				//评分
+				allscore = 0;
 				List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
 				if(null != complaintScoreList && complaintScoreList.size()>0){
 					for(Complaint complaint:complaintScoreList){
 						gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
 					}
 					gradeStat = gradeStat/complaintScoreList.size();
-					gradeStat = grade - gradeStat;
+					gradeStat = allgrade  - gradeStat;
 					if(score > gradeStat){
 						score = score - gradeStat;
+						allscore = allscore + gradeStat;
+						grade = new Grade("grade",String.valueOf(gradeStat),"大众点评","实时","");
+						_mapList.add(grade);
 					}else{
 						score = 0;
 					}
 					gradeStat=0;
+					//总分
+					grade = new Grade("grade","评分"+"-"+String.valueOf(allscore));
+					_mapList1.add(grade);
 				}
 			}
+			 httpSession.setAttribute("_mapList", _mapList);  
+			 httpSession.setAttribute("_mapList1", _mapList1); 
 			jsonVo.setResult(score);
 			jsonVo.setMessage(sb.toString());
 		}
@@ -334,6 +397,10 @@ public class ScanCodeController {
 		if(!"".equals(company)){
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(company);
 			if(null != companyInfo){
+				Map<String,Object> map = ScanCodeUtils.getScanCode("2","http://www.haoschoool.com/sz-wechat/checkScanCodeTableWare.do?company="+company);
+				modelAndView.addObject("nonceStr", String.valueOf(map.get("nonceStr")));
+				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
+				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
 				modelAndView.setViewName("/tableware");
 			}else{
@@ -348,8 +415,9 @@ public class ScanCodeController {
 	 * 跳转至查看评分详细
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/toGradeInfo")
-	public ModelAndView toGradeInfo(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView toGradeInfo(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		String companyname = request.getParameter("companyname");
 		String score = request.getParameter("score");
 		String ratio = request.getParameter("ratio");
@@ -358,6 +426,10 @@ public class ScanCodeController {
 		modelAndView.addObject("companyname", companyname);
 		modelAndView.addObject("score",score);
 		modelAndView.addObject("ratio",ratio);
+		List<Grade> gradeList = (List<Grade>) httpSession.getAttribute("_mapList");
+		List<Grade> allgradelist = (List<Grade>)httpSession.getAttribute("_mapList1");
+		modelAndView.addObject("gradeList",gradeList);
+		modelAndView.addObject("allgradelist",allgradelist);
 		return modelAndView;
 	}		
 	

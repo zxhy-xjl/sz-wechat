@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,6 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
-import com.sz.wechat.vo.JsonVo;
 
 /***
  * 菜单控制器
@@ -51,13 +51,14 @@ public class MenuController  {
 	 * @return
 	 */
 	@RequestMapping(value = "/toTakingOrder")
-	public ModelAndView toTakingOrder(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView toTakingOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Menu> menuList = this.menuService.getMenu();
 		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
 		modelAndView.addObject("dictList", dictList);
 		modelAndView.addObject("menuList",menuList);
 		modelAndView.addObject("companyCode",request.getParameter("companyCode"));
+		httpSession.setAttribute("companyCode", request.getParameter("companyCode"));
 		modelAndView.setViewName("/takingorders");
 		return modelAndView;
 	}
@@ -141,13 +142,16 @@ public class MenuController  {
 	 * @return
 	 */
 	@RequestMapping(value = "/toMenuOrder")
-	public ModelAndView toMenuOrder(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView toMenuOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		ModelAndView modelAndView = new ModelAndView();
 		String oddNumber = request.getParameter("oddNumber");
 		String allPrice = request.getParameter("allPrice");
+		//String companyCode = (String) httpSession.getAttribute("companyCode");
 		Map<String,Object> _map = null;
 		List<Map<String,Object>> mapList = new ArrayList<>();
 		if(!"".equals(oddNumber)){
+			String defaultAdd= "";
+			String bill = "";
 			List<Consumerec> consumerecList = consumerecService.selectConsumerecByOddNumber(oddNumber);
 			if(null != consumerecList && consumerecList.size() > 0){
 				Menu menu = null;
@@ -157,11 +161,15 @@ public class MenuController  {
 					_map.put("menuname",menu.getMenuname());
 					_map.put("menunum",consumerec.getBuynum());
 					_map.put("price",menu.getPrice());
+					defaultAdd = consumerec.getDefaultadd();
+					bill = consumerec.getBillunit();
 					mapList.add(_map);
 				}
 			}
 			modelAndView.addObject("menuList", mapList);
 			modelAndView.addObject("allPrice", allPrice);
+			modelAndView.addObject("defaultAdd", defaultAdd);
+			modelAndView.addObject("bill", bill);
 			modelAndView.addObject("oddNumber", oddNumber);
 			modelAndView.setViewName("/takingordersa");
 		}
@@ -181,10 +189,12 @@ public class MenuController  {
 		String oddNumber = request.getParameter("oddNumber");
 		String paytype = request.getParameter("paytype");
 		String invoice = request.getParameter("invoice");
+		String invoicetype = request.getParameter("invoicetype");
 		Consumerec consumerec = new Consumerec();
 		consumerec.setOddnumber(oddNumber);
 		consumerec.setPaytype(paytype);
 		consumerec.setBillunit(invoice);
+		consumerec.setDefaultadd(invoicetype);
 		this.consumerecService.updatePayByOddNumber(consumerec);
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HHmm:ss");
 		modelAndView.setViewName("/doPay");
@@ -193,5 +203,4 @@ public class MenuController  {
 		modelAndView.addObject("paytime",df.format(new Date()));
 		return modelAndView;
 	}
-	
 }

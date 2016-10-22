@@ -31,6 +31,7 @@ text-align:center;
 $(function(){
 	getPercentage();
 	getScore();
+
 });
 
 /**
@@ -45,7 +46,7 @@ function getPercentage(){
 		success:function(data){
 			if(data){
 				ratio = data.result;
-				msgHtml ='<font color="#333333">您选择的店铺评分高于上海市<font color="red">'+ratio+'%</font>商家</font>';
+				msgHtml ='<font color="#333333">领先于全市<font color="red">'+ratio+'%</font>的餐厅</font>';
 				$("#showMsg").html(msgHtml);
 				$("#ratio").val(ratio);
 			}
@@ -56,6 +57,7 @@ function getPercentage(){
  * 获取积分
  */
 var score = 0;
+var listObj;
 function getScore(){
 	var scoreHtml ='';
 	$.ajax({
@@ -97,6 +99,7 @@ function toGradeInfo(){
 <input id="scoreinput" name="score" type="hidden">
 <input id="companyname" name="companyname" type="hidden" value="${CompanyInfo.companyname}">
 <input id="ratio" name="ratio" type="hidden">
+<input id="listObj" name="listObj"  type="hidden">
 </form>
 <div id="content" style="height: 100%">
 	<div style="height:50px"></div>

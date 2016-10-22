@@ -89,6 +89,11 @@ public class CompanyInfo implements Serializable  {
 	 * 资质状态
 	 */
 	private String aptitudestate;//资质状态
+	
+	/**
+	 * 企业注册码
+	 */
+	private String companyrecode;
 	public String getCompanycode() {
 		return companycode;
 	}
@@ -208,5 +213,11 @@ public class CompanyInfo implements Serializable  {
 	}
 	public void setAptitudestate(String aptitudestate) {
 		this.aptitudestate = aptitudestate;
+	}
+	public String getCompanyrecode() {
+		return companyrecode;
+	}
+	public void setCompanyrecode(String companyrecode) {
+		this.companyrecode = companyrecode;
 	}
 }
