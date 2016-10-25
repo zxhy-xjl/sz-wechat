@@ -14,13 +14,49 @@ html{
 font-family: SimHei;
 }
 </style>
+<script type="text/javascript">
+function pagejump(pid,companyname)
+{
+	
+	window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname;  		
+
+}
+
+</script>
 </head>
 <body style="background-color: #e9e9e9">
 <br><br><br><br><br>
-<div id="success" style="text-align: center;">
-<h2>投诉已成功！请耐心等待受理</h2>
+<div id="imgdiv" style="text-align: center;">
+<img id="successimg" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="120" height="120">
 </div>
-
-
+<div id="success" style="text-align: center;">
+<h2>投诉已提交！</h2>
+</div>
+<div id="suctable">
+<br>
+<h2 style="font-size: 20px;">&nbsp;&nbsp;&nbsp;后续流程</h2>
+<hr color="lightgrey" width="85%"/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img style="position: relative;top:5px; " id="successimg" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="20" height="20">
+<label style="color: #8bcd44;">申请投诉</label>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<img style="position: relative;top:5px; " id="successimg" onclick="" alt="0" src="<%=path%>/public/images/bg_2.png" width="20" height="20">
+<label>投诉受理中</label>
+<br>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功将在扫桌公众号中显示，请及时关注</label>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<img style="position: relative;top:5px; " id="successimg" onclick="" alt="0" src="<%=path%>/public/images/bg_2.png" width="20" height="20">
+<label >投诉处理中</label>
+<br>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功将在扫桌公众号中显示，请及时关注</label>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<img style="position: relative;top:5px; " id="successimg" onclick="" alt="0" src="<%=path%>/public/images/bg_2.png" width="20" height="20">
+<label >投诉反馈</label>
+<br>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功将在扫桌公众号中显示，请及时关注</label>
+</div>
+<br><br>
+<div id="detaildiv" style="text-align: center;">
+<input type="button" value="查看投诉详情" onclick="pagejump('${pid}','${companyname}')" style="background: #f3be67;width:120px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+</div>
 </body>
 </html>

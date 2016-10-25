@@ -3,6 +3,10 @@
  */
 package com.sz.wechat.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,13 +48,17 @@ public class ComplainController {
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    HttpSession ss = (HttpSession)request.getSession();
         String openid = ss.getAttribute("myopenid").toString();
+        
+        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date=new Date();
+      
         Complaint complaint = new Complaint();
         complaint.setCompanyid(companycode);
         complaint.setComplaincontent(complaintcontent);
-        complaint.setComplaintime("");
+        complaint.setComplaintime(dateFormater.format(date));
         complaint.setComplaintype("1");
         complaint.setOpenid(openid);
-        complaint.setPid("222");
+        complaint.setPid(UUID.randomUUID().toString());
         complaint.setDisposestatus("1");
         complaint.setDisposeresult("");
         complaint.setDisposedep("");
@@ -59,6 +67,8 @@ public class ComplainController {
        
         this.companyInfoService.insertComplaint(complaint);
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pid", complaint.getPid());
+		modelAndView.addObject("companyname", companyname);
 		modelAndView.setViewName("/complaintsuccess");
 		return modelAndView;
 		
