@@ -14,6 +14,15 @@ html{
 font-family: SimHei;
 }
 </style>
+<script type="text/javascript">
+function pagejump(pid,companyname)
+{
+	
+	window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname;  		
+
+}
+
+</script>
 </head>
 <body style="background-color: #e9e9e9">
 <br><br><br><br><br>
@@ -44,12 +53,10 @@ font-family: SimHei;
 <label >投诉反馈</label>
 <br>
 <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功将在扫桌公众号中显示，请及时关注</label>
-
-
 </div>
 <br><br>
 <div id="detaildiv" style="text-align: center;">
-<input type="button" value="查看投诉详情" style="background: #f3be67;width:120px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+<input type="button" value="查看投诉详情" onclick="pagejump('${pid}','${companyname}')" style="background: #f3be67;width:120px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
 </div>
 </body>
 </html>

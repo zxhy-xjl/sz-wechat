@@ -3,6 +3,8 @@
  */
 package com.sz.wechat.controller;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,7 +52,7 @@ public class ComplainController {
         complaint.setComplaintime("");
         complaint.setComplaintype("1");
         complaint.setOpenid(openid);
-        complaint.setPid("222");
+        complaint.setPid(UUID.randomUUID().toString());
         complaint.setDisposestatus("1");
         complaint.setDisposeresult("");
         complaint.setDisposedep("");
@@ -59,6 +61,8 @@ public class ComplainController {
        
         this.companyInfoService.insertComplaint(complaint);
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pid", complaint.getPid());
+		modelAndView.addObject("companyname", companyname);
 		modelAndView.setViewName("/complaintsuccess");
 		return modelAndView;
 		
