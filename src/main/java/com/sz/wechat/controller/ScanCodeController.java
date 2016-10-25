@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Grade;
+import com.sz.wechat.entity.PersonHealth;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
+import com.sz.wechat.service.PersonHealthService;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
 
@@ -36,6 +38,11 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private CompanyInfoService companyInfoService;
+	/**
+	 * 健康证数据逻辑层
+	 */
+	@Autowired
+	private PersonHealthService personHealthService;
 	
 	/**
 	 * 扫一扫
@@ -281,6 +288,17 @@ public class ScanCodeController {
 				//总分
 				grade = new Grade("aptitude","资质"+"-"+String.valueOf(allscore));
 				_mapList1.add(grade);
+				//健康类
+				List<PersonHealth> personHealthList = personHealthService.getPersonHealthByCompanyCode(companyInfo.getCompanycode());
+				if(null != personHealthList && personHealthList.size() > 0){
+					for (PersonHealth personHealth : personHealthList) {
+						grade = new Grade("health","0","<a class='example-image-link' href='http://123.57.4.104/sz-wechat/public/healthPhotos/"+personHealth.getHealthpersoncode()+".jpg' data-lightbox='example-set' data-title='"+personHealth.getName()+"' style='text-decoration:none' >健康证-"+personHealth.getName()+"</a>","有","");
+						_mapList.add(grade);
+					}
+				}
+				//总分
+				grade = new Grade("health","健康证");
+				_mapList1.add(grade);
 				//处罚类
 				allscore = 0;
 				SupervisePunish supervisePunish = new SupervisePunish();
@@ -379,7 +397,7 @@ public class ScanCodeController {
 					if(score > gradeStat){
 						score = score - gradeStat;
 						allscore = allscore + gradeStat;
-						grade = new Grade("grade",String.valueOf(gradeStat),"大众点评","实时","");
+						grade = new Grade("grade",String.valueOf(gradeStat),"评分","实时","");
 						_mapList.add(grade);
 					}else{
 						score = 0;

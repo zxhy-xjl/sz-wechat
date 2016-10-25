@@ -1,5 +1,6 @@
 package com.sz.wechat.dao;
 import org.springframework.stereotype.Repository;
+
 /**
  * 许可证数据服务接口
  * @author sway
