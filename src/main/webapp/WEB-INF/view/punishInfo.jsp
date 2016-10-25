@@ -21,7 +21,7 @@ $(function(){
 });
 </script>
 <body style="background-color:#E9E9E9">
-<div id="content" >
+<div id="content" > 
 <table border="0" width="100%" align="center">
 	<tr>
 		<td align="right">行政处罚决定书文号：</td>
