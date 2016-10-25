@@ -24,7 +24,7 @@ $(function(){
 <div id="content" > 
 <table border="0" width="100%" align="center">
 	<tr>
-		<td align="right">行政处罚决定书文号：</td>
+		<td align="right" width="60%">行政处罚决定书文号：</td>
 		<td>${SupervisePunish.adminpenaltybook}</td>
 	</tr>
 	<tr>
@@ -36,7 +36,7 @@ $(function(){
 		<td>${SupervisePunish.unlawfulact}</td>
 	</tr>
 	<tr>
-		<td align="right">违法企业名称或违法自然人姓名：</td>
+		<td align="right">违法企业名称或自然人姓名：</td>
 		<td>${SupervisePunish.nlawfulcompanyname}</td>
 	</tr>
 	<tr>
