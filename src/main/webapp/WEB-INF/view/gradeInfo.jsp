@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
 <title>${companyname}</title>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="<%=path%>/public/style/lightbox.min.css" type="text/css" media="screen" />
 <style type="text/css">
 #head{
 width:100px;
@@ -24,7 +25,6 @@ var ratio = ${ratio}
 $(function(){
 	getScore();
 	getPercentage();
-	getlistObj();
 });
 /**
  * 获取分数
@@ -51,6 +51,9 @@ function getPercentage(){
 }
 </script>
 <body style="background-color:#E9E9E9">
+<!-- <div>
+      <a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=91310113051219117N" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">afdsfd</a>
+</div> -->
 <div id="content">
 	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%;">
 	</div>
@@ -86,4 +89,5 @@ function getPercentage(){
 	</div>
 </div>
 </body>
+<script src="<%=path%>/public/script/lightbox-plus-jquery.min.js" type="text/javascript"></script>
 </html>

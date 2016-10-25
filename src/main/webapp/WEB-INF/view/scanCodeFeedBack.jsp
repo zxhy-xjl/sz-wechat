@@ -67,13 +67,13 @@ function getScore(){
 			if(data){
 				score = data.result;
 				if(score<65){
-					scoreHtml = '<font size="14px" color="red">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="red">'+score+'分</font>';
 				}
 				if(score>65 && score<80){
-					scoreHtml = '<font size="14px" color="#629527">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="#629527">'+score+'分</font>';
 				}
 				if(score>80){
-					scoreHtml = '<font size="14px" color="#63B109">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="#63B109">'+score+'分</font>';
 				}
 				$("#score").html(scoreHtml);
 				$("#scoreinput").val(score);
@@ -107,7 +107,7 @@ function toGradeInfo(){
 	</div>
 	<div id="info" style="text-align:center;line-height:50px;">
 		<a href="javascript:toGradeInfo()" style="font-family:'楷体','楷体_GB2312';font-size:20px;text-decoration:none;color:#4B4B4B">点击查看详情</a>
-	</div>
+	</div> 
 	<div id="showMsg" style="text-align:center;line-height:150px;">
 	</div>
 	<div class="button-sp-area" style="text-align:center;"> 

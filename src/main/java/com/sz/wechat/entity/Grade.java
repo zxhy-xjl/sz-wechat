@@ -41,6 +41,11 @@ public class Grade implements Serializable {
 	 */
 	private String result;
 	
+	/**
+	 * 营业执照请求地址
+	 */
+	private String url;
+	
 	
 	public Grade(){
 	}
@@ -50,7 +55,14 @@ public class Grade implements Serializable {
 		this.allscore=allscore; 
 	}
 	
- 
+	public Grade(String type,String score,String name,String result,String error,String url){
+		this.type=type;
+		this.score=score;
+		this.name= name;
+		this.result=result;
+		this.error=error;
+		this.url = url;
+	}
 	public Grade(String type,String score,String name,String result,String error){
 		this.type=type;
 		this.score=score;
@@ -93,5 +105,13 @@ public class Grade implements Serializable {
 	}
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

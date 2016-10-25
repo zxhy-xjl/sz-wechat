@@ -36,6 +36,9 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private CompanyInfoService companyInfoService;
+	
+	
+	private final static String URL="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=";
 	/**
 	 * 扫一扫
 	 * @param request
@@ -218,7 +221,7 @@ public class ScanCodeController {
 			double proportion = 0;
 			for (int i=0;i <= companyScoreList.size();i++) {
 				if (companyCode.equals(companyScoreList.get(i).getCompanycode())){
-					sort = i;
+					sort = i+1;
 					break;
 				}
 			}
@@ -258,10 +261,12 @@ public class ScanCodeController {
 				//营业执照
 				if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
 					score = score - 30;
-					allscore = allscore+ 30;
+					allscore  = allscore+ 30;
 					grade = new Grade("aptitude","30","营业执照","无","");
 					_mapList.add(grade);
-					 
+				}else{
+					grade = new Grade("aptitude","0","<a class='example-image-link' href='http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13="+companyInfo.getCompanyrecode()+"' data-lightbox='example-set' data-title='"+companyInfo.getCompanyname()+"' style='text-decoration:none'>营业执照</a>","有","");
+					_mapList.add(grade);
 				}
 				//餐饮服务许可证
 				if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
