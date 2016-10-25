@@ -289,7 +289,7 @@ public class ScanCodeController {
 				grade = new Grade("aptitude","资质"+"-"+String.valueOf(allscore));
 				_mapList1.add(grade);
 				//健康类
-				List<PersonHealth> personHealthList = personHealthService.getPersonHealthByCompanyCode(companyInfo.getCompanycode());
+				/*List<PersonHealth> personHealthList = personHealthService.getPersonHealthByCompanyCode(companyInfo.getCompanycode());
 				if(null != personHealthList && personHealthList.size() > 0){
 					for (PersonHealth personHealth : personHealthList) {
 						grade = new Grade("health","0","<a class='example-image-link' href='http://123.57.4.104/sz-wechat/public/healthPhotos/"+personHealth.getHealthpersoncode()+".jpg' data-lightbox='example-set' data-title='"+personHealth.getName()+"' style='text-decoration:none' >健康证-"+personHealth.getName()+"</a>","有","");
@@ -298,7 +298,7 @@ public class ScanCodeController {
 				}
 				//总分
 				grade = new Grade("health","健康证");
-				_mapList1.add(grade);
+				_mapList1.add(grade);*/
 				//处罚类
 				allscore = 0;
 				SupervisePunish supervisePunish = new SupervisePunish();
