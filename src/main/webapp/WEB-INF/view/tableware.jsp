@@ -18,8 +18,10 @@
 <script type="text/javascript">
 	$(function(){
 		<%
-		String code = (String)session.getAttribute("code"); 
+		String code = (String)session.getAttribute("code");
+		String open_code = (String)session.getAttribute("open_code");
 		%>
+		window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=open_code%>";
 	});
 	function doScore(obj){
 		var id = obj.id;

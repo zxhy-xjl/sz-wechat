@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
+	HttpSession session = request.getSession(); 
 %>
 <html>
 <head>
@@ -31,7 +32,10 @@ text-align:center;
 $(function(){
 	getPercentage();
 	getScore();
-
+	<%
+	String code = (String)session.getAttribute("open_code"); 
+	%>
+	window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=code%>";
 });
 
 /**

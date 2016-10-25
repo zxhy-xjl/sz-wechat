@@ -87,11 +87,15 @@ wx.ready(function(){
 	            	return;
 	            }
 	            if(1 == flag['flag']){
-	            	 window.location.href="<%=path%>/checkScanCode.do?company="+$('#id_securityCode_input').val();
+	            	<%-- window.location.href="<%=path%>/checkScanCode.do?company="+$('#id_securityCode_input').val(); --%>
+	            	 var url ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4203dd1ae2c80664&redirect_uri=http%3A%2F%2Fwww.haoschoool.com%2Fsz-wechat%2FcheckScanCode.do%3Fcompany%3D"+$('#id_securityCode_input').val()+"&response_type=code&scope=snsapi_userinfo&state=222&connect_redirect=1#wechat_redirect";
+	            	 window.location.href=url;
 	            	 return;
 	            }
 	            if(2 == flag['flag']){}{
-	            	 window.location.href="<%=path%>/checkScanCodeTableWare.do?company="+$('#id_securityCode_input').val();
+	            	 <%-- window.location.href="<%=path%>/checkScanCodeTableWare.do?company="+$('#id_securityCode_input').val(); --%>
+	            	 var url ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4203dd1ae2c80664&redirect_uri=http%3A%2F%2Fwww.haoschoool.com%2Fsz-wechat%2FcheckScanCodeTableWare.do%3Fcompany%3D"+$('#id_securityCode_input').val()+"&response_type=code&scope=snsapi_userinfo&state=222&connect_redirect=1#wechat_redirect";
+	            	 window.location.href=url;
 	            	 return;
 	            }
 	        }

@@ -28,7 +28,7 @@ public class MenuManager {
 		
 		
 		//String myUrl = "http://www.haoschoool.com/sz_wechattest/Oauth2Servlet";
-		String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/toFootprint.do?aaa=1","utf-8"); 
+		String   myUrl   =   java.net.URLEncoder.encode("http://www.haoschoool.com/sz-wechat/checkScanCodeTableWare.do?company=","utf-8"); 
 		System.out.println(myUrl);
 		
 /*		//获取所有图片素材

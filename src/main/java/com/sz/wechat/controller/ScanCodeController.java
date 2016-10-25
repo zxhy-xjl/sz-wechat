@@ -78,6 +78,7 @@ public class ScanCodeController {
 	@RequestMapping(value = "/checkScanCode")
 	public ModelAndView  checkScanCode(HttpServletRequest request, HttpServletResponse response){
 		String company = request.getParameter("company");
+		String code = request.getParameter("code");
 		ModelAndView modelAndView = new ModelAndView();
 		if(!"".equals(company)){
 			String [] companyArr = company.split("●");
@@ -89,6 +90,7 @@ public class ScanCodeController {
 					modelAndView.addObject("CompanyInfo", companyInfo);
 					HttpSession session = request.getSession();
 					session.setAttribute("code",companyInfo.getCompanycode());
+					session.setAttribute("open_code", code);
 					modelAndView.addObject("tableNum",tablenum);
 					modelAndView.setViewName("/scanCodeFeedBack");
 				}else{
@@ -425,6 +427,7 @@ public class ScanCodeController {
 	@RequestMapping(value = "/checkScanCodeTableWare")
 	public ModelAndView checkScanCodeTableWare(HttpServletRequest request, HttpServletResponse response){
 		String company = request.getParameter("company");
+		String code = request.getParameter("code");
 		ModelAndView modelAndView = new ModelAndView();
 		if(!"".equals(company)){
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCodeAndType(company,"0");
@@ -434,6 +437,8 @@ public class ScanCodeController {
 				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
 				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
+				HttpSession session = request.getSession();
+				session.setAttribute("open_code", code);
 				modelAndView.setViewName("/tableware");
 			}else{
 				modelAndView.addObject("companyCode", company);
