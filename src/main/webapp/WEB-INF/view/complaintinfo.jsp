@@ -82,7 +82,7 @@ function ajaxCall(){
 </td>
 </tr>
 </table>
-<div style="height:50px;background-color: #e9e9e9;">
+
 
 <label style="font-size: 20px">&nbsp;&nbsp;<font style="font-weight: bold;" size="5">处理流程</font></label>
 <br>

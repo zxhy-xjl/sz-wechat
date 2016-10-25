@@ -3,6 +3,8 @@
  */
 package com.sz.wechat.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,10 +48,14 @@ public class ComplainController {
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    HttpSession ss = (HttpSession)request.getSession();
         String openid = ss.getAttribute("myopenid").toString();
+        
+        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date=new Date();
+      
         Complaint complaint = new Complaint();
         complaint.setCompanyid(companycode);
         complaint.setComplaincontent(complaintcontent);
-        complaint.setComplaintime("");
+        complaint.setComplaintime(dateFormater.format(date));
         complaint.setComplaintype("1");
         complaint.setOpenid(openid);
         complaint.setPid(UUID.randomUUID().toString());
