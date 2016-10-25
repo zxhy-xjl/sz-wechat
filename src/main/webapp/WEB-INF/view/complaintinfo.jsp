@@ -81,23 +81,33 @@ function ajaxCall(){
 <label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
 </td>
 </tr>
-<tr style="height:50px;background-color: #e9e9e9;">
-<td>
+</table>
+<div style="height:50px;background-color: #e9e9e9;">
+
 <label style="font-size: 20px">&nbsp;&nbsp;<font style="font-weight: bold;" size="5">处理流程</font></label>
 <br>
-</td>
-</tr>
-<tr style="height:40px;background-color: white;">
-<td><br>
+
+
+<div style="height:40px;background-color: white;">
+<br>
+<div style="background:url('<%=path%>/public/images/bg_1.png') no-repeat;width:100px;height:70px">1</div>
+<%-- &nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
+&nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
+&nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
+&nbsp;&nbsp;&nbsp;&nbsp;<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2.png" width="56" height="53">
+ --%>
+
+<hr color="lightgrey"/>
+
+</div>
+<%-- <div style="height:40px;background-color: white;">
+<br>
 <label >&nbsp;&nbsp;<font style="" size="3">处理时间：${complaint.disposetime }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">处理部门：${complaint.disposedep }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">处理结果：${complaint.disposeresult }</font></label><br /><br />
-
-</td>
-</tr>
-
-</table>
 </div>
+
+</div> --%>
 <%-- <div id="baseinfo">
 <label>投诉餐厅：上海创洁</label><br><br>
 <label>投诉时间： 2016年9月1日</label><br><br>

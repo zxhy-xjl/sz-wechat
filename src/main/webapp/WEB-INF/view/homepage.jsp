@@ -4,7 +4,6 @@
 <%
 	String path = request.getContextPath();
 %>
-<!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
