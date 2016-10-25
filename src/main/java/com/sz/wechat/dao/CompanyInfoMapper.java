@@ -23,4 +23,12 @@ public interface CompanyInfoMapper {
 	 * @return
 	 */
 	public List<CompanyInfo> getCompanyInfo();
+	
+	/**
+	 * 根据企业注册码和类型获取企业信息
+	 * @param companyCode
+	 * @param type
+	 * @return
+	 */
+	public CompanyInfo getCompanyByCodeAndType(String companyCode,String type);
 }

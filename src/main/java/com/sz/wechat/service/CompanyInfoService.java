@@ -42,6 +42,16 @@ public class CompanyInfoService {
 	public CompanyInfo getCompanyByCode(String companyCode){
 		return this.companyInfoMapper.getCompanyByCode(companyCode);
 	}
+	
+	/**
+	 * 根据餐饮企业注册码和企业类型获取企业信息
+	 * @param companyCode 注册码
+	 * @param type 企业类型
+	 * @return
+	 */
+	public CompanyInfo getCompanyByCodeAndType(String companyCode,String type){
+		return this.companyInfoMapper.getCompanyByCodeAndType(companyCode, type);
+	}
 	/**
 	 * 查询所有的餐饮企业信息
 	 * @return
@@ -75,6 +85,9 @@ public class CompanyInfoService {
 	public List<Complaint> getComplaintByCompanyId(String companyId){
 		return this.complaintMapper.getComplaintByCompanyId(companyId);
 	}
+	
+	
+	
 	/**
 	 * 插入投诉信息
 	 * @param complaint

@@ -37,8 +37,6 @@ public class ScanCodeController {
 	@Autowired
 	private CompanyInfoService companyInfoService;
 	
-	
-	private final static String URL="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=";
 	/**
 	 * 扫一扫
 	 * @param request
@@ -79,7 +77,7 @@ public class ScanCodeController {
 			if(null != companyArr && companyArr.length > 0){
 				String companyCode = companyArr [companyArr.length-companyArr.length];
 				String tablenum = companyArr[companyArr.length-1];
-				CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
+				CompanyInfo companyInfo = companyInfoService.getCompanyByCodeAndType(companyCode,"1");
 				if(null != companyInfo){
 					modelAndView.addObject("CompanyInfo", companyInfo);
 					HttpSession session = request.getSession();
@@ -400,7 +398,7 @@ public class ScanCodeController {
 		String company = request.getParameter("company");
 		ModelAndView modelAndView = new ModelAndView();
 		if(!"".equals(company)){
-			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(company);
+			CompanyInfo companyInfo = companyInfoService.getCompanyByCodeAndType(company,"0");
 			if(null != companyInfo){
 				Map<String,Object> map = ScanCodeUtils.getScanCode("2","http://www.haoschoool.com/sz-wechat/checkScanCodeTableWare.do?company="+company);
 				modelAndView.addObject("nonceStr", String.valueOf(map.get("nonceStr")));

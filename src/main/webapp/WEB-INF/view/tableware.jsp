@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
 <script type="text/javascript" src="<%=path%>/public/script/jweixin-1.1.0.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="<%=path%>/public/style/lightbox.min.css" type="text/css" media="screen" />
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -83,7 +84,9 @@
 			<tr>
 				<td colspan="2" >
 					<div style="margin-left:5%">
-						<p>1、营业执照注册号</p>
+						<p>
+						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}">营业执照</a>
+						</p>
 						<p>2、行政处罚单</p>
 						<p>3、投诉</p>
 						<p>4、评论</p>	
@@ -113,4 +116,5 @@
     </div> 
 </div>
 </body>
+<script src="<%=path%>/public/script/lightbox-plus-jquery.min.js" type="text/javascript"></script>
 </html>
