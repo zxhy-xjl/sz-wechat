@@ -88,7 +88,7 @@
 						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}" style="text-decoration:none;" >1、营业执照</a>
 						</p>
 						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">2、餐饮许可证</a></p>
-						<p>3、行政处罚单</p>
+						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">3、行政处罚单</a></p>
 						<p>4、投诉</p>
 						<p>5、评论</p>	
 					</div>

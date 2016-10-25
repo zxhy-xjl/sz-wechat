@@ -15,4 +15,11 @@ public interface SupervisePunishMapper {
 	 * @return
 	 */
 	public List<SupervisePunish> getSuperviseLikeCompanyName(SupervisePunish supervisePunish);
+
+	/**
+	 * 通过企业名称获取监管信息
+	 * @param CompanyName
+	 * @return
+	 */
+	public SupervisePunish getSuperviseByCompanyName(SupervisePunish supervisePunish);
 }
