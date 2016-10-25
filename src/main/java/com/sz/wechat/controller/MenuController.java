@@ -80,6 +80,7 @@ public class MenuController  {
 			Consumerec consumerec = null;
 			List<Consumerec> list = new ArrayList<>();
 			String oddNumber = UUID.randomUUID().toString();
+			HttpSession session = request.getSession();
 			for(String menu:menuArr){
 				menuArr_0 = menu.split(":");
 				consumerec = new Consumerec();
@@ -88,6 +89,7 @@ public class MenuController  {
 				consumerec.setBuynum(menuArr_0[1]);
 				consumerec.setCompanycode(companyCode);
 				consumerec.setOddnumber(oddNumber);
+				consumerec.setOpenid(String.valueOf(session.getAttribute("openid")));;
 				list.add(consumerec);
 			}
 			this.consumerecService.batchInsertConsumerec(list);
