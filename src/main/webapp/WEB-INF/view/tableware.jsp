@@ -85,11 +85,12 @@
 				<td colspan="2" >
 					<div style="margin-left:5%">
 						<p>
-						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}">营业执照</a>
+						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}">1、营业执照</a>
 						</p>
-						<p>2、行政处罚单</p>
-						<p>3、投诉</p>
-						<p>4、评论</p>	
+						<p>2、餐饮许可证</p>
+						<p>3、行政处罚单</p>
+						<p>4、投诉</p>
+						<p>5、评论</p>	
 					</div>
 				</td>
 			</tr>

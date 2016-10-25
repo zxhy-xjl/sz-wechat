@@ -16,7 +16,7 @@ import com.sz.wechat.entity.SupervisePunish;
 @Service
 public class CompanyInfoService {
 
-	
+	 
 	/**
 	 * 餐饮企业实现接口
 	 */
