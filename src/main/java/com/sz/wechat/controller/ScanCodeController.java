@@ -108,6 +108,7 @@ public class ScanCodeController {
 		String keyWord_1="没收";
 		String keyword_2="停产停业";
 		String keyword_3="吊销执照";
+		String keyword_4="暂扣";
 		List<CompanyInfo> companyList = this.companyInfoService.getCompanyInfo();
 		List<CompanyInfo> companyScoreList = new ArrayList<>();
 		if(null != companyList && companyList.size() > 0){
@@ -141,6 +142,9 @@ public class ScanCodeController {
 						String illegalType = _supervisePunish.getPenaltytype();
 						//判断是否存在吊销执照
 						if(illegalType.indexOf(keyword_3)!=-1){
+							sb.append(illegalType).append(";");
+							score = score - 5;
+						}else if(illegalType.indexOf(keyword_4)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 5;
 						}
@@ -248,6 +252,7 @@ public class ScanCodeController {
 		String keyWord_1="没收";
 		String keyword_2="停产停业";
 		String keyword_3="吊销执照";
+		String keyword_4="暂扣";
 		if(!"".equals(companyCode)){
 			StringBuffer sb  = new StringBuffer();
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companyCode);
@@ -288,6 +293,12 @@ public class ScanCodeController {
 						String pentype = _supervisePunish.getPenaltytype();
 						//判断是否存在吊销执照
 						if(illegalType.indexOf(keyword_3)!=-1){
+							sb.append(illegalType).append(";");
+							score = score - 5;
+							allscore = allscore + 5;
+							grade = new Grade("punish","5","","",pentype);
+							_mapList.add(grade);
+						}else if(illegalType.indexOf(keyword_4)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 5;
 							allscore = allscore + 5;

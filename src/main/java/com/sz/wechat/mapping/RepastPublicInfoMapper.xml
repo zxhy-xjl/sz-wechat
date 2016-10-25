@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.RepastPublicInfoMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.RepastPublicInfo">
+		<id column="REPASTLICENCE" property="repastlicence" jdbcType="VARCHAR"/>
+		<result column="REPASTNAME" property="repastname" jdbcType="VARCHAR"/>
+		<result column="LEGALPERSON"  property="legalperson" jdbcType="VARCHAR"/>
+		<result column="GRADE" property="grade" jdbcType="VARCHAR"/>
+		<result column="ADDRESS"  property="address" jdbcType="VARCHAR"/>
+		<result column="PRINCIPAL"  property="principal" jdbcType="VARCHAR"/>
+		<result column="SUBJECTTYPE"  property="subjecttype" jdbcType="VARCHAR"/>
+		<result column="PERMISSIONSCOPE"  property="permissionscope" jdbcType="VARCHAR"/>
+		<result column="VALIDITY"  property="validity" jdbcType="VARCHAR"/>
+		<result column="CERTIFICATEOFFICE"  property="certificateoffice" jdbcType="VARCHAR"/>
+		<result column="CERTIFICATETIME"  property="certificatetime" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		 REPASTLICENCE, REPASTNAME, LEGALPERSON, GRADE, ADDRESS, PRINCIPAL, SUBJECTTYPE, PERMISSIONSCOPE, VALIDITY, CERTIFICATEOFFICE, CERTIFICATETIME  
+	</sql>
+	<!-- 查询 -->
+	<select id="getPublicInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM SODA_REPAST_PUBLICINFO WHERE REPASTLICENCE =#{repastlicence,jdbcType=VARCHAR}
+	</select>
+</mapper>
