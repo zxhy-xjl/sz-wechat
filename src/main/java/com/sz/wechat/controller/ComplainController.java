@@ -49,7 +49,7 @@ public class ComplainController {
 	 * 执行投操作
 	 * @return
 	 */
-	@RequestMapping(value = "/doInsertComplaint",method = RequestMethod.POST)
+	@RequestMapping(value = "/doInsertComplaint",method = RequestMethod.GET)
 	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");

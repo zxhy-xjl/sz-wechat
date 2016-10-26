@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -64,8 +66,10 @@ function ajaxCall(){
 } --%>
 </script>
 </head>
-<body>
+<body style="background-color: #e9e9e9;">
 <div id="baseinfo" style="background-color: #e9e9e9;">
+
+<div>
 <table border="0" width="100%"
 			style="border-collapse: collapse;">
 <tr style="height:40px;">
@@ -82,32 +86,62 @@ function ajaxCall(){
 </td>
 </tr>
 </table>
-
-
-<label style="font-size: 20px">&nbsp;&nbsp;<font style="font-weight: bold;" size="5">处理流程</font></label>
-<br>
-
-
-<div style="height:40px;background-color: white;">
-<br>
-<div style="background:url('<%=path%>/public/images/bg_1.png') no-repeat;width:100px;height:70px">1</div>
-<%-- &nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
-&nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
-&nbsp;&nbsp;&nbsp;&nbsp;<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1.png" width="56" height="53">
-&nbsp;&nbsp;&nbsp;&nbsp;<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2.png" width="56" height="53">
- --%>
-
-<hr color="lightgrey"/>
-
 </div>
-<%-- <div style="height:40px;background-color: white;">
+<div >
+<label style="font-size: 20px;">&nbsp;&nbsp;<font style="font-weight: bold;" size="5">处理流程</font></label>
 <br>
+</div>
+
+<div style="background-color: white;">
+<br>
+
+<c:if test="${complaint.disposestatus == '1'}">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+</c:if>
+<c:if test="${complaint.disposestatus == '2'}">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+</c:if>
+<c:if test="${complaint.disposestatus == '3'}">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+</c:if>
+<c:if test="${complaint.disposestatus == '4'}">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_1_4.png" width="56" height="53">
+</c:if>
+<br>
+&nbsp;&nbsp;<label>投诉</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>受理</label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>处理</label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>反馈</label>
+
+<br><br>
+<hr color="lightgrey" size="1" width="90%"/>
+
+<table border="0" width="100%"
+			style="border-collapse: collapse;">
+
+
+<tr style="height:40px;background-color: white;">
+
+<td><br />
 <label >&nbsp;&nbsp;<font style="" size="3">处理时间：${complaint.disposetime }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">处理部门：${complaint.disposedep }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">处理结果：${complaint.disposeresult }</font></label><br /><br />
+</td>
+</tr>
+</table>
 </div>
-
-</div> --%>
+</div>
 <%-- <div id="baseinfo">
 <label>投诉餐厅：上海创洁</label><br><br>
 <label>投诉时间： 2016年9月1日</label><br><br>
