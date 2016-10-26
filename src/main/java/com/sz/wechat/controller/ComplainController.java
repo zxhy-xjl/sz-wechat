@@ -34,10 +34,12 @@ public class ComplainController {
 	{   String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
+	    String evaluate = request.getParameter("evaluate");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("companyname", companyname);
 		modelAndView.addObject("companycode", companycode);
 		modelAndView.addObject("complaintcontent", complaintcontent);
+		modelAndView.addObject("evaluate",evaluate);
 		modelAndView.setViewName("/docomplaint");
 		return modelAndView;
 		
