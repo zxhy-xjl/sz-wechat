@@ -23,7 +23,7 @@
 		%>
 		if("null"!="<%=open_code%>"){
 			$.ajax({
-				type:'get',
+				type:'GET',
 				url:'<%=path%>/Oauth2Servlet.do?code=<%=open_code%>',
 				success:function(){
 					
