@@ -287,6 +287,9 @@ public class ScanCodeController {
 					allscore = allscore+ 30;
 					grade = new Grade("aptitude","30","餐饮服务许可证","无","");
 					_mapList.add(grade);
+				}else{
+					grade = new Grade("aptitude","0","<a href='../sz-wechat/getPublicInfo.do?repastlicence="+companyInfo.getLicence()+"'  style='text-decoration:none'>餐饮服务许可证</a>","有","");
+					_mapList.add(grade);
 				}
 				//总分
 				grade = new Grade("aptitude","资质"+"-"+String.valueOf(allscore));
@@ -393,7 +396,9 @@ public class ScanCodeController {
 				List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
 				if(null != complaintScoreList && complaintScoreList.size()>0){
 					for(Complaint complaint:complaintScoreList){
-						gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+						if(null != complaint.getEvaluate()){
+							gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+						}
 					}
 					gradeStat = gradeStat/complaintScoreList.size();
 					gradeStat = allgrade  - gradeStat;
@@ -484,6 +489,18 @@ public class ScanCodeController {
 		modelAndView.addObject("gradeList",gradeList);
 		modelAndView.addObject("allgradelist",allgradelist);
 		return modelAndView;
-	}		
+	}	
+	
+	/**
+	 * 存值openid
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/setOpenId")
+	public void setOpenId(HttpServletRequest request, HttpServletResponse response){
+		String openid = String.valueOf(request.getParameter("openid"));
+		HttpSession httpSession =(HttpSession)request.getSession();
+		httpSession.setAttribute("openid", openid);
+	}
 	
 }

@@ -11,10 +11,10 @@
 <title>许可证详细信息</title>
 </head>
 <body style="background-color:#E9E9E9">
-<div id="content" >
+<div id="content" > 
 <table border="0" width="100%" align="center">
 	<tr>
-		<td align="right">许可证编号：</td>
+		<td align="right" width="30%">许可证编号：</td>
 		<td>${RepastPublicInfo.repastlicence}</td>
 	</tr>
 	<tr>

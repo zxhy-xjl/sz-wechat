@@ -25,7 +25,7 @@ import net.sf.json.JSONObject;
 public class Oauth2Servlet {
 	
 	@ResponseBody
-	@RequestMapping(value = "/Oauth2Servlet",method = RequestMethod.GET)
+	@RequestMapping(value = "/Oauth2Servlet")
 	public void authGet(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 			// 第三方用户唯一凭证

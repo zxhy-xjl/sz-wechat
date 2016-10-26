@@ -71,7 +71,7 @@ public class ComplainController {
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
 	    HttpSession httpSession = (HttpSession)request.getSession();
         String openid = String.valueOf(httpSession.getAttribute("myopenid"));
-        if("".equals(openid)){
+        if("null".equals(openid)){
         	openid = String.valueOf(httpSession.getAttribute("openid"));
         }
         Complaint complaint = new Complaint();

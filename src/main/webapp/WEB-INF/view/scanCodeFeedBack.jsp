@@ -35,21 +35,13 @@ $(function(){
 	<%
 	String code = (String)session.getAttribute("open_code"); 
 	%>
-	if("null"!="<%=code%>"){
-		$.ajax({
-			type:'get',
-			url:'<%=path%>/Oauth2Servlet.do?code=<%=code%>',
-			success:function(){
-				
-			}
-		});
-	} 
+	setOpenid();
 });
 
 /**
  * 得到占比
  */
- var ratio = 0;
+var ratio = 0;
 function getPercentage(){
 	var msgHtml = '';
 	$.ajax({
@@ -104,6 +96,42 @@ function toTakingOrder(){
  */
 function toGradeInfo(){
 	$("#scoreForm").submit();
+}
+/**
+ * 回掉方法
+ */
+function backHttp(){
+	if(xmlHttpRequest.readyState == 4 ) {  		//完全得到服务器的响应
+		if(xmlHttpRequest.status == 200) {		//没有异常
+			text = xmlHttpRequest.responseText;
+			var json = eval('(' + text + ')'); 
+			$.ajax({
+				type:'post',
+				url:'<%=path%>/setOpenId.do?openid='+json.openid,
+				success:function(){}
+			});
+		} 
+		}
+}
+/**
+ *  存入openid
+ */
+function setOpenid(){
+	var url="<%=path%>/Oauth2Servlet.do?code=<%=code%>";
+	if(window.ActiveXObject) {   			//IE的
+		xmlHttpRequest = new ActionXObject("Microsoft.XMLHTTP");
+	}
+	else if(window.XMLHttpRequest) {		//除IE外的
+		xmlHttpRequest = new XMLHttpRequest();
+	}
+	if(xmlHttpRequest != null) {
+		xmlHttpRequest.open("GET", url, true);
+		//xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		//关联好ajax的回调函数
+		xmlHttpRequest.onreadystatechange = backHttp;
+		//真正向服务器发送请求
+		xmlHttpRequest.send();
+	} 
 }
 </script>
 <body style="background-color:#E9E9E9">

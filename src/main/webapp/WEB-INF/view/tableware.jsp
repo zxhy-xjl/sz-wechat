@@ -16,21 +16,13 @@
 <link rel="stylesheet" href="<%=path%>/public/style/lightbox.min.css" type="text/css" media="screen" />
 </head>
 <script type="text/javascript">
+	var xmlHttpRequest = null;
 	$(function(){
 		<%
 		String code = (String)session.getAttribute("code");
 		String open_code = (String)session.getAttribute("open_code");
 		%>
-		if("null"!="<%=open_code%>"){
-			$.ajax({
-				type:'GET',
-				url:'<%=path%>/Oauth2Servlet.do?code=<%=open_code%>',
-				success:function(){
-					
-				}
-			});
-		} 
-		onloadScore();
+		setOpenid();
 	});
 	/**
 	 * 初始化加载
@@ -76,12 +68,48 @@
 	function tots(){
 		var codeObj = $("#codei");
 		if(codeObj.val() == "null" ){
-			//window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
-			$("#complaintForm").submit();
+			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+			//$("#complaintForm").submit();
 		}else{
 			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&companyname=${CompanyInfo.companyname}&complaintcontent="+$("#textare").val()+"&evaluate="+$("#star").val()+"&flag=2";
 		}
-		
+	}
+	/**
+	 * 回掉方法
+	 */
+	function backHttp(){
+		if(xmlHttpRequest.readyState == 4 ) {  		//完全得到服务器的响应
+			if(xmlHttpRequest.status == 200) {		//没有异常
+				text = xmlHttpRequest.responseText;
+				var json = eval('(' + text + ')'); 
+				$.ajax({
+					type:'post',
+					url:'<%=path%>/setOpenId.do?openid='+json.openid,
+					success:function(){}
+				});
+				onloadScore();
+			} 
+  		}
+	}
+	/**
+	 *  存入openid
+	 */
+	function setOpenid(){
+		var url="<%=path%>/Oauth2Servlet.do?code=<%=open_code%>";
+		if(window.ActiveXObject) {   			//IE的
+			xmlHttpRequest = new ActionXObject("Microsoft.XMLHTTP");
+		}
+		else if(window.XMLHttpRequest) {		//除IE外的
+			xmlHttpRequest = new XMLHttpRequest();
+		}
+		if(xmlHttpRequest != null) {
+			xmlHttpRequest.open("GET", url, true);
+			//xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			//关联好ajax的回调函数
+			xmlHttpRequest.onreadystatechange = backHttp;
+			//真正向服务器发送请求
+			xmlHttpRequest.send();
+		} 
 	}
 </script>
 <body style="background-color:#E9E9E9">
