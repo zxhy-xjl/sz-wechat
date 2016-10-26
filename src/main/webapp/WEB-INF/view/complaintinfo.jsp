@@ -13,6 +13,10 @@
 html{
 font-family: SimHei;
 }
+div{
+
+white-space: nowrap;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -96,28 +100,28 @@ function ajaxCall(){
 <br>
 
 <c:if test="${complaint.disposestatus == '1'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_2.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="15%" height="15%">
 </c:if>
 <c:if test="${complaint.disposestatus == '2'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="15%" height="15%">
 </c:if>
 <c:if test="${complaint.disposestatus == '3'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="56" height="53">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="15%" height="15%">
 </c:if>
 <c:if test="${complaint.disposestatus == '4'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="56" height="53">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_1_4.png" width="56" height="53">
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="15%" height="15%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
+<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_1_4.png" width="15%" height="15%">
 </c:if>
 <br>
 &nbsp;&nbsp;<label>投诉</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>受理</label>
