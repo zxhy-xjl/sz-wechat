@@ -65,6 +65,9 @@ public class ComplainController {
 	    String evaluate = request.getParameter("evaluate");
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
         String openid = String.valueOf(httpSession.getAttribute("myopenid"));
+        if("".equals(openid)){
+        	openid = String.valueOf(httpSession.getAttribute("openid"));
+        }
         Complaint complaint = new Complaint();
         complaint.setCompanyid(companycode);
         complaint.setComplaincontent(complaintcontent);
