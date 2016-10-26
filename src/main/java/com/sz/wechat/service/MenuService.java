@@ -1,6 +1,7 @@
 package com.sz.wechat.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.sz.wechat.dao.MenuMapper;
 import com.sz.wechat.entity.Menu;
@@ -33,5 +34,15 @@ public class MenuService {
 	 */
 	public Menu getMenuByMenuId(String menuId){
 		return this.menuMapper.getMenuByMenuId(menuId);
+	}
+	
+	/**
+	 * 执行插入
+	 * @param menu
+	 * @return
+	 */
+	@Async
+	public int doInsertBlob(Menu menu){
+		return this.menuMapper.doInsertBlob(menu);
 	}
 }

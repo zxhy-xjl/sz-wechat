@@ -1,7 +1,5 @@
 package com.sz.wechat.entity;
-
 import java.io.Serializable;
-import java.sql.Blob;
 
 /**
  * 菜单数据结构
@@ -34,7 +32,13 @@ public class Menu implements Serializable {
 	/**
 	 * 菜品图片
 	 */
-	private Blob menuphoto;
+	private byte[] menuphoto;
+	
+	/**
+	 * 保存路径
+	 */
+	private String path;
+	
 	public String getMenuid() {
 		return menuid;
 	}
@@ -65,10 +69,16 @@ public class Menu implements Serializable {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public Blob getMenuphoto() {
+	public byte[] getMenuphoto() {
 		return menuphoto;
 	}
-	public void setMenuphoto(Blob menuphoto) {
+	public void setMenuphoto(byte[] menuphoto) {
 		this.menuphoto = menuphoto;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

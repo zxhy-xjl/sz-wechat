@@ -18,20 +18,25 @@
 .pager a.disabled{color:#C8CDD2;cursor:auto;}
 </style>
 <body>
-<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<!-- Slider -->
+<form action="<%=path%>/doInsertMenu.do" method="post" enctype="multipart/form-data">
+<input type="file" name="cover">
+<input type="submit">
+</form>
+
+<!-- <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			Slider
 			<div class="mui-scroll">
-				<!-- List -->
+				List
 				<h4 class="list-title">用户</h4>
 				<ul id="myList" class="mui-table-view">
 				</ul>
 			</div>
-		</div>
+		</div> -->
 </body>
 <script type="text/javascript" src="<%=path%>/public/script/mui.min.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/app.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/app.template.js"></script>
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 var listurl="<%=path%>/userInfo/users.do";
 (function(mui, doc) {
 	//mui初始化
@@ -137,5 +142,5 @@ var listurl="<%=path%>/userInfo/users.do";
 		}
 	}
 }(mui, document));
-</script>
+</script> --%>
 </html>

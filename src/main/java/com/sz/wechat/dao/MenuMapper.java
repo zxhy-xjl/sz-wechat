@@ -21,5 +21,13 @@ public interface MenuMapper {
 	 * @return
 	 */
 	public Menu getMenuByMenuId(String menuId);
+	
+	/**
+	 * 执行插入操作
+	 * @param menu
+	 * @return
+	 */
+	public int doInsertBlob(Menu menu);
+
 
 }

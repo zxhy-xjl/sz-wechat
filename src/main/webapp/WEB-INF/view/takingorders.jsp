@@ -177,7 +177,7 @@ function doSubmit(){
 				</c:if>
 				<c:if test="${item.code_id ==  item1.menutype}">
 					<tr  style="background-color:white;">
-						<td width="120px" ><img alt="" src="<%=path%>/public/images/food.png" width="150px" height="100px"></td>
+						<td width="120px" ><img alt="" src="<%=path%>/${item1.path}" width="150px" height="100px"></td>
 						<td style="line-height:25px;" width="80%">
 							 <p style="line-height:20px;">${item1.menuname}</p>
 							 <p style="line-height:20px;"><font style="color:#E09D2F">￥${item1.price}</font></p>

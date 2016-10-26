@@ -67,7 +67,7 @@
 	
 	function tots(){
 		var codeObj = $("#codei");
-		if(codeObj.val() == "null" ){
+		if(codeObj.val() == "null" && "${CompanyInfo.companycode}"!=codeObj.val()){
 			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
 			//$("#complaintForm").submit();
 		}else{
@@ -122,15 +122,15 @@
 	<div>
 		<table border="0" width="100%" align="center">
 			<tr>
-				<td align="right" width="20%">企业名称：</td>
+				<td align="center" width="100px">企业名称：</td>
 				<td>${CompanyInfo.companyname}</td>
 			</tr>
 			<tr>
-				<td align="right">联系方式：</td>
+				<td align="center">联系方式：</td>
 				<td>${CompanyInfo.lxfs}</td>
 			</tr>
 			<tr>
-				<td align="right" >公司地址：</td>
+				<td align="center" >公司地址：</td>
 				<td>${CompanyInfo.companyaddress}</td>
 			</tr>
 			<tr>
@@ -144,14 +144,14 @@
 			</tr>
 			<tr>
 				<td colspan="2" >
-					<div style="margin-left:5%">
+					<div style="margin-left:10%">
 						<p>
-						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}" style="text-decoration:none;" >1、营业执照</a>
+						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}" style="text-decoration:none;" >营业执照</a>
 						</p>
-						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">2、餐饮许可证</a></p>
-						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">3、行政处罚单</a></p>
-						<p><a href="<%=path%>/getComplaintByOpenid.do?companyCode=${CompanyInfo.companycode}&companyName=${CompanyInfo.companyname}">4、投诉</a></p>
-						<!-- <p>5、评论</p> -->	
+						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">餐饮许可证</a></p>
+						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">行政处罚单</a></p>
+						<p><a href="<%=path%>/getComplaintByOpenid.do?companyCode=${CompanyInfo.companycode}&companyName=${CompanyInfo.companyname}">投诉信息</a></p>
+						<p><font color="red">注</font>：如果您对扫桌的餐具有任何疑问，请反馈给我们，以便我们进行调整。</p> 	
 					</div>
 				</td>
 			</tr>

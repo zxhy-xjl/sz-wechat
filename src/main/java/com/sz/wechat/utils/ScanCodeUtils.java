@@ -1,5 +1,8 @@
 package com.sz.wechat.utils;
+import java.io.File;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +30,8 @@ public class ScanCodeUtils {
 	 * wechatJSSDK的ticket请求URL地址
 	 */
 	private final static String WECHAT_JSSDK_TICKET_URL="https://api.weixin.qq.com/cgi-bin/ticket/getticket?";
-	/**
-	 * 扫一扫页面
-	 */
-		
+
+	private static SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
 		
 	/**
 	 * 读取扫一扫所需要参数
@@ -134,4 +135,37 @@ public class ScanCodeUtils {
 	public static String create_timestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
+	
+	/**
+	 * 得到文件上传的相对路径
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @return
+	 */
+	public static  String getUploadPath(String fileName,String url,String newname) {
+		String uploadPath = new StringBuffer("upload").append("/")
+				.append(formater.format(new Date())).append("/").append(newname)
+				.append(getFileExt(fileName)).toString();
+		// 判断父文件夹是否存在，不存在则创建
+		File dir = new File(url+"/"+uploadPath).getParentFile();
+		if (!dir.exists()) {
+			try {
+				// 文件不存在，创建所在的文件夹
+				dir.mkdirs();
+			} catch (Exception e) {
+				System.out.print("创建附件目录时出错");
+				return "";
+			}
+		}
+		return uploadPath;
+	}
+	/**
+	 * 获取文件扩展名
+	 * 
+	 * @return string
+	 */
+	public static String getFileExt(String fileName) {
+		return fileName.substring(fileName.lastIndexOf("."));
+	}
 }

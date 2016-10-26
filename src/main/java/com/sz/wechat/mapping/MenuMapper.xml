@@ -8,10 +8,12 @@
 		<result column="MENUTYPE" property="menutype" jdbcType="VARCHAR"/>
 		<result column="FEATURE" property="feature" jdbcType="VARCHAR"/>
 		<result column="PRICE" property="price" jdbcType="VARCHAR"/>
+		<result column="PATH" property="path" jdbcType="VARCHAR"/>
+		<result column="MENUPHOTO" property="menuphoto"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		 MENUID, MENUNAME, MENUTYPE, FEATURE, PRICE, MENUPHOTO
+		 MENUID, MENUNAME, MENUTYPE, FEATURE, PRICE, MENUPHOTO,PATH
 	</sql>
 	<!-- 查询 -->
 	<select id="getMenu" resultMap="BaseResultMap">
@@ -20,4 +22,11 @@
 	<select id="getMenuByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT <include refid="Base_Column_List"/> FROM SZ_MENU WHERE MENUID = #{menuid,jdbcType=VARCHAR}
 	</select>
+	<!-- 插入 -->
+	<insert id="doInsertBlob" parameterType="com.sz.wechat.entity.Menu" >
+		INSERT INTO SZ_MENU
+		  (MENUID, MENUNAME, MENUTYPE, FEATURE, PRICE,PATH, MENUPHOTO)
+		VALUES
+		  (#{menuid,jdbcType=VARCHAR},#{menuname,jdbcType=VARCHAR},#{menutype,jdbcType=VARCHAR},#{feature,jdbcType=VARCHAR},#{price,jdbcType=VARCHAR},#{path,jdbcType=VARCHAR},#{menuphoto,jdbcType=BLOB})
+	</insert>
 </mapper>

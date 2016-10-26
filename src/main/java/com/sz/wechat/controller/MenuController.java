@@ -1,4 +1,11 @@
 package com.sz.wechat.controller;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,9 +16,14 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CodeDict;
 import com.sz.wechat.entity.Consumerec;
@@ -19,6 +31,9 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
+import com.sz.wechat.utils.ScanCodeUtils;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 /***
  * 菜单控制器
@@ -54,6 +69,11 @@ public class MenuController  {
 	public ModelAndView toTakingOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Menu> menuList = this.menuService.getMenu();
+		if(null!= menuList && menuList.size()>0){
+			for (Menu menu : menuList) {
+				transferToFile(menu);
+			}
+		}
 		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
 		modelAndView.addObject("dictList", dictList);
 		modelAndView.addObject("menuList",menuList);
@@ -122,11 +142,23 @@ public class MenuController  {
 					_map.put("menunum",consumerec.getBuynum());
 					_map.put("price",menu.getPrice());
 					_map.put("menutype",menu.getMenutype());
+					_map.put("path", menu.getPath());
+					_map.put("menuphoto", menu.getMenuphoto());
 					allPrice = allPrice + (Integer.parseInt(menu.getPrice())*Integer.parseInt(consumerec.getBuynum()));
 					buyNum = buyNum + Integer.parseInt(consumerec.getBuynum());
 					mapList.add(_map);
 				}
 			}
+			if(null != mapList && mapList.size() > 0){
+				Menu menu = null;
+				for (Map<String,Object> map : mapList) {
+					menu = new Menu();
+					menu.setMenuphoto((byte[])map.get("menuphoto"));
+					menu.setPath(String.valueOf(map.get("path")));
+					transferToFile(menu);
+				}
+			}
+			
 			List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
 			modelAndView.addObject("dictList", dictList);
 			modelAndView.addObject("menuList", mapList);
@@ -205,4 +237,86 @@ public class MenuController  {
 		modelAndView.addObject("paytime",df.format(new Date()));
 		return modelAndView;
 	}
+	
+	/**
+	 * 执行图片插入
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/doInsertMenu")
+	public void doInsertMenu(HttpServletRequest request, HttpServletResponse response){
+		MultipartFile file = null;
+		MultipartHttpServletRequest multipartRequest = null;
+		multipartRequest = (MultipartHttpServletRequest) request;
+		file = multipartRequest.getFile("cover");
+		if (file == null) {
+			System.out.println("没有附件上传");
+		}
+		uploadPhoto(file,file.getOriginalFilename());
+	}
+	
+	/**
+	 * 执行插入操作
+	 * @param multipartFile
+	 * @param filename
+	 * @return
+	 */
+	public int uploadPhoto(MultipartFile multipartFile,String filename){
+		String url=this.getClass().getResource("/").getPath();
+		url=url.substring(1, url.indexOf("/WEB-INF"));
+		String newName = UUID.randomUUID().toString();
+		String uploadPath = ScanCodeUtils.getUploadPath(filename,url,newName);
+		String filePath = url+"/"+uploadPath;
+		byte[] fileBytes = null;
+		try {
+			fileBytes = multipartFile.getBytes();
+			multipartFile.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Menu menu = new Menu();
+		menu.setMenuid(newName);
+		menu.setMenuname("麻婆豆腐");
+		menu.setMenuphoto(fileBytes);
+		menu.setMenutype("1");
+		menu.setPrice("10");
+		menu.setFeature("介绍：麻辣开胃");
+		menu.setPath(uploadPath);
+		return this.menuService.doInsertBlob(menu);
+	}
+	
+	public void transferToFile(Menu menu) {
+		String url=this.getClass().getResource("/").getPath();
+		url=url.substring(1, url.indexOf("/WEB-INF"));
+		// 获得文件路径
+		String path = menu.getPath();
+		String downLoadPath = url+"/"+path;
+		File file = new File(downLoadPath);
+		if(!file.exists()){
+			file.getParentFile().mkdirs();
+			byte[] blobByte = menu.getMenuphoto();
+			BufferedOutputStream bos = null;
+			FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(file);
+				bos = new BufferedOutputStream(fos);
+				bos.write(blobByte);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				IOUtils.closeQuietly(bos);
+				IOUtils.closeQuietly(fos);
+			}
+		}
+		File newFile = new File(url+"/"+path);
+		try {
+			Thumbnails.of(file).scale(0.6f).toFile(newFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} 
+	
 }

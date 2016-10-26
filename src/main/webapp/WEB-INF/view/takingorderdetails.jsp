@@ -65,7 +65,7 @@ html,body {
 				</c:if>
 				<c:if test="${item.code_id ==  item1.menutype}">
 					<tr style="background-color:white;">
-						<td width="120px" ><img alt="" src="<%=path%>/public/images/food.png" width="150px" height="100px"></td>
+						<td width="120px" ><img alt="" src="<%=path%>/${item1.path}" width="150px" height="100px"></td>
 						<td>
 							 <p style="line-height:20px;">${item1.menuname}</p>
 						</td>
