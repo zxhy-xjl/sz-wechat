@@ -441,14 +441,16 @@ public class ScanCodeController {
 				List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyId(company);
 				if(null != complaintList && complaintList.size()>0){
 					int scort = 0;
+					int length = 0;
 					for (Complaint complaint : complaintList) {
 						if(!"".equals(complaint.getEvaluate())){
 							if(null != complaint.getEvaluate()){
+								length = length +1;
 								scort = scort + Integer.parseInt(complaint.getEvaluate());
 							}
 						}
 					}
-					scort = scort / complaintList.size();
+					scort = scort / length;
 					modelAndView.addObject("score", scort);
 				}
 				HttpSession session = request.getSession();
