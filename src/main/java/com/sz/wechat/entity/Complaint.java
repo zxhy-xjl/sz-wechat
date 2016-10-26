@@ -6,8 +6,7 @@ import java.io.Serializable;
  * 投诉反馈数据模型
  * @author sway
  */
-public class Complaint implements Serializable  {
-
+public class Complaint implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 主键

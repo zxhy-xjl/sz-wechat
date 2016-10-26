@@ -41,21 +41,22 @@ public class ComplainController {
 		
 	}
 	
-	@RequestMapping(value = "/toInsertComplaint",method = RequestMethod.GET)
-	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response)
-	{   String companyname = request.getParameter("companyname");
+	/**
+	 * 执行投操作
+	 * @return
+	 */
+	@RequestMapping(value = "/doInsertComplaint",method = RequestMethod.POST)
+	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+		String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
-	    HttpSession ss = (HttpSession)request.getSession();
-        String openid = ss.getAttribute("myopenid").toString();
-        
-        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date=new Date();
-      
+	    String evaluate = request.getParameter("evaluate");
+	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
+        String openid = String.valueOf(httpSession.getAttribute("myopenid"));
         Complaint complaint = new Complaint();
         complaint.setCompanyid(companycode);
         complaint.setComplaincontent(complaintcontent);
-        complaint.setComplaintime(dateFormater.format(date));
+        complaint.setComplaintime(dateFormater.format(new Date()));
         complaint.setComplaintype("1");
         complaint.setOpenid(openid);
         complaint.setPid(UUID.randomUUID().toString());
@@ -63,8 +64,7 @@ public class ComplainController {
         complaint.setDisposeresult("");
         complaint.setDisposedep("");
         complaint.setDisposetime("");
-        complaint.setEvaluate("3");
-       
+        complaint.setEvaluate(evaluate);
         this.companyInfoService.insertComplaint(complaint);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pid", complaint.getPid());

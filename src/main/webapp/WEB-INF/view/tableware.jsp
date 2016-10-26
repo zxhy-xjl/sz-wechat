@@ -21,11 +21,31 @@
 		String code = (String)session.getAttribute("code");
 		String open_code = (String)session.getAttribute("open_code");
 		%>
-		window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=open_code%>";
+		if(null!=<%=open_code%>){
+			window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=open_code%>";			
+		}
+		onloadScore();
 	});
+	/**
+	 * 初始化加载
+	 */
+	function onloadScore(){
+		var score ="${score}";
+		$("img").each(function(){
+			var id = $(this).attr("id");
+			if(typeof(id) != "undefined" &&id.substring(id.length-1,id.length) <=score){
+				$(this).attr('src','<%=path%>/public/images/star_on.png');
+				$(this).attr('alt','1');
+			}
+		});
+	}
+	/**
+	 * 打分
+	 */
 	function doScore(obj){
 		var id = obj.id;
 		var size = id.substring(id.length-1,id.length);
+		$("#star").val(size);
 		if(obj.alt == 0){
 			$("img").each(function(){
 				if($(this).attr("id").substring(id.length-1,id.length) <=size){
@@ -50,7 +70,8 @@
 	function tots(){
 		var codeObj = $("#codei");
 		if(codeObj.val() =="" || codeObj.val() == "null" ){
-			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+			//window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+			$("#complaintForm").submit();
 		}else{
 			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&flag=2";
 		}
@@ -58,7 +79,11 @@
 	}
 </script>
 <body style="background-color:#E9E9E9">
+<form action="<%=path%>/doInsertComplaint.do" method="post" id="complaintForm">
 <input id="codei" type="hidden" value="<%=code%>">
+<input id="star" name="evaluate" type="hidden"/>
+<input name="companyname" value="${CompanyInfo.companyname}" type="hidden">
+<input name="companycode" value="${CompanyInfo.companycode}" type="hidden">
 <div id="content">
 	<div>
 		<table border="0" width="100%" align="center">
@@ -99,7 +124,7 @@
 			<tr>
 				<td colspan="2"  align="center">
 					<div>
-						<textarea id="textare" rows="6" cols="55" placeholder="你想说点啥" ></textarea>
+						<textarea id="textare" name="complaintcontent" rows="6" cols="55" placeholder="你想说点啥" ></textarea>
 					</div>
 				</td>
 			</tr>
@@ -118,6 +143,7 @@
          <a href="javascript:doSubmit();" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#F3BE67;width:150px;height:30px;">继续点餐</a> 
     </div> 
 </div>
+</form>
 </body>
 <script src="<%=path%>/public/script/lightbox-plus-jquery.min.js" type="text/javascript"></script>
 </html>

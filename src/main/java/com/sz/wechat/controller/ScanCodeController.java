@@ -17,11 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Grade;
-import com.sz.wechat.entity.PersonHealth;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
-import com.sz.wechat.service.PersonHealthService;
+import com.sz.wechat.service.ComplainService;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
 
@@ -39,10 +38,10 @@ public class ScanCodeController {
 	@Autowired
 	private CompanyInfoService companyInfoService;
 	/**
-	 * 健康证数据逻辑层
+	 * 投诉反馈数据逻辑层
 	 */
 	@Autowired
-	private PersonHealthService personHealthService;
+	private ComplainService complainService;
 	
 	/**
 	 * 扫一扫
@@ -437,6 +436,15 @@ public class ScanCodeController {
 				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
 				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
+				List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyId(company);
+				if(null != complaintList && complaintList.size()>0){
+					int scort = 0;
+					for (Complaint complaint : complaintList) {
+						scort = scort + Integer.parseInt(complaint.getEvaluate());
+					}
+					scort = scort / complaintList.size();
+					modelAndView.addObject("score", scort);
+				}
 				HttpSession session = request.getSession();
 				session.setAttribute("open_code", code);
 				modelAndView.setViewName("/tableware");
