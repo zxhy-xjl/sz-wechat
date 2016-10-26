@@ -58,12 +58,13 @@ public class ComplainController {
 	 * @return
 	 */
 	@RequestMapping(value = "/doInsertComplaint")
-	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response){
 		String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    String evaluate = request.getParameter("evaluate");
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
+	    HttpSession httpSession = (HttpSession)request.getSession();
         String openid = String.valueOf(httpSession.getAttribute("myopenid"));
         if("".equals(openid)){
         	openid = String.valueOf(httpSession.getAttribute("openid"));
