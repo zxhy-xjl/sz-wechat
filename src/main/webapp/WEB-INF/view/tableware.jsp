@@ -122,8 +122,8 @@
 						</p>
 						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">2、餐饮许可证</a></p>
 						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">3、行政处罚单</a></p>
-						<!-- <p>4、投诉</p>
-						<p>5、评论</p> -->	
+						<p><a href="<%=path%>/getComplaintByOpenid.do?companyCode=${CompanyInfo.companycode}&companyName=${CompanyInfo.companyname}">4、投诉</a></p>
+						<!-- <p>5、评论</p> -->	
 					</div>
 				</td>
 			</tr>

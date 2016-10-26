@@ -5,6 +5,7 @@ package com.sz.wechat.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.service.CompanyInfoService;
+import com.sz.wechat.service.ComplainService;
 
 /**
  * 投诉控制层
@@ -29,6 +31,12 @@ import com.sz.wechat.service.CompanyInfoService;
 public class ComplainController {
     @Autowired
 	private CompanyInfoService companyInfoService;
+    
+    /**
+     * 投诉数据逻辑层
+     */
+    @Autowired
+    private ComplainService complainService;
 	@RequestMapping(value = "/toComplain",method = RequestMethod.GET)
 	public ModelAndView toComplainGet (HttpServletRequest request, HttpServletResponse response)
 	{   String companyname = request.getParameter("companyname");
@@ -76,5 +84,25 @@ public class ComplainController {
 		modelAndView.setViewName("/complaintsuccess");
 		return modelAndView;
 		
+	}
+
+	/**
+	 * 通过openID获取用户投诉信息
+	 * @param request
+	 * @param response
+	 * @param httpSession
+	 * @return
+	 */
+	@RequestMapping(value = "/getComplaintByOpenid")
+	public ModelAndView getComplaintByOpenid(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+		ModelAndView modelAndView = new ModelAndView();
+		String openid = String.valueOf(httpSession.getAttribute("openid"));//得到session中的openID
+		String companyCode = String.valueOf(request.getParameter("companyCode"));
+		String companyName = String.valueOf(request.getParameter("companyName"));
+		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode,"oehpaw8_fgOEWtPk0S0gLidH60xg");
+		modelAndView.addObject("complaintList", complaintList);
+		modelAndView.addObject("companyName", companyName);
+		modelAndView.setViewName("/complaintList");
+		return modelAndView;
 	}
 }
