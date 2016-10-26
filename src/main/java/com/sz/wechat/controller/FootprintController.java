@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Footprint;
+import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
@@ -55,6 +56,7 @@ public class FootprintController {
 		String keyWord_1="没收";
 		String keyword_2="停产停业";
 		String keyword_3="吊销执照";
+		String keyword_4="暂扣";
 		List<CompanyInfo> companyList = this.companyInfoService.getCompanyInfo();
 		List<CompanyInfo> companyScoreList = new ArrayList<>();
 		if(null != companyList && companyList.size() > 0){
@@ -71,7 +73,13 @@ public class FootprintController {
 			score = 100;
 			//资质类
 			//营业执照
+			if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
+				score = score - 30;
+			}
 			//餐饮服务许可证
+			if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
+				score = score - 30;
+			}
 			//处罚类
 			SupervisePunish supervisePunish = new SupervisePunish();
 			supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
@@ -82,6 +90,9 @@ public class FootprintController {
 					String illegalType = _supervisePunish.getPenaltytype();
 					//判断是否存在吊销执照
 					if(illegalType.indexOf(keyword_3)!=-1){
+						sb.append(illegalType).append(";");
+						score = score - 5;
+					}else if(illegalType.indexOf(keyword_4)!=-1){
 						sb.append(illegalType).append(";");
 						score = score - 5;
 					}
