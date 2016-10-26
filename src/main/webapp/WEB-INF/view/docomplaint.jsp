@@ -25,16 +25,25 @@ font-family: SimHei;
 <div id="baseinfo">
 <label>投诉餐厅： ${companyname}</label><br><br>
 <label>投诉内容：</label>
+<form id="complainForm" action="<%=path%>/doInsertComplaint.do" method="post" enctype="multipart/form-data">
+<input type="hidden" name="companyname" value="${companyname}">
+<input type="hidden" name="companycode" value="${companycode}">
+<input type="hidden" name="evaluate" value="${evaluate}">
 
 <%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
-<textarea id="complaintcontent"  rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
-<input type="file" accept="image/*"  capture="camera" ><br>
+<textarea id="complaintcontent" name="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
+<input type="file" name="camera" accept="image/*"  capture="camera" ><br>
 <br>
+<div style="text-align: center;">
+<input type="submit" value="投诉"  style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
 </div>
-<div id="shadowdiv" style="text-align: center;">
+</form>
 
-<input type="button" value="投诉" onclick="finishcomplaint(' ${companyname}','${companycode}')" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+
 </div>
+
+
+
 <script type="text/javascript">
 var flag = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
