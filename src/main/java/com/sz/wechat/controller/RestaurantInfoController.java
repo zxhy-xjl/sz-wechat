@@ -158,8 +158,10 @@ public class RestaurantInfoController {
 				complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
 				if(null != complaintScoreList && complaintScoreList.size()>0){
 					for(Complaint complaint:complaintScoreList){
-						gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
-					}
+						if(complaint.getEvaluate()!=null)
+							gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+							else
+								gradeStat=0;					}
 					gradeStat = gradeStat/complaintScoreList.size();
 					gradeStat = grade - gradeStat;
 					if(score > gradeStat){

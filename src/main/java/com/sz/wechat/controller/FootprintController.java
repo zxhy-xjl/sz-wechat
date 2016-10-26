@@ -127,7 +127,10 @@ public class FootprintController {
 			complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
 			if(null != complaintScoreList && complaintScoreList.size()>0){
 				for(Complaint complaint:complaintScoreList){
+					if(complaint.getEvaluate()!=null)
 					gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+					else
+						gradeStat=0;
 				}
 				gradeStat = gradeStat/complaintScoreList.size();
 				gradeStat = grade - gradeStat;
