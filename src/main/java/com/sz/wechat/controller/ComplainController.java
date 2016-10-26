@@ -3,6 +3,7 @@
  */
 package com.sz.wechat.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.Complaint;
@@ -56,13 +59,15 @@ public class ComplainController {
 	/**
 	 * 执行投操作
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/doInsertComplaint")
-	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView toInsertComplainGet (HttpServletRequest request, HttpServletResponse response,@RequestParam MultipartFile camera) throws IOException{
 		String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    String evaluate = request.getParameter("evaluate");
+	    byte[] complainphoto =   camera.getBytes();
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
 	    HttpSession httpSession = (HttpSession)request.getSession();
         String openid = String.valueOf(httpSession.getAttribute("myopenid"));
@@ -81,6 +86,7 @@ public class ComplainController {
         complaint.setDisposedep("");
         complaint.setDisposetime("");
         complaint.setEvaluate(evaluate);
+        complaint.setComplainphoto(complainphoto);
         this.companyInfoService.insertComplaint(complaint);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pid", complaint.getPid());

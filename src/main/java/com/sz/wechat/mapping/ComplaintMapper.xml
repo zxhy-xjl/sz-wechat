@@ -14,6 +14,7 @@
 		<result column="COMPLAINTYPE" property="complaintype" jdbcType="VARCHAR"/>
 		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
 		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
+		<result column="COMPLAINPHOTO" property="complainphoto" jdbcType="BLOB"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
@@ -38,9 +39,9 @@
 	<!--插入  -->
 	 <insert id="insertComplaint" parameterType="com.sz.wechat.entity.Complaint">
   insert into SZ_COMPLAINT
-   (PID,COMPANYID,COMPLAINTIME,DISPOSESTATUS,COMPLAINCONTENT,EVALUATE,DISPOSETIME,DISPOSEDEP,COMPLAINTYPE,DISPOSERESULT,OPENID)
+   (PID,COMPANYID,COMPLAINTIME,DISPOSESTATUS,COMPLAINCONTENT,EVALUATE,DISPOSETIME,DISPOSEDEP,COMPLAINTYPE,DISPOSERESULT,OPENID,COMPLAINPHOTO)
     values
-   (#{pid},#{companyid},#{complaintime},#{disposestatus},#{complaincontent},#{evaluate},#{disposetime},#{disposedep},#{complaintype},#{disposeresult},#{openid})
+   (#{pid},#{companyid},#{complaintime},#{disposestatus},#{complaincontent},#{evaluate},#{disposetime},#{disposedep},#{complaintype},#{disposeresult},#{openid},#{complainphoto})
  </insert>
 	
 </mapper>

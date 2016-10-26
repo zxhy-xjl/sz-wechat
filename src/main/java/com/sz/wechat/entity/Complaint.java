@@ -53,6 +53,17 @@ public class Complaint implements Serializable {
 	 */
 	private String openid;
 	
+    /**
+     * 投诉图片
+     */
+    private byte[] complainphoto;
+
+	public byte[] getComplainphoto() {
+		return complainphoto;
+	}
+	public void setComplainphoto(byte[] complainphoto) {
+		this.complainphoto = complainphoto;
+	}
 	public String getOpenid() {
 		return openid;
 	}
