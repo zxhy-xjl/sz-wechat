@@ -18,6 +18,14 @@ public interface ComplaintMapper {
 	 * @return
 	 */
 	public List<Complaint> getComplaintScoreByCompanyId(String companyId);
+	
+	/**
+	 * 查询企业投诉反馈页面(一年有效期)
+	 * @param companyId
+	 * @param openId
+	 * @return
+	 */
+	public List<Complaint> getComplaintScoreByCompanyIdAndOpenid(String companyId,String openId);
 	/**
 	 * 查询企业投诉反馈信息（一年有效期）
 	 * @param companyId 企业Code

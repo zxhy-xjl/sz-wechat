@@ -21,12 +21,20 @@ public class ComplainService {
 	
 	
 	/**
+	 * 查询企业反馈评分（一年有效期）
+	 * @param companyId 企业ID
+	 * @return
+	 */
+	public List<Complaint>  getComplaintScoreByCompanyId(String companyId){
+		return this.complaintMapper.getComplaintScoreByCompanyId(companyId);
+	}
+	/**
 	 * 查询企业投诉反馈评分（一年有效）
 	 * @param companyCode
 	 * @return
 	 */
-	public List<Complaint> getComplaintScoreByCompanyId(String companyCode){
-		return this.complaintMapper.getComplaintScoreByCompanyId(companyCode);
+	public List<Complaint> getComplaintScoreByCompanyIdAndOpenid(String companyCode,String openid){
+		return this.complaintMapper.getComplaintScoreByCompanyIdAndOpenid(companyCode,openid);
 	}
 	
 }
