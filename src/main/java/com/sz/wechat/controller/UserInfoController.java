@@ -80,6 +80,7 @@ public class UserInfoController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		modelAndView.addObject("complaint", complaint);
+		modelAndView.addObject("pid", pid);
 		modelAndView.addObject("companyname", companyname);
 		modelAndView.setViewName("/complaintinfo");
 		return modelAndView;

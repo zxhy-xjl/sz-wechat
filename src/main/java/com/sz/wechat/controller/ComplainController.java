@@ -3,7 +3,10 @@
  */
 package com.sz.wechat.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +60,7 @@ public class ComplainController {
 	}
 	
 	/**
-	 * 执行投操作
+	 * 执行投诉的插入操作
 	 * @return
 	 * @throws IOException 
 	 */
@@ -115,4 +118,29 @@ public class ComplainController {
 		modelAndView.setViewName("/complaintList");
 		return modelAndView;
 	}
+	
+	 @RequestMapping(value="/toLookImage",method = RequestMethod.GET)
+     public void lookImage(HttpServletRequest request,HttpServletResponse response){
+    	String pid = request.getParameter("pid");
+    	Complaint complaint = this.companyInfoService.getComplaintInfoByPid(pid);
+    	byte[] data= complaint.getComplainphoto();
+    	response.setContentType("img/jpeg");
+    	response.setCharacterEncoding("utf-8");
+    	try {
+    		
+			OutputStream outputStream=response.getOutputStream();
+			InputStream in=new ByteArrayInputStream(data);
+			
+			int len=0;
+			byte[]buf=new byte[1024];
+			while((len=in.read(buf,0,1024))!=-1){
+				outputStream.write(buf, 0, len);
+			}
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 		
+     }
 }

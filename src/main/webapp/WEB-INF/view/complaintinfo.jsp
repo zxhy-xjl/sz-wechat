@@ -68,6 +68,15 @@ function ajaxCall(){
 	}
 	
 } --%>
+var flag = null;
+var text = null;
+var xmlHttpRequest = null;
+window.onload = function()//用window的onload事件，窗体加载完毕的时候
+{   var pid = "${pid}";
+	document.getElementById("complainpic").src="<%=path%>/toLookImage.do?pid="+pid;
+	
+}
+
 </script>
 </head>
 <body style="background-color: #e9e9e9;">
@@ -87,6 +96,12 @@ function ajaxCall(){
 <label >&nbsp;&nbsp;<font style="" size="3">投诉餐厅：${companyname }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">投诉时间：${complaint.complaintime }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
+<c:if test="${complaint.complainphoto!=null}">
+<img id="complainpic" onclick="" alt="0" src="" >
+</c:if>
+<c:if test="${complaint.complainphoto==null}">
+<label style="font-weight: bolder;color: red;">&nbsp;&nbsp;没有图片，投诉时附加图片可以增加审核通过率</label>
+</c:if>
 </td>
 </tr>
 </table>
