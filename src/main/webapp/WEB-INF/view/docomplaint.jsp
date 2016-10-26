@@ -81,7 +81,7 @@ function finishcomplaint(companyname,companycode)
 {
 	var complaintcontent = document.getElementById("complaintcontent").value;
 	
-	window.location.href="<%=path%>/doInsertComplaint.do?complaintcontent="+complaintcontent+"&companyname="+companyname+"&companycode="+companycode;
+	window.location.href="<%=path%>/doInsertComplaint.do?complaintcontent="+complaintcontent+"&companyname="+companyname+"&companycode="+companycode+"&evaluate=${evaluate}";
 	
 	}
 
