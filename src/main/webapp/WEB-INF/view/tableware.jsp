@@ -87,7 +87,7 @@
 <body style="background-color:#E9E9E9">
 <form action="<%=path%>/doInsertComplaint.do" method="post" id="complaintForm">
 <input id="codei" type="hidden" value="<%=code%>">
-<input id="star" name="evaluate" type="hidden"/>
+<input id="star" name="evaluate" type="hidden" value="0"/>
 <input name="companyname" value="${CompanyInfo.companyname}" type="hidden">
 <input name="companycode" value="${CompanyInfo.companycode}" type="hidden">
 <div id="content">

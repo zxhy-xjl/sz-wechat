@@ -198,7 +198,9 @@ public class ScanCodeController {
 				complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
 				if(null != complaintScoreList && complaintScoreList.size()>0){
 					for(Complaint complaint:complaintScoreList){
-						gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+						if(null != complaint.getEvaluate()){
+							gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+						}
 					}
 					gradeStat = gradeStat/complaintScoreList.size();
 					gradeStat = grade - gradeStat;
