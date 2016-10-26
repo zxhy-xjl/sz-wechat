@@ -124,9 +124,20 @@ function ajaxCall(){
 <img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_1_4.png" width="14%" height="14%">
 </c:if>
 <br>
-&nbsp;&nbsp;<label>投诉</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>受理</label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>处理</label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>反馈</label>
+<div style="width:100%;">
+<div style="display: inline;position:relative;left:4%"><label>投诉</label>
+</div>
+
+<div style="display: inline;position:relative;left:21%"><label >受理</label> </div>
+
+<div style="display: inline;position:relative;left:39%"><label >处理</label> </div>
+
+<div style="display: inline;position:relative;left:57%"><label >反馈</label> </div>
+</div>
+<!-- 
+<label style="position:relative;left:75px;">受理</label> -->
+<!-- <label style="position:relative;left:150px;">处理</label>
+<label style="position:relative;left:220px;">反馈</label> -->
 
 <br><br>
 <hr color="lightgrey" size="1" width="90%"/>
