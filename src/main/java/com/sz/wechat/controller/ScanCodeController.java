@@ -440,7 +440,11 @@ public class ScanCodeController {
 				if(null != complaintList && complaintList.size()>0){
 					int scort = 0;
 					for (Complaint complaint : complaintList) {
-						scort = scort + Integer.parseInt(complaint.getEvaluate());
+						if(!"".equals(complaint.getEvaluate())){
+							if(null != complaint.getEvaluate()){
+								scort = scort + Integer.parseInt(complaint.getEvaluate());
+							}
+						}
 					}
 					scort = scort / complaintList.size();
 					modelAndView.addObject("score", scort);

@@ -35,7 +35,15 @@ $(function(){
 	<%
 	String code = (String)session.getAttribute("open_code"); 
 	%>
-	window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=code%>";
+	if("null"!="<%=code%>"){
+		$.ajax({
+			type:'get',
+			url:'<%=path%>/Oauth2Servlet.do?code=<%=code%>',
+			success:function(){
+				
+			}
+		});
+	} 
 });
 
 /**

@@ -27,7 +27,7 @@ font-family: SimHei;
 <label>投诉内容：</label>
 
 <%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
-<textarea id="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
+<textarea id="complaintcontent"  rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
 <input type="file" accept="image/*"  capture="camera" ><br>
 <br>
 </div>
@@ -39,6 +39,9 @@ font-family: SimHei;
 var flag = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
+	if(""!="${complaintcontent}"){
+		document.getElementById("complaintcontent").value="${complaintcontent}";
+	}
 	flag = "<%=request.getParameter("flag")%>";
 	if(flag==1)
 		document.getElementById("shadowdiv").style.display="block";

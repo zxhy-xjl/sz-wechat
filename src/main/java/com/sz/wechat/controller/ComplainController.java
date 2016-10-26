@@ -33,9 +33,11 @@ public class ComplainController {
 	public ModelAndView toComplainGet (HttpServletRequest request, HttpServletResponse response)
 	{   String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
+	    String complaintcontent = request.getParameter("complaintcontent");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("companyname", companyname);
 		modelAndView.addObject("companycode", companycode);
+		modelAndView.addObject("complaintcontent", complaintcontent);
 		modelAndView.setViewName("/docomplaint");
 		return modelAndView;
 		

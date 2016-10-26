@@ -21,9 +21,15 @@
 		String code = (String)session.getAttribute("code");
 		String open_code = (String)session.getAttribute("open_code");
 		%>
-		if(null!=<%=open_code%>){
-			window.location.href="<%=path%>/Oauth2Servlet.do?code=<%=open_code%>";			
-		}
+		if("null"!="<%=open_code%>"){
+			$.ajax({
+				type:'get',
+				url:'<%=path%>/Oauth2Servlet.do?code=<%=open_code%>',
+				success:function(){
+					
+				}
+			});
+		} 
 		onloadScore();
 	});
 	/**
@@ -69,11 +75,11 @@
 	
 	function tots(){
 		var codeObj = $("#codei");
-		if(codeObj.val() =="" || codeObj.val() == "null" ){
+		if(codeObj.val() == "null" ){
 			//window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
 			$("#complaintForm").submit();
 		}else{
-			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&flag=2";
+			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&companyname=${CompanyInfo.companyname}&complaintcontent="+$("#textare").val();
 		}
 		
 	}
