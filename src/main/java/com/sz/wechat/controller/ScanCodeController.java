@@ -484,6 +484,18 @@ public class ScanCodeController {
 		modelAndView.addObject("gradeList",gradeList);
 		modelAndView.addObject("allgradelist",allgradelist);
 		return modelAndView;
-	}		
+	}	
+	
+	/**
+	 * 存值openid
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/setOpenId")
+	public void setOpenId(HttpServletRequest request, HttpServletResponse response){
+		String openid = String.valueOf(request.getParameter("openid"));
+		HttpSession httpSession =(HttpSession)request.getSession();
+		httpSession.setAttribute("openid", openid);
+	}
 	
 }
