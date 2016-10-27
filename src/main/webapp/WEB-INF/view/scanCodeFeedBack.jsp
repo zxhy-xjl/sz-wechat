@@ -36,6 +36,7 @@ $(function(){
 	String code = (String)session.getAttribute("open_code"); 
 	%>
 	setOpenid();
+	setTimeout('doInsertFootPrint()',3000)
 });
 
 /**
@@ -142,9 +143,7 @@ function doInsertFootPrint(){
 		type:'post',
 		url:'<%=path%>/doInserFootPrint.do',
 		data:{companCode:"${CompanyInfo.companycode}",companyName:"${CompanyInfo.companyname}",score:score,paystatus:"0"},
-		success:function(){
-			
-		}
+		success:function(){}
 	});
 }
 </script>

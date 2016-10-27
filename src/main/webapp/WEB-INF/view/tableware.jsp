@@ -164,7 +164,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="file" accept="image/*"  capture="camera" style="width:100%" >
+					<!-- <input type="file" accept="image/*"  capture="camera" style="width:100%" > -->
 					<%-- <img alt="" src="<%=path%>/public/images/photo.png" onclick="javascript:text()" width="43" height="42" style="margin-left:-25%" > --%>
 				</td>
 				<td align="right">

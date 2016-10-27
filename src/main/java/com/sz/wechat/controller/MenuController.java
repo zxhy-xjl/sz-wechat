@@ -1,7 +1,5 @@
 package com.sz.wechat.controller;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +24,6 @@ import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
 import com.sz.wechat.utils.ScanCodeUtils;
-import net.coobird.thumbnailator.Thumbnails;
 
 /***
  * 菜单控制器
@@ -65,7 +61,7 @@ public class MenuController  {
 		List<Menu> menuList = this.menuService.getMenu();
 		if(null!= menuList && menuList.size()>0){
 			for (Menu menu : menuList) {
-				ScanCodeUtils.transferToFile(menu,request);
+					ScanCodeUtils.transferToFile(menu,request);
 			}
 		}
 		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");

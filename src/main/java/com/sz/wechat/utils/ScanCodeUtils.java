@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -208,7 +210,8 @@ public class ScanCodeUtils {
 		}
 		File newFile = new File(request.getRealPath("/")+"/"+path);
 		try {
-			Thumbnails.of(file).scale(0.6f).toFile(newFile);
+			FileUtils.writeByteArrayToFile(newFile, menu.getMenuphoto());
+			//Thumbnails.of(file).scale(0.6f).toFile(newFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
