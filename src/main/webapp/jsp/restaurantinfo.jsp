@@ -114,7 +114,7 @@ function lookcomplaint(pid,companyname)
 </script>
 
 
-<body style="font-family: SimHei">
+<body style="font-family: SimHei;background-color: #e9e9e9;">
 <div id="baseinfo">
 <table>
 <tr>
@@ -124,13 +124,26 @@ function lookcomplaint(pid,companyname)
  </td>
  <td>
  <br><br>
- <label style="font-weight:bold">联系方式：025-99999999</label>
-<label style="font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
+ <label style="font-weight:bold">本月扫桌：999次</label>
+
 <br>
-<label style="font-weight:bold">本月扫桌：999次</label>
+
+
+ <label style="font-weight:bold">联系方式：025-99999999</label>
+ <br>
+<div id="stars" style="text-align: center;"> 
+
+<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+
+</div> 
  </td>
 </tr>
 </table>
+<label style="font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;营业执照</label>
 <img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
@@ -150,15 +163,7 @@ function lookcomplaint(pid,companyname)
 <label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
 </div>
 <br>
-<div id="stars" style="text-align: center;"> 
 
-<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
-<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
-<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
-<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
-<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
-
-</div> 
 <div id="buttondiv" style="text-align: center;">
  <c:if test="${complainflag== '1'}"> 
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>

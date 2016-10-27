@@ -163,7 +163,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 		
 	}
 	
-	function detailsinfo(oddNumber,newflag){
+	function detailsinfo(oddNumber){
 		
 		
 		console.log(oddNumber);
@@ -171,7 +171,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 		
 		
 	}
-	function detailsinfo1(oddNumber,newflag){
+	function detailsinfo1(oddNumber){
 		
 		
 		console.log(oddNumber);
@@ -202,18 +202,18 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 				<tr style="background-color: #E9E9E9;height:30px;">
 					<td><label style="font-size: 15px;">&nbsp;&nbsp;${fn:substring(item.paytime,0,4)}年${fn:substring(item.paytime,4,6)}月${fn:substring(item.paytime,6,8)}日 ${fn:substring(item.paytime,8,10)}:${fn:substring(item.paytime,10,12)}  上海</label></td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="pagejump()">
+				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.oddnumber}')">
 					<td>
 						<label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.pid}</font></label><br />
 					</td>
 					<td></td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.oddnumber}','0')">
+				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.oddnumber}')">
 					<td>
 						<label style="">&nbsp;&nbsp;合计：8道菜，12元</label>
 					</td>
 					
-					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 15px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${oddnumber}','1')"></c:if><br />
+					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 15px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${oddnumber}')"></c:if><br />
 					</td>
 				</tr>
 			<%-- 	<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}')">
