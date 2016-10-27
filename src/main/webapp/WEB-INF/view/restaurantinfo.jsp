@@ -90,7 +90,7 @@ function detailsinfo(oddNumber){
 </div> 
 <div id="buttondiv" style="text-align: center;">
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}')"/>
-<input id="historycomplain" type="button" value="查看历史投诉" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick=""/>
+<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick=""/>
 
 </div>
 
