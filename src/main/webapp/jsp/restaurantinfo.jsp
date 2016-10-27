@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -9,96 +11,164 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>餐厅详情</title>
+<link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
+
+<style type="text/css">
+#score{
+width:150px;
+height:150px;
+margin:0px auto;
+background:url("<%=path%>/public/images/feedbackscore.png") no-repeat center top;
+}
+span{
+text-align:center; 
+
+}
+</style>
+<script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
+</head>
 <script type="text/javascript">
-
-var text = null;
-var xmlHttpRequest = null;
-var json = null;
-window.onload=function()//用window的onload事件，窗体加载完毕的时候
-{   text = <%=request.getParameter("userinfo")%>;
-     json = JSON.stringify(text); 
-	var newurl = window.location.href;
-	var url = "<%=path%>/insertLog.do?json="+json+"&url="+newurl;
-	if(window.ActiveXObject) {   			//IE的
-		xmlHttpRequest = new ActionXObject("Microsoft.XMLHTTP");
-	}
-	else if(window.XMLHttpRequest) {		//除IE外的
-		xmlHttpRequest = new XMLHttpRequest();
-	}
-	if(xmlHttpRequest != null) {
-		
-		xmlHttpRequest.open("GET", url, true);
-		//xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		//关联好ajax的回调函数
-		xmlHttpRequest.onreadystatechange = ajaxCall;
-		
-		//真正向服务器发送请求
-		xmlHttpRequest.send();
-	}
-}
-
-function ajaxCall(){
+<%-- /**
+ * 初始化
+ */
+$(function(){
 	
-	if(xmlHttpRequest.readyState == 4 ) {  		//完全得到服务器的响应
-		if(xmlHttpRequest.status == 200) {	
-			console.log('保存成功！'); 
-		}else
-			{				
-			console.log('保存失败！'); 
+	getScore();
+
+});
+
+/**
+ * 获取积分
+ */
+var score = 0;
+var listObj;
+function getScore(){
+	var scoreHtml ='';
+	$.ajax({
+		type:'post',
+		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
+		success:function(data){
+			if(data){
+				score = data.result;
+				if(score<=65){
+					scoreHtml = '<font style="font-size:40px" color="red">'+score+'分</font>';
+				}
+				if(score>65 && score<80){
+					scoreHtml = '<font style="font-size:40px" color="#629527">'+score+'分</font>';
+				}
+				if(score>=80){
+					scoreHtml = '<font style="font-size:40px" color="#63B109">'+score+'分</font>';
+				}
+				$("#score").html(scoreHtml);
+				
 			}
-	
+		}
+	});
+} --%>
+
+function doScore(obj){
+	var id = obj.id;
+	var size = id.substring(id.length-1,id.length);
+	if(obj.alt == 0){
+		$('#stars img').each(function(){
+			if($(this).attr("id").substring(id.length-1,id.length) <=size){
+				$(this).attr('src','<%=path%>/public/images/star_on.png');
+				$(this).attr('alt','1');
+			}
+		});
+	}else{
+		$('#stars img').each(function(){
+			 if($(this).attr("id").substring(id.length-1,id.length) >= size){
+				 $(this).attr('src','<%=path%>/public/images/star1.png');
+				$(this).attr('alt','0');
+			 }
+		});
 	}
+	 
+}
+
+function pagejump(companyname,companycode,footprintpid)
+{
+	console.log(companyname);
+	
+	window.location.href="<%=path%>/toComplain.do?companyname="+companyname+"&companycode="+companycode+"&footprintpid"+footprintpid;  		
+}
+
+
+function detailsinfo(oddNumber){
+	
+	
+	console.log(oddNumber);
+	window.location.href="<%=path%>/toMenuView.do?oddNumber="+oddNumber+"&flag=0";
+	
 	
 }
 
-function pagejump()
+function lookcomplaint(pid,companyname)
 {
-	window.location.href="<%=path%>/jsp/complaintinfo.jsp?userinfo="+json+"&flag=1";  		
-}
+	
+	window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname; 
+	
+	}
 
 </script>
-<style type="text/css"> 
-.vote-star{ 
-    display:inline-block;/*内联元素转换成块元素，并不换行*/ 
-    margin-right:6px; 
-    width:85px;/*5个星星的宽度 */ 
-    height:17px;/*1个星星的高度 */ 
-    overflow:hidden; 
-    vertical-align:middle; 
-    background:url(../public/images/star.gif) repeat-x 0 -17px;} 
-.vote-star i{ 
-    display:inline-block;/*内联元素转换成块元素，并不换行 */ 
-    height:17px;/*1个星星的高度*/ 
-    background:url(../public/images/star.gif) repeat-x 0 0;} 
-</style> 
-</head>
-<body>
+
+
+<body style="font-family: SimHei">
 <div id="baseinfo">
 <table>
 <tr>
-<td><img src="../public/images/food.jpg" height="100px" width="100px"/></td>
-<td><label style="font-size: 26px;font-weight:bold">海底捞（大行宫店）</label><br><br>
-<label style="font-size: 26px;font-weight:bold">综合得分：<font color="red">87</font>分</label><br>
-</td>
+<td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
+<td width="30%"><label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label><br><br>
+ <label style="font-size: 26px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label><br>
+ </td>
+ <td>
+ <br><br>
+ <label style="font-weight:bold">联系方式：025-99999999</label>
+<label style="font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
+<br>
+<label style="font-weight:bold">本月扫桌：999次</label>
+ </td>
 </tr>
 </table>
 <hr color="lightgrey"/>
-<label style="color: lightgrey;font-weight:bold">联系方式：025-99999999</label><br><br>
-<label style="color: lightgrey;font-weight:bold">联系地址：中山北路999号</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;营业执照</label>
+<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品经营许可证</label>
+<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+<br>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;健康证    &nbsp; 4个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
+&nbsp;<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.jpg" width="28" height="26">
+<br>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚     0个</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    &nbsp; 0个</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
-<label>海底捞专业从事火锅餐饮服务，海底捞专业从事火锅餐饮服务。海底捞专业从事火锅餐饮服务。海底捞专业从事火锅餐饮服务。海底捞专业从事火锅餐饮服务。</label>
+<label>${CompanyInfo.companyintro}</label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> 11123 </font>元</label><br>
-<label>2016年9月29日  16:00 消费<font color="red">882</font>元           【查看详情】</label>
+<label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> ${totalprice} </font>元</label><br>
+<label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
 </div>
 <br>
-<div class="star" style="text-align: center;"> 
-<span class="vote-star"><i style="width:100%"></i></span> 
-<br/><br/> 
+<div id="stars" style="text-align: center;"> 
+
+<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
+<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
+<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
+<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
+<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="56" height="53">
+
 </div> 
 <div id="buttondiv" style="text-align: center;">
-<input id="wannacomplain" type="button" value="我要投诉" style="width:100px;height:32px" onclick="pagejump()"/>
+ <c:if test="${complainflag== '1'}"> 
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+</c:if>
+ <c:if test="${complainflag== '0'}"> 
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+</c:if>
+<c:if test="${complainflag== '2' }">
+<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${CompanyInfo.companyname}')"/>
+</c:if>
 </div>
 
 </body>

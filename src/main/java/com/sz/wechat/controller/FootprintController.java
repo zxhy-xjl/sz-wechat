@@ -49,8 +49,7 @@ public class FootprintController {
 		HttpSession ss = (HttpSession)request.getSession();
         ss.setAttribute("myopenid",openid);
 		ModelAndView modelAndView = new ModelAndView();
-		List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid(openid);
-		
+		List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid(openid);	
 		String keyWord="警告";
 		String keyWord_0="罚款";
 		String keyWord_1="没收";

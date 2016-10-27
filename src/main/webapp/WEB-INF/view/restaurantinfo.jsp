@@ -13,9 +13,58 @@
 <title>餐厅详情</title>
 <link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
 
+<style type="text/css">
+#score{
+width:150px;
+height:150px;
+margin:0px auto;
+background:url("<%=path%>/public/images/feedbackscore.png") no-repeat center top;
+}
+span{
+text-align:center; 
+
+}
+</style>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
 <script type="text/javascript">
+<%-- /**
+ * 初始化
+ */
+$(function(){
+	
+	getScore();
+
+});
+
+/**
+ * 获取积分
+ */
+var score = 0;
+var listObj;
+function getScore(){
+	var scoreHtml ='';
+	$.ajax({
+		type:'post',
+		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
+		success:function(data){
+			if(data){
+				score = data.result;
+				if(score<=65){
+					scoreHtml = '<font style="font-size:40px" color="red">'+score+'分</font>';
+				}
+				if(score>65 && score<80){
+					scoreHtml = '<font style="font-size:40px" color="#629527">'+score+'分</font>';
+				}
+				if(score>=80){
+					scoreHtml = '<font style="font-size:40px" color="#63B109">'+score+'分</font>';
+				}
+				$("#score").html(scoreHtml);
+				
+			}
+		}
+	});
+} --%>
 
 function doScore(obj){
 	var id = obj.id;
@@ -65,19 +114,34 @@ function lookcomplaint(pid,companyname)
 </script>
 
 
-<body style="font-family: SimHei">
+<body style="font-family: SimHei;background-color: #e9e9e9;">
 <div id="baseinfo">
 <table>
 <tr>
-<td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/> </td>
-<td><label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label><br><br>
-<label style="font-size: 26px;font-weight:bold">综合得分：<font color="red">${CompanyInfo.score}</font>分</label><br>
-</td>
+<td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
+<td width="30%"><label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label><br><br>
+ <label style="font-size: 26px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label><br>
+ </td>
+ <td>
+ <br><br>
+ <label style="font-weight:bold">联系方式：025-99999999</label>
+<label style="font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
+<br>
+<label style="font-weight:bold">本月扫桌：999次</label>
+ </td>
 </tr>
 </table>
 <hr color="lightgrey"/>
-<label style="color: lightgrey;font-weight:bold">联系方式：025-99999999</label><br><br>
-<label style="color: lightgrey;font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;营业执照</label>
+<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品经营许可证</label>
+<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+<br>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;健康证    &nbsp; 4个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
+&nbsp;<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.jpg" width="28" height="26">
+<br>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚     0个</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    &nbsp; 0个</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
 <label>${CompanyInfo.companyintro}</label>
