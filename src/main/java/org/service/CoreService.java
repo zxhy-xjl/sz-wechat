@@ -47,11 +47,11 @@ public class CoreService {
 			textMessage.setFuncFlag(0);
 
 			// 文本消息
-			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
+			/*if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
 				respContent = "您发送的是文本消息！";
-			}
+			}*/
 			// 图片消息
-			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
+			 if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "您发送的是图片消息！";
 			}
 			else if(userContent.contains("餐具"))

@@ -46,10 +46,10 @@ public class UserInfoController {
 	
 	@RequestMapping(value = "/userInfo",method = RequestMethod.GET)
 	public ModelAndView getUsers(HttpServletRequest request,HttpServletResponse response){
-		//HttpSession ss = (HttpSession)request.getSession();
-		//String openid = ss.getAttribute("openid").toString();
-		List<Consumerec>  consumereclist= this.consumerecService.selectConsumerecByOpenid("oehpaw8_fgOEWtPk0S0gLidH60xg");
-		List<Complaint> complaintlist = this.companyInfoService.getComplaintByOpenid("oehpaw8_fgOEWtPk0S0gLidH60xg");
+		HttpSession ss = (HttpSession)request.getSession();
+		String openid = ss.getAttribute("openid").toString();
+		List<Consumerec>  consumereclist= this.consumerecService.selectConsumerecByOpenid(openid);
+		List<Complaint> complaintlist = this.companyInfoService.getComplaintByOpenid(openid);
 		String companyname;
 		for(int i=0; i<consumereclist.size();i++)
 		{
