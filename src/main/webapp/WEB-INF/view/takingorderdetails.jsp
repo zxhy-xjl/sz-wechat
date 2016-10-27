@@ -52,6 +52,7 @@ html,body {
 <form id="detailForm" action="<%=path%>/toMenuOrder.do" method="post">
 <input value="${oddNumber}" name="oddNumber"  type="hidden">
 <input value="${allPrice}" name="allPrice" type="hidden">
+<input value="${companyCode}" name="companyCode" type="hidden">
 </form>
 	<table border="0" align="center" width="100%" style="border-collapse:collapse;" >
 		<c:forEach items="${dictList}" var="item" varStatus="statu">

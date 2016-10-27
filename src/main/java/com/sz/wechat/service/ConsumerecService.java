@@ -39,6 +39,16 @@ public class ConsumerecService {
 	}
 	
 	/**
+	 * 通过openId和注册码确认是否存在记住发票开头的账号
+	 * @param openid
+	 * @param companyCode
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerByDefaultadd(String openid,String companyCode){
+		return this.consumerecMapper.selectConsumerByDefaultadd(openid, companyCode);
+	}
+	
+	/**
 	 * 修改支付状态
 	 * @param consumerec
 	 * @return
@@ -46,7 +56,7 @@ public class ConsumerecService {
 	public int updatePayByOddNumber(Consumerec consumerec){
 		return this.consumerecMapper.updatePayByOddNumber(consumerec);
 	}
-
+	
 	
 	/**
 	 * 通过支付时间号获取订单信息

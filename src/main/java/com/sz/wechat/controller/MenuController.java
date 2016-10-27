@@ -105,6 +105,7 @@ public class MenuController  {
 			}
 			this.consumerecService.batchInsertConsumerec(list);
 			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.addObject("companyCode",companyCode);
 			modelAndView.setViewName("/takingordersucceed");
 		}
 	return modelAndView;	
@@ -156,6 +157,7 @@ public class MenuController  {
 			modelAndView.addObject("allPrice", allPrice);
 			modelAndView.addObject("buyNum", buyNum);
 			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.addObject("companyCode",request.getParameter("companyCode"));
 			modelAndView.addObject("flag",request.getParameter("flag"));
 			modelAndView.setViewName("/takingorderdetails");
 		}
@@ -167,7 +169,7 @@ public class MenuController  {
 	 * @return
 	 */
 	@RequestMapping(value = "/toMenuOrder")
-	public ModelAndView toMenuOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+	public ModelAndView toMenuOrder(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView modelAndView = new ModelAndView();
 		String oddNumber = request.getParameter("oddNumber");
 		String allPrice = request.getParameter("allPrice");
@@ -175,8 +177,6 @@ public class MenuController  {
 		Map<String,Object> _map = null;
 		List<Map<String,Object>> mapList = new ArrayList<>();
 		if(!"".equals(oddNumber)){
-			String defaultAdd= "";
-			String bill = "";
 			List<Consumerec> consumerecList = consumerecService.selectConsumerecByOddNumber(oddNumber);
 			if(null != consumerecList && consumerecList.size() > 0){
 				Menu menu = null;
@@ -186,15 +186,19 @@ public class MenuController  {
 					_map.put("menuname",menu.getMenuname());
 					_map.put("menunum",consumerec.getBuynum());
 					_map.put("price",menu.getPrice());
-					defaultAdd = consumerec.getDefaultadd();
-					bill = consumerec.getBillunit();
 					mapList.add(_map);
 				}
 			}
+			HttpSession httpSession =(HttpSession)request.getSession();
+			String openid = String.valueOf(httpSession.getAttribute("openid"));
+			List<Consumerec> consumerecList_1 = this.consumerecService.selectConsumerByDefaultadd(openid,request.getParameter("companyCode"));
+			String billunit = "";
+			if(null != consumerecList_1 && consumerecList_1.size()>0){
+				billunit = consumerecList_1.get(0).getBillunit();
+			}
 			modelAndView.addObject("menuList", mapList);
 			modelAndView.addObject("allPrice", allPrice);
-			modelAndView.addObject("defaultAdd", defaultAdd);
-			modelAndView.addObject("bill", bill);
+			modelAndView.addObject("billunit",billunit);
 			modelAndView.addObject("oddNumber", oddNumber);
 			modelAndView.setViewName("/takingordersa");
 		}

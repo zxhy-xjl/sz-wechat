@@ -22,9 +22,8 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 </head>
 <script type="text/javascript">
 	$(function(){
-		if(0 !="${defaultAdd}"){
+		if(""!="${billunit}"){
 			$("#invoicetype").attr("checked",true);
-			$("#bill").val("${bill}")
 		}
 	});
 	function doSubmit(){
@@ -86,7 +85,7 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 			<tr style="line-height:50px;">
 				<td width="80%" align="left">
 				<div style="margin-left:7%">
-					开票单位：<input id="invoice" name="invoice" type="text" style="width:60%;" >				
+					开票单位：<input id="invoice" name="invoice" value="${billunit}" type="text" style="width:60%;" >				
 				</div>
 				</td>
 				<td width="48%"></td>

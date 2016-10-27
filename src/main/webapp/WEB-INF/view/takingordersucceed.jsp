@@ -26,7 +26,7 @@ $(function(){
  * 跳转至详细页面
  */
 function toMenuView(){
-	window.location.href="<%=path%>/toMenuView.do?oddNumber=${oddNumber}";
+	window.location.href="<%=path%>/toMenuView.do?oddNumber=${oddNumber}&companyCode=${companyCode}";
 }
 </script>
 <body style="background-color:#E9E9E9;">

@@ -55,5 +55,13 @@ public interface ConsumerecMapper {
 	 */
 	public List<Consumerec> selectConsumerecByOpenid(@Param(value="openid")String openid);
 
+	
+	/**
+	 * 通过openid和企业code 查询是否存在记住发票名称
+	 * @param openid
+	 * @param companycode
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerByDefaultadd(String openid,String companycode);
 
 }
