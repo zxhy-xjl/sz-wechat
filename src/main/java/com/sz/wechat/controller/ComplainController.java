@@ -124,12 +124,13 @@ public class ComplainController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getComplaintByOpenid")
-	public ModelAndView getComplaintByOpenid(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+	public ModelAndView getComplaintByOpenid(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView modelAndView = new ModelAndView();
+		HttpSession httpSession = (HttpSession)request.getSession();
 		String openid = String.valueOf(httpSession.getAttribute("openid"));//得到session中的openID
 		String companyCode = String.valueOf(request.getParameter("companyCode"));
 		String companyName = String.valueOf(request.getParameter("companyName"));
-		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode,"oehpaw8_fgOEWtPk0S0gLidH60xg");
+		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode,openid);
 		modelAndView.addObject("complaintList", complaintList);
 		modelAndView.addObject("companyName", companyName);
 		modelAndView.setViewName("/complaintList");

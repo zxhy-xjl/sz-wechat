@@ -77,7 +77,7 @@
 			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
 			//$("#complaintForm").submit();
 		}else{
-			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&companyname=${CompanyInfo.companyname}&complaintcontent="+$("#textare").val()+"&evaluate="+$("#star").val()+"&flag=2";
+			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&companyname=${CompanyInfo.companyname}&complaintcontent="+$("#textare").val()+"&evaluate="+$("#star").val()+"&companycode=${CompanyInfo.companycode}&flag=2";
 		}
 	}
 	/**

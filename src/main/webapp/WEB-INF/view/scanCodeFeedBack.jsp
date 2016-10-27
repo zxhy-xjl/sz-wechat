@@ -65,7 +65,6 @@ function getScore(){
 		type:'post',
 		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
 		success:function(data){
-			alert(data);
 			if(data){
 				score = data.result;
 				if(score<=65){
