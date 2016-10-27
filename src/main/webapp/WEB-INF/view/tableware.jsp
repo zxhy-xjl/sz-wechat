@@ -149,23 +149,23 @@
 						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">餐饮许可证</a></p>
 						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">行政处罚单</a></p>
 						<p><a href="<%=path%>/getComplaintByOpenid.do?companyCode=${CompanyInfo.companycode}&companyName=${CompanyInfo.companyname}">投诉信息</a></p>
-						<p><font color="red">注</font>：如果您对扫桌的餐具有任何疑问，请反馈给我们，以便我们进行调整。</p> 	
+						<!-- <p><font color="red">注</font>：如果您对扫桌的餐具有任何疑问，请反馈给我们，以便我们进行调整。</p> --> 	
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"  align="center">
-					<div>
+					<!-- <div>
 						<textarea id="textare" name="complaintcontent" rows="6" cols="55" placeholder="你想说点啥" ></textarea>
-					</div>
+					</div> -->
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<%-- <td>
 					<!-- <input type="file" accept="image/*"  capture="camera" style="width:100%" > -->
-					<%-- <img alt="" src="<%=path%>/public/images/photo.png" onclick="javascript:text()" width="43" height="42" style="margin-left:-25%" > --%>
-				</td>
-				<td align="right">
+					<img alt="" src="<%=path%>/public/images/photo.png" onclick="javascript:text()" width="43" height="42" style="margin-left:-25%" >
+				</td> --%>
+				<td colspan="2" align="center">
 					<img alt="" src="<%=path%>/public/images/sub.png" onclick="javascript:tots();" width="85" height="42" style="margin-right:5%">
 				</td>
 			</tr>
