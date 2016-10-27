@@ -29,6 +29,7 @@ font-family: SimHei;
 <input type="hidden" name="companyname" value="${companyname}">
 <input type="hidden" name="companycode" value="${companycode}">
 <input type="hidden" name="evaluate" value="${evaluate}">
+<input type="hidden" name="footprintpid" value="${footprintpid}">
 
 <%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
 <textarea id="complaintcontent" name="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>

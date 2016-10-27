@@ -19,6 +19,9 @@
 	<select id="getFootprintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 			SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
 		</select>
+	<select id="getFootprintByComplaintpid" resultMap="BaseResultMap" parameterType="java.lang.String">
+			SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  COMPLAINTPID = #{complaintpid,jdbcType=VARCHAR}
+		</select>
 		<!-- 插入  guan -->
 	<insert id="doInserFootPrint" parameterType="com.sz.wechat.entity.Footprint">
 	INSERT INTO SZ_FOOTPRINT
@@ -26,4 +29,9 @@
 		values
 		  (#{pid,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{companycode,jdbcType=VARCHAR},#{score,jdbcType=VARCHAR},#{complaintflag,jdbcType=VARCHAR},#{visittime,jdbcType=VARCHAR},#{paystatus,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{complaintpid,jdbcType=VARCHAR})
 	</insert>
+	
+	<!--修改  -->
+		 <update id="updatePrintByComplaintpidandFlag" parameterType="com.sz.wechat.entity.Footprint">
+	 	update SZ_FOOTPRINT set COMPLAINTPID = #{complaintpid,jdbcType=VARCHAR},COMPLAINTFLAG=#{complaintflag,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
+	 </update>
 </mapper>
