@@ -4,6 +4,8 @@
 <%
 	String path = request.getContextPath();
 	HttpSession session = request.getSession(); 
+	String code = (String)session.getAttribute("code");
+	String open_code = (String)session.getAttribute("open_code");
 %>
 <html>
 <head>
@@ -18,10 +20,6 @@
 <script type="text/javascript">
 	var xmlHttpRequest = null;
 	$(function(){
-		<%
-		String code = (String)session.getAttribute("code");
-		String open_code = (String)session.getAttribute("open_code");
-		%>
 		setOpenid();
 	});
 	/**
