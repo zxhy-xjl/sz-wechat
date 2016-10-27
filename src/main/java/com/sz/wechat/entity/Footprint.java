@@ -22,6 +22,17 @@ public class Footprint {
 	private String paystatus;
     //企业名称
 	private String companyname;
+	//投诉pid
+	private String complaintpid;
+	
+	public String getComplaintpid() {
+		return complaintpid;
+	}
+
+	public void setComplaintpid(String complaintpid) {
+		this.complaintpid = complaintpid;
+	}
+
 	public String getPid() {
 		return pid;
 	}
