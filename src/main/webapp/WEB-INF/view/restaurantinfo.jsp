@@ -19,6 +19,7 @@ width:150px;
 height:150px;
 margin:0px auto;
 background:url("<%=path%>/public/images/feedbackscore.png") no-repeat center top;
+background-size:95px;
 }
 span{
 text-align:center; 
@@ -28,7 +29,7 @@ text-align:center;
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
 <script type="text/javascript">
-<%-- /**
+ /**
  * 初始化
  */
 $(function(){
@@ -51,20 +52,20 @@ function getScore(){
 			if(data){
 				score = data.result;
 				if(score<=65){
-					scoreHtml = '<font style="font-size:40px" color="red">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="red">'+score+'分</font>';
 				}
 				if(score>65 && score<80){
-					scoreHtml = '<font style="font-size:40px" color="#629527">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="#629527">'+score+'分</font>';
 				}
 				if(score>=80){
-					scoreHtml = '<font style="font-size:40px" color="#63B109">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="#63B109">'+score+'分</font>';
 				}
 				$("#score").html(scoreHtml);
 				
 			}
 		}
 	});
-} --%>
+} 
 
 function doScore(obj){
 	var id = obj.id;
@@ -115,30 +116,32 @@ function lookcomplaint(pid,companyname)
 
 
 <body style="font-family: SimHei;background-color: #e9e9e9;">
-<label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label>
+<label style="font-size: 36px;font-weight:bold">${CompanyInfo.companyname}</label>
 <div id="baseinfo">
 <table>
 <tr>
 <td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
 <td width="30%">
- <label style="font-size: 26px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label><br>
+<div id="score" style="text-align:center;line-height:230px;position:relative;top:50px;">
+	</div>
+<%--  <label style="font-size: 36px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label> --%><br>
  </td>
- <td>
+ <td width="80%">
 
  <label style="font-weight:bold">本月扫桌：999次</label>
 
 <br>
 
 
- <label style="font-weight:bold">联系方式：025-99999999</label>
+ <label style="font-weight:bold">联系方式：025-999999</label>
  <br>
 <div id="stars" style="text-align: center;"> 
 
-<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
-<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
-<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
-<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
-<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="28" height="26">
+<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
 
 </div> 
  </td>
