@@ -4,6 +4,7 @@
 <%
 	String path = request.getContextPath();
 	HttpSession session = request.getSession(); 
+	String code = (String)session.getAttribute("open_code");
 %>
 <html>
 <head>
@@ -32,9 +33,6 @@ text-align:center;
 $(function(){
 	getPercentage();
 	getScore();
-	<%
-	String code = (String)session.getAttribute("open_code"); 
-	%>
 	setOpenid();
 	setTimeout('doInsertFootPrint()',3000)
 });
@@ -71,13 +69,13 @@ function getScore(){
 		success:function(data){
 			if(data){
 				score = data.result;
-				if(score<65){
+				if(score<=65){
 					scoreHtml = '<font style="font-size:78px" color="red">'+score+'分</font>';
 				}
 				if(score>65 && score<80){
 					scoreHtml = '<font style="font-size:78px" color="#629527">'+score+'分</font>';
 				}
-				if(score>80){
+				if(score>=80){
 					scoreHtml = '<font style="font-size:78px" color="#63B109">'+score+'分</font>';
 				}
 				$("#score").html(scoreHtml);
