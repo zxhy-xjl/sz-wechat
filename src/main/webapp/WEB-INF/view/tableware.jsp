@@ -21,6 +21,7 @@
 	var xmlHttpRequest = null;
 	$(function(){
 		setOpenid();
+		setTimeOut('onloadScore()',1000);
 	});
 	/**
 	 * 初始化加载
@@ -42,6 +43,7 @@
 		var id = obj.id;
 		var size = id.substring(id.length-1,id.length);
 		$("#star").val(size);
+		doInsertEvaluate(size);
 		if(obj.alt == 0){
 			$("img").each(function(){
 				if($(this).attr("id").substring(id.length-1,id.length) <=size){
@@ -57,10 +59,17 @@
 				 }
 			});
 		}
-		 
 	}
 	function doSubmit(){
 		window.location.href="<%=path%>/toTakingOrder.do";
+	}
+	
+	function doInsertEvaluate(size){
+		$.ajax({
+			type:'post',
+			url:'<%=path%>/doInsertEvaluate.do?companyCode=${CompanyInfo.companycode}&evaluate='+size,
+			success:function(){}
+		});
 	}
 	
 	function tots(){

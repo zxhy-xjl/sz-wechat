@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.EvaluateMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.Evaluate">
+		<id column="PID" property="pid" jdbcType="VARCHAR"/>
+		<result column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
+		<result column="EVALUATE" property="evaluate" jdbcType="VARCHAR"/>
+		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		PID, COMPANYCODE, EVALUATE, OPENID
+	</sql>
+	<!-- 查询 -->
+	<select id="getEvaluateByOpenIdAndCompanyCode" resultMap="BaseResultMap" >
+		SELECT <include refid="Base_Column_List"/> FROM SZ_EVALUATE WHERE  OPENID = #{0} AND COMPANYCODE = #{1} ORDER BY CREATETIME DESC 
+	</select>
+	<!-- 插入-->
+	<insert id="doInsertEvalate" parameterType="com.sz.wechat.entity.Evaluate">
+	 INSERT INTO SZ_EVALUATE
+	   (PID,COMPANYCODE,EVALUATE,OPENID)
+	 VALUES
+	   (#{pid},#{companycode},#{evaluate},#{openid})
+	</insert>
+</mapper>

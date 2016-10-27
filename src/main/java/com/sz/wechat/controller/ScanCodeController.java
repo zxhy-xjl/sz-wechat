@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Evaluate;
 import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
+import com.sz.wechat.service.EvaluateService;
 import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
@@ -53,6 +55,12 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private FootprintService footPrintService;
+	
+	/**
+	 * 积分数据逻辑层
+	 */
+	@Autowired
+	private EvaluateService evaluateService;
 	
 	/**
 	 * 扫一扫
@@ -454,16 +462,16 @@ public class ScanCodeController {
 				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
 				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
-				List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyId(company);
-				if(null != complaintList && complaintList.size()>0){
+				HttpSession httpSession =(HttpSession)request.getSession();
+				String openId = String.valueOf(httpSession.getAttribute("openid"));
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, company);
+				if(null != evaluateList && evaluateList.size()>0){
 					int scort = 0;
 					int length = 0;
-					for (Complaint complaint : complaintList) {
-						if(!"".equals(complaint.getEvaluate())){
-							if(null != complaint.getEvaluate()){
-								length = length +1;
-								scort = scort + Integer.parseInt(complaint.getEvaluate());
-							}
+					for (Evaluate evaluate : evaluateList) {
+						if(!"".equals(evaluate.getEvaluate())){
+							length = length +1;
+							scort = scort + Integer.parseInt(evaluate.getEvaluate());
 						}
 					}
 					scort = scort / length;
