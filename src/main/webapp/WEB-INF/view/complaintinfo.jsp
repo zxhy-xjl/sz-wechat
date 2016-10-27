@@ -96,7 +96,7 @@ window.onload = function()//用window的onload事件，窗体加载完毕的时�
 <label >&nbsp;&nbsp;<font style="" size="3">投诉时间：${complaint.complaintime }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
 <c:if test="${complaint.complainphoto!=null}">
-<img id="complainpic" onclick="" alt="0" src="" width="50%" height="50%" >
+<img id="complainpic" onclick="" alt="0" src="" width="100%" height="10%" >
 </c:if>
 <c:if test="${complaint.complainphoto==null}">
 <label style="font-weight: bolder;color: red;">&nbsp;&nbsp;没有图片，投诉时附加图片可以增加审核通过率</label>

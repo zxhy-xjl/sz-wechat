@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -54,6 +55,12 @@ function detailsinfo(oddNumber){
 	
 }
 
+function lookcomplaint(pid,companyname)
+{
+	
+	window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname; 
+	
+	}
 
 </script>
 
@@ -89,9 +96,12 @@ function detailsinfo(oddNumber){
 
 </div> 
 <div id="buttondiv" style="text-align: center;">
+ <c:if test="${complainflag== '1'} || ${complainflag== '0'}"> 
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}')"/>
-<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick=""/>
-
+</c:if>
+<c:if test="${complainflag== '2' }">
+<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${CompanyInfo.companyname}')"/>
+</c:if>
 </div>
 
 </body>

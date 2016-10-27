@@ -32,11 +32,11 @@ var openid ="<%=session.getAttribute("myopenid")%>";
 
 
 
-function pagejump(company,visittime)
+function pagejump(company,visittime,complaintpid,complainflag)
 {
 	console.log(company);
 	console.log(visittime);
-	window.location.href="<%=path%>/toRestaurant.do?companycode="+company+"&paytime="+visittime;
+	window.location.href="<%=path%>/toRestaurant.do?companycode="+company+"&paytime="+visittime+"&complaintpid="+complaintpid+"&complainflag="+complainflag;
 }
 </script>
 <style type="text/css">
@@ -51,9 +51,9 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 				<tr style="background-color: #E9E9E9;height:30px;">
 					<td><label style="font-size: 15px;">&nbsp;&nbsp;${fn:substring(item.visittime,0,4)}年${fn:substring(item.visittime,4,6)}月${fn:substring(item.visittime,6,8)}日 ${fn:substring(item.visittime,8,10)}:${fn:substring(item.visittime,10,12)}  上海</label></td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}')">
+				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}','${item.complaintpid}','${item.complaintflag}')">
 					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyname}</font></label><br>
-						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '1'}">&nbsp;&nbsp;您有一个投诉正在处理中</c:if></label>
+						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '2'}">&nbsp;&nbsp;您有一个投诉正在处理中</c:if></label>
 					</td>
 					<td><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>

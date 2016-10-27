@@ -56,6 +56,10 @@ public class RestaurantInfoController {
 		String openid = ss.getAttribute("myopenid").toString();
 		String companycode = request.getParameter("companycode");
 		String paytime = request.getParameter("paytime");
+		String complaintpid = request.getParameter("complaintpid");
+		String complainflag = request.getParameter("complainflag");
+		//Complaint complaintforjsp = this.companyInfoService.getComplaintInfoByPid(complaintpid);
+		
 		List<Consumerec> consumelist2 = this.consumerecService.selectConsumerecByOpenidandCompanycode(openid, companycode);
 		//计算历次总价
 		float totalprice=0;
@@ -189,6 +193,9 @@ public class RestaurantInfoController {
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("totalprice", totalprice);
 		modelAndView.addObject("paytime", paytime);
+		modelAndView.addObject("complaintpid", complaintpid);
+		modelAndView.addObject("complainflag", complainflag);
+		//modelAndView.addObject("complaintforjsp", complaintforjsp);
 		modelAndView.setViewName("/restaurantinfo");
 		
 		return modelAndView;
