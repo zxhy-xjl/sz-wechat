@@ -25,9 +25,9 @@
 		<!-- 插入  guan -->
 	<insert id="doInserFootPrint" parameterType="com.sz.wechat.entity.Footprint">
 	INSERT INTO SZ_FOOTPRINT
-		  (PID, OPENID, COMPANYCODE, SCORE, COMPLAINTFLAG, VISITTIME, PAYSTATUS, COMPANYNAME,COMPLAINTPID)
+		  (PID, OPENID, COMPANYCODE, SCORE, COMPLAINTFLAG, PAYSTATUS, COMPANYNAME,COMPLAINTPID)
 		values
-		  (#{pid,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{companycode,jdbcType=VARCHAR},#{score,jdbcType=VARCHAR},#{complaintflag,jdbcType=VARCHAR},#{visittime,jdbcType=VARCHAR},#{paystatus,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{complaintpid,jdbcType=VARCHAR})
+		  (#{pid,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{companycode,jdbcType=VARCHAR},#{score,jdbcType=VARCHAR},#{complaintflag,jdbcType=VARCHAR},#{paystatus,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{complaintpid,jdbcType=VARCHAR})
 	</insert>
 	
 	<!--修改  -->
