@@ -43,7 +43,7 @@
 	 	SELECT DISTINCT ODDNUMBER,COMPANYCODE,PAYTIME,PAYTYPE FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR}
 	 </select>
 	 <select id="selectConsumerByDefaultadd" resultMap="BaseResultMap" parameterType="java.lang.String">
-	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC WHERE DEFAULTADD=1 AND OPENID = #{0} AND COMPANYCODE = #{1}
+	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC WHERE DEFAULTADD=1 AND OPENID = #{0} AND COMPANYCODE = #{1} ORDER BY PAYTIME DESC 
 	 </select>
 	 <!-- 修改 -->
 	 <update id="updatePayByOddNumber" parameterType="com.sz.wechat.entity.Consumerec">
