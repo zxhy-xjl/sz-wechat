@@ -38,11 +38,11 @@ function doScore(obj){
 	 
 }
 
-function pagejump(companyname,companycode)
+function pagejump(companyname,companycode,footprintpid)
 {
 	console.log(companyname);
 	
-	window.location.href="<%=path%>/toComplain.do?companyname="+companyname+"&companycode="+companycode;  		
+	window.location.href="<%=path%>/toComplain.do?companyname="+companyname+"&companycode="+companycode+"&footprintpid"+footprintpid;  		
 }
 
 
@@ -96,8 +96,11 @@ function lookcomplaint(pid,companyname)
 
 </div> 
 <div id="buttondiv" style="text-align: center;">
- <c:if test="${complainflag== '1'} || ${complainflag== '0'}"> 
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}')"/>
+ <c:if test="${complainflag== '1'}"> 
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+</c:if>
+ <c:if test="${complainflag== '0'}"> 
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
 </c:if>
 <c:if test="${complainflag== '2' }">
 <input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${CompanyInfo.companyname}')"/>

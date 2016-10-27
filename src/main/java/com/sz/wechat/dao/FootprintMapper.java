@@ -22,13 +22,24 @@ public interface FootprintMapper {
      */
 	public List<Footprint> getFootprintByOpenid(String openid);
 	
-	
+    /**
+     * @param openid
+     * 根据complaintpid查询足迹信息
+     */
+	public List<Footprint> getFootprintByComplaintpid(String complaintpid);
 	/**
 	 * 执行插入操作
 	 * @param footPrint
 	 * @return
 	 */
 	public int doInserFootPrint(Footprint footPrint);
+	
+	/**
+	 * 根据pid修改complainpid和flag
+	 * @param footPrint
+	 * @return
+	 */
+	public int updatePrintByComplaintpidandFlag(Footprint footPrint);
 	
 	
 }

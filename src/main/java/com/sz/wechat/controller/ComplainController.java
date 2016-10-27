@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
+import com.sz.wechat.service.FootprintService;
 
 /**
  * 投诉控制层
@@ -37,7 +39,8 @@ import com.sz.wechat.service.ComplainService;
 public class ComplainController {
     @Autowired
 	private CompanyInfoService companyInfoService;
-    
+    @Autowired
+    private FootprintService footprintService;
     /**
      * 投诉数据逻辑层
      */
@@ -49,11 +52,13 @@ public class ComplainController {
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    String evaluate = request.getParameter("evaluate");
+	    String footprintpid = request.getParameter("footprintpid");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("companyname", companyname);
 		modelAndView.addObject("companycode", companycode);
 		modelAndView.addObject("complaintcontent", complaintcontent);
 		modelAndView.addObject("evaluate",evaluate);
+		modelAndView.addObject("footprintpid",footprintpid);
 		modelAndView.setViewName("/docomplaint");
 		return modelAndView;
 		
@@ -70,7 +75,8 @@ public class ComplainController {
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
 	    String evaluate = request.getParameter("evaluate");
-	    byte[] complainphoto =   camera.getBytes();
+	    String footprintpid = request.getParameter("footprintpid");
+	    	    byte[] complainphoto = camera.getBytes();
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
 	    HttpSession httpSession = (HttpSession)request.getSession();
         String openid = String.valueOf(httpSession.getAttribute("myopenid"));
@@ -91,6 +97,17 @@ public class ComplainController {
         complaint.setEvaluate(evaluate);
         complaint.setComplainphoto(complainphoto);
         this.companyInfoService.insertComplaint(complaint);
+        
+        Footprint footprint = new Footprint();
+        footprint.setPid(footprintpid);
+        footprint.setComplaintpid(complaint.getPid());
+        footprint.setComplaintflag("2");
+       List<Footprint> templist =  this.footprintService.getFootprintByComplaintpid(complaint.getPid());
+       if(templist.size()==0)
+       {
+    	   this.footprintService.updatePrintByComplaintpidandFlag(footprint);
+       }
+        
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pid", complaint.getPid());
 		modelAndView.addObject("companyname", companyname);
