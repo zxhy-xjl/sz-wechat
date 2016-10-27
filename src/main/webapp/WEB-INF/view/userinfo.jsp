@@ -208,12 +208,12 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 					</td>
 					<td></td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.oddnumber}')">
+				<tr style="background-color: white;height:50px;" >
 					<td>
-						<label style="">&nbsp;&nbsp;合计：8道菜，12元</label>
+						<label style="">&nbsp;&nbsp;合计：${item.buynum}道菜，${item.billunit}元</label>
 					</td>
 					
-					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 15px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${oddnumber}')"></c:if><br />
+					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 15px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${item.oddnumber}')"></c:if><br />
 					</td>
 				</tr>
 			<%-- 	<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}')">
@@ -238,7 +238,7 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 						<label style="color: #d4a351;"><c:if test="${item.disposestatus == '1'}">&nbsp;&nbsp;您有一个投诉正在处理中</c:if></label>
 					</td>
 					<td><c:if test="${item.disposestatus == '1'|| item.disposestatus == '2'}"><label style="color: red; font-size: 20px;">未处理</label></c:if>
-					<c:if test="${item.disposestatus == '4'|| item.disposestatus == '3'}"><label style="color: red; font-size: 20px;">已处理</label></c:if>
+					<c:if test="${item.disposestatus == '4'|| item.disposestatus == '3'}"><label style="color: green; font-size: 20px;">已处理</label></c:if>
 					
 					<br />
 					</td>
