@@ -213,7 +213,9 @@ window.onload=function()//用window的onload事件，窗体加载完毕的时候
 						<label style="">&nbsp;&nbsp;合计：${item.buynum}道菜，${item.billunit}元</label>
 					</td>
 					
-					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 15px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${item.oddnumber}')"></c:if><br />
+					<td><c:if test="${item.paytype == null}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 20px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${item.oddnumber}')"></c:if>
+					<c:if test="${item.paytype != null}"><label  style="height:25px;width:60px;color: #a59171;font-family: SimHei;font-size: 20px" >已付款</label></c:if>
+					<br />
 					</td>
 				</tr>
 			<%-- 	<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}')">
