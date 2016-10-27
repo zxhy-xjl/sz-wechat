@@ -53,7 +53,7 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 				</tr>
 				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}','${item.complaintpid}','${item.complaintflag}','${item.pid}')">
 					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyname}</font></label><br>
-						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '2'}">&nbsp;&nbsp;您有一个投诉正在处理中</c:if></label>
+						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '2'}">&nbsp;&nbsp;该商户有投诉</c:if></label>
 					</td>
 					<td><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>

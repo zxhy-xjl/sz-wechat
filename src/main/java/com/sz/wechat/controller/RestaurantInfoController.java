@@ -21,6 +21,7 @@ import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Consumerec;
 import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Menu;
+import com.sz.wechat.entity.OrderHelper;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ConsumerecService;
@@ -72,16 +73,42 @@ public class RestaurantInfoController {
 				
 		}
 		//计算单次总价
-		float price=0;
-		List<Consumerec> consumelist = this.consumerecService.selectConsumerecByPaytime(paytime, companycode);
+		
+		//List<Consumerec> consumelist = this.consumerecService.selectConsumerecByPaytime(paytime, companycode);
+		//List<Consumerec> consumelist = this.consumerecService.selectConsumerecByOpenidandCompanycode(openid, companycode);
+		List<Consumerec> consumelist = this.consumerecService.selectOddnumberByOpenidandCompanycode(openid, companycode);
+		List<OrderHelper> helperlist = new ArrayList<OrderHelper>();
+		
 		for(int i=0;i<consumelist.size();i++)
-		{
+		{   OrderHelper orderhelper = new OrderHelper();
+			float price=0;
+			orderhelper.setOddnumber(consumelist.get(i).getOddnumber());
+			orderhelper.setPaytime(this.consumerecService.selectConsumerecByOddNumber(consumelist.get(i).getOddnumber()).get(0).getPaytime());
+			orderhelper.setComplainttype("0");			
+		List<Consumerec> comsumetemp = 	this.consumerecService.selectConsumerecByOddNumber(consumelist.get(i).getOddnumber());
+		           for(int k=0;k<comsumetemp.size();k++)
+		           {
+		            Menu menu = this.menuService.getMenuByMenuId(comsumetemp.get(k).getMenuid());		   			
+		   			if(menu.getPrice()!=null)
+		   			price+=Float.parseFloat(menu.getPrice())*Float.parseFloat(comsumetemp.get(k).getBuynum());
+		        	 		        	   
+		           }
+		           orderhelper.setPrice(price);   
+		           helperlist.add(orderhelper);
+		}
+		
+		
+/*		
+		for(int i=0;i<consumelist.size();i++)
+		{   
+			consumelist.get(i).getOddnumber();
+		
 			Menu menu = this.menuService.getMenuByMenuId(consumelist.get(i).getMenuid());
 			
 			if(menu.getPrice()!=null)
 			price+=Float.parseFloat(menu.getPrice())*Float.parseFloat(consumelist.get(i).getBuynum());
 			
-		}
+		}*/
 		
 		//计算餐厅评分
 		CompanyInfo companyInfo2 = companyInfoService.getCompanyByCode(companycode);
@@ -201,13 +228,15 @@ public class RestaurantInfoController {
 		}
 		//CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companycode);
 		modelAndView.addObject("CompanyInfo", companyInfo2);
-		modelAndView.addObject("oddnumber", consumelist.get(0).getOddnumber());
-		modelAndView.addObject("price", price);
+		//modelAndView.addObject("oddnumber", consumelist.get(0).getOddnumber());
+		//modelAndView.addObject("price", price);
 		modelAndView.addObject("totalprice", totalprice);
 		modelAndView.addObject("paytime", paytime);
 		modelAndView.addObject("complaintpid", complaintpid);
 		modelAndView.addObject("complainflag", complainflag);
 		modelAndView.addObject("pid", pid);
+		modelAndView.addObject("helperlist", helperlist);
+		//modelAndView.addObject("consumelist", consumelist);
 		//modelAndView.addObject("complaintforjsp", complaintforjsp);
 		modelAndView.setViewName("/restaurantinfo");
 		

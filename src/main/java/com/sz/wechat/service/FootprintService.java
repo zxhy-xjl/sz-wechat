@@ -37,6 +37,16 @@ public class FootprintService {
 		return this.footprintMapper.getFootprintByOpenid(complaintpid);
 		
 	}
+	
+	/**
+	 * @param openid
+	 * 根据complaintpid查询足迹信息
+	 */
+	public List<Footprint> getDisFootprintByOpenid(String openid)
+	{
+		
+		return this.footprintMapper.getDisFootprintByOpenid(openid);
+	}
 	/**
 	 * 执行插入操作
 	 * @param footPrint

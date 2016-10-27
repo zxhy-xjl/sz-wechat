@@ -90,5 +90,15 @@ public class ConsumerecService {
 		return this.consumerecMapper.selectConsumerecByOpenid(openid);
 		
 	}
+	/**
+	 * 通过openid和companycode分组查询订单
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectOddnumberByOpenidandCompanycode(@Param(value="openid")String openid,@Param(value="companycode") String companycode){
+		
+		return this.consumerecMapper.selectOddnumberByOpenidandCompanycode(openid, companycode);
+		
+	}
 
 }

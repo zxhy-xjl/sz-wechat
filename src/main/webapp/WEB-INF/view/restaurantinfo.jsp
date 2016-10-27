@@ -115,15 +115,16 @@ function lookcomplaint(pid,companyname)
 
 
 <body style="font-family: SimHei;background-color: #e9e9e9;">
+<label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label>
 <div id="baseinfo">
 <table>
 <tr>
 <td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
-<td width="30%"><label style="font-size: 26px;font-weight:bold">${CompanyInfo.companyname}</label><br><br>
+<td width="30%">
  <label style="font-size: 26px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label><br>
  </td>
  <td>
- <br><br>
+
  <label style="font-weight:bold">本月扫桌：999次</label>
 
 <br>
@@ -160,12 +161,21 @@ function lookcomplaint(pid,companyname)
 <label>${CompanyInfo.companyintro}</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> ${totalprice} </font>元</label><br>
-<label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
+<%-- <label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
+ --%>
+  <c:forEach items="${helperlist}" var="item" varStatus="status">
+ 
+ <label>${fn:substring(item.paytime,0,4)}年${fn:substring(item.paytime,4,6)}月${fn:substring(item.paytime,6,8)}日  ${fn:substring(item.paytime,8,10)}:${fn:substring(item.paytime,10,12)} 消费<font color="red">${item.price}</font>元    </label><label onclick="detailsinfo('${item.oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label><br>
+ <c:if test="${item.complainttype == '2'}"><label><font color="red" style="font-weight: bolder;" >&nbsp;&nbsp;<u>投诉受理中</u></font></label><br></c:if>
+  <c:if test="${item.complainttype == '0'}"><label><font color="red" style="font-weight: bolder;" >&nbsp;&nbsp;<u>投诉处理中</u></font></label><br></c:if>
+ </c:forEach> 
 </div>
 <br>
 
 <div id="buttondiv" style="text-align: center;">
- <c:if test="${complainflag== '1'}"> 
+<br>
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+<%--  <c:if test="${complainflag== '1'}"> 
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
 </c:if>
  <c:if test="${complainflag== '0'}"> 
@@ -173,7 +183,7 @@ function lookcomplaint(pid,companyname)
 </c:if>
 <c:if test="${complainflag== '2' }">
 <input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${CompanyInfo.companyname}')"/>
-</c:if>
+</c:if> --%>
 </div>
 
 </body>

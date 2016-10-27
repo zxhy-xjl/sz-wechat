@@ -49,7 +49,20 @@ public class FootprintController {
 		HttpSession ss = (HttpSession)request.getSession();
         ss.setAttribute("myopenid",openid);
 		ModelAndView modelAndView = new ModelAndView();
-		List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid(openid);	
+		//List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid("oehpaw9s_mgU_rtNMPHnyLeDZEdM");	
+		List<Footprint> footprintlist = this.footprintService.getDisFootprintByOpenid(openid);	
+		
+		for(int i=0;i<footprintlist.size();i++)
+		{
+		 List<Complaint> templist =	companyInfoService.getComplaintByCompanyId(footprintlist.get(i).getCompanycode());
+		
+		 if(templist.size()>0)
+		 { footprintlist.get(i).setComplaintflag("2");
+		
+		 }
+		}
+		
+		
 		String keyWord="警告";
 		String keyWord_0="罚款";
 		String keyWord_1="没收";
