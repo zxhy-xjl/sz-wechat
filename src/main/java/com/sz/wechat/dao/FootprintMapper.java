@@ -23,5 +23,12 @@ public interface FootprintMapper {
 	public List<Footprint> getFootprintByOpenid(String openid);
 	
 	
+	/**
+	 * 执行插入操作
+	 * @param footPrint
+	 * @return
+	 */
+	public int doInserFootPrint(Footprint footPrint);
+	
 	
 }

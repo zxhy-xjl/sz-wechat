@@ -175,4 +175,11 @@ public class FootprintController {
 	}
 	
 	
+	
+	public void doInsertFootPrint(HttpServletRequest request, HttpServletResponse response){
+		
+		
+	}
+	
+	
 }

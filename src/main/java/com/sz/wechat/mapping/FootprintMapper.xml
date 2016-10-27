@@ -15,7 +15,14 @@
 	<sql id="Base_Column_List">
 		PID, OPENID, COMPANYCODE, SCORE, COMPLAINTFLAG, VISITTIME, PAYSTATUS,COMPANYNAME
 	</sql>
-<select id="getFootprintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
-		SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
-	</select>
+	<select id="getFootprintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
+			SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
+		</select>
+		<!-- 插入  guan -->
+	<insert id="doInserFootPrint" parameterType="com.sz.wechat.entity.Footprint">
+	INSERT INTO SZ_FOOTPRINT
+		  (PID, OPENID, COMPANYCODE, SCORE, COMPLAINTFLAG, VISITTIME, PAYSTATUS, COMPANYNAME)
+		values
+		  (#{pid,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{companycode,jdbcType=VARCHAR},#{score,jdbcType=VARCHAR},#{complaintflag,jdbcType=VARCHAR},#{visittime,jdbcType=VARCHAR},#{paystatus,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR})
+	</insert>
 </mapper>

@@ -27,4 +27,16 @@ public class FootprintService {
 		
 	}
 	
+	
+	/**
+	 * 执行插入操作
+	 * @param footPrint
+	 * @author guan
+	 * @return
+	 */
+	public int doInserFootPrint(Footprint footPrint){
+		return this.footprintMapper.doInserFootPrint(footPrint);
+				
+	}
+	
 }

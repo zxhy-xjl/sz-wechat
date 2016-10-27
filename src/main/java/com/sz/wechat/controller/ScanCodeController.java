@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,11 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
+import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
 
@@ -42,6 +46,13 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private ComplainService complainService;
+	
+	
+	/**
+	 * 足迹数据逻辑层
+	 */
+	@Autowired
+	private FootprintService footPrintService;
 	
 	/**
 	 * 扫一扫
@@ -501,6 +512,30 @@ public class ScanCodeController {
 		String openid = String.valueOf(request.getParameter("openid"));
 		HttpSession httpSession =(HttpSession)request.getSession();
 		httpSession.setAttribute("openid", openid);
+	}
+	
+	/**
+	 * 执行足迹新增
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/doInserFootPrint")
+	public void doInserFootPrint(HttpServletRequest request, HttpServletResponse response){
+		HttpSession httpSession =(HttpSession)request.getSession();
+		String openid = String.valueOf(httpSession.getAttribute("openid"));
+		String companyCode = request.getParameter("companCode");
+		String companyName = request.getParameter("companyName");
+		String score = request.getParameter("score");
+		String paystatus = request.getParameter("paystatus");
+		Footprint footPring = new Footprint();
+		footPring.setPid(UUID.randomUUID().toString());
+		footPring.setCompanycode(companyCode);
+		footPring.setCompanyname(companyName);
+		footPring.setScore(score);
+		footPring.setComplaintflag(this.complainService.getComplaintScoreByCompanyId(companyCode).size()>0?"1":"0");
+		footPring.setOpenid(openid);
+		footPring.setPaystatus(paystatus);
+		this.footPrintService.doInserFootPrint(footPring);
 	}
 	
 }

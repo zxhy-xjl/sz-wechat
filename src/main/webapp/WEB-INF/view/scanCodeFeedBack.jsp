@@ -133,6 +133,20 @@ function setOpenid(){
 		xmlHttpRequest.send();
 	} 
 }
+
+/**
+ * 进行记录
+ */
+function doInsertFootPrint(){
+	$.ajax({
+		type:'post',
+		url:'<%=path%>/doInserFootPrint.do',
+		data:{companCode:"${CompanyInfo.companycode}",companyName:"${CompanyInfo.companyname}",score:score,paystatus:"0"},
+		success:function(){
+			
+		}
+	});
+}
 </script>
 <body style="background-color:#E9E9E9">
 <form id="scoreForm" action="<%=path%>/toGradeInfo.do" method="post" >
