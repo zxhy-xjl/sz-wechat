@@ -1,5 +1,8 @@
 package com.sz.wechat.utils;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,8 +10,14 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sz.wechat.entity.Menu;
+
+import net.coobird.thumbnailator.Thumbnails;
 import net.sf.json.JSONObject;
 
 /**
@@ -168,4 +177,40 @@ public class ScanCodeUtils {
 	public static String getFileExt(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
+
+	/**
+	 * 打印输出略缩图
+	 * @param menu
+	 * @param request
+	 */
+	@SuppressWarnings("deprecation")
+	public static void transferToFile(Menu menu,HttpServletRequest request) {
+		// 获得文件路径
+		String path = menu.getPath();
+		String downLoadPath = request.getRealPath("/")+"/"+path;
+		File file = new File(downLoadPath);
+		if(!file.exists()){
+			file.getParentFile().mkdirs();
+			byte[] blobByte = menu.getMenuphoto();
+			BufferedOutputStream bos = null;
+			FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(file);
+				bos = new BufferedOutputStream(fos);
+				bos.write(blobByte);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				IOUtils.closeQuietly(bos);
+				IOUtils.closeQuietly(fos);
+			}
+		}
+		File newFile = new File(request.getRealPath("/")+"/"+path);
+		try {
+			Thumbnails.of(file).scale(0.6f).toFile(newFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} 
 }

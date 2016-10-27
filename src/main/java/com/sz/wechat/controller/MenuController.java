@@ -1,11 +1,8 @@
 package com.sz.wechat.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +13,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -32,7 +27,6 @@ import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
 import com.sz.wechat.utils.ScanCodeUtils;
-
 import net.coobird.thumbnailator.Thumbnails;
 
 /***
@@ -71,7 +65,7 @@ public class MenuController  {
 		List<Menu> menuList = this.menuService.getMenu();
 		if(null!= menuList && menuList.size()>0){
 			for (Menu menu : menuList) {
-				transferToFile(menu);
+				ScanCodeUtils.transferToFile(menu,request);
 			}
 		}
 		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
@@ -156,7 +150,7 @@ public class MenuController  {
 					menu = new Menu();
 					menu.setMenuphoto((byte[])map.get("menuphoto"));
 					menu.setPath(String.valueOf(map.get("path")));
-					transferToFile(menu);
+					ScanCodeUtils.transferToFile(menu,request);
 				}
 			}
 			
@@ -287,37 +281,4 @@ public class MenuController  {
 		menu.setPath(uploadPath);
 		return this.menuService.doInsertBlob(menu);
 	}
-	
-	public void transferToFile(Menu menu) {
-		String url=this.getClass().getResource("/").getPath();
-		url=url.substring(1, url.indexOf("/WEB-INF"));
-		// 获得文件路径
-		String path = menu.getPath();
-		String downLoadPath = url+"/"+path;
-		File file = new File(downLoadPath);
-		if(!file.exists()){
-			file.getParentFile().mkdirs();
-			byte[] blobByte = menu.getMenuphoto();
-			BufferedOutputStream bos = null;
-			FileOutputStream fos = null;
-			try {
-				fos = new FileOutputStream(file);
-				bos = new BufferedOutputStream(fos);
-				bos.write(blobByte);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				IOUtils.closeQuietly(bos);
-				IOUtils.closeQuietly(fos);
-			}
-		}
-		File newFile = new File(url+"/"+path);
-		try {
-			Thumbnails.of(file).scale(0.6f).toFile(newFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	} 
-	
 }
