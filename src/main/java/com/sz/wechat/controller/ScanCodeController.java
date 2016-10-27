@@ -148,6 +148,7 @@ public class ScanCodeController {
 			List<Complaint> complaintList = null;//存储企业投诉信息
 			List<Complaint> complaintScoreList = null;//存储企业投诉评分信息
 			CompanyInfo _companyInfo = null;
+			HttpSession httpSession =(HttpSession)request.getSession();
 			for (CompanyInfo companyInfo : companyList) {
 				score = 100;
 				//资质类
@@ -214,14 +215,16 @@ public class ScanCodeController {
 					complaintStat = 0;
 				}
 				//评分
-				complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
-				if(null != complaintScoreList && complaintScoreList.size()>0){
-					for(Complaint complaint:complaintScoreList){
-						if(null != complaint.getEvaluate()){
-							gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+				String openId = String.valueOf(httpSession.getAttribute("openid"));
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+				//complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
+				if(null != evaluateList && evaluateList.size()>0){
+					for(Evaluate evaluate:evaluateList){
+						if(null != evaluate.getEvaluate()){
+							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/complaintScoreList.size();
+					gradeStat = gradeStat/evaluateList.size();
 					gradeStat = grade - gradeStat;
 					if(score > gradeStat){
 						score = score - gradeStat;
@@ -271,7 +274,7 @@ public class ScanCodeController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ResponseBody
 	@RequestMapping(value = "/superviseScore")
-	public JsonVo checkScore(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
+	public JsonVo checkScore(HttpServletRequest request, HttpServletResponse response){
 		String companyCode = request.getParameter("companyCode");
 		JsonVo  jsonVo = new JsonVo();
 		int score = 100;
@@ -288,6 +291,7 @@ public class ScanCodeController {
 			Grade grade = null;
 			List<Grade> _mapList = new ArrayList<>();
 			List<Grade> _mapList1 = new ArrayList<>();
+			HttpSession httpSession =(HttpSession)request.getSession();
 			if(null != companyInfo){
 				//资质类
 				//营业执照
@@ -412,14 +416,16 @@ public class ScanCodeController {
 				}
 				//评分
 				allscore = 0;
-				List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
-				if(null != complaintScoreList && complaintScoreList.size()>0){
-					for(Complaint complaint:complaintScoreList){
-						if(null != complaint.getEvaluate()){
-							gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
+				String openId = String.valueOf(httpSession.getAttribute("openid"));
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+				//List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
+				if(null != evaluateList && evaluateList.size()>0){
+					for(Evaluate evaluate:evaluateList){
+						if(null != evaluate.getEvaluate()){
+							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/complaintScoreList.size();
+					gradeStat = gradeStat/evaluateList.size();
 					gradeStat = allgrade  - gradeStat;
 					if(score > gradeStat){
 						score = score - gradeStat;

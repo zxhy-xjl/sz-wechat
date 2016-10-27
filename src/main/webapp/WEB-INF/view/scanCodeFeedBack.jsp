@@ -31,8 +31,6 @@ text-align:center;
  * 初始化
  */
 $(function(){
-	getPercentage();
-	getScore();
 	setOpenid();
 	setTimeout('doInsertFootPrint()',3000)
 });
@@ -67,6 +65,7 @@ function getScore(){
 		type:'post',
 		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
 		success:function(data){
+			alert(data);
 			if(data){
 				score = data.result;
 				if(score<=65){
@@ -110,7 +109,9 @@ function backHttp(){
 				success:function(){}
 			});
 		} 
-		}
+	}
+	getPercentage();
+	getScore();
 }
 /**
  *  存入openid

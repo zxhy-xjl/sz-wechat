@@ -21,7 +21,6 @@
 	var xmlHttpRequest = null;
 	$(function(){
 		setOpenid();
-		setTimeOut('onloadScore()',1000);
 	});
 	/**
 	 * 初始化加载
@@ -94,9 +93,9 @@
 					url:'<%=path%>/setOpenId.do?openid='+json.openid,
 					success:function(){}
 				});
-				onloadScore();
 			} 
   		}
+		onloadScore();
 	}
 	/**
 	 *  存入openid
