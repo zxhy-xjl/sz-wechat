@@ -247,5 +247,15 @@ public class CompanyInfoService {
 			}
 		return allScore;
 	 }
-
+	public String getFace(String companyCode){
+		CompanyInfo companyInfo = this.getCompanyByCode(companyCode);
+		if (companyInfo == null){
+			return null;
+		}
+		String face = this.companyInfoMapper.getFaceByLicence(companyInfo.getLicence());
+		return face;
+		
+	}
+		
+	
 }

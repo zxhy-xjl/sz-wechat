@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +25,14 @@ import com.sz.wechat.entity.Consumerec;
 import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.OrderHelper;
+import com.sz.wechat.entity.PersonHealth;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ConsumerecService;
+import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.service.MenuService;
+import com.sz.wechat.service.PersonHealthService;
+import com.sz.wechat.service.SupervisePunishService;
 
 /**
  * 餐厅详情控制层
@@ -35,7 +41,7 @@ import com.sz.wechat.service.MenuService;
  */
 @Controller
 public class RestaurantInfoController {
-
+	private static Log log = LogFactory.getLog(RestaurantInfoController.class);
 	
 	@Autowired
 	private CompanyInfoService companyInfoService;
@@ -45,6 +51,13 @@ public class RestaurantInfoController {
 	
 	@Autowired
 	private MenuService menuService;
+	
+	@Autowired
+	private FootprintService footprintService;
+	@Autowired
+	private PersonHealthService personHealthService;
+	@Autowired
+	private SupervisePunishService supervisePunishService;
 	/**
 	 * 餐厅详情页面
 	 * @param request
@@ -55,174 +68,42 @@ public class RestaurantInfoController {
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
 		HttpSession ss = (HttpSession)request.getSession();
-		String openid = ss.getAttribute("openid").toString();
-		String companycode = request.getParameter("companycode");
-		String paytime = request.getParameter("paytime");
-		String complaintpid = request.getParameter("complaintpid");
-		String complainflag = request.getParameter("complainflag");
-		String pid = request.getParameter("pid");
-		//Complaint complaintforjsp = this.companyInfoService.getComplaintInfoByPid(complaintpid);
-		
-		List<Consumerec> consumelist2 = this.consumerecService.selectConsumerecByOpenidandCompanycode(openid, companycode);
-		//计算历次总价
-		float totalprice=0;
-		for(int u=0;u<consumelist2.size();u++)
-		{
-			Menu menu = this.menuService.getMenuByMenuId(consumelist2.get(u).getMenuid());
-			if(menu.getPrice()!=null)
-				totalprice+=Float.parseFloat(menu.getPrice())*Float.parseFloat(consumelist2.get(u).getBuynum());
-				
+		//String openid = ss.getAttribute("openid").toString();
+		String openid = "oehpaw8_fgOEWtPk0S0gLidH60xg";
+		String companyCode = request.getParameter("companycode");
+		CompanyInfo companyInfo = this.companyInfoService.getCompanyByCode(companyCode);
+		//综合得分
+		int score = this.companyInfoService.getScore(companyCode);
+		log.debug("score:" + score);
+		//累计扫描次数
+		int scanCount = this.footprintService.getCountByCompany(companyCode);
+		log.debug("scanCount:" + scanCount);
+		//企业当前是几颗星
+		int star = this.companyInfoService.getEvaluate(companyCode);
+		log.debug("star:" + star);
+		//健康证
+		List<PersonHealth> personHealthList = personHealthService.getPersonHealthByCompanyCode(companyInfo.getCompanycode());
+		int personHealthCount = 0;
+		if (personHealthList != null){
+			personHealthCount = personHealthList.size();
 		}
-		//计算单次总价
-		
-		//List<Consumerec> consumelist = this.consumerecService.selectConsumerecByPaytime(paytime, companycode);
-		//List<Consumerec> consumelist = this.consumerecService.selectConsumerecByOpenidandCompanycode(openid, companycode);
-		List<Consumerec> consumelist = this.consumerecService.selectOddnumberByOpenidandCompanycode(openid, companycode);
-		List<OrderHelper> helperlist = new ArrayList<OrderHelper>();
-		
-		for(int i=0;i<consumelist.size();i++)
-		{   OrderHelper orderhelper = new OrderHelper();
-			float price=0;
-			orderhelper.setOddnumber(consumelist.get(i).getOddnumber());
-			orderhelper.setPaytime(this.consumerecService.selectConsumerecByOddNumber(consumelist.get(i).getOddnumber()).get(0).getPaytime());
-			orderhelper.setComplainttype("0");			
-		List<Consumerec> comsumetemp = 	this.consumerecService.selectConsumerecByOddNumber(consumelist.get(i).getOddnumber());
-		           for(int k=0;k<comsumetemp.size();k++)
-		           {
-		            Menu menu = this.menuService.getMenuByMenuId(comsumetemp.get(k).getMenuid());		   			
-		   			if(menu.getPrice()!=null)
-		   			price+=Float.parseFloat(menu.getPrice())*Float.parseFloat(comsumetemp.get(k).getBuynum());
-		        	 		        	   
-		           }
-		           orderhelper.setPrice(price);   
-		           helperlist.add(orderhelper);
-		}
-		
-		
-/*		
-		for(int i=0;i<consumelist.size();i++)
-		{   
-			consumelist.get(i).getOddnumber();
-		
-			Menu menu = this.menuService.getMenuByMenuId(consumelist.get(i).getMenuid());
-			
-			if(menu.getPrice()!=null)
-			price+=Float.parseFloat(menu.getPrice())*Float.parseFloat(consumelist.get(i).getBuynum());
-			
-		}*/
-		
-		//计算餐厅评分
-		CompanyInfo companyInfo2 = companyInfoService.getCompanyByCode(companycode);
+		//脸谱
+		String face = this.companyInfoService.getFace(companyCode);
+		log.debug("face:" + face);
+		//处罚数量
+		System.out.println("companyInfo.getCompanyname():" + companyInfo.getCompanyname());
+		int superviseCount = this.supervisePunishService.getCountByCompanyName(companyInfo.getCompanyname());
+		System.out.println("superViseCount:" + superviseCount);
 		ModelAndView modelAndView = new ModelAndView();
-		String keyWord="警告";
-		String keyWord_0="罚款";
-		String keyWord_1="没收";
-		String keyword_2="停产停业";
-		String keyword_3="吊销执照";
-		String keyword_4="暂扣";
-		List<CompanyInfo> companyList = this.companyInfoService.getCompanyInfo();
-		List<CompanyInfo> companyScoreList = new ArrayList<>();
-		if(null != companyList && companyList.size() > 0){
-		int score = 100;
-		int grade = 5;//评分
-		int gradeStat=0;
-		int complaintStat=0;
-		StringBuffer sb  = new StringBuffer();
-		List<SupervisePunish> list = null;//存储企业处罚信息
-		List<Complaint> complaintList = null;//存储企业投诉信息
-		List<Complaint> complaintScoreList = null;//存储企业投诉评分信息
-		CompanyInfo _companyInfo = null;
-		for (CompanyInfo companyInfo : companyList) {
-			score = 100;
-			//资质类
-			//营业执照
-			if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
-				score = score - 30;
-			}
-			//餐饮服务许可证
-			if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
-				score = score - 30;
-			}
-			//处罚类
-			SupervisePunish supervisePunish = new SupervisePunish();
-			supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
-			list = this.companyInfoService.getSuperviseLikeCompanyName(supervisePunish);
-			if(null != list && list.size() > 0){
-				//根据关键字判断
-				for (SupervisePunish _supervisePunish : list) {
-					String illegalType = _supervisePunish.getPenaltytype();
-					//判断是否存在吊销执照
-					if(illegalType.indexOf(keyword_3)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 5;
-					}else if(illegalType.indexOf(keyword_4)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 5;
-					}
-					//停产停业
-					if(illegalType.indexOf(keyword_2)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 4;
-					}
-					//没收违法所得
-					if(illegalType.indexOf(keyWord_1)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 3;
-					}
-					//罚款
-					if(illegalType.indexOf(keyWord_0)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 2;
-					}
-					//警告
-					if(illegalType.indexOf(keyWord)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 1;
-					}
-				}
-			}
-			//投诉类
-			complaintList = this.companyInfoService.getComplaintByCompanyId(companyInfo.getCompanycode());
-			//投诉
-			if(null != complaintList && complaintList.size() > 0){
-				for (Complaint complaint : complaintList) {
-					if(null != complaint){
-						complaintStat = complaintStat + 2;
-					}
-				}
-				if(score > complaintStat){
-					score = score - complaintStat;
-				}else{
-					score = 0;
-				}
-				complaintStat = 0;
-			}
-			//评分,应该从评分表中获取数据
-			
-			_companyInfo = new CompanyInfo();
-			_companyInfo.setCompanycode(companyInfo.getCompanycode());
-			_companyInfo.setScore(score);
-			companyScoreList.add(_companyInfo);
-		}
-	}
-		for (int i=0;i <= companyScoreList.size();i++) {
-			if (companycode.equals(companyScoreList.get(i).getCompanycode())){
-				companyInfo2.setScore(companyScoreList.get(i).getScore());
-				break;
-			}
-		}
-		//CompanyInfo companyInfo = companyInfoService.getCompanyByCode(companycode);
-		modelAndView.addObject("CompanyInfo", companyInfo2);
-		//modelAndView.addObject("oddnumber", consumelist.get(0).getOddnumber());
-		//modelAndView.addObject("price", price);
-		modelAndView.addObject("totalprice", totalprice);
-		modelAndView.addObject("paytime", paytime);
-		modelAndView.addObject("complaintpid", complaintpid);
-		modelAndView.addObject("complainflag", complainflag);
-		modelAndView.addObject("pid", pid);
-		modelAndView.addObject("helperlist", helperlist);
-		//modelAndView.addObject("consumelist", consumelist);
-		//modelAndView.addObject("complaintforjsp", complaintforjsp);
+		modelAndView.addObject("companyInfo", companyInfo);
+		modelAndView.addObject("score", score);
+		modelAndView.addObject("scanCount", scanCount);
+		modelAndView.addObject("star",star);
+		modelAndView.addObject("personHealthCount", personHealthCount);
+		modelAndView.addObject("superviseCount", superviseCount);
+		modelAndView.addObject("face", face);
+		
+		modelAndView.addObject("totalprice", 40);
 		modelAndView.setViewName("/restaurantinfo");
 		
 		return modelAndView;

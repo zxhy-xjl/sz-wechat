@@ -22,10 +22,11 @@
 		<result column="VALIDTIME" property="validtime" jdbcType="VARCHAR"/>
 		<result column="APTITUDESTATE" property="aptitudestate" jdbcType="VARCHAR"/>
 		<result column="COMPANYRECODE" property="companyrecode" jdbcType="VARCHAR"/>
+		<result column="LXFS" property="lxfs" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		COMPANYCODE, COMPANYNAME, COMPANYTYPE, LEGALPERSON, REGISTCAPITAL, CREATETIME, COMPANYADDRESS, OPERATESTART, OPERATEEND, OPERATESCOPE, REGISTEROFFICE, FILETIME, COMPANYSTATUS, COMPANYINTRO, LICENCE, CERTIFICATETIME, VALIDTIME, APTITUDESTATE, COMPANYRECODE 
+		COMPANYCODE, COMPANYNAME, COMPANYTYPE, LEGALPERSON, REGISTCAPITAL, CREATETIME, COMPANYADDRESS, OPERATESTART, OPERATEEND, OPERATESCOPE, REGISTEROFFICE, FILETIME, COMPANYSTATUS, COMPANYINTRO, LICENCE, CERTIFICATETIME, VALIDTIME, APTITUDESTATE, COMPANYRECODE,LXFS 
 	</sql>
 	<!-- 查询 -->
 	<select id="getCompanyByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -36,5 +37,8 @@
 	</select>
 	<select id="getCompanyInfo" resultMap="BaseResultMap" >
 		SELECT <include refid="Base_Column_List"/> FROM SZ_COMPANYINFO
+	</select>
+	<select id="getFaceByLicence" resultType="java.lang.String" >
+		SELECT safelevel from sz_match_shipinsafelevel where permitnum = #{param1,jdbcType=VARCHAR}
 	</select>
 </mapper>

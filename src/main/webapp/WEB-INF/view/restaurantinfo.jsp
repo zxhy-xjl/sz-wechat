@@ -29,45 +29,15 @@ text-align:center;
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
 <script type="text/javascript">
- /**
- * 初始化
- */
-$(function(){
-	
-	getScore();
 
-});
-
+ 
 /**
- * 获取积分
+ * 星星
  */
-var score = 0;
-var listObj;
-function getScore(){
-	var scoreHtml ='';
-	$.ajax({
-		type:'post',
-		url:'<%=path%>/superviseScore.do?companyCode=${CompanyInfo.companycode}',
-		success:function(data){
-			if(data){
-				score = data.result;
-				if(score<=65){
-					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="red">'+score+'分</font>';
-				}
-				if(score>65 && score<80){
-					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="#629527">'+score+'分</font>';
-				}
-				if(score>=80){
-					scoreHtml = '<font style="font-size:40px;position: relative;bottom: 65px;" color="#63B109">'+score+'分</font>';
-				}
-				$("#score").html(scoreHtml);
-				
-			}
-		}
-	});
-} 
-
-function doScore(obj){
+function doStar(obj){
+	if (!obj){
+		return;
+	}
 	var id = obj.id;
 	var size = id.substring(id.length-1,id.length);
 	if(obj.alt == 0){
@@ -116,49 +86,81 @@ function lookcomplaint(pid,companyname)
 
 
 <body style="font-family: SimHei;background-color: #e9e9e9;">
-<label style="font-size: 36px;font-weight:bold">${CompanyInfo.companyname}</label>
+<label style="font-size: 36px;font-weight:bold">${companyInfo.companyname}</label>
 <div id="baseinfo">
 <table>
 <tr>
 <td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
 <td width="30%">
 <div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
+		<font style="font-size:40px;position: relative;bottom: 65px;" color="red">&nbsp;${score}</font>
+		<font style="font-size:18px;position: relative;bottom: 65px;" color="red">分</font>
 	</div>
-<%--  <label style="font-size: 36px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label> --%><br>
  </td>
  <td width="80%">
-
- <label style="font-weight:bold">本月扫桌：999次</label>
-<br>
- <label style="font-weight:bold">联系方式：<br>025-999999</label>
- <br>
-<div id="stars" style="text-align: center;"> 
-
-<img id="star1" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star2" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star3" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star4" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star5" onclick="doScore(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<table width="100%"><tr><td>
+ <label style="font-weight:bold">扫桌次数：${scanCount}次</label>
+</td></tr><tr><td>
+<div id="stars"> 
+<img id="star1" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star2" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star3" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star4" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+<img id="star5" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
 
 </div> 
+</td></tr></table>
+
+
  </td>
 </tr>
 </table>
-<label style="font-weight:bold">联系地址：${CompanyInfo.companyaddress}</label>
+<label style="font-weight:bold">${companyInfo.companyaddress}  &nbsp;<a href="tel:${companyInfo.lxfs}">${companyInfo.lxfs}</a></label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;营业执照</label>
-<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品经营许可证</label>
-<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+<label style="font-weight:bold;font-size: 20px;">
+<a href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${companyInfo.companyrecode}" data-lightbox="example-set" data-title="${companyInfo.companyname}" style="text-decoration:none;" >营业执照</a>
+</label>
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+
+<c:if test="${companyInfo.licence==null}">
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+餐饮许可证
+</label>
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/close.png" width="28" height="26">
+</c:if>
+<c:if test="${companyInfo.licence!=null}">
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<%=path%>/getPublicInfo.do?repastlicence=${companyInfo.licence}" style="text-decoration:none;">餐饮许可证</a>
+</label>
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
+</c:if>
+
 <br>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;健康证    &nbsp; 4个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
-&nbsp;<img id="star1" align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.jpg" width="28" height="26">
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;
+<c:if test="${personHealthCount > 0}">
+<a href="<%=path%>/personHealthList.do?companyCode=${companyInfo.companycode}">健康证</a>
+</c:if>
+<c:if test="${personHealthCount  == 0}">
+健康证
+</c:if>
+&nbsp; ${personHealthCount }个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
+&nbsp;
+<c:if test="${face=='良好（笑脸）' }">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.jpg" width="28" height="26">
+</c:if>
+<c:if test="${face=='一般（平脸）' }">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_normal.jpg" width="28" height="26">
+</c:if>
+<c:if test="${face=='很差（哭脸）' }">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_cry.jpg" width="28" height="26">
+</c:if>
+
 <br>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚     0个</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚    ${superviseCount }个</label>
 <label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    &nbsp; 0个</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
-<label>${CompanyInfo.companyintro}</label>
+<label>${companyInfo.companyintro}</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> ${totalprice} </font>元</label><br>
 <%-- <label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
@@ -174,17 +176,21 @@ function lookcomplaint(pid,companyname)
 
 <div id="buttondiv" style="text-align: center;">
 <br>
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
 <%--  <c:if test="${complainflag== '1'}"> 
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
 </c:if>
  <c:if test="${complainflag== '0'}"> 
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${CompanyInfo.companyname}','${CompanyInfo.companycode}','${pid}')"/>
+<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
 </c:if>
 <c:if test="${complainflag== '2' }">
-<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${CompanyInfo.companyname}')"/>
+<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${companyInfo.companyname}')"/>
 </c:if> --%>
 </div>
 
 </body>
+<script type="text/javascript">
+
+doStar(document.getElementById("star" + ${star}));
+</script>
 </html>

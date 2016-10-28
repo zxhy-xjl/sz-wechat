@@ -69,5 +69,8 @@ public class FootprintService {
 		return this.footprintMapper.updatePrintByComplaintpidandFlag(footPrint);
 		
 	}
+	public int getCountByCompany(String companyCode){
+		return this.footprintMapper.getCountByCompany(companyCode);
+	}
 	
 }

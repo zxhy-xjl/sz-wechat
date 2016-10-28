@@ -6,7 +6,7 @@
 		<id column="ADMINPENALTYBOOK" property="adminpenaltybook" jdbcType="VARCHAR"/>
 		<result column="CASENAME" property="casename" jdbcType="VARCHAR"/>
 		<result column="UNLAWFULACT" property="unlawfulact" jdbcType="VARCHAR"/>
-		<result column="NLAWFULCOMPANYNAME" property="nlawfulcompanyname" jdbcType="VARCHAR"/>
+		<result column="UNLAWFULCOMPANYNAME" property="unlawfulcompanyname" jdbcType="VARCHAR"/>
 		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
 		<result column="UNLAWFULFACT" property="unlawfulfact" jdbcType="VARCHAR"/>
 		<result column="PENALTYTYPE" property="penaltytype" jdbcType="VARCHAR"/>
@@ -24,5 +24,8 @@
 	</select>
 	<select id="getSuperviseByCompanyName" resultMap="BaseResultMap" parameterType="com.sz.wechat.entity.SupervisePunish">
 		SELECT <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
+	</select>
+	<select id="getCountByCompanyName" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from SODA_FDADATA_CATERINGPUNISH where UNLAWFULCOMPANYNAME=#{unlawfulcompanyname,jdbcType=VARCHAR}
 	</select>
 </mapper>

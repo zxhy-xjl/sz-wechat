@@ -32,11 +32,10 @@ var openid ="<%=session.getAttribute("openid")%>";
 
 
 
-function pagejump(company,visittime,complaintpid,complainflag,pid)
+function pagejump(company)
 {
 	console.log(company);
-	console.log(visittime);
-	window.location.href="<%=path%>/toRestaurant.do?companycode="+company+"&paytime="+visittime+"&complaintpid="+complaintpid+"&complainflag="+complainflag+"&pid="+pid;
+	window.location.href="<%=path%>/toRestaurant.do?companycode="+company;
 }
 </script>
 <style type="text/css">
@@ -53,6 +52,7 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyName}</font></label><br>
 						<label style="color: #d4a351;">订单数量:${item.consumerecCount}</label>
 						<label style="color: #d4a351;">投诉数量:${item.complaintCount}</label>
+						
 					</td>
 					<td><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>

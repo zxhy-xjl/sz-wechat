@@ -38,4 +38,9 @@
 		 <update id="updatePrintByComplaintpidandFlag" parameterType="com.sz.wechat.entity.Footprint">
 	 	update SZ_FOOTPRINT set COMPLAINTPID = #{complaintpid,jdbcType=VARCHAR},COMPLAINTFLAG=#{complaintflag,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
 	 </update>
+	 
+	 <select id="getCountByCompany" resultType="java.lang.Integer" parameterType="java.lang.String">
+			SELECT count(*) FROM SZ_FOOTPRINT  WHERE  COMPANYCODE = #{companycode,jdbcType=VARCHAR}
+		</select>
+		
 </mapper>

@@ -1,5 +1,7 @@
 package com.sz.wechat.dao;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import com.sz.wechat.entity.SupervisePunish;
 /**
@@ -22,4 +24,6 @@ public interface SupervisePunishMapper {
 	 * @return
 	 */
 	public SupervisePunish getSuperviseByCompanyName(SupervisePunish supervisePunish);
+	public int getCountByCompanyName(@Param(value="unlawfulcompanyname") String unlawfulcompanyname);
+			
 }

@@ -31,4 +31,5 @@ public interface CompanyInfoMapper {
 	 * @return
 	 */
 	public CompanyInfo getCompanyByCodeAndType(String companyCode,String type);
+	public String getFaceByLicence(String licence);
 }

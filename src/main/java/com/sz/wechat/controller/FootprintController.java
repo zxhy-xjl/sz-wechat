@@ -77,9 +77,11 @@ public class FootprintController {
 			company.setComplaintCount(this.complainService.getComplaintCountByCompanyIdAndOpenid(company.getCompanyCode(), openid));
 			log.debug("投诉数量:" + company.getComplaintCount());
 			//综合评星
-			//company.setEvaluate(this.companyInfoService.getEvaluate(companyCode));
+//			company.setEvaluate(this.companyInfoService.getEvaluate(company.getCompanyCode()));
+//			log.debug("评星:" + company.getEvaluate());
 			//综合得分
-			//company.setScore(this.companyInfoService.getScore(companyCode));
+			company.setScore(this.companyInfoService.getScore(company.getCompanyCode()));
+			log.debug("综合得分：" + company.getScore());
 			companyList.add(company);
 		}		
 		modelAndView.addObject("companyList", companyList);

@@ -45,6 +45,11 @@ public interface FootprintMapper {
 	 * @return
 	 */
 	public int updatePrintByComplaintpidandFlag(Footprint footPrint);
-	
+	/**
+	 * 根据餐厅code得到所有的足迹数量
+	 * @param companyCode
+	 * @return
+	 */
+	public int getCountByCompany(String companyCode);
 	
 }
