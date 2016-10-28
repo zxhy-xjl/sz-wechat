@@ -100,5 +100,13 @@ public class ConsumerecService {
 		return this.consumerecMapper.selectOddnumberByOpenidandCompanycode(openid, companycode);
 		
 	}
-
+	/**
+	 * 得到某人在某个餐厅的下单数量
+	 * @param companyId
+	 * @param openId
+	 * @return
+	 */
+	public int getCountByCompanyidAndOpenid(String companyId, String openId){
+		return this.consumerecMapper.getCountByCompanyidAndOpenid(openId,companyId);
+	}
 }

@@ -52,4 +52,7 @@
 	 <update id="updatePayByOddNumber" parameterType="com.sz.wechat.entity.Consumerec">
 	 	update SZ_CONSUMEREC set PAYTYPE = #{paytype,jdbcType=VARCHAR},BILLUNIT=#{billunit,jdbcType=VARCHAR},DEFAULTADD=#{defaultadd,jdbcType=VARCHAR},PAYTIME=to_char(sysdate,'yyyyhhdd') WHERE ODDNUMBER=#{oddnumber,jdbcType=VARCHAR}
 	 </update>
+	 <select id="getCountByCompanyidAndOpenid" resultType="java.lang.Integer" parameterType="java.lang.String">
+	 	SELECT count(*) FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR} AND COMPANYCODE = #{companycode,jdbcType=VARCHAR}
+	 </select>
 </mapper>

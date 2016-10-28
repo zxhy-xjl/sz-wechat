@@ -1,6 +1,7 @@
 package com.sz.wechat.dao;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sz.wechat.entity.Complaint;
@@ -18,13 +19,7 @@ public interface ComplaintMapper {
 	 * @return
 	 */
 	public List<Complaint> getComplaintScoreByCompanyId(String companyId);
-	/**
-	 * 得到某人在某个餐厅的投诉数量
-	 * @param companyId
-	 * @param openid
-	 * @return
-	 */
-	public int getComplaintCountByCompanyIdAndOpenid(String companyId, String openid);
+
 	
 	/**
 	 * 查询企业投诉反馈页面(一年有效期)
@@ -51,4 +46,11 @@ public interface ComplaintMapper {
 	 */
 	public int insertComplaint(Complaint complaint);
 
+	/**
+	 * 得到某人在某个餐厅的投诉数量
+	 * @param companyId
+	 * @param openid
+	 * @return
+	 */
+	public int getComplaintCountByCompanyIdAndOpenid(@Param(value="companyid") String companyid, @Param("openid") String openid);
 }

@@ -36,5 +36,14 @@ public class ComplainService {
 	public List<Complaint> getComplaintScoreByCompanyIdAndOpenid(String companyCode,String openid){
 		return this.complaintMapper.getComplaintScoreByCompanyIdAndOpenid(companyCode,openid);
 	}
+	/**
+	 * 得到我在该餐厅的投诉数量
+	 * @param companyCode
+	 * @param openid
+	 * @return
+	 */
+	public int getComplaintCountByCompanyIdAndOpenid(String companyid,String openid){
+		return this.complaintMapper.getComplaintCountByCompanyIdAndOpenid(companyid,openid);
+	}
 	
 }

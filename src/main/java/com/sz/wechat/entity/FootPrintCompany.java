@@ -5,11 +5,17 @@ package com.sz.wechat.entity;
  *
  */
 public class FootPrintCompany {
+	//餐厅代码
 	private String companyCode;
+	//餐厅名称
 	private String companyName;
-	private int fontPrintcount;
+	//订单数量
+	private int consumerecCount;
+	//投诉数量
 	private int complaintCount;
+	//评星
 	private int evaluate;
+	//综合得分
 	private int score;
 	public String getCompanyCode() {
 		return companyCode;
@@ -23,11 +29,12 @@ public class FootPrintCompany {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public int getFontPrintcount() {
-		return fontPrintcount;
+	
+	public int getConsumerecCount() {
+		return consumerecCount;
 	}
-	public void setFontPrintcount(int fontPrintcount) {
-		this.fontPrintcount = fontPrintcount;
+	public void setConsumerecCount(int consumerecCount) {
+		this.consumerecCount = consumerecCount;
 	}
 	public int getComplaintCount() {
 		return complaintCount;

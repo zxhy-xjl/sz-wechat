@@ -47,6 +47,7 @@ public class FootprintService {
 		
 		return this.footprintMapper.getDisFootprintByOpenid(openid);
 	}
+
 	/**
 	 * 执行插入操作
 	 * @param footPrint

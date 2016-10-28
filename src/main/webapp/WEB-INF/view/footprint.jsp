@@ -47,11 +47,12 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 <div id="footinfo">
 		<table border="0" align="center" width="100%"
 			style="border-collapse: collapse;">
-			<c:forEach items="${footprintList}" var="item" varStatus="status">
-				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}','${item.complaintpid}','${item.complaintflag}','${item.pid}')">
+			<c:forEach items="${companyList}" var="item" varStatus="status">
+				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companyCode}')">
 				<td><img src="<%=path%>/public/images/food.jpg"  height="100px" width="100px" / ></td>
-					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyname}</font></label><br>
-						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '2'}">&nbsp;&nbsp;该商户有投诉</c:if></label>
+					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyName}</font></label><br>
+						<label style="color: #d4a351;">订单数量:${item.consumerecCount}</label>
+						<label style="color: #d4a351;">投诉数量:${item.complaintCount}</label>
 					</td>
 					<td><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>

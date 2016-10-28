@@ -71,5 +71,11 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public List<Consumerec> selectConsumerByDefaultadd(String openid,String companycode);
-
+	/**
+	 * 根据公司id和用户id得到该用户在该餐厅的订单数量
+	 * @param openId
+	 * @param companyId
+	 * @return
+	 */
+	public int getCountByCompanyidAndOpenid(@Param(value="openid") String openid,@Param(value="companycode") String companycode);
 }

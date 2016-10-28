@@ -110,7 +110,7 @@ public class CompanyInfoService {
 	 * @param opendid
 	 * @return
 	 */
-	public int getComplaintCountByCompanyId(String companyId,String openid){
+	public int getComplaintCountByCompanyIdAndOpenid(String companyId,String openid){
 		return this.complaintMapper.getComplaintCountByCompanyIdAndOpenid(companyId,openid);
 	}
 	
