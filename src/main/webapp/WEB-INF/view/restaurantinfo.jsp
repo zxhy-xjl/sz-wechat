@@ -16,10 +16,10 @@
 <style type="text/css">
 #score{
 width:150px;
-height:150px;
+height:85px;
 margin:0px auto;
 background:url("<%=path%>/public/images/feedbackscore.png") no-repeat center top;
-background-size:95px;
+background-size:85px;
 }
 span{
 text-align:center; 
@@ -122,18 +122,15 @@ function lookcomplaint(pid,companyname)
 <tr>
 <td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
 <td width="30%">
-<div id="score" style="text-align:center;line-height:230px;position:relative;top:50px;">
+<div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
 	</div>
 <%--  <label style="font-size: 36px;font-weight:bold"><font color="red">${CompanyInfo.score}</font>分</label> --%><br>
  </td>
  <td width="80%">
 
  <label style="font-weight:bold">本月扫桌：999次</label>
-
 <br>
-
-
- <label style="font-weight:bold">联系方式：025-999999</label>
+ <label style="font-weight:bold">联系方式：<br>025-999999</label>
  <br>
 <div id="stars" style="text-align: center;"> 
 
