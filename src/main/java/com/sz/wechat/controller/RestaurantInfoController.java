@@ -94,6 +94,8 @@ public class RestaurantInfoController {
 		System.out.println("companyInfo.getCompanyname():" + companyInfo.getCompanyname());
 		int superviseCount = this.supervisePunishService.getCountByCompanyName(companyInfo.getCompanyname());
 		System.out.println("superViseCount:" + superviseCount);
+		//投诉数量
+		int complaintcount = this.companyInfoService.getComplaintCountByCompanyIdAndOpenid(companyCode, openid);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("companyInfo", companyInfo);
 		modelAndView.addObject("score", score);
@@ -101,6 +103,7 @@ public class RestaurantInfoController {
 		modelAndView.addObject("star",star);
 		modelAndView.addObject("personHealthCount", personHealthCount);
 		modelAndView.addObject("superviseCount", superviseCount);
+		modelAndView.addObject("complaintcount", complaintcount);
 		modelAndView.addObject("face", face);
 		
 		modelAndView.addObject("totalprice", 40);

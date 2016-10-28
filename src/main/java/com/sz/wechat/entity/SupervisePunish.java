@@ -25,7 +25,7 @@ public class SupervisePunish implements Serializable {
 	/**
 	 * 违法企业名称或违法自然人姓名
 	 */
-	private String nlawfulcompanyname;
+	private String unlawfulcompanyname;
 	/**
 	 * 法定代表人姓名
 	 */
@@ -69,10 +69,10 @@ public class SupervisePunish implements Serializable {
 		this.unlawfulact = unlawfulact;
 	}
 	public String getNlawfulcompanyname() {
-		return nlawfulcompanyname;
+		return unlawfulcompanyname;
 	}
 	public void setNlawfulcompanyname(String nlawfulcompanyname) {
-		this.nlawfulcompanyname = nlawfulcompanyname;
+		this.unlawfulcompanyname = nlawfulcompanyname;
 	}
 	public String getLegalperson() {
 		return legalperson;

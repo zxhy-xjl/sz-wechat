@@ -157,7 +157,7 @@ function lookcomplaint(pid,companyname)
 
 <br>
 <label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚    ${superviseCount }个</label>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    &nbsp; 0个</label>
+<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
 <label>${companyInfo.companyintro}</label>
