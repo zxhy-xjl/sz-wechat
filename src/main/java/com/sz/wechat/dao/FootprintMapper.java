@@ -28,6 +28,11 @@ public interface FootprintMapper {
      */
 	public List<Footprint> getFootprintByComplaintpid(String complaintpid);
 	/**
+	 * @param openid
+	 * 根据complaintpid查询足迹信息
+	 */
+	public List<Footprint> getDisFootprintByOpenid(String openid);
+	/**
 	 * 执行插入操作
 	 * @param footPrint
 	 * @return

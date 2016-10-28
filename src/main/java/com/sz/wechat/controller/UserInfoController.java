@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Consumerec;
+import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.UserInfo;
 import com.sz.wechat.pagination.DataGridHepler;
 import com.sz.wechat.pagination.PageParam;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ConsumerecService;
+import com.sz.wechat.service.MenuService;
 import com.sz.wechat.service.UserInfoService;
 
 /**
@@ -42,8 +44,8 @@ public class UserInfoController {
 	private ConsumerecService consumerecService;
 	@Autowired
 	private CompanyInfoService companyInfoService;
-	
-	
+	@Autowired
+	private MenuService menuService;
 	@RequestMapping(value = "/userInfo",method = RequestMethod.GET)
 	public ModelAndView getUsers(HttpServletRequest request,HttpServletResponse response){
 		HttpSession ss = (HttpSession)request.getSession();
@@ -51,12 +53,26 @@ public class UserInfoController {
 		List<Consumerec>  consumereclist= this.consumerecService.selectConsumerecByOpenid(openid);
 		List<Complaint> complaintlist = this.companyInfoService.getComplaintByOpenid(openid);
 		String companyname;
+		
 		for(int i=0; i<consumereclist.size();i++)
-		{
+		{    int m = 0;
+		     float o = 0;
 			//consumereclist.get(i)
 			companyname =  this.companyInfoService.getCompanyByCode(consumereclist.get(i).getCompanycode()).getCompanyname();
 			consumereclist.get(i).setPid(companyname);
-			
+			List<Consumerec> templist = this.consumerecService.selectConsumerecByOddNumber(consumereclist.get(i).getOddnumber());
+		      for(int k=0;k<templist.size();k++)
+		      {
+		    	  Menu menu = this.menuService.getMenuByMenuId(templist.get(k).getMenuid());		   			
+		   			if(menu.getPrice()!=null)
+		   			o+=Float.parseFloat(menu.getPrice())*Float.parseFloat(templist.get(k).getBuynum());
+		        	
+		    	 m=m+Integer.parseInt(templist.get(k).getBuynum()); 
+		      }
+		      consumereclist.get(i).setBuynum(String.valueOf(m));
+		      consumereclist.get(i).setBillunit(String.valueOf(o));
+		    
+		      
 		}
 		for(int i=0; i<complaintlist.size();i++)
 		{
