@@ -146,13 +146,13 @@ function lookcomplaint(pid,companyname)
 &nbsp; ${personHealthCount }个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
 &nbsp;
 <c:if test="${face=='良好（笑脸）' }">
-<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.jpg" width="28" height="26">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.png" width="28" height="26">
 </c:if>
 <c:if test="${face=='一般（平脸）' }">
-<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_normal.jpg" width="28" height="26">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_normal.png" width="28" height="26">
 </c:if>
 <c:if test="${face=='很差（哭脸）' }">
-<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_cry.jpg" width="28" height="26">
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_cry.png" width="28" height="26">
 </c:if>
 
 <br>
