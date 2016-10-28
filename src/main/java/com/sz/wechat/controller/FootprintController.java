@@ -45,140 +45,17 @@ public class FootprintController {
 
 	@RequestMapping(value = "/toFootprint",method = RequestMethod.GET)
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
+		//获取到用户的id
 		String openid = request.getParameter("openid");
+		openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
+		//存入session，以便其他地方直接从session中获取openid
 		HttpSession ss = (HttpSession)request.getSession();
-        ss.setAttribute("myopenid",openid);
+        ss.setAttribute("openid",openid);
+        
 		ModelAndView modelAndView = new ModelAndView();
-		//List<Footprint> footprintlist = this.footprintService.getFootprintByOpenid("oehpaw9s_mgU_rtNMPHnyLeDZEdM");	
+		//根据openid获取足迹列表
 		List<Footprint> footprintlist = this.footprintService.getDisFootprintByOpenid(openid);	
-		
-		for(int i=0;i<footprintlist.size();i++)
-		{
-		 List<Complaint> templist =	companyInfoService.getComplaintByCompanyId(footprintlist.get(i).getCompanycode());
-		
-		 if(templist.size()>0)
-		 { footprintlist.get(i).setComplaintflag("2");
-		
-		 }
-		}
-		
-		
-		String keyWord="警告";
-		String keyWord_0="罚款";
-		String keyWord_1="没收";
-		String keyword_2="停产停业";
-		String keyword_3="吊销执照";
-		String keyword_4="暂扣";
-		List<CompanyInfo> companyList = this.companyInfoService.getCompanyInfo();
-		List<CompanyInfo> companyScoreList = new ArrayList<>();
-		if(null != companyList && companyList.size() > 0){
-		int score = 100;
-		int grade = 5;//评分
-		int gradeStat=0;
-		int complaintStat=0;
-		StringBuffer sb  = new StringBuffer();
-		List<SupervisePunish> list = null;//存储企业处罚信息
-		List<Complaint> complaintList = null;//存储企业投诉信息
-		List<Complaint> complaintScoreList = null;//存储企业投诉评分信息
-		CompanyInfo _companyInfo = null;
-		for (CompanyInfo companyInfo : companyList) {
-			score = 100;
-			//资质类
-			//营业执照
-			if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
-				score = score - 30;
-			}
-			//餐饮服务许可证
-			if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
-				score = score - 30;
-			}
-			//处罚类
-			SupervisePunish supervisePunish = new SupervisePunish();
-			supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
-			list = this.companyInfoService.getSuperviseLikeCompanyName(supervisePunish);
-			if(null != list && list.size() > 0){
-				//根据关键字判断
-				for (SupervisePunish _supervisePunish : list) {
-					String illegalType = _supervisePunish.getPenaltytype();
-					//判断是否存在吊销执照
-					if(illegalType.indexOf(keyword_3)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 5;
-					}else if(illegalType.indexOf(keyword_4)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 5;
-					}
-					//停产停业
-					if(illegalType.indexOf(keyword_2)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 4;
-					}
-					//没收违法所得
-					if(illegalType.indexOf(keyWord_1)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 3;
-					}
-					//罚款
-					if(illegalType.indexOf(keyWord_0)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 2;
-					}
-					//警告
-					if(illegalType.indexOf(keyWord)!=-1){
-						sb.append(illegalType).append(";");
-						score = score - 1;
-					}
-				}
-			}
-			//投诉类
-			complaintList = this.companyInfoService.getComplaintByCompanyId(companyInfo.getCompanycode());
-			//投诉
-			if(null != complaintList && complaintList.size() > 0){
-				for (Complaint complaint : complaintList) {
-					if(null != complaint){
-						complaintStat = complaintStat + 2;
-					}
-				}
-				if(score > complaintStat){
-					score = score - complaintStat;
-				}else{
-					score = 0;
-				}
-				complaintStat = 0;
-			}
-			//评分
-			complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
-			if(null != complaintScoreList && complaintScoreList.size()>0){
-				for(Complaint complaint:complaintScoreList){
-					if(complaint.getEvaluate()!=null)
-					gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
-					else
-						gradeStat=0;
-				}
-				gradeStat = gradeStat/complaintScoreList.size();
-				gradeStat = grade - gradeStat;
-				if(score > gradeStat){
-					score = score - gradeStat;
-				}else{
-					score = 0;
-				}
-				gradeStat=0;
-			}
-			_companyInfo = new CompanyInfo();
-			_companyInfo.setCompanycode(companyInfo.getCompanycode());
-			_companyInfo.setScore(score);
-			companyScoreList.add(_companyInfo);
-		}
-	}
-		for (int i=0;i < footprintlist.size();i++) {
-			
-			for(int u=0;u<companyScoreList.size();u++)
-			if (footprintlist.get(i).getCompanycode().equals(companyScoreList.get(u).getCompanycode())){
-				footprintlist.get(i).setScore(String.valueOf(companyScoreList.get(u).getScore()));
-				continue;
-			}
-		}
-		
+				
 		modelAndView.addObject("footprintList", footprintlist);
 		modelAndView.setViewName("/footprint");
 	 

@@ -14,7 +14,7 @@ public class Footprint {
 	private String companycode;
 	//餐饮评分
 	private String score;
-	//是否存在投诉标识 1-有 2-无
+	//是否存在投诉标识 1代表有，其他代表没有
 	private String complaintflag;
 	//访问时间
 	private String visittime;

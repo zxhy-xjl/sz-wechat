@@ -539,16 +539,11 @@ public class ScanCodeController {
 		String openid = String.valueOf(httpSession.getAttribute("openid"));
 		String companyCode = request.getParameter("companCode");
 		String companyName = request.getParameter("companyName");
-		String score = request.getParameter("score");
-		String paystatus = request.getParameter("paystatus");
 		Footprint footPring = new Footprint();
 		footPring.setPid(UUID.randomUUID().toString());
 		footPring.setCompanycode(companyCode);
 		footPring.setCompanyname(companyName);
-		footPring.setScore(score);
-		footPring.setComplaintflag(this.complainService.getComplaintScoreByCompanyId(companyCode).size()>0?"1":"0");
 		footPring.setOpenid(openid);
-		footPring.setPaystatus(paystatus);
 		this.footPrintService.doInserFootPrint(footPring);
 	}
 	

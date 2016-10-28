@@ -27,7 +27,7 @@ var code = null;
 var text = null;
 var json = null;
 
-var openid ="<%=session.getAttribute("myopenid")%>";
+var openid ="<%=session.getAttribute("openid")%>";
 
 
 
@@ -48,10 +48,8 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 		<table border="0" align="center" width="100%"
 			style="border-collapse: collapse;">
 			<c:forEach items="${footprintList}" var="item" varStatus="status">
-				<tr style="background-color: #E9E9E9;height:30px;">
-					<td><label style="font-size: 15px;">&nbsp;&nbsp;${fn:substring(item.visittime,0,4)}年${fn:substring(item.visittime,4,6)}月${fn:substring(item.visittime,6,8)}日 ${fn:substring(item.visittime,8,10)}:${fn:substring(item.visittime,10,12)}  上海</label></td>
-				</tr>
 				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companycode}','${item.visittime}','${item.complaintpid}','${item.complaintflag}','${item.pid}')">
+				<td><img src="<%=path%>/public/images/food.jpg"  height="100px" width="100px" / ></td>
 					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyname}</font></label><br>
 						<label style="color: #d4a351;"><c:if test="${item.complaintflag == '2'}">&nbsp;&nbsp;该商户有投诉</c:if></label>
 					</td>

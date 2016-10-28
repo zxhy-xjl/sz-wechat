@@ -23,8 +23,9 @@
 			SELECT <include refid="Base_Column_List"/> FROM SZ_FOOTPRINT  WHERE  COMPLAINTPID = #{complaintpid,jdbcType=VARCHAR}
 		</select>
 	    <select id="getDisFootprintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
-			SELECT DISTINCT COMPANYCODE,COMPANYNAME,COMPLAINTPID,VISITTIME FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
+			SELECT DISTINCT COMPANYCODE,COMPANYNAME FROM SZ_FOOTPRINT  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
 		</select>
+		
 		<!-- 插入  guan -->
 	<insert id="doInserFootPrint" parameterType="com.sz.wechat.entity.Footprint">
 	INSERT INTO SZ_FOOTPRINT

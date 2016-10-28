@@ -49,7 +49,8 @@ public class UserInfoController {
 	@RequestMapping(value = "/userInfo",method = RequestMethod.GET)
 	public ModelAndView getUsers(HttpServletRequest request,HttpServletResponse response){
 		HttpSession ss = (HttpSession)request.getSession();
-		String openid = ss.getAttribute("openid").toString();
+		//String openid = ss.getAttribute("openid").toString();
+		String openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
 		List<Consumerec>  consumereclist= this.consumerecService.selectConsumerecByOpenid(openid);
 		List<Complaint> complaintlist = this.companyInfoService.getComplaintByOpenid(openid);
 		String companyname;

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +55,7 @@ public class RestaurantInfoController {
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
 		HttpSession ss = (HttpSession)request.getSession();
-		String openid = ss.getAttribute("myopenid").toString();
+		String openid = ss.getAttribute("openid").toString();
 		String companycode = request.getParameter("companycode");
 		String paytime = request.getParameter("paytime");
 		String complaintpid = request.getParameter("complaintpid");
@@ -196,24 +197,8 @@ public class RestaurantInfoController {
 				}
 				complaintStat = 0;
 			}
-			//评分
-			complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
-			if(null != complaintScoreList && complaintScoreList.size()>0){
-				for(Complaint complaint:complaintScoreList){
-					if(complaint.getEvaluate()!=null)
-					gradeStat = Integer.parseInt(complaint.getEvaluate())+gradeStat;
-					else
-						gradeStat=0;
-				}
-				gradeStat = gradeStat/complaintScoreList.size();
-				gradeStat = grade - gradeStat;
-				if(score > gradeStat){
-					score = score - gradeStat;
-				}else{
-					score = 0;
-				}
-				gradeStat=0;
-			}
+			//评分,应该从评分表中获取数据
+			
 			_companyInfo = new CompanyInfo();
 			_companyInfo.setCompanycode(companyInfo.getCompanycode());
 			_companyInfo.setScore(score);

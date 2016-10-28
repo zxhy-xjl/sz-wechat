@@ -29,10 +29,6 @@ public class Complaint implements Serializable {
 	 */
 	private String complaincontent;
 	/**
-	 * 评分
-	 */
-	private String evaluate	;
-	/**
 	 * 处理时间
 	 */
 	private String disposetime;
@@ -99,12 +95,6 @@ public class Complaint implements Serializable {
 	}
 	public void setComplaincontent(String complaincontent) {
 		this.complaincontent = complaincontent;
-	}
-	public String getEvaluate() {
-		return evaluate;
-	}
-	public void setEvaluate(String evaluate) {
-		this.evaluate = evaluate;
 	}
 	public String getDisposetime() {
 		return disposetime;

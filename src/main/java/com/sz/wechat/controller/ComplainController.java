@@ -74,39 +74,31 @@ public class ComplainController {
 		String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
 	    String complaintcontent = request.getParameter("complaintcontent");
-	    String evaluate = request.getParameter("evaluate");
 	    String footprintpid = request.getParameter("footprintpid");
-	    	    byte[] complainphoto = camera.getBytes();
+	    byte[] complainphoto = camera.getBytes();
 	    SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMddHHmmss");
 	    HttpSession httpSession = (HttpSession)request.getSession();
-        String openid = String.valueOf(httpSession.getAttribute("myopenid"));
-        if("null".equals(openid)){
-        	openid = String.valueOf(httpSession.getAttribute("openid"));
-        }
+        String openid = String.valueOf(httpSession.getAttribute("openid"));
         Complaint complaint = new Complaint();
         complaint.setCompanyid(companycode);
         complaint.setComplaincontent(complaintcontent);
         complaint.setComplaintime(dateFormater.format(new Date()));
-        complaint.setComplaintype("1");
         complaint.setOpenid(openid);
         complaint.setPid(UUID.randomUUID().toString());
+        //1是投诉，2是受理，3是处理，4是反馈
         complaint.setDisposestatus("1");
         complaint.setDisposeresult("");
         complaint.setDisposedep("");
         complaint.setDisposetime("");
-        complaint.setEvaluate(evaluate);
+        //投诉只保存一个图片
         complaint.setComplainphoto(complainphoto);
         this.companyInfoService.insertComplaint(complaint);
-        
+        //更新足迹投诉状态
         Footprint footprint = new Footprint();
         footprint.setPid(footprintpid);
-        footprint.setComplaintpid(complaint.getPid());
-        footprint.setComplaintflag("2");
-       List<Footprint> templist =  this.footprintService.getFootprintByComplaintpid(complaint.getPid());
-       if(templist.size()==0)
-       {
-    	   this.footprintService.updatePrintByComplaintpidandFlag(footprint);
-       }
+        //设置该足迹有投诉
+        footprint.setComplaintflag("1");
+    	this.footprintService.updatePrintByComplaintpidandFlag(footprint);
         
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pid", complaint.getPid());
