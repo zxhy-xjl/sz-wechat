@@ -13,9 +13,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
 <title>餐具信息</title>
 <link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
+<link rel="stylesheet" type="text/css" href="<%=path%>/public/style/themes/gray/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/public/style/themes/icon.css">
+<link rel="stylesheet" href="<%=path%>/public/style/lightbox.min.css" type="text/css" media="screen" />
+
 <script type="text/javascript" src="<%=path%>/public/script/jweixin-1.1.0.js"></script>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
-<link rel="stylesheet" href="<%=path%>/public/style/lightbox.min.css" type="text/css" media="screen" />
 </head>
 <script type="text/javascript">
 	var xmlHttpRequest = null;
@@ -74,7 +77,11 @@
 	function tots(){
 		var codeObj = $("#codei");
 		if(codeObj.val() == "null" && "${CompanyInfo.companycode}"!=codeObj.val()){
-			window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3";
+			$.messager.confirm("操作提示", "您目前还没有扫桌,请先扫一扫桌!", function (data) {  
+	            if (data) {  
+	            	window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=3"; 
+	            }   
+	        });
 			//$("#complaintForm").submit();
 		}else{
 			window.location.href="<%=path%>/toComplain.do?company="+codeObj.val()+"&companyname=${CompanyInfo.companyname}&complaintcontent="+$("#textare").val()+"&evaluate="+$("#star").val()+"&companycode=${CompanyInfo.companycode}&flag=2";
@@ -186,4 +193,6 @@
 </form>
 </body>
 <script src="<%=path%>/public/script/lightbox-plus-jquery.min.js" type="text/javascript"></script>
+<script src="<%=path%>/public/script/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="<%=path%>/public/script/easyui-lang-zh_CN.js" type="text/javascript"></script>
 </html>
