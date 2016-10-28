@@ -146,9 +146,7 @@ public class ScanCodeController {
 			StringBuffer sb  = new StringBuffer();
 			List<SupervisePunish> list = null;//存储企业处罚信息
 			List<Complaint> complaintList = null;//存储企业投诉信息
-			List<Complaint> complaintScoreList = null;//存储企业投诉评分信息
 			CompanyInfo _companyInfo = null;
-			HttpSession httpSession =(HttpSession)request.getSession();
 			for (CompanyInfo companyInfo : companyList) {
 				score = 100;
 				//资质类
@@ -215,8 +213,7 @@ public class ScanCodeController {
 					complaintStat = 0;
 				}
 				//评分
-				String openId = String.valueOf(httpSession.getAttribute("openid"));
-				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 				//complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
 				if(null != evaluateList && evaluateList.size()>0){
 					for(Evaluate evaluate:evaluateList){
@@ -416,8 +413,7 @@ public class ScanCodeController {
 				}
 				//评分
 				allscore = 0;
-				String openId = String.valueOf(httpSession.getAttribute("openid"));
-				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 				//List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
 				if(null != evaluateList && evaluateList.size()>0){
 					for(Evaluate evaluate:evaluateList){
@@ -470,7 +466,7 @@ public class ScanCodeController {
 				modelAndView.addObject("CompanyInfo", companyInfo);
 				HttpSession httpSession =(HttpSession)request.getSession();
 				String openId = String.valueOf(httpSession.getAttribute("openid"));
-				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, company);
+				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(company);
 				if(null != evaluateList && evaluateList.size()>0){
 					int scort = 0;
 					int length = 0;

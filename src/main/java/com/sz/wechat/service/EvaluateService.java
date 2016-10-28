@@ -34,7 +34,7 @@ public class EvaluateService {
 	 * @param companyCode
 	 * @return
 	 */
-	public List<Evaluate> getEvaluateByOpenIdAndCompanyCode(String openId,String companyCode){
-		return this.evaluateMapper.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+	public List<Evaluate> getEvaluateByOpenIdAndCompanyCode(String companyCode){
+		return this.evaluateMapper.getEvaluateByOpenIdAndCompanyCode( companyCode);
 	}
 }

@@ -28,5 +28,5 @@ public interface EvaluateMapper {
 	 * @param companyCode
 	 * @return
 	 */
-	public List<Evaluate> getEvaluateByOpenIdAndCompanyCode(String openId,String companyCode);
+	public List<Evaluate> getEvaluateByOpenIdAndCompanyCode(String companyCode);
 }

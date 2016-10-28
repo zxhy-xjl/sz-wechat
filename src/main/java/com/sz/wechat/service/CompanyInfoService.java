@@ -140,12 +140,10 @@ public class CompanyInfoService {
 	  * 得到该餐厅的综合得分
 	  * @return
 	  */
-	 public int getScore(String companyCode,HttpServletRequest request){
+	 public int getScore(String companyCode){
 		 	int score = 100;
 			if(!"".equals(companyCode)){
-				StringBuffer sb  = new StringBuffer();
 				CompanyInfo companyInfo = getCompanyByCode(companyCode);
-				HttpSession httpSession =(HttpSession)request.getSession();
 				if(null != companyInfo){
 					//资质类
 					//营业执照
@@ -206,8 +204,7 @@ public class CompanyInfoService {
 						}
 					}
 					//评分
-					String openId = String.valueOf(httpSession.getAttribute("openid"));
-					List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+					List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 					if(null != evaluateList && evaluateList.size()>0){
 						for(Evaluate evaluate:evaluateList){
 							if(null != evaluate.getEvaluate()){
@@ -235,9 +232,9 @@ public class CompanyInfoService {
 	  * @param companyCode
 	  * @return
 	  */
-	 public int getEvaluate(String openId,String companyCode){
+	 public int getEvaluate(String companyCode){
 		 int allScore = 0;
-		 List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+		 List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 		 if(null != evaluateList && evaluateList.size()>0){
 				int length = 0;
 				for (Evaluate evaluate : evaluateList) {
