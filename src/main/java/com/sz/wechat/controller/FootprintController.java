@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +40,7 @@ import com.sz.wechat.service.FootprintService;
  */
 @Controller
 public class FootprintController {
-	private static Log log = LogFactory.getLog(FootprintController.class);
+	private static Logger logger = LoggerFactory.getLogger(FootprintController.class);
 	
 	@Autowired
 	private FootprintService footprintService;
@@ -57,7 +59,9 @@ public class FootprintController {
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
 		//获取到用户的id
 		String openid = request.getParameter("openid");
+		
 		//openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
+		logger.info("openId:" + openid);
 		//存入session，以便其他地方直接从session中获取openid
 		HttpSession ss = (HttpSession)request.getSession();
         ss.setAttribute("openid",openid);
@@ -72,19 +76,21 @@ public class FootprintController {
 			company.setCompanyName(footprint.getCompanyname());
 			//订单数量
 			company.setConsumerecCount(this.consumerecService.getCountByCompanyidAndOpenid(company.getCompanyCode(), openid));
-			log.debug("订餐数量:" + company.getConsumerecCount());
+			logger.debug("订餐数量:" + company.getConsumerecCount());
 			//投诉数量
 			company.setComplaintCount(this.complainService.getComplaintCountByCompanyIdAndOpenid(company.getCompanyCode(), openid));
-			log.debug("投诉数量:" + company.getComplaintCount());
+			logger.debug("投诉数量:" + company.getComplaintCount());
 			//综合评星
 //			company.setEvaluate(this.companyInfoService.getEvaluate(company.getCompanyCode()));
 //			log.debug("评星:" + company.getEvaluate());
 			//综合得分
 			company.setScore(this.companyInfoService.getScore(company.getCompanyCode()));
-			log.debug("综合得分：" + company.getScore());
+			logger.debug("综合得分：" + company.getScore());
 			companyList.add(company);
 		}		
 		modelAndView.addObject("companyList", companyList);
+		modelAndView.addObject("companyListCount", companyList.size());
+		
 		modelAndView.setViewName("/footprint");
 	 
 		return modelAndView;

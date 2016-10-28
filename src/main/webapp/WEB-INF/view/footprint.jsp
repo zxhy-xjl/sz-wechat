@@ -46,6 +46,11 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 <div id="footinfo">
 		<table border="0" align="center" width="100%"
 			style="border-collapse: collapse;">
+			<c:if test="${companyListCount==0 }">
+			<tr style="background-color: white;height:50px;">
+				<td>您还没有任何足迹，请扫描餐桌二维码</td>
+			</tr>
+			</c:if>
 			<c:forEach items="${companyList}" var="item" varStatus="status">
 				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companyCode}')">
 				<td><img src="<%=path%>/public/images/food.jpg"  height="100px" width="100px" / ></td>
