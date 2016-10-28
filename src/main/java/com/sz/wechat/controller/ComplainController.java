@@ -90,6 +90,7 @@ public class ComplainController {
         complaint.setDisposeresult("");
         complaint.setDisposedep("");
         complaint.setDisposetime("");
+        complaint.setComplaintype("1");
         //投诉只保存一个图片
         complaint.setComplainphoto(complainphoto);
         this.companyInfoService.insertComplaint(complaint);

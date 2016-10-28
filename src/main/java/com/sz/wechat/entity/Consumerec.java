@@ -55,6 +55,10 @@ public class Consumerec  implements Serializable   {
 	 * 默认添加
 	 */
 	private String  defaultadd;
+	/**
+	 * 下单时间
+	 */
+	private String oddTime;
 		
 	public String getPid() {
 		return pid;
@@ -125,4 +129,11 @@ public class Consumerec  implements Serializable   {
 	public void setDefaultadd(String defaultadd) {
 		this.defaultadd = defaultadd;
 	}
+	public String getOddTime() {
+		return oddTime;
+	}
+	public void setOddTime(String oddTime) {
+		this.oddTime = oddTime;
+	}
+	
 }

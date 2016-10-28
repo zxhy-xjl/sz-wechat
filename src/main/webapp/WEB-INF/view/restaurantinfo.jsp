@@ -162,30 +162,36 @@ function lookcomplaint(pid,companyname)
 <label style="font-weight:bold">商家介绍：</label><br/><br/>
 <label>${companyInfo.companyintro}</label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold">消费记录：</label><label style="float: right;">【合计】<font color="red"> ${totalprice} </font>元</label><br>
-<%-- <label>${fn:substring(paytime,0,4)}年${fn:substring(paytime,4,6)}月${fn:substring(paytime,6,8)}日  ${fn:substring(paytime,8,10)}:${fn:substring(paytime,10,12)} 消费<font color="red">${price}</font>元    </label><label onclick="detailsinfo('${oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label>
- --%>
-  <c:forEach items="${helperlist}" var="item" varStatus="status">
- 
- <label>${fn:substring(item.paytime,0,4)}年${fn:substring(item.paytime,4,6)}月${fn:substring(item.paytime,6,8)}日  ${fn:substring(item.paytime,8,10)}:${fn:substring(item.paytime,10,12)} 消费<font color="red">${item.price}</font>元    </label><label onclick="detailsinfo('${item.oddnumber}')"><font color="red" style="font-weight: bolder;" ><u>查看详情</u></font></label><br>
- <c:if test="${item.complainttype == '2'}"><label><font color="red" style="font-weight: bolder;" >&nbsp;&nbsp;<u>投诉受理中</u></font></label><br></c:if>
-  <c:if test="${item.complainttype == '0'}"><label><font color="red" style="font-weight: bolder;" >&nbsp;&nbsp;<u>投诉处理中</u></font></label><br></c:if>
+<label style="font-weight:bold">消费合计：</label><label style="float: right;">【${orderCount }个订单】【合计】<font color="red"> ${orderTotalMoney} </font>元</label><br>
+  <c:forEach items="${orderList}" var="item" varStatus="status">
+ <label onclick="detailsinfo('${item.orderNo}')">
+ <label>${fn:substring(item.orderDate,0,4)}年${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日   消费<font color="red">${item.orderTotalMoney}</font>元    </label>
+ </label><br>
  </c:forEach> 
 </div>
 <br>
-
+  <c:forEach items="${complainList}" var="item" varStatus="status">
+ <label onclick="lookcomplaint('${item.pid}','${companyInfo.companyname }')">
+ <label>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日  
+  <font color="red">${item.complaincontent}</font>   
+  <c:if test="${item.disposestatus=='1' }">
+  待受理
+  </c:if>
+ <c:if test="${item.disposestatus=='2' }">
+  待处理
+  </c:if>
+  <c:if test="${item.disposestatus=='3' }">
+  待反馈
+  </c:if>
+  <c:if test="${item.disposestatus=='4' }">
+  已反馈
+  </c:if>
+  </label></label><br>
+ </c:forEach> 
 <div id="buttondiv" style="text-align: center;">
 <br>
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
-<%--  <c:if test="${complainflag== '1'}"> 
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
-</c:if>
- <c:if test="${complainflag== '0'}"> 
-<input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
-</c:if>
-<c:if test="${complainflag== '2' }">
-<input id="historycomplain" type="button" value="查看投诉详情" style="background: #f3be67;width:100px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="lookcomplaint('${complaintpid}','${companyInfo.companyname}')"/>
-</c:if> --%>
+
 </div>
 
 </body>

@@ -1,16 +1,22 @@
 package com.sz.wechat.service;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sz.wechat.dao.ConsumerecMapper;
+import com.sz.wechat.dao.MenuMapper;
 import com.sz.wechat.entity.Consumerec;
+import com.sz.wechat.entity.Menu;
 /**
  * 订单记录数据逻辑层
  * @author sway
  */
+import com.sz.wechat.entity.Order;
 @Service
 public class ConsumerecService {
 	
@@ -19,6 +25,11 @@ public class ConsumerecService {
 	 */
 	@Autowired
 	private ConsumerecMapper consumerecMapper;
+	/**
+	 * 菜单服务接口
+	 */
+	@Autowired
+	private MenuMapper menuMapper;
 
 	/**
 	 * 批量插入订单数据
@@ -71,7 +82,6 @@ public class ConsumerecService {
 	}
 	/**
 	 * 通过openid和companycode查询订单
-	 * @param paytime 下单时间
 	 * @return
 	 */
 	public List<Consumerec> selectConsumerecByOpenidandCompanycode(@Param(value="openid")String openid,@Param(value="companycode") String companycode)
@@ -109,4 +119,42 @@ public class ConsumerecService {
 	public int getCountByCompanyidAndOpenid(String companyId, String openId){
 		return this.consumerecMapper.getCountByCompanyidAndOpenid(openId,companyId);
 	}
+	/**
+	 * 根据下单人和餐厅得到订单列表
+	 * @param openId
+	 * @param companyCode
+	 * @return
+	 */
+	public List<Order> getOrderList(String openId, String companyCode){
+		List<Consumerec> oddNumberList = this.consumerecMapper.selectOddnumberByOpenidandCompanycode(openId, companyCode);
+		List<Order> orderList = new ArrayList<>();
+		for (Consumerec consumerecOddNumber : oddNumberList) {
+			Order order = new Order();
+			order.setOpenId(openId);
+			order.setCompanyCode(companyCode);
+			order.setOrderNo(consumerecOddNumber.getOddnumber());
+			List<Consumerec> consumerecList = this.consumerecMapper.selectConsumerecByOddNumber(order.getOrderNo());
+			//先把订单时间、支付状态设置下，这个数据只要获取到第一条记录即可
+			if (consumerecList != null && !consumerecList.isEmpty()){
+				Consumerec consumerec = consumerecList.get(0);
+				order.setOrderDate(consumerec.getOddTime());
+				if (consumerec.getPaytime()==null){
+					order.setOrderStatus("等待支付");
+				} else {
+					order.setOrderStatus("支付完成");
+				}
+			}
+			//遍历所有的记录，计算总金额
+			for (Consumerec consumerec : consumerecList) {
+				
+				Menu menu = this.menuMapper.getMenuByMenuId(consumerec.getMenuid());
+				int money = NumberUtils.toInt(consumerec.getBuynum()) * NumberUtils.toInt(menu.getPrice());
+				order.setOrderTotalMoney("" + (NumberUtils.toInt(order.getOrderTotalMoney()) + money));
+			}
+			orderList.add(order);
+		}
+		return orderList;
+		
+	}
+	
 }

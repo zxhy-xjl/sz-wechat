@@ -92,6 +92,9 @@ public class MenuController  {
 			String oddNumber = UUID.randomUUID().toString();
 			HttpSession httpSession =(HttpSession)request.getSession();
 			String openid = String.valueOf(httpSession.getAttribute("openid"));
+			SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMMdd");
+			Date date=new Date();
+			String oddTime=dateFormater.format(date);
 			for(String menu:menuArr){
 				menuArr_0 = menu.split(":");
 				consumerec = new Consumerec();
@@ -101,6 +104,7 @@ public class MenuController  {
 				consumerec.setCompanycode(companyCode);
 				consumerec.setOddnumber(oddNumber);
 				consumerec.setOpenid(openid);
+				consumerec.setOddTime(oddTime);
 				list.add(consumerec);
 			}
 			this.consumerecService.batchInsertConsumerec(list);

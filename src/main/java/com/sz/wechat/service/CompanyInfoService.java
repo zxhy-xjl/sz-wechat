@@ -105,6 +105,14 @@ public class CompanyInfoService {
 		return this.complaintMapper.getComplaintByCompanyId(companyId);
 	}
 	/**
+	 * 得到餐厅所有的投诉，投诉状态为4的
+	 * @param companyId
+	 * @return
+	 */
+	public int getComplaintCountByCompanyId(String companyId, String status){
+		return this.complaintMapper.getComplaintCountByCompanyId(companyId, status);
+	}
+	/**
 	 * 得到我在该餐厅的投诉数量
 	 * @param compnayId
 	 * @param opendid

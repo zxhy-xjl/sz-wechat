@@ -53,4 +53,10 @@ public interface ComplaintMapper {
 	 * @return
 	 */
 	public int getComplaintCountByCompanyIdAndOpenid(@Param(value="companyid") String companyid, @Param("openid") String openid);
+	/**
+	 * 得到餐厅所有的投诉,投诉状态为4的，也就是已经完成的状态
+	 * @param companyid
+	 * @return
+	 */
+	public int getComplaintCountByCompanyId(@Param(value="companyid") String companyid, @Param(value="status") String status);
 }

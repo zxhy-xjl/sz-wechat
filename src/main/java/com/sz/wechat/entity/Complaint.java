@@ -21,8 +21,12 @@ public class Complaint implements Serializable {
 	 */
 	private String complaintime;
 	/**
-	 * 投诉状态：1-收到投诉，2-投诉审核，3-部门处理，4-处理反馈
+	 * 投诉状态：1-投诉，2-受理，3-处理，4-反馈
 	 */
+	public static final String DISPOSE_STATUS_TOUSHU="1";
+	public static final String DISPOSE_STATUS_SHOULI="2";
+	public static final String DISPOSE_STATUS_CHULI="3";
+	public static final String DISPOSE_STATUS_FANKUI="4";
 	private String disposestatus;
 	/**
 	 * 投诉内容
@@ -37,7 +41,7 @@ public class Complaint implements Serializable {
 	 */
 	private String disposedep;
 	/**
-	 * 投诉类型 1-店铺，2-卫生，3-服务
+	 * 投诉类型 1-店铺，2-卫生，3-服务,暂时不用
 	 */
 	private String complaintype;
 	/**

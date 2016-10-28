@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,10 +25,12 @@ import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Consumerec;
 import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Menu;
+import com.sz.wechat.entity.Order;
 import com.sz.wechat.entity.OrderHelper;
 import com.sz.wechat.entity.PersonHealth;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
+import com.sz.wechat.service.ComplainService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.service.MenuService;
@@ -58,6 +61,8 @@ public class RestaurantInfoController {
 	private PersonHealthService personHealthService;
 	@Autowired
 	private SupervisePunishService supervisePunishService;
+	@Autowired
+    private ComplainService complainService;
 	/**
 	 * 餐厅详情页面
 	 * @param request
@@ -68,8 +73,8 @@ public class RestaurantInfoController {
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
 		HttpSession ss = (HttpSession)request.getSession();
-		//String openid = ss.getAttribute("openid").toString();
-		String openid = "oehpaw8_fgOEWtPk0S0gLidH60xg";
+		String openid = ss.getAttribute("openid").toString();
+		//String openid = "oehpaw8_fgOEWtPk0S0gLidH60xg";
 		String companyCode = request.getParameter("companycode");
 		CompanyInfo companyInfo = this.companyInfoService.getCompanyByCode(companyCode);
 		//综合得分
@@ -91,11 +96,21 @@ public class RestaurantInfoController {
 		String face = this.companyInfoService.getFace(companyCode);
 		log.debug("face:" + face);
 		//处罚数量
-		System.out.println("companyInfo.getCompanyname():" + companyInfo.getCompanyname());
 		int superviseCount = this.supervisePunishService.getCountByCompanyName(companyInfo.getCompanyname());
-		System.out.println("superViseCount:" + superviseCount);
-		//投诉数量
-		int complaintcount = this.companyInfoService.getComplaintCountByCompanyIdAndOpenid(companyCode, openid);
+		//投诉数量,已经反馈的投诉
+		int complaintcount = this.companyInfoService.getComplaintCountByCompanyId(companyCode, Complaint.DISPOSE_STATUS_FANKUI);
+		//获取订单列表
+		List<Order> orderList = this.consumerecService.getOrderList(openid, companyCode);
+		//订单数量
+		int orderCount = orderList.size();
+		//订单总额
+		int orderTotalMoney = 0;
+		for (Order order : orderList) {
+			orderTotalMoney += NumberUtils.toInt(order.getOrderTotalMoney());
+		}
+		//我在这个餐厅的投诉列表
+		List<Complaint> complainList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode, openid);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("companyInfo", companyInfo);
 		modelAndView.addObject("score", score);
@@ -106,7 +121,12 @@ public class RestaurantInfoController {
 		modelAndView.addObject("complaintcount", complaintcount);
 		modelAndView.addObject("face", face);
 		
-		modelAndView.addObject("totalprice", 40);
+		modelAndView.addObject("orderCount", orderCount);
+		modelAndView.addObject("orderTotalMoney", orderTotalMoney);
+		modelAndView.addObject("orderList", orderList);
+		modelAndView.addObject("complainList", complainList);
+		
+		
 		modelAndView.setViewName("/restaurantinfo");
 		
 		return modelAndView;

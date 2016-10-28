@@ -57,7 +57,7 @@ public class FootprintController {
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
 		//获取到用户的id
 		String openid = request.getParameter("openid");
-		openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
+		//openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
 		//存入session，以便其他地方直接从session中获取openid
 		HttpSession ss = (HttpSession)request.getSession();
         ss.setAttribute("openid",openid);
