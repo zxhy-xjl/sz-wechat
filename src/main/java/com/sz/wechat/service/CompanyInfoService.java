@@ -1,5 +1,9 @@
 package com.sz.wechat.service;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +12,8 @@ import com.sz.wechat.dao.ComplaintMapper;
 import com.sz.wechat.dao.SupervisePunishMapper;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
+import com.sz.wechat.entity.Evaluate;
+import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.SupervisePunish;
 /**
  * 餐饮企业数据逻辑层
@@ -32,6 +38,19 @@ public class CompanyInfoService {
 	 */
 	@Autowired
 	private ComplaintMapper complaintMapper;
+	
+	/**
+	 * 积分数据逻辑层
+	 */
+	@Autowired
+	private EvaluateService evaluateService;
+	
+	private final String KEYWORD="警告";
+	private final String KEYWORD_0="罚款";
+	private final String KEYWORD_1="没收";
+	private final String KEYWORD_2="停产停业";
+	private final String KEYWORD_3="吊销执照";
+	private final String KEYWORD_4="暂扣";
 	
 
 	/**
@@ -121,8 +140,115 @@ public class CompanyInfoService {
 	  * 得到该餐厅的综合得分
 	  * @return
 	  */
-	 public int getScore(){
-		 return 0;
+	 public int getScore(String companyCode,HttpServletRequest request){
+		 	int score = 100;
+			if(!"".equals(companyCode)){
+				StringBuffer sb  = new StringBuffer();
+				CompanyInfo companyInfo = getCompanyByCode(companyCode);
+				HttpSession httpSession =(HttpSession)request.getSession();
+				if(null != companyInfo){
+					//资质类
+					//营业执照
+					if("".equals(companyInfo.getCompanyrecode())|| null == companyInfo.getCompanyrecode()){
+						score = score - 30;
+					}
+					//餐饮服务许可证
+					if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
+						score = score - 30;
+					}
+					//处罚类
+					SupervisePunish supervisePunish = new SupervisePunish();
+					supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
+					List<SupervisePunish> list = getSuperviseLikeCompanyName(supervisePunish);
+					if(null != list && list.size() > 0){
+						//根据关键字判断
+						for (SupervisePunish _supervisePunish : list) {
+							String illegalType = _supervisePunish.getPenaltytype();
+							//判断是否存在吊销执照
+							if(illegalType.indexOf(KEYWORD_3)!=-1){
+								score = score - 5;
+							}else if(illegalType.indexOf(KEYWORD_4)!=-1){
+								score = score - 5;
+							}
+							//停产停业
+							if(illegalType.indexOf(KEYWORD_2)!=-1){
+								score = score - 4;
+							}
+							//没收违法所得
+							if(illegalType.indexOf(KEYWORD_1)!=-1){
+								score = score - 3;
+							}
+							//罚款
+							if(illegalType.indexOf(KEYWORD_0)!=-1){
+								score = score - 2;
+							}
+							//警告
+							if(illegalType.indexOf(KEYWORD)!=-1){
+								score = score - 1;
+							}
+						}
+					}
+					//投诉类
+					int allgrade = 5;
+					int gradeStat=0;
+					List<Complaint> complaintList = getComplaintByCompanyId(companyCode);
+					//投诉
+					if(null != complaintList && complaintList.size() > 0){
+						for (Complaint complaint : complaintList) {
+							if(null != complaint){
+								if(score > 2){
+									score = score - 2;
+								}else{
+									score = 0;
+									break;
+								}
+							}
+						}
+					}
+					//评分
+					String openId = String.valueOf(httpSession.getAttribute("openid"));
+					List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+					if(null != evaluateList && evaluateList.size()>0){
+						for(Evaluate evaluate:evaluateList){
+							if(null != evaluate.getEvaluate()){
+								gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
+							}
+						}
+						gradeStat = gradeStat/evaluateList.size();
+						gradeStat = allgrade  - gradeStat;
+						if(score > gradeStat){
+							score = score - gradeStat;
+						}else{
+							score = 0;
+						}
+						gradeStat=0;
+					}
+				}
+			}
+		 return score;
+	 }
+	 
+	 
+	 /**
+	  * 计算评星分数
+	  * @param openId
+	  * @param companyCode
+	  * @return
+	  */
+	 public int getEvaluate(String openId,String companyCode){
+		 int allScore = 0;
+		 List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(openId, companyCode);
+		 if(null != evaluateList && evaluateList.size()>0){
+				int length = 0;
+				for (Evaluate evaluate : evaluateList) {
+					if(!"".equals(evaluate.getEvaluate())){
+						length = length +1;
+						allScore = allScore + Integer.parseInt(evaluate.getEvaluate());
+					}
+				}
+				allScore = allScore / length;
+			}
+		return allScore;
 	 }
 
 }
