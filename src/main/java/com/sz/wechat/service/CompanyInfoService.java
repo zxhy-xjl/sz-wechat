@@ -85,7 +85,15 @@ public class CompanyInfoService {
 	public List<Complaint> getComplaintByCompanyId(String companyId){
 		return this.complaintMapper.getComplaintByCompanyId(companyId);
 	}
-	
+	/**
+	 * 得到我在该餐厅的投诉数量
+	 * @param compnayId
+	 * @param opendid
+	 * @return
+	 */
+	public int getComplaintCountByCompanyId(String companyId,String openid){
+		return this.complaintMapper.getComplaintCountByCompanyIdAndOpenid(companyId,openid);
+	}
 	
 	
 	/**
@@ -109,6 +117,12 @@ public class CompanyInfoService {
 	{
 		return this.complaintMapper.getComplaintInfoByPid(pid);
 	}
-
+	 /**
+	  * 得到该餐厅的综合得分
+	  * @return
+	  */
+	 public int getScore(){
+		 return 0;
+	 }
 
 }
