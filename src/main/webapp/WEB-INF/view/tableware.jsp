@@ -159,7 +159,7 @@
 				<td colspan="2" >
 					<div style="margin-left:10%">
 						<p>
-						<a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}" style="text-decoration:none;" >营业执照</a>
+						<a class="example-image-link"  href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${CompanyInfo.companyrecode}" data-lightbox="example-set" data-title="${CompanyInfo.companyname}" style="text-decoration:none;" >营业执照</a>
 						</p>
 						<p><a href="<%=path%>/getPublicInfo.do?repastlicence=${CompanyInfo.licence}" style="text-decoration:none;">餐饮许可证</a></p>
 						<p><a href="<%=path%>/getSuperviseByCompanyName.do?companyname=${CompanyInfo.companyname}">行政处罚单</a></p>
