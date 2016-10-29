@@ -63,48 +63,43 @@ var xmlHttpRequest = null;
 
 <div style="background-color: white;">
 <br>
-
-<c:if test="${complaint.disposestatus == '1'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_2.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="14%" height="14%">
+<table><tr>
+<td>
+<img src="<%=path%>/public/images/bg_1_1.png"><br>
+&nbsp;&nbsp;<div style="display: inline;position:relative;"><label >投诉</label> </div>
+</td>
+<td>--<br>&nbsp;</td>
+<td>
+<c:if test="${complaint.disposestatus>1}">
+<img src="<%=path%>/public/images/bg_1_2.png"><br>
 </c:if>
-<c:if test="${complaint.disposestatus == '2'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_2_3.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="14%" height="14%">
+<c:if test="${!(complaint.disposestatus>1)}">
+<img src="<%=path%>/public/images/bg_2_2.png"><br>
 </c:if>
-<c:if test="${complaint.disposestatus == '3'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_2_4.png" width="14%" height="14%">
+
+&nbsp;&nbsp;<div style="display: inline;position:relative;"><label >受理</label> </div>
+</td>
+<td>--<br>&nbsp;</td>
+<td>
+<c:if test="${complaint.disposestatus>2}">
+<img src="<%=path%>/public/images/bg_1_3.png"><br>
 </c:if>
-<c:if test="${complaint.disposestatus == '4'}">
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_1.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_2.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num1" onclick="" alt="0" src="<%=path%>/public/images/bg_1_3.png" width="14%" height="14%">&nbsp;<label style="position: relative;bottom:20px;">-----</label>
-<img id="num2" onclick="" alt="0" src="<%=path%>/public/images/bg_1_4.png" width="14%" height="14%">
+<c:if test="${!(complaint.disposestatus>2)}">
+<img src="<%=path%>/public/images/bg_2_3.png"><br>
 </c:if>
-<br>
-<div style="width:100%;">
-<div style="display: inline;position:relative;left:4%"><label>投诉</label>
-</div>
-
-<div style="display: inline;position:relative;left:21%"><label >受理</label> </div>
-
-<div style="display: inline;position:relative;left:39%"><label >处理</label> </div>
-
-<div style="display: inline;position:relative;left:57%"><label >反馈</label> </div>
-</div>
-<!-- 
-<label style="position:relative;left:75px;">受理</label> -->
-<!-- <label style="position:relative;left:150px;">处理</label>
-<label style="position:relative;left:220px;">反馈</label> -->
-
-<br><br>
+&nbsp;&nbsp;<div style="display: inline;position:relative;"><label >处理</label> </div>
+</td>
+<td>--<br>&nbsp;</td>
+<td>
+<c:if test="${complaint.disposestatus>3}">
+<img src="<%=path%>/public/images/bg_1_4.png"><br>
+</c:if>
+<c:if test="${!(complaint.disposestatus>3)}">
+<img src="<%=path%>/public/images/bg_2_4.png"><br>
+</c:if>
+&nbsp;&nbsp;<div style="display: inline;position:relative;"><label >反馈</label> </div>
+</td>
+</tr></table>
 <hr color="lightgrey" size="1" width="90%"/>
 
 <table border="0" width="100%"
