@@ -32,6 +32,7 @@ import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.FootprintService;
+import com.sz.wechat.utils.RuntimeModel;
 
 /**
  * 足迹信息控制层
@@ -53,14 +54,13 @@ public class FootprintController {
 	private ConsumerecService consumerecService;
 	@Autowired
 	private ComplainService complainService;
-	
+	@Autowired
+	private RuntimeModel runtimeModel;
 	
 	@RequestMapping(value = "/toFootprint",method = RequestMethod.GET)
 	public ModelAndView footprintGet(HttpServletRequest request, HttpServletResponse response){
 		//获取到用户的id
-		String openid = request.getParameter("openid");
-		
-		openid="oehpaw8_fgOEWtPk0S0gLidH60xg";
+		String openid = this.runtimeModel.getOpenId(request);
 		logger.info("openId:" + openid);
 		//存入session，以便其他地方直接从session中获取openid
 		HttpSession ss = (HttpSession)request.getSession();

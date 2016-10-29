@@ -36,6 +36,7 @@ import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.service.MenuService;
 import com.sz.wechat.service.PersonHealthService;
 import com.sz.wechat.service.SupervisePunishService;
+import com.sz.wechat.utils.RuntimeModel;
 
 /**
  * 餐厅详情控制层
@@ -63,6 +64,8 @@ public class RestaurantInfoController {
 	private SupervisePunishService supervisePunishService;
 	@Autowired
     private ComplainService complainService;
+	@Autowired
+	private RuntimeModel runtimeModel;
 	/**
 	 * 餐厅详情页面
 	 * @param request
@@ -73,8 +76,7 @@ public class RestaurantInfoController {
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
 		HttpSession ss = (HttpSession)request.getSession();
-		String openid = ss.getAttribute("openid").toString();
-		//String openid = "oehpaw8_fgOEWtPk0S0gLidH60xg";
+		String openid = this.runtimeModel.getOpenId(ss);
 		String companyCode = request.getParameter("companycode");
 		CompanyInfo companyInfo = this.companyInfoService.getCompanyByCode(companyCode);
 		//综合得分
