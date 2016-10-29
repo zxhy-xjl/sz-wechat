@@ -4,6 +4,7 @@
 package com.sz.wechat.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -80,4 +81,44 @@ public class GovernmentController {
 		return modelAndView;
 		
 	}
+	
+	
+	/**
+	 * 政府端执行投诉详情操作
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping(value = "/updategovdetails")
+	public ModelAndView UpdatedetailsGet (HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String pid = request.getParameter("pid");
+		String status = request.getParameter("status");
+		if(status==null )
+			status="";
+		String feedback = request.getParameter("feedback");
+		Date date=new Date();
+		DateFormat format=new SimpleDateFormat("yyyyMMddHHmmss");
+		String time=format.format(date);
+		Complaint complaint = new Complaint();
+		complaint.setPid(pid);
+		complaint.setDisposestatus(status);
+		complaint.setDisposetime(time);
+		complaint.setFeedback(feedback);
+		if(status.equals("4"))
+		this.complainService.updateStatusandFeedByPid(complaint);
+		else
+			this.complainService.updateStatusByPid(complaint);
+		
+		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.addObject("complaint", complaint);
+		
+		//log.debug(complainlist.get(0).getComplaincontent());
+		//modelAndView.addObject("companyname", companyname);
+		modelAndView.setViewName("redirect:/government.do");
+		return modelAndView;
+		
+	}
+	
+	
+	
+	
 }

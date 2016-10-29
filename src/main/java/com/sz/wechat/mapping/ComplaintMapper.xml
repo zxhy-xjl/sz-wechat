@@ -14,10 +14,12 @@
 		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
 		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
 		<result column="COMPLAINPHOTO" property="complainphoto" jdbcType="BLOB"/>
+		<result column="FEEDBACK" property="feedback" jdbcType="VARCHAR"/>
+		
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT,  DISPOSETIME, DISPOSEDEP, COMPLAINTYPE,DISPOSERESULT,OPENID,COMPLAINPHOTO
+		PID, COMPANYID, COMPLAINTIME, DISPOSESTATUS, COMPLAINCONTENT,  DISPOSETIME, DISPOSEDEP, COMPLAINTYPE,DISPOSERESULT,OPENID,COMPLAINPHOTO,FEEDBACK
 	</sql>
 	
 	<!-- 查询 -->
@@ -57,6 +59,7 @@
 		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
 		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
 		<result column="COMPLAINPHOTO" property="complainphoto" jdbcType="BLOB"/>
+				<result column="FEEDBACK" property="feedback" jdbcType="VARCHAR"/>
         <association property="companyinfo" javaType="com.sz.wechat.entity.CompanyInfo">
             <id column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
 		<result column="COMPANYNAME" property="companyname" jdbcType="VARCHAR"/>
@@ -84,7 +87,12 @@
 	
 	
 	<!--修改  -->
-	
+		 <update id="updateStatusByPid" parameterType="com.sz.wechat.entity.Complaint">
+	 	update SZ_COMPLAINT set DISPOSESTATUS = #{disposestatus,jdbcType=VARCHAR},DISPOSETIME = #{disposetime,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
+	 </update>
+		 <update id="updateStatusandFeedByPid" parameterType="com.sz.wechat.entity.Complaint">
+	 	update SZ_COMPLAINT set DISPOSESTATUS = #{disposestatus,jdbcType=VARCHAR},DISPOSETIME = #{disposetime,jdbcType=VARCHAR},FEEDBACK=#{feedback,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
+	 </update>
 	<!--插入  -->
 	 <insert id="insertComplaint" parameterType="com.sz.wechat.entity.Complaint">
   insert into SZ_COMPLAINT

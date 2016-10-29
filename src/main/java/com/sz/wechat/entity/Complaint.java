@@ -67,9 +67,24 @@ public class Complaint implements Serializable {
      * 公司表里的companyname
      */ 
     private String companyName;
+    /**
+     * 评分
+     */
     private String evaluate;
+    
+    /**
+     * 用户反馈
+     */
+    private String feedback;
+    
 
 
+	public String getFeedback() {
+		return feedback;
+	}
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
 	public String getEvaluate() {
 		return evaluate;
 	}
