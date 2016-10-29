@@ -67,8 +67,15 @@ public class Complaint implements Serializable {
      * 公司表里的companyname
      */ 
     private String companyName;
+    private String evaluate;
 
 
+	public String getEvaluate() {
+		return evaluate;
+	}
+	public void setEvaluate(String evaluate) {
+		this.evaluate = evaluate;
+	}
 	public byte[] getComplainphoto() {
 		return complainphoto;
 	}

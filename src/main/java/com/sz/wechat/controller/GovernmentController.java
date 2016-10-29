@@ -40,7 +40,8 @@ public class GovernmentController {
 	private FootprintService footprintService;
 	@Autowired
 	private ComplainService complainService;
-	
+	@Autowired
+	private CompanyInfoService companyInfoService;
 	/**
 	 * 政府端执行投诉的查询操作
 	 * @return
@@ -55,9 +56,28 @@ public class GovernmentController {
 		modelAndView.addObject("complainlist", complainlist);
 		log.debug(complainlist.get(0).getComplaincontent());
 		//modelAndView.addObject("companyname", companyname);
-		modelAndView.setViewName("/govcomplaint");
+		modelAndView.setViewName("forward:/manager/govcomplaint.jsp");
 		return modelAndView;
 		
 	}
 	
+	/**
+	 * 政府端执行投诉详情操作
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping(value = "/governmentdetails")
+	public ModelAndView ComplaindetailsGet (HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String pid = request.getParameter("pid");
+		String companyname = request.getParameter("companyname");
+		Complaint complaint = this.companyInfoService.getComplaintInfoByPid(pid);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("complaint", complaint);
+		modelAndView.addObject("companyname", companyname);
+		//log.debug(complainlist.get(0).getComplaincontent());
+		//modelAndView.addObject("companyname", companyname);
+		modelAndView.setViewName("forward:/manager/govcomplaintdetails.jsp");
+		return modelAndView;
+		
+	}
 }

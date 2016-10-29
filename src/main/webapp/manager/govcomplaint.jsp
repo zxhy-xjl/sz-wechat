@@ -48,7 +48,13 @@ table.hovertable td {
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>扫桌政府端控制台</title>
 <script type="text/javascript">
-
+function complaindetails(pid,companyname)
+{
+	
+	window.location.href="<%=path%>/governmentdetails.do?pid="+pid+"&companyname="+companyname;
+	
+	
+}
 </script>
 </head>
 <body style="background-color: #e9e9e9;">
@@ -60,7 +66,7 @@ table.hovertable td {
 	<th>日期</th><th>餐厅</th><th>投诉内容</th><th>状态</th><th>操作</th>
 </tr>
 <c:forEach items="${complainlist}" var="item" varStatus="status">
-<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+<tr onclick="complaindetails('${item.pid}','${item.companyinfo.companyname}')" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
 	<%-- <td>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日 ${fn:substring(item.complaintime,8,10)}:${fn:substring(item.complaintime,10,12)}</td><td>${item.companyid }</td><td>${item.complaincontent }</td>
 	<td>${item.disposestatus }</td><td>Item 1C</td> --%>
 	<td>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日 ${fn:substring(item.complaintime,8,10)}:${fn:substring(item.complaintime,10,12)}</td>
