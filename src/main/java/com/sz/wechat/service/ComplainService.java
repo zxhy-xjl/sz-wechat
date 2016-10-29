@@ -63,5 +63,22 @@ public class ComplainService {
 	public List<Complaint> getMoreComplaintInfo(){
 		return this.complaintMapper.getMoreComplaintInfo();
 	}
-	
+	/**
+	 * 通过pid修改投诉处理状态
+	 * @param pid
+	 */
+    public int updateStatusByPid(Complaint complaint)
+    {
+    	return this.complaintMapper.updateStatusByPid(complaint);
+    	
+    }
+    /**
+     * 通过pid修改投诉处理状态和反馈信息
+     * @param pid
+     */
+    public int updateStatusandFeedByPid(Complaint complaint)
+    {
+    	return this.complaintMapper.updateStatusandFeedByPid(complaint);
+    	
+    }
 }

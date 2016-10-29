@@ -9,7 +9,33 @@
 <html>
 <head>
 <style type="text/css">
+.mesWindow {
+	border: #666 1px solid;
+	background: #fff;
+}
 
+.mesWindowTop {
+	border-bottom: #eee 1px solid;
+	margin-left: 4px;
+	padding: 3px;
+	font-weight: bold;
+	text-align: left;
+	font-size: 12px;
+}
+
+.mesWindowContent {
+	margin: 4px;
+	font-size: 12px;
+}
+
+.mesWindow .close {
+	/* height: 15px;
+	width: 28px; */
+	border: none;
+	cursor: pointer;
+	/* text-decoration: underline; */
+	background: #fff
+}
 html{
 font-family: SimHei;
 }
@@ -48,6 +74,7 @@ table.hovertable td {
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>扫桌政府端控制台</title>
 <script type="text/javascript">
+var isIe = (document.all) ? true : false;
 function complaindetails(pid,companyname)
 {
 	
@@ -55,6 +82,140 @@ function complaindetails(pid,companyname)
 	
 	
 }
+//阻止事件重复响应
+function stopBubble(e){
+	 if(e && e.stopPropagation){
+	 e.stopPropagation(); //w3c
+	 }else window.event.cancelBubble=true; //IE
+	 }
+	 
+	function bizchange(event,button,newpid,status)
+	{
+		
+		stopBubble(event);
+		var tmp = confirm("确认"+button.value+"此投诉？")
+		
+     if(tmp==true)
+    	 {
+		button.value="已"+button.value;
+		window.location.href="<%=path%>/updategovdetails.do?pid="+newpid+"&status="+status;
+    	 }
+     else
+    	 return;
+	}
+	
+	function feedfinish()
+	{
+		closeWindow();
+
+		//window.location.href="<%=path%>/government.do";
+	}
+	
+	//弹出方法
+	function showMessageBox(wTitle, content, wWidth,feedpid)
+
+	{
+
+		closeWindow();
+
+		var bWidth = parseInt(document.documentElement.scrollWidth);
+
+		var bHeight = parseInt(document.documentElement.scrollHeight);
+
+		if (isIe) {
+
+			setSelectState('hidden');
+		}
+
+		var back = document.createElement("div");
+
+		back.id = "back";
+
+		var styleStr = "top:0px;left:0px;position:absolute;background:#666;width:"
+				+ bWidth + "px;height:" + bHeight + "px;";
+
+		styleStr += (isIe) ? "filter:alpha(opacity=0);" : "opacity:0;";
+
+		back.style.cssText = styleStr;
+
+		document.body.appendChild(back);
+
+		showBackground(back, 50);
+
+		var mesW = document.createElement("div");
+
+		mesW.id = "mesWindow";
+
+		mesW.className = "mesWindow";
+
+		mesW.innerHTML = "<div class='mesWindowTop'><table width='100%' height='100%'><tr><td>"
+				+ wTitle
+				+ "</td><td style='width:1px;'><input type='button' onclick='closeWindow();' title='关闭窗口' class='close' value='关闭' /></td></tr></table></div><div class='mesWindowContent' id='mesWindowContent'>"
+				+ content + "</div><div class='mesWindowBottom'></div>";
+
+		styleStr = "left:500"
+				
+				+ "px;height:500px;top:100" +  "px;position:absolute;width:" + wWidth
+				+ "px;";
+
+		mesW.style.cssText = styleStr;
+
+		document.body.appendChild(mesW);
+        document.getElementById("feedpid").value = feedpid;
+	}
+
+	//让背景渐渐变暗
+	function showBackground(obj, endInt)
+	{
+		if (isIe)
+
+		{
+			obj.filters.alpha.opacity += 1;
+
+			if (obj.filters.alpha.opacity < endInt)
+			{
+				setTimeout(function() {
+					showBackground(obj, endInt)
+				}, 5);
+			}
+	} else {
+			var al = parseFloat(obj.style.opacity);
+			al += 0.01;
+			obj.style.opacity = al;
+			if (al < (endInt / 100))
+			{
+				setTimeout(function() {
+					showBackground(obj, endInt)
+				}, 5);
+			}
+		}
+	}
+
+	//关闭窗口
+	function closeWindow()
+	{
+		if (document.getElementById('back') != null)
+		{
+		document.getElementById('back').parentNode.removeChild(document
+					.getElementById('back'));
+		}
+		if (document.getElementById('mesWindow') != null)
+		{
+			document.getElementById('mesWindow').parentNode
+					.removeChild(document.getElementById('mesWindow'));
+		}
+		if (isIe) {
+			setSelectState('');
+		}
+	}
+
+	//测试弹出
+	function testMessageBox(event,feedpid)
+	{
+		stopBubble(event);
+	messContent = "<div style='padding:30px 0 30px 120px;'><form id=\"feedbackForm\" action='<%=path%>/updategovdetails.do' method=\"post\"> <input type=\"hidden\" id='feedpid' name=\"pid\" value=\"\"><input type=\"hidden\" id='status' name=\"status\" value=\"4\"><label>反馈内容:</label><br/><textarea id='result' name='feedback' row='6' style='height: 300px;width: 300px;'></textarea><br/><br/><br/><input type='submit' style='width:48px;margin-left: 120px;' value='完成' onclick='feedfinish()'/></form></div>";
+		showMessageBox('用户反馈', messContent, 500,feedpid);
+	}
 </script>
 </head>
 <body style="background-color: #e9e9e9;">
@@ -86,14 +247,14 @@ function complaindetails(pid,companyname)
 	<label>已反馈</label>
 	</c:if>
 	</td>
-	<td><c:if test="${item.disposestatus == 1}">
-	<input type="button" value="受理" onclick="">
+	<td ><c:if test="${item.disposestatus == 1}">
+	<input type="button" value="受理" onclick="bizchange(event,this,'${item.pid}','2')">
 	</c:if>
 	<c:if test="${item.disposestatus == 2}">
-	<input type="button" value="处理" onclick="">
+	<input type="button" value="处理" onclick="bizchange(event,this,'${item.pid}','3')">
 	</c:if>
 	<c:if test="${item.disposestatus == 3}">
-	<input type="button" value="反馈" onclick="">
+	<input type="button" value="反馈" onclick="testMessageBox(event,'${item.pid}');">
 	</c:if>
 	<c:if test="${item.disposestatus == 4}">
 	

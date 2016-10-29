@@ -69,6 +69,10 @@ font-family: SimHei;
 <img alt="0" src="<%=path%>/toLookImage.do?pid=${complaint.pid }" width="200px"   >
 </label>
 </c:if>
+<c:if test="${complaint.feedback!=null}">
+<br><br>
+<label>客户反馈：${complaint.feedback}</label>
+</c:if>
 </div>
 
 </div>

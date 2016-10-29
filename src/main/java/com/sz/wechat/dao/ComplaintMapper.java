@@ -35,17 +35,39 @@ public interface ComplaintMapper {
 	 */
 	public List<Complaint> getComplaintByCompanyId(String companyId);
 	/**
-	 * 查询企业投诉反馈信息（政府端）
+	 * 查询企业投诉信息（政府端）
 	 *
 	 * @return
 	 */
 	public List<Complaint> getComplaintInfo();
-	
+	/**
+	 * 连表查询投诉信息
+	 * @return
+	 */
 	public List<Complaint> getMoreComplaintInfo();
 	
-	
+	/**
+	 * 通过openid查询投诉信息
+	 * @param Openid
+	 * @return
+	 */
 	public List<Complaint> getComplaintByOpenid(String Openid);
+	/**
+	 * 通过pid查询投诉信息
+	 * @param pid
+	 * @return
+	 */
 	public Complaint getComplaintInfoByPid(String pid);
+	/**
+	 * 通过pid修改投诉处理状态
+	 * @param pid
+	 */
+    public int updateStatusByPid(Complaint complaint);
+    /**
+     * 通过pid修改投诉处理状态和反馈信息
+     * @param pid
+     */
+    public int updateStatusandFeedByPid(Complaint complaint);
 	
 	/**
 	 * 插入投诉信息
