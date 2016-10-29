@@ -13,10 +13,13 @@ public class Order {
 	private String orderDate;
 	//订单编号
 	private String orderNo;
+	//点菜的数量
+	private int orderCount;
 	//订单总金额
-	private String orderTotalMoney;
+	private int orderTotalMoney;
 	//订单状态，下单、支付两个状态，
 	private String orderStatus;
+	
 	
 	
 	public String getOpenId() {
@@ -43,18 +46,26 @@ public class Order {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
-	public String getOrderTotalMoney() {
-		return orderTotalMoney;
-	}
-	public void setOrderTotalMoney(String orderTotalMoney) {
-		this.orderTotalMoney = orderTotalMoney;
-	}
+
 	public String getOrderStatus() {
 		return orderStatus;
 	}
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	public int getOrderCount() {
+		return orderCount;
+	}
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+	public int getOrderTotalMoney() {
+		return orderTotalMoney;
+	}
+	public void setOrderTotalMoney(int orderTotalMoney) {
+		this.orderTotalMoney = orderTotalMoney;
+	}
+
 	
 	
 }

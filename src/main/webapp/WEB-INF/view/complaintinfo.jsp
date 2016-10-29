@@ -73,7 +73,7 @@ var xmlHttpRequest = null;
 window.onload = function()//用window的onload事件，窗体加载完毕的时候
 {   var pid = "${pid}";
 	document.getElementById("complainpic").src="<%=path%>/toLookImage.do?pid="+pid;
-	
+	document.getElementById("complainpicHref").href="<%=path%>/toLookImage.do?pid="+pid;
 }
 
 </script>
@@ -96,7 +96,9 @@ window.onload = function()//用window的onload事件，窗体加载完毕的时�
 <label >&nbsp;&nbsp;<font style="" size="3">投诉时间：${complaint.complaintime }</font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
 <c:if test="${complaint.complainphoto!=null}">
-<img id="complainpic" onclick="" alt="0" src="" width="20%"  >
+<a id="complainpicHref" href="">
+<img id="complainpic" alt="0" src="" width="100px" height="100px"  >
+</a>
 </c:if>
 <c:if test="${complaint.complainphoto==null}">
 <label style="font-weight: bolder;color: red;">&nbsp;&nbsp;没有图片，投诉时附加图片可以增加审核通过率</label>

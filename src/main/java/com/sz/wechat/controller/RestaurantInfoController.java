@@ -106,7 +106,7 @@ public class RestaurantInfoController {
 		//订单总额
 		int orderTotalMoney = 0;
 		for (Order order : orderList) {
-			orderTotalMoney += NumberUtils.toInt(order.getOrderTotalMoney());
+			orderTotalMoney += order.getOrderTotalMoney();
 		}
 		//我在这个餐厅的投诉列表
 		List<Complaint> complainList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode, openid);
