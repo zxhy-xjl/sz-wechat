@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sz.wechat.dao.CompanyInfoMapper;
 import com.sz.wechat.dao.ConsumerecMapper;
 import com.sz.wechat.dao.MenuMapper;
 import com.sz.wechat.entity.Consumerec;
@@ -30,7 +32,8 @@ public class ConsumerecService {
 	 */
 	@Autowired
 	private MenuMapper menuMapper;
-
+	@Autowired
+	private CompanyInfoMapper companyInfoMapper;
 	/**
 	 * 批量插入订单数据
 	 * @param list
@@ -119,6 +122,10 @@ public class ConsumerecService {
 	public int getCountByCompanyidAndOpenid(String companyId, String openId){
 		return this.consumerecMapper.getCountByCompanyidAndOpenid(openId,companyId);
 	}
+	public List<Order> getOrderList(String openId){
+		List<Consumerec> oddNumberList = this.consumerecMapper.selectOddnumberByOpenid(openId);
+		return this.toOrderList(oddNumberList);
+	}
 	/**
 	 * 根据下单人和餐厅得到订单列表
 	 * @param openId
@@ -127,16 +134,23 @@ public class ConsumerecService {
 	 */
 	public List<Order> getOrderList(String openId, String companyCode){
 		List<Consumerec> oddNumberList = this.consumerecMapper.selectOddnumberByOpenidandCompanycode(openId, companyCode);
+		return toOrderList(oddNumberList);
+		
+	}
+
+	private List<Order> toOrderList(List<Consumerec> oddNumberList) {
 		List<Order> orderList = new ArrayList<>();
 		for (Consumerec consumerecOddNumber : oddNumberList) {
 			Order order = new Order();
-			order.setOpenId(openId);
-			order.setCompanyCode(companyCode);
 			order.setOrderNo(consumerecOddNumber.getOddnumber());
 			List<Consumerec> consumerecList = this.consumerecMapper.selectConsumerecByOddNumber(order.getOrderNo());
 			//先把订单时间、支付状态设置下，这个数据只要获取到第一条记录即可
 			if (consumerecList != null && !consumerecList.isEmpty()){
 				Consumerec consumerec = consumerecList.get(0);
+				order.setOpenId(consumerec.getOpenid());
+				order.setCompanyCode(consumerec.getCompanycode());
+				String companyName = this.companyInfoMapper.getCompanyByCode(order.getCompanyCode()).getCompanyname();
+				order.setCompanyName(companyName);
 				order.setOrderDate(consumerec.getOddTime());
 				if (consumerec.getPaytime()==null){
 					order.setOrderStatus("待支付");
@@ -154,7 +168,6 @@ public class ConsumerecService {
 			orderList.add(order);
 		}
 		return orderList;
-		
 	}
 	
 }

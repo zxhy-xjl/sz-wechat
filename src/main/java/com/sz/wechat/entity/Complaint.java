@@ -16,6 +16,7 @@ public class Complaint implements Serializable {
 	 * 企业ID
 	 */
 	private String companyid;
+	private String companyName;
 	/**
 	 * 投诉时间
 	 */
@@ -124,4 +125,11 @@ public class Complaint implements Serializable {
 	public void setDisposeresult(String disposeresult) {
 		this.disposeresult = disposeresult;
 	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	
 }
