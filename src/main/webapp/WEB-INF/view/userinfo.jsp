@@ -29,19 +29,19 @@ font-family: SimHei;
 	{
 		if(id=='myorder')
 		{
-			document.getElementById("myorder").style.display = "block";
-			document.getElementById("mycomplaint").style.display = "none";
       
-			document.getElementById("myorderbutton").style.background = "#e9e9e9";
-			document.getElementById("mycomplaintbutton").style.background = "#d4d3d3";
+			document.getElementById("myorderbutton").style.background = "blue";
+			document.getElementById("mycomplaintbutton").style.background = "";
+			document.getElementById("myorder").style.display = "";
+			document.getElementById("mycomplaint").style.display = "none";
 		}
 		else if(id=='mycomplaint')
 			{
-			document.getElementById("myorder").style.display = "none";
-			document.getElementById("mycomplaint").style.display = "block";
 
-			document.getElementById("myorderbutton").style.background = "#d4d3d3";
-			document.getElementById("mycomplaintbutton").style.background = "#e9e9e9";
+			document.getElementById("myorderbutton").style.background = "";
+			document.getElementById("mycomplaintbutton").style.background = "blue";
+			document.getElementById("myorder").style.display = "none";
+			document.getElementById("mycomplaint").style.display = "";
 			}
 		
 	}
@@ -54,11 +54,11 @@ font-family: SimHei;
 		
 		
 	}
-	function detailsinfo1(oddNumber){
+	function detailsinfo1(oddNumber,orderStatus){
 		
-		
+		var flag = orderStatus=="待支付";
 		console.log(oddNumber);
-		window.location.href="<%=path%>/toMenuView.do?oddNumber="+oddNumber+"&flag=0"
+		window.location.href="<%=path%>/toMenuView.do?oddNumber="+oddNumber+"&flag=" + flag;
 		
 		
 	}
@@ -75,8 +75,8 @@ font-family: SimHei;
 <body style="background-color: #e9e9e9;">
 <div id="welcomediv">您好，<label id="nickname" style="color: red;"></label><br></div>
 <div style="text-align: center;">
-<input  id="myorderbutton" type="button" onclick="changetable('myorder')" style="background-color: #e9e9e9;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的订单">
-<input id="mycomplaintbutton" type="button" onclick="changetable('mycomplaint')" style="background-color: #d4d3d3;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的投诉">
+<input  id="myorderbutton" type="button" onclick="changetable('myorder')" style="background-color: blue;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的订单">
+<input id="mycomplaintbutton" type="button" onclick="changetable('mycomplaint')" style="background-color: ;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的投诉">
 </div>
 <div id="myorder">
 <table border="0" width="100%"
@@ -87,7 +87,7 @@ font-family: SimHei;
 					<td><label style="font-size: 15px;">
 					&nbsp;&nbsp;${fn:substring(item.orderDate,0,4)}年${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日 </label></td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.orderNo}')">
+				<tr style="background-color: white;height:50px;" onclick="detailsinfo1('${item.orderNo}','${item.orderStatus}')">
 					<td>
 						<label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyName}</font></label><br />
 					</td>
@@ -98,7 +98,8 @@ font-family: SimHei;
 						<label style="">&nbsp;&nbsp;合计：${item.orderCount}道菜，${item.orderTotalMoney}元</label>
 					</td>
 					
-					<td><c:if test="${item.orderStatus == '待支付'}"><input type="button" style="height:25px;width:60px;background-color: #f3be67;border:none;font-family: SimHei;font-size: 20px;-moz-border-radius: 20px;" value="买单" onclick="detailsinfo('${item.orderNo}')"></c:if>
+					<td><c:if test="${item.orderStatus == '待支付'}">
+					<input type="button" value="去结算" onclick="detailsinfo('${item.orderNo}')"></c:if>
 					<c:if test="${item.orderStatus == '已支付'}"><label  style="height:25px;width:60px;color: #a59171;font-family: SimHei;font-size: 20px" >已付款</label></c:if>
 					<br />
 					</td>
