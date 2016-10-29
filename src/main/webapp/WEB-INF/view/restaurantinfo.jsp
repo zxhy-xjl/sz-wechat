@@ -86,20 +86,21 @@ function lookcomplaint(pid,companyname)
 
 
 <body style="font-family: SimHei;background-color: #e9e9e9;">
-<label style="font-size: 36px;font-weight:bold">${companyInfo.companyname}</label>
+<label style="font-size: 32px;font-weight:bold">${companyInfo.companyname}</label>
 <div id="baseinfo">
-<table>
+<table width="100%">
 <tr>
-<td><img src="<%=path%>/public/images/food.jpg" height="100px" width="100px"/></td>
-<td width="30%">
+<td width="25%">
+<img src="<%=path%>/public/images/company/${companyInfo.companycode }.png" height="100px" width="100px"/></td>
+<td width="15%">
 <div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
 		<font style="font-size:40px;position: relative;bottom: 65px;" color="red">&nbsp;${score}</font>
 		<font style="font-size:18px;position: relative;bottom: 65px;" color="red">分</font>
 	</div>
  </td>
- <td width="80%">
+ <td width="70%">
 <table width="100%"><tr><td>
- <label style="font-weight:bold">扫桌次数：${scanCount}次</label>
+ <label style="font-weight:bold">本月扫桌：${scanCount}次</label>
 </td></tr><tr><td>
 <div id="stars"> 
 <img id="star1" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
@@ -109,41 +110,44 @@ function lookcomplaint(pid,companyname)
 <img id="star5" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
 
 </div> 
-</td></tr></table>
+</td></tr>
+<tr><td><a href="tel:${companyInfo.lxfs}">${companyInfo.lxfs}</a>
+</td></tr>
+</table>
 
 
  </td>
 </tr>
 </table>
-<label style="font-weight:bold">${companyInfo.companyaddress}  &nbsp;<a href="tel:${companyInfo.lxfs}">${companyInfo.lxfs}</a></label>
+<label style="font-weight:bold">&nbsp;&nbsp;${companyInfo.companyaddress}  &nbsp;</label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold;font-size: 20px;">
-<a href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${companyInfo.companyrecode}" data-lightbox="example-set" data-title="${companyInfo.companyname}" style="text-decoration:none;" >营业执照</a>
+<label style="font-size: 20px;">
+<a href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${companyInfo.companyrecode}" data-lightbox="example-set" data-title="${companyInfo.companyname}" style="text-decoration:none;" >&nbsp;&nbsp;营业执照</a>
 </label>
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
 
 <c:if test="${companyInfo.licence==null}">
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;
 餐饮许可证
 </label>
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/close.png" width="28" height="26">
 </c:if>
 <c:if test="${companyInfo.licence!=null}">
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="<%=path%>/getPublicInfo.do?repastlicence=${companyInfo.licence}" style="text-decoration:none;">餐饮许可证</a>
 </label>
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
 </c:if>
 
 <br>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;
+<label style="font-size: 20px;">&nbsp;
 <c:if test="${personHealthCount > 0}">
-<a href="<%=path%>/personHealthList.do?companyCode=${companyInfo.companycode}">健康证</a>
+<a href="<%=path%>/personHealthList.do?companyCode=${companyInfo.companycode}">健&nbsp;康&nbsp;证</a>
 </c:if>
 <c:if test="${personHealthCount  == 0}">
-健康证
+健&nbsp;康&nbsp;证
 </c:if>
-&nbsp; ${personHealthCount }个</label><label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
+${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
 &nbsp;
 <c:if test="${face=='良好（笑脸）' }">
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.png" width="28" height="26">
@@ -156,24 +160,24 @@ function lookcomplaint(pid,companyname)
 </c:if>
 
 <br>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;行政处罚    ${superviseCount }个</label>
-<label style="font-weight:bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
+<label style="font-size: 20px;">&nbsp;&nbsp;行政处罚    ${superviseCount }个</label>
+<label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
 <hr color="lightgrey"/>
-<label style="font-weight:bold">商家介绍：</label><br/><br/>
-<label>${companyInfo.companyintro}</label>
+<label style="font-weight:bold">餐厅介绍：${companyInfo.companyintro}</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">消费合计：</label><label style="float: right;">【${orderCount }个订单】【合计】<font color="red"> ${orderTotalMoney} </font>元</label><br>
   <c:forEach items="${orderList}" var="item" varStatus="status">
  <label onclick="detailsinfo('${item.orderNo}')">
- <label>${fn:substring(item.orderDate,0,4)}年${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日   消费<font color="red">${item.orderTotalMoney}</font>元    </label>
+ <label>${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日&nbsp;&nbsp;${item.orderCount }道菜&nbsp;&nbsp;<font color="red"> ${item.orderTotalMoney}</font>元 </label><label style="float: right;">   ${item.orderStatus }</label>
  </label><br>
  </c:forEach> 
 </div>
 <br>
   <c:forEach items="${complainList}" var="item" varStatus="status">
  <label onclick="lookcomplaint('${item.pid}','${companyInfo.companyname }')">
- <label>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日  
-  <font color="red">${item.complaincontent}</font>   
+ <label>${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日  
+  <font color="red">${item.complaincontent}</font>  
+  </label><label style="float: right;"> 
   <c:if test="${item.disposestatus=='1' }">
   待受理
   </c:if>

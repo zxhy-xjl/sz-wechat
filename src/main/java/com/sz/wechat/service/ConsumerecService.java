@@ -139,17 +139,17 @@ public class ConsumerecService {
 				Consumerec consumerec = consumerecList.get(0);
 				order.setOrderDate(consumerec.getOddTime());
 				if (consumerec.getPaytime()==null){
-					order.setOrderStatus("等待支付");
+					order.setOrderStatus("待支付");
 				} else {
-					order.setOrderStatus("支付完成");
+					order.setOrderStatus("已支付");
 				}
 			}
 			//遍历所有的记录，计算总金额
 			for (Consumerec consumerec : consumerecList) {
-				
+				order.setOrderCount(order.getOrderCount()+NumberUtils.toInt(consumerec.getBuynum()));
 				Menu menu = this.menuMapper.getMenuByMenuId(consumerec.getMenuid());
 				int money = NumberUtils.toInt(consumerec.getBuynum()) * NumberUtils.toInt(menu.getPrice());
-				order.setOrderTotalMoney("" + (NumberUtils.toInt(order.getOrderTotalMoney()) + money));
+				order.setOrderTotalMoney(order.getOrderTotalMoney() + money);
 			}
 			orderList.add(order);
 		}
