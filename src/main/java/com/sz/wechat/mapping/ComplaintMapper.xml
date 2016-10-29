@@ -36,6 +36,52 @@
 		<select id="getComplaintInfoByPid" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND PID = #{pid,jdbcType=VARCHAR} 
 	</select>
+
+	<select id="getComplaintInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT
+	</select>
+	
+	 <select id="getMoreComplaintInfo" parameterType="java.lang.String" resultMap="ClassResultMap">
+        select a.PID,a.COMPANYID,a.COMPLAINTIME,a.DISPOSESTATUS,a.COMPLAINCONTENT,a.DISPOSETIME,a.DISPOSEDEP,a.DISPOSERESULT,a.OPENID,b.COMPANYNAME from SZ_COMPLAINT a LEFT OUTER JOIN SZ_COMPANYINFO b on a.COMPANYID=b.COMPANYCODE
+    </select>
+    <!-- 使用resultMap映射实体类和字段之间的一一对应关系 -->
+    <resultMap type="com.sz.wechat.entity.Complaint" id="ClassResultMap">
+      <id column="PID" property="pid" jdbcType="VARCHAR"/>
+		<result column="COMPANYID" property="companyid" jdbcType="VARCHAR"/>
+		<result column="COMPLAINTIME" property="complaintime" jdbcType="VARCHAR"/>
+		<result column="DISPOSESTATUS" property="disposestatus" jdbcType="VARCHAR"/>
+		<result column="COMPLAINCONTENT" property="complaincontent" jdbcType="VARCHAR"/>
+		<result column="DISPOSETIME" property="disposetime" jdbcType="VARCHAR"/>
+		<result column="DISPOSEDEP" property="disposedep" jdbcType="VARCHAR"/>
+		<result column="COMPLAINTYPE" property="complaintype" jdbcType="VARCHAR"/>
+		<result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR"/>
+		<result column="OPENID" property="openid" jdbcType="VARCHAR"/>
+		<result column="COMPLAINPHOTO" property="complainphoto" jdbcType="BLOB"/>
+        <association property="companyinfo" javaType="com.sz.wechat.entity.CompanyInfo">
+            <id column="COMPANYCODE" property="companycode" jdbcType="VARCHAR"/>
+		<result column="COMPANYNAME" property="companyname" jdbcType="VARCHAR"/>
+		<result column="COMPANYTYPE" property="companytype" jdbcType="VARCHAR"/>
+		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR"/>
+		<result column="REGISTCAPITAL" property="registcapital" jdbcType="VARCHAR"/>
+		<result column="CREATETIME" property="createtime" jdbcType="VARCHAR"/>
+		<result column="COMPANYADDRESS" property="companyaddress" jdbcType="VARCHAR"/>
+		<result column="OPERATESTART" property="operatestart" jdbcType="VARCHAR"/>
+		<result column="OPERATEEND" property="operateend" jdbcType="VARCHAR"/>
+		<result column="OPERATESCOPE" property="operatescope" jdbcType="VARCHAR"/>
+		<result column="REGISTEROFFICE" property="registeroffice" jdbcType="VARCHAR"/>
+		<result column="FILETIME" property="filetime" jdbcType="VARCHAR"/>
+		<result column="COMPANYSTATUS" property="companystatus" jdbcType="VARCHAR"/>
+		<result column="COMPANYINTRO" property="companyintro" jdbcType="VARCHAR"/>
+		<result column="LICENCE" property="licence" jdbcType="VARCHAR"/>
+		<result column="CERTIFICATETIME" property="certificatetime" jdbcType="VARCHAR"/>
+		<result column="VALIDTIME" property="validtime" jdbcType="VARCHAR"/>
+		<result column="APTITUDESTATE" property="aptitudestate" jdbcType="VARCHAR"/>
+		<result column="COMPANYRECODE" property="companyrecode" jdbcType="VARCHAR"/>
+		<result column="LXFS" property="lxfs" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+	
+	
 	
 	<!--修改  -->
 	

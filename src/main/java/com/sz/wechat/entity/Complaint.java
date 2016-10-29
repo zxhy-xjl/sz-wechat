@@ -1,6 +1,7 @@
 package com.sz.wechat.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 投诉反馈数据模型
@@ -58,8 +59,24 @@ public class Complaint implements Serializable {
      */
     private byte[] complainphoto;
 
+    /**
+     * 外联接查询用
+     */
+    private CompanyInfo companyinfo;
+    /**
+     * 公司表里的companyname
+     */ 
+    private String companyName;
+
+
 	public byte[] getComplainphoto() {
 		return complainphoto;
+	}
+	public CompanyInfo getCompanyinfo() {
+		return companyinfo;
+	}
+	public void setCompanyinfo(CompanyInfo companyinfo) {
+		this.companyinfo = companyinfo;
 	}
 	public void setComplainphoto(byte[] complainphoto) {
 		this.complainphoto = complainphoto;
@@ -124,4 +141,12 @@ public class Complaint implements Serializable {
 	public void setDisposeresult(String disposeresult) {
 		this.disposeresult = disposeresult;
 	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	
 }

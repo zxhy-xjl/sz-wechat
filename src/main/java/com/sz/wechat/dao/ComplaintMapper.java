@@ -34,6 +34,14 @@ public interface ComplaintMapper {
 	 * @return
 	 */
 	public List<Complaint> getComplaintByCompanyId(String companyId);
+	/**
+	 * 查询企业投诉反馈信息（政府端）
+	 *
+	 * @return
+	 */
+	public List<Complaint> getComplaintInfo();
+	
+	public List<Complaint> getMoreComplaintInfo();
 	
 	
 	public List<Complaint> getComplaintByOpenid(String Openid);
