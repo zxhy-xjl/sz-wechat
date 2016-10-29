@@ -60,6 +60,20 @@ public class Consumerec  implements Serializable   {
 	 */
 	private String oddTime;
 		
+	/**
+	 * 桌号
+	 */
+	private String tablenum;
+
+	
+	
+
+	public String getTablenum() {
+		return tablenum;
+	}
+	public void setTablenum(String tablenum) {
+		this.tablenum = tablenum;
+	}
 	public String getPid() {
 		return pid;
 	}

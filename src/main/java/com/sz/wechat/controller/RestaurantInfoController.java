@@ -28,6 +28,7 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.Order;
 import com.sz.wechat.entity.OrderHelper;
 import com.sz.wechat.entity.PersonHealth;
+import com.sz.wechat.entity.RestaurantConsoleHelper;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
@@ -134,4 +135,50 @@ public class RestaurantInfoController {
 		return modelAndView;
 		
 	}
+	
+	/**
+	 * 餐厅控制台页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/restaurantConsole",method = RequestMethod.GET)
+	public ModelAndView restartantConsoleGet (HttpServletRequest request, HttpServletResponse response)
+	{ 
+		
+		
+		//String companycode = request.getParameter("companycode");
+		String companycode = "913101146887231187";
+		List<Consumerec> consumelist = this.consumerecService.selectDistinctOrderByCompanycode(companycode);
+		List<RestaurantConsoleHelper> helperlist = new ArrayList<RestaurantConsoleHelper>();
+		for(int i=0;i<consumelist.size();i++)
+		{
+			int buynum=0;
+			float price=0;
+			RestaurantConsoleHelper helper = new RestaurantConsoleHelper();			
+			
+			List<Consumerec> tmplist = this.consumerecService.selectConsumerecByOddNumber(consumelist.get(i).getOddnumber());
+			String[] tmp = tmplist.get(0).getCompanycode().split("\\●");
+			helper.setOrdernum(consumelist.get(i).getOddnumber());
+			helper.setTablenum(tmp[1]);
+			for(int k=0;k<tmplist.size();k++)
+			{
+				buynum=buynum+Integer.parseInt(tmplist.get(k).getBuynum()); 
+				price=price+Float.parseFloat(tmplist.get(k).getPrice())*Float.parseFloat(tmplist.get(k).getBuynum());
+			}
+			helper.setTotalprice(String.valueOf(price));
+			helper.setCoursenum(String.valueOf(buynum));
+			helper.setOrderstatus(consumelist.get(i).getPaytype());
+			helperlist.add(helper);
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		modelAndView.addObject("helperlist", helperlist);
+		modelAndView.setViewName("forward:/manager/restaurantconsole.jsp");
+		
+		return modelAndView;
+		
+	}
+	
 }

@@ -72,7 +72,7 @@ table.hovertable td {
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>扫桌政府端控制台</title>
+<title>扫桌餐厅端控制台</title>
 <script type="text/javascript">
 var isIe = (document.all) ? true : false;
 function complaindetails(pid,companyname)
@@ -225,40 +225,11 @@ function stopBubble(e){
 <tr>
 	<th>日期</th><th>餐厅</th><th>投诉内容</th><th>状态</th><th>操作</th>
 </tr>
-<c:forEach items="${complainlist}" var="item" varStatus="status">
-<tr onclick="complaindetails('${item.pid}','${item.companyinfo.companyname}')" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
-	<%-- <td>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日 ${fn:substring(item.complaintime,8,10)}:${fn:substring(item.complaintime,10,12)}</td><td>${item.companyid }</td><td>${item.complaincontent }</td>
-	<td>${item.disposestatus }</td><td>Item 1C</td> --%>
-	<td>${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日 ${fn:substring(item.complaintime,8,10)}:${fn:substring(item.complaintime,10,12)}</td>
-	<td>${item.companyinfo.companyname}</td>
-	<td>${item.complaincontent}</td>
+<c:forEach items="${consumelist}" var="item" varStatus="status">
+<tr onclick="" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+
 	<td>
-	<c:if test="${item.disposestatus == 1}">
-	<label>等待受理</label>
-	</c:if>
-	<c:if test="${item.disposestatus == 2}">
-	<label>等待处理</label>
-	</c:if>
-	<c:if test="${item.disposestatus == 3}">
-	<label>处理中</label>
-	</c:if>
-	<c:if test="${item.disposestatus == 4}">
-	<label>已反馈</label>
-	</c:if>
-	</td>
-	<td ><c:if test="${item.disposestatus == 1}">
-	<input type="button" value="受理" onclick="bizchange(event,this,'${item.pid}','2')">
-	</c:if>
-	<c:if test="${item.disposestatus == 2}">
-	<input type="button" value="处理" onclick="bizchange(event,this,'${item.pid}','3')">
-	</c:if>
-	<c:if test="${item.disposestatus == 3}">
-	<input type="button" value="反馈" onclick="testMessageBox(event,'${item.pid}');">
-	</c:if>
-	<c:if test="${item.disposestatus == 4}">
-	
-	</c:if>
-	
+	${item.tablenum }
 	</td>
 	
 </tr>

@@ -39,9 +39,14 @@
 	 <select id="selectConsumerecByOpenidandCompanycode" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR} AND COMPANYCODE = #{companycode,jdbcType=VARCHAR}
 	 </select>
-	 
+	  <select id="selectConsumerecByCompanycode" resultMap="BaseResultMap" parameterType="java.lang.String">
+	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC  WHERE COMPANYCODE LIKE concat(concat('',#{companycode}),'%')
+	 </select>
 	 <select id="selectConsumerecByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT DISTINCT ODDNUMBER,COMPANYCODE,PAYTIME,PAYTYPE FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR}
+	 </select>
+	 <select id="selectDistinctOrderByCompanycode" resultMap="BaseResultMap" parameterType="java.lang.String">
+	 	SELECT DISTINCT ODDNUMBER FROM SZ_CONSUMEREC  WHERE COMPANYCODE LIKE concat(concat('',#{companycode}),'%')
 	 </select>
 	 <select id="selectOddnumberByOpenidandCompanycode" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT  ODDNUMBER FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR} AND COMPANYCODE = #{companycode,jdbcType=VARCHAR} GROUP BY ODDNUMBER

@@ -170,4 +170,24 @@ public class ConsumerecService {
 		return orderList;
 	}
 	
+	/**
+	 * 通过companycode模糊查询订单（餐厅客户端专用）
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectConsumerecByCompanycode(@Param(value="companycode") String companycode)
+	{
+		return this.consumerecMapper.selectConsumerecByCompanycode(companycode);
+	}
+	/**
+	 * 通过companycode模糊查询订单号（餐厅客户端专用）
+	 * @param paytime 下单时间
+	 * @return
+	 */
+	public List<Consumerec> selectDistinctOrderByCompanycode(@Param(value="companycode") String companycode)
+	{
+		return this.selectDistinctOrderByCompanycode(companycode);
+		
+	}
+
 }
