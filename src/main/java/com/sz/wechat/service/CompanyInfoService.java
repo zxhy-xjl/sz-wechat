@@ -91,19 +91,21 @@ public class CompanyInfoService {
 	/**
 	 * 查询企业反馈评分（一年有效期）
 	 * @param companyId 企业ID
+	 * @param status 状态
 	 * @return
 	 */
-	public List<Complaint>  getComplaintScoreByCompanyId(String companyId){
-		return this.complaintMapper.getComplaintScoreByCompanyId(companyId);
+	public List<Complaint>  getComplaintScoreByCompanyId(String companyId, String status){
+		return this.complaintMapper.getComplaintScoreByCompanyId(companyId,status);
 	}
 	/**
 	 * 查询企业投诉反馈信息（一年有效期）
 	 * @param companyId 企业ID
 	 * @return
 	 */
-	public List<Complaint> getComplaintByCompanyId(String companyId){
-		return this.complaintMapper.getComplaintByCompanyId(companyId);
+	public List<Complaint> getComplaintByCompanyId(String companyId, String status){
+		return this.complaintMapper.getComplaintByCompanyId(companyId,status);
 	}
+	
 	/**
 	 * 得到餐厅所有的投诉，投诉状态为4的
 	 * @param companyId
@@ -197,7 +199,7 @@ public class CompanyInfoService {
 					//投诉类
 					int allgrade = 5;
 					int gradeStat=0;
-					List<Complaint> complaintList = getComplaintByCompanyId(companyCode);
+					List<Complaint> complaintList = getComplaintByCompanyId(companyCode,Complaint.DISPOSE_STATUS_FANKUI);
 					//投诉
 					if(null != complaintList && complaintList.size() > 0){
 						for (Complaint complaint : complaintList) {

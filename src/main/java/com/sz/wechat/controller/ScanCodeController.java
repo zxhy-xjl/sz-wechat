@@ -197,7 +197,7 @@ public class ScanCodeController {
 					}
 				}
 				//投诉类
-				complaintList = this.companyInfoService.getComplaintByCompanyId(companyInfo.getCompanycode());
+				complaintList = this.companyInfoService.getComplaintByCompanyId(companyInfo.getCompanycode(),Complaint.DISPOSE_STATUS_FANKUI);
 				//投诉
 				if(null != complaintList && complaintList.size() > 0){
 					for (Complaint complaint : complaintList) {
@@ -390,7 +390,7 @@ public class ScanCodeController {
 				int allgrade = 5;
 				int gradeStat=0;
 				allscore = 0;
-				List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companyCode);
+				List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companyCode,Complaint.DISPOSE_STATUS_FANKUI);
 				SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 				//投诉
 				if(null != complaintList && complaintList.size() > 0){

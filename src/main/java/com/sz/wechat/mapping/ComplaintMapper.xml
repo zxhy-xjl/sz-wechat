@@ -24,13 +24,13 @@
 	
 	<!-- 查询 -->
 	<select id="getComplaintScoreByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
-		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND COMPANYID = #{companyid,jdbcType=VARCHAR} 
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND COMPANYID = #{companyid,jdbcType=VARCHAR} and DISPOSESTATUS=#{status,jdbcType=VARCHAR}
 	</select>
 	<select id="getComplaintScoreByCompanyIdAndOpenid" resultMap="BaseResultMap">
 		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND COMPANYID = #{0} AND OPENID=#{1}
 	</select>
 	<select id="getComplaintByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.String">
-		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE  COMPANYID = #{companyid,jdbcType=VARCHAR} 
+		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE  COMPANYID = #{companyid,jdbcType=VARCHAR} and DISPOSESTATUS=#{status,jdbcType=VARCHAR}
 	</select>
 	<select id="getComplaintByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT  <include refid="Base_Column_List"/> FROM SZ_COMPLAINT WHERE (to_char(sysdate,'yyyymmdd')-COMPLAINTIME)&lt;= 10000 AND OPENID = #{openid,jdbcType=VARCHAR} 

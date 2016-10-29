@@ -25,8 +25,8 @@ public class ComplainService {
 	 * @param companyId 企业ID
 	 * @return
 	 */
-	public List<Complaint>  getComplaintScoreByCompanyId(String companyId){
-		return this.complaintMapper.getComplaintScoreByCompanyId(companyId);
+	public List<Complaint>  getComplaintScoreByCompanyId(String companyId, String status){
+		return this.complaintMapper.getComplaintScoreByCompanyId(companyId,status);
 	}
 	/**
 	 * 查询企业投诉反馈评分（一年有效）
