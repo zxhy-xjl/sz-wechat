@@ -18,7 +18,7 @@ public interface ComplaintMapper {
 	 * @param companyId 企业Code
 	 * @return
 	 */
-	public List<Complaint> getComplaintScoreByCompanyId(String companyId,String status);
+	public List<Complaint> getComplaintScoreByCompanyId(@Param(value="companyid") String companyId, @Param("status") String status);
 
 	
 	/**
@@ -34,7 +34,7 @@ public interface ComplaintMapper {
 	 * @param status 状态，如果为空，代表查询所有的
 	 * @return
 	 */
-	public List<Complaint> getComplaintByCompanyId(String companyId, String status);
+	public List<Complaint> getComplaintByCompanyId(@Param(value="companyid") String companyId, @Param("status") String status);
 	/**
 	 * 查询企业投诉信息（政府端）
 	 *

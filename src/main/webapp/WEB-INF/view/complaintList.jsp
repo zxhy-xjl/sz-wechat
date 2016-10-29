@@ -23,6 +23,9 @@ function toCompaintInfo(pid){
 <body style="background-color:#E9E9E9">
 <div id="content" >
 	<table border="0" align="center" width="100%" style="border-collapse: collapse;">
+		<c:if test="${complaintList==[]}">
+			<tr><td>该企业暂无投诉信息（未经核实反馈的投诉不再此列）</td></tr>
+		</c:if>
 		<c:forEach items="${complaintList}" var="item" varStatus="status">
 			<tr style="background-color:white">
 				<td colspan="2"><label style="font-size: 15px;">&nbsp;&nbsp;${fn:substring(item.complaintime,0,4)}年${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日 ${fn:substring(item.complaintime,8,10)}:${fn:substring(item.complaintime,10,12)}  上海 (${companyName})</label></td>

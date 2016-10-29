@@ -123,7 +123,7 @@ public class ComplainController {
 		String openid = String.valueOf(httpSession.getAttribute("openid"));//得到session中的openID
 		String companyCode = String.valueOf(request.getParameter("companyCode"));
 		String companyName = String.valueOf(request.getParameter("companyName"));
-		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode,openid);
+		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyId(companyCode,Complaint.DISPOSE_STATUS_FANKUI);
 		modelAndView.addObject("complaintList", complaintList);
 		modelAndView.addObject("companyName", companyName);
 		modelAndView.setViewName("/complaintList");
