@@ -75,8 +75,8 @@ public class FootprintController {
 			company.setCompanyCode(footprint.getCompanycode());
 			company.setCompanyName(footprint.getCompanyname());
 			//订单数量
-			company.setConsumerecCount(this.consumerecService.getCountByCompanyidAndOpenid(company.getCompanyCode(), openid));
-			logger.debug("订餐数量:" + company.getConsumerecCount());
+			company.setConsumerecCount(this.consumerecService.selectOddnumberByOpenidandCompanycode(openid,company.getCompanyCode()).size());
+			logger.debug("订单数量:" + company.getConsumerecCount());
 			//投诉数量
 			company.setComplaintCount(this.complainService.getComplaintCountByCompanyIdAndOpenid(company.getCompanyCode(), openid));
 			logger.debug("投诉数量:" + company.getComplaintCount());

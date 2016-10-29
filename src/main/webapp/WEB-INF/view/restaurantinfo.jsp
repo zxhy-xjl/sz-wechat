@@ -15,7 +15,7 @@
 
 <style type="text/css">
 #score{
-width:150px;
+width:120px;
 height:85px;
 margin:0px auto;
 background:url("<%=path%>/public/images/feedbackscore.png") no-repeat center top;
@@ -90,32 +90,33 @@ function lookcomplaint(pid,companyname)
 <div id="baseinfo">
 <table width="100%">
 <tr>
-<td width="25%">
-<img src="<%=path%>/public/images/company/${companyInfo.companycode }.png" height="100px" width="100px"/></td>
 <td width="15%">
-<div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
+	<img src="<%=path%>/public/images/company/${companyInfo.companycode }.png" height="100px" width="100px"/>
+</td>
+<td width="15%">
+	<div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
 		<font style="font-size:40px;position: relative;bottom: 65px;" color="red">&nbsp;${score}</font>
 		<font style="font-size:18px;position: relative;bottom: 65px;" color="red">分</font>
 	</div>
  </td>
  <td width="70%">
-<table width="100%"><tr><td>
- <label style="font-weight:bold">本月扫桌：${scanCount}次</label>
-</td></tr><tr><td>
-<div id="stars"> 
-<img id="star1" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star2" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star3" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star4" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-<img id="star5" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
-
-</div> 
-</td></tr>
-<tr><td><a href="tel:${companyInfo.lxfs}">${companyInfo.lxfs}</a>
-</td></tr>
-</table>
-
-
+		<table width="100%">
+		<tr><td>
+			<label style="font-weight:bold">本月扫桌：${scanCount}次</label>
+		</td></tr>
+		<tr><td>
+			<div id="stars"> 
+			<img id="star1" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+			<img id="star2" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+			<img id="star3" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+			<img id="star4" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+			<img id="star5" onclick="doStar(this)" alt="0" src="<%=path%>/public/images/star1.png" width="14" height="13">
+			</div> 
+		</td></tr>
+		<tr><td>
+			<a href="tel:${companyInfo.lxfs}">${companyInfo.lxfs}</a>
+		</td></tr>
+		</table>
  </td>
 </tr>
 </table>
@@ -147,7 +148,7 @@ function lookcomplaint(pid,companyname)
 <c:if test="${personHealthCount  == 0}">
 健&nbsp;康&nbsp;证
 </c:if>
-${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
+${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;食品安全等级</label>
 &nbsp;
 <c:if test="${face=='良好（笑脸）' }">
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/food_smile.png" width="28" height="26">

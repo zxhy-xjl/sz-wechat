@@ -11,6 +11,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,12 +127,15 @@ public class MenuController  {
 		ModelAndView modelAndView = new ModelAndView();
 		Map<String,Object> _map = null;
 		List<Map<String,Object>> mapList = new ArrayList<>();
+		boolean needPlayFlag=false;
 		if(!"".equals(oddNumber)){
 			List<Consumerec> consumerecList = consumerecService.selectConsumerecByOddNumber(oddNumber);
 			int allPrice = 0;
 			int buyNum = 0;
+			
 			if(null != consumerecList && consumerecList.size() > 0){
 				Menu menu = null;
+				needPlayFlag = StringUtils.isBlank(consumerecList.get(0).getPaytime());
 				for (Consumerec consumerec : consumerecList) {
 					_map = new HashMap<>();
 					 menu = this.menuService.getMenuByMenuId(consumerec.getMenuid());
@@ -162,7 +167,7 @@ public class MenuController  {
 			modelAndView.addObject("buyNum", buyNum);
 			modelAndView.addObject("oddNumber", oddNumber);
 			modelAndView.addObject("companyCode",request.getParameter("companyCode"));
-			modelAndView.addObject("flag",request.getParameter("flag"));
+			modelAndView.addObject("needPlayFlag",needPlayFlag);
 			modelAndView.setViewName("/takingorderdetails");
 		}
 		return modelAndView;
