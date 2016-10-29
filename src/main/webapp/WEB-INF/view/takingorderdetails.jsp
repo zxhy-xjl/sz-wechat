@@ -37,10 +37,11 @@ html,body {
 </style>
 </head>
 <script type="text/javascript">
-	var flag =${flag}
+	var flag =${flag};
+	//不在做隐藏，都显示，只是把结算按钮改为已结算
 	$(function(){
 		if(0==flag){
-			$("#footer").hide();
+			//$("#footer").hide();
 		}
 	});
 	function doSubmit(){
@@ -92,7 +93,15 @@ html,body {
 			 <span style="color:#FBEBED;">合计:${allPrice}元</span>
 			 <span style="color:#FBEBED;">${buyNum}道</span>
 		</td>
-		<td align="center" style="background-color:#D0021B;"><a href="javascript:doSubmit();" style="text-decoration:none;color:#FBEBED;">结算</a></td>
+		
+		<td align="center" style="background-color:#D0021B;">
+		<c:if test="${flag==1 }">
+		<a href="javascript:doSubmit();" style="text-decoration:none;color:#FBEBED;">结算</a>
+		</c:if>
+		<c:if test="${flag==0 }">
+		已结算
+		</c:if>
+		</td>
 	</tr>
 </table>
 </body>

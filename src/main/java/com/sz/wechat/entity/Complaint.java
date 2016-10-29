@@ -148,5 +148,4 @@ public class Complaint implements Serializable {
 		this.companyName = companyName;
 	}
 
-	
 }

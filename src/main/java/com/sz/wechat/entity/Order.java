@@ -9,6 +9,8 @@ public class Order {
 	private String openId;
 	//公司代码
 	private String companyCode;
+	//公司名称
+	private String companyName;
 	//订单日期
 	private String orderDate;
 	//订单编号
@@ -64,6 +66,12 @@ public class Order {
 	}
 	public void setOrderTotalMoney(int orderTotalMoney) {
 		this.orderTotalMoney = orderTotalMoney;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	
