@@ -220,18 +220,58 @@ function stopBubble(e){
 <body style="background-color: #e9e9e9;">
 <table class="hovertable">
 <tr>
-	<th colspan="5" ><font style="font-weight: bolder">投诉处理</font></th>
+	<th colspan="5" ><font style="font-weight: bolder">订单</font></th>
 </tr>
 <tr>
-	<th>日期</th><th>餐厅</th><th>投诉内容</th><th>状态</th><th>操作</th>
+	<th>桌号</th><th>菜数</th><th>金额</th><th>状态</th><th>操作</th>
 </tr>
-<c:forEach items="${consumelist}" var="item" varStatus="status">
+<c:forEach items="${helperlist}" var="item" varStatus="status">
 <tr onclick="" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
 
 	<td>
 	${item.tablenum }
 	</td>
-	
+		<td>
+	${item.coursenum }道
+	</td>
+		<td>
+	${item.totalprice }元
+	</td>
+	<c:if test="${item.orderstatus == null}">
+		<td>
+	未下单
+	</td>
+	</c:if>
+	<c:if test="${item.orderstatus == 0}">
+	<td>
+	已下单
+	</td>
+	</c:if>
+	<c:if test="${item.orderstatus == 1}">
+	<td>
+	微信已支付
+	</td>
+	</c:if>
+	<c:if test="${item.orderstatus == 2}">
+	<td>
+	已配送
+	</td>
+	</c:if>
+	<c:if test="${item.orderstatus == 3}">
+	<td>
+	现金已支付
+	</td>
+	</c:if>
+	<td>
+
+	<c:if test="${item.orderstatus == 0}">
+		<input type="button" value="配送" onclick="bizchange(event,this,'${item.pid}','3')">	
+	</c:if>
+
+	<c:if test="${item.orderstatus == 2}">
+		<input type="button" value="确定付款" onclick="bizchange(event,this,'${item.pid}','3')">	
+	</c:if>
+	</td>
 </tr>
 </c:forEach>
 
