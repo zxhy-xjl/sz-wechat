@@ -1,4 +1,6 @@
 package com.sz.wechat.controller;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,8 +38,8 @@ public class SupervisePunishController {
 		ModelAndView modelAndView = new ModelAndView();
 		SupervisePunish supervisePunish = new SupervisePunish();
 		supervisePunish.setNlawfulcompanyname(nlawfulcompanyname);
-		SupervisePunish _supervisePunish = this.supervisorPunishService.getSuperviseByCompanyName(supervisePunish);
-		modelAndView.addObject("SupervisePunish",_supervisePunish);
+		List<SupervisePunish> _supervisePunishList = this.supervisorPunishService.getSuperviseByCompanyName(supervisePunish);
+		modelAndView.addObject("SupervisePunishList",_supervisePunishList);
 		modelAndView.setViewName("/punishInfo");
 		return modelAndView;
 	}

@@ -23,7 +23,7 @@ public interface SupervisePunishMapper {
 	 * @param CompanyName
 	 * @return
 	 */
-	public SupervisePunish getSuperviseByCompanyName(SupervisePunish supervisePunish);
+	public List<SupervisePunish> getSuperviseByCompanyName(SupervisePunish supervisePunish);
 	public int getCountByCompanyName(@Param(value="unlawfulcompanyname") String unlawfulcompanyname);
 			
 }
