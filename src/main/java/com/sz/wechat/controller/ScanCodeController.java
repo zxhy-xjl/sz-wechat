@@ -505,12 +505,12 @@ public class ScanCodeController {
 	private void findCTQYAbnormal(HttpServletRequest request, String company, String code, CompanyInfo companyInfo) {
 		if (companyInfo == null){
 			logger.info("扫描餐厅二维码没有找到对应的企业信息，发出一条异常信息");
-			String openId = this.runtimeModel.getOpenId(request.getSession());
+			String openId = this.runtimeModel.getOpenId(request);
 			this.abnormalService.findAbnormal(openId, code, company, true,true);
 		} else {
 			if (StringUtils.isBlank(companyInfo.getCompanycode()) || StringUtils.isBlank(companyInfo.getLicence())){
 				logger.info("扫描餐厅找到对应的企业信息，但是营业执照和许可证有空的，发出一条异常信息");
-				String openId = this.runtimeModel.getOpenId(request.getSession());
+				String openId = this.runtimeModel.getOpenId(request);
 				this.abnormalService.findAbnormal(openId, code, company, StringUtils.isBlank(companyInfo.getCompanycode()), StringUtils.isBlank(companyInfo.getLicence()));
 			}
 		}
@@ -518,12 +518,12 @@ public class ScanCodeController {
 	private void findCJQYAbnormal(HttpServletRequest request, String company, String code, CompanyInfo companyInfo) {
 		if (companyInfo == null){
 			logger.info("扫描餐具条码没有找到对应的企业信息，发出一条异常信息");
-			String openId = this.runtimeModel.getOpenId(request.getSession());
+			String openId = this.runtimeModel.getOpenId(request);
 			this.abnormalService.findAbnormal(openId, code, company, true,false);
 		} else {
 			if (StringUtils.isBlank(companyInfo.getCompanycode())){
 				logger.info("扫描餐具条码（二维码）找到对应的企业信息，但是营业执照有空的，发出一条异常信息");
-				String openId = this.runtimeModel.getOpenId(request.getSession());
+				String openId = this.runtimeModel.getOpenId(request);
 				this.abnormalService.findAbnormal(openId, code, company, StringUtils.isBlank(companyInfo.getCompanycode()),false);
 			}
 		}
@@ -570,7 +570,7 @@ public class ScanCodeController {
 	 */
 	@RequestMapping(value = "/doInserFootPrint")
 	public void doInserFootPrint(HttpServletRequest request, HttpServletResponse response){
-		String openid = this.runtimeModel.getOpenId(request.getSession());
+		String openid = this.runtimeModel.getOpenId(request);
 		String companyCode = request.getParameter("companCode");
 		String companyName = request.getParameter("companyName");
 		Footprint footPring = new Footprint();

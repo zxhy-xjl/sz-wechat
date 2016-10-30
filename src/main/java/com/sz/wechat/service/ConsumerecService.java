@@ -6,6 +6,8 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ import com.sz.wechat.entity.Menu;
 import com.sz.wechat.entity.Order;
 @Service
 public class ConsumerecService {
-	
+	private static Logger logger = LoggerFactory.getLogger(ConsumerecService.class);
 	/**
 	 * 订单记录数据服务接口
 	 */
@@ -149,6 +151,7 @@ public class ConsumerecService {
 				Consumerec consumerec = consumerecList.get(0);
 				order.setOpenId(consumerec.getOpenid());
 				order.setCompanyCode(consumerec.getCompanycode());
+				
 				String companyName = this.companyInfoMapper.getCompanyByCode(order.getCompanyCode()).getCompanyname();
 				order.setCompanyName(companyName);
 				order.setOrderDate(consumerec.getOddTime());
@@ -186,7 +189,7 @@ public class ConsumerecService {
 	 */
 	public List<Consumerec> selectDistinctOrderByCompanycode(@Param(value="companycode") String companycode)
 	{
-		return this.selectDistinctOrderByCompanycode(companycode);
+		return this.consumerecMapper.selectDistinctOrderByCompanycode(companycode);
 		
 	}
 

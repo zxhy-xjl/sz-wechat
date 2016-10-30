@@ -76,8 +76,7 @@ public class RestaurantInfoController {
 	@RequestMapping(value = "/toRestaurant",method = RequestMethod.GET)
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
-		HttpSession ss = (HttpSession)request.getSession();
-		String openid = this.runtimeModel.getOpenId(ss);
+		String openid = this.runtimeModel.getOpenId(request);
 		String companyCode = request.getParameter("companycode");
 		CompanyInfo companyInfo = this.companyInfoService.getCompanyByCode(companyCode);
 		//综合得分
@@ -148,7 +147,7 @@ public class RestaurantInfoController {
 		
 		
 		//String companycode = request.getParameter("companycode");
-		String companycode = "913101146887231187";
+		String companycode = "2010310101010070";
 		List<Consumerec> consumelist = this.consumerecService.selectDistinctOrderByCompanycode(companycode);
 		List<RestaurantConsoleHelper> helperlist = new ArrayList<RestaurantConsoleHelper>();
 		for(int i=0;i<consumelist.size();i++)
@@ -162,9 +161,11 @@ public class RestaurantInfoController {
 			helper.setOrdernum(consumelist.get(i).getOddnumber());
 			helper.setTablenum(tmp[1]);
 			for(int k=0;k<tmplist.size();k++)
-			{
-				buynum=buynum+Integer.parseInt(tmplist.get(k).getBuynum()); 
-				price=price+Float.parseFloat(tmplist.get(k).getPrice())*Float.parseFloat(tmplist.get(k).getBuynum());
+			{   
+				String pricetmp = this.menuService.getMenuByMenuId(tmplist.get(k).getMenuid()).getPrice();
+				String buynumtmp = tmplist.get(k).getBuynum();
+				buynum=buynum+Integer.parseInt(buynumtmp); 
+				price=price+Float.parseFloat(pricetmp)*Float.parseFloat(buynumtmp);
 			}
 			helper.setTotalprice(String.valueOf(price));
 			helper.setCoursenum(String.valueOf(buynum));
