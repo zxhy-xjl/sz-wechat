@@ -173,35 +173,29 @@ public class ScanCodeController {
 				SupervisePunish supervisePunish = new SupervisePunish();
 				supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
 				list = this.companyInfoService.getSuperviseLikeCompanyName(supervisePunish);
+				logger.info("处罚数量:" + list.size());
 				if(null != list && list.size() > 0){
 					//根据关键字判断
 					for (SupervisePunish _supervisePunish : list) {
 						String illegalType = _supervisePunish.getPenaltytype();
 						//判断是否存在吊销执照
-						if(illegalType.indexOf(keyword_3)!=-1){
+						if(illegalType.indexOf(keyword_3)!=-1 || illegalType.indexOf(keyword_4)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 5;
-						}else if(illegalType.indexOf(keyword_4)!=-1){
-							sb.append(illegalType).append(";");
-							score = score - 5;
-						}
-						//停产停业
-						if(illegalType.indexOf(keyword_2)!=-1){
+						}else if(illegalType.indexOf(keyword_2)!=-1){
+							//停产停业
 							sb.append(illegalType).append(";");
 							score = score - 4;
-						}
-						//没收违法所得
-						if(illegalType.indexOf(keyWord_1)!=-1){
+						} else 	if(illegalType.indexOf(keyWord_1)!=-1){
+							//没收违法所得
 							sb.append(illegalType).append(";");
 							score = score - 3;
-						}
-						//罚款
-						if(illegalType.indexOf(keyWord_0)!=-1){
+						} else 	if(illegalType.indexOf(keyWord_0)!=-1){
+							//罚款
 							sb.append(illegalType).append(";");
 							score = score - 2;
-						}
-						//警告
-						if(illegalType.indexOf(keyWord)!=-1){
+						} else {
+							//警告,其他的都算警告
 							sb.append(illegalType).append(";");
 							score = score - 1;
 						}
@@ -347,55 +341,46 @@ public class ScanCodeController {
 						String illegalType = _supervisePunish.getPenaltytype();
 						String pentype = _supervisePunish.getPenaltytype();
 						//判断是否存在吊销执照
-						if(illegalType.indexOf(keyword_3)!=-1){
+						if(illegalType.indexOf(keyword_3)!=-1 || illegalType.indexOf(keyword_4)!=-1){
 							sb.append(illegalType).append(";");
 							score = score - 5;
 							allscore = allscore + 5;
 							grade = new Grade("punish","5","","",pentype);
 							_mapList.add(grade);
-						}else if(illegalType.indexOf(keyword_4)!=-1){
-							sb.append(illegalType).append(";");
-							score = score - 5;
-							allscore = allscore + 5;
-							grade = new Grade("punish","5","","",pentype);
-							_mapList.add(grade);
-						}
-						//停产停业
-						if(illegalType.indexOf(keyword_2)!=-1){
+						}else if(illegalType.indexOf(keyword_2)!=-1){
+							//停业
 							sb.append(illegalType).append(";");
 							score = score - 4;
 							allscore = allscore + 4;
 							grade = new Grade("punish","4","","",pentype);
 							_mapList.add(grade);
-						}
-						//没收违法所得
-						if(illegalType.indexOf(keyWord_1)!=-1){
+						} else if(illegalType.indexOf(keyWord_1)!=-1){
+							//违法所得
 							sb.append(illegalType).append(";");
 							score = score - 3;
 							allscore = allscore + 3;
 							grade = new Grade("punish","3","","",pentype);
 							_mapList.add(grade);
-						}
-						//罚款
-						if(illegalType.indexOf(keyWord_0)!=-1){
+						} else if(illegalType.indexOf(keyWord_0)!=-1){
+							//罚款
 							sb.append(illegalType).append(";");
 							score = score - 2;
 							allscore = allscore + 2;
 							grade = new Grade("punish","2","","",pentype);
 							_mapList.add(grade);
-						}
-						//警告
-						if(illegalType.indexOf(keyWord)!=-1){
+						}else {
+							//其他都算警告
 							sb.append(illegalType).append(";");
 							score = score - 1;
 							allscore = allscore + 1;
 							grade = new Grade("punish","1","","",pentype);
 							_mapList.add(grade);
 						}
-						//总分
-						grade = new Grade("punish","处罚"+"-"+String.valueOf(allscore));
-						_mapList1.add(grade);
+						
 					}
+					//总分
+					grade = new Grade("punish","处罚"+"-"+String.valueOf(allscore));
+					_mapList1.add(grade);
 				}
 				//投诉类
 				int allgrade = 5;
