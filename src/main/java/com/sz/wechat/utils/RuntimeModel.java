@@ -31,7 +31,7 @@ public class RuntimeModel {
 		if (localDevModel){
 			return this.localOpenId;
 		}
-		return ss.getAttribute("openid").toString();
+		return String.valueOf(ss.getAttribute("openid"));
 	}
 	public boolean isLocalDevModel() {
 		return localDevModel;
