@@ -102,7 +102,7 @@ public class GovernmentController {
 		complaint.setPid(pid);
 		complaint.setDisposestatus(status);
 		complaint.setDisposetime(time);
-		complaint.setFeedback(feedback);
+		complaint.setDisposeresult(feedback);
 		if(status.equals("4"))
 		this.complainService.updateStatusandFeedByPid(complaint);
 		else

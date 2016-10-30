@@ -91,7 +91,7 @@
 	 	update SZ_COMPLAINT set DISPOSESTATUS = #{disposestatus,jdbcType=VARCHAR},DISPOSETIME = #{disposetime,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
 	 </update>
 		 <update id="updateStatusandFeedByPid" parameterType="com.sz.wechat.entity.Complaint">
-	 	update SZ_COMPLAINT set DISPOSESTATUS = #{disposestatus,jdbcType=VARCHAR},DISPOSETIME = #{disposetime,jdbcType=VARCHAR},FEEDBACK=#{feedback,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
+	 	update SZ_COMPLAINT set DISPOSESTATUS = #{disposestatus,jdbcType=VARCHAR},DISPOSETIME = #{disposetime,jdbcType=VARCHAR},DISPOSERESULT=#{disposeresult,jdbcType=VARCHAR} WHERE PID=#{pid,jdbcType=VARCHAR}
 	 </update>
 	<!--插入  -->
 	 <insert id="insertComplaint" parameterType="com.sz.wechat.entity.Complaint">

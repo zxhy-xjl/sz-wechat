@@ -49,7 +49,12 @@ font-family: SimHei;
 	<label>投诉状态：已反馈</label><br><br>
 	</c:if>
 <label>处理时间：${complaint.disposetime }</label><br><br>
+<c:if test="${complaint.disposestatus!=1 }">
+<label>处理部门：市场监督管理局</label><br><br>
+</c:if>
+<c:if test="${complaint.disposestatus==1 }">
 <label>处理部门：${complaint.disposedep }</label><br><br>
+</c:if>
 <c:if test="${complaint.complaintype==1 }">
 <label>投诉类型：店铺</label>
 </c:if>
@@ -69,10 +74,10 @@ font-family: SimHei;
 <img alt="0" src="<%=path%>/toLookImage.do?pid=${complaint.pid }" width="200px"   >
 </label>
 </c:if>
-<c:if test="${complaint.feedback!=null}">
+<%-- <c:if test="${complaint.feedback!=null}">
 <br><br>
 <label>客户反馈：${complaint.feedback}</label>
-</c:if>
+</c:if> --%>
 </div>
 
 </div>

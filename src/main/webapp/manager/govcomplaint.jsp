@@ -213,7 +213,7 @@ function stopBubble(e){
 	{
 		stopBubble(event);
 	messContent = "<div style='padding:30px 0 30px 120px;'><form id=\"feedbackForm\" action='<%=path%>/updategovdetails.do' method=\"post\"> <input type=\"hidden\" id='feedpid' name=\"pid\" value=\"\"><input type=\"hidden\" id='status' name=\"status\" value=\"4\"><label>反馈内容:</label><br/><textarea id='result' name='feedback' row='6' style='height: 300px;width: 300px;'></textarea><br/><br/><br/><input type='submit' style='width:48px;margin-left: 120px;' value='完成' onclick='feedfinish()'/></form></div>";
-		showMessageBox('用户反馈', messContent, 500,feedpid);
+		showMessageBox('反馈', messContent, 500,feedpid);
 	}
 </script>
 </head>
