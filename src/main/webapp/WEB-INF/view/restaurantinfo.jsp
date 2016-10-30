@@ -122,11 +122,18 @@ function lookcomplaint(pid,companyname)
 </table>
 <label style="font-weight:bold">&nbsp;&nbsp;${companyInfo.companyaddress}  &nbsp;</label>
 <hr color="lightgrey"/>
+<c:if test="${companyInfo.companyrecode==null}">
+<label style="font-size: 20px;">
+&nbsp;&nbsp;营业执照
+</label>
+<img align="top" onclick="" alt="0" src="<%=path%>/public/images/close.png" width="28" height="26">
+</c:if>
+<c:if test="${companyInfo.companyrecode!=null}">
 <label style="font-size: 20px;">
 <a href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=${companyInfo.companyrecode}" data-lightbox="example-set" data-title="${companyInfo.companyname}" style="text-decoration:none;" >&nbsp;&nbsp;营业执照</a>
 </label>
 <img align="top" onclick="" alt="0" src="<%=path%>/public/images/success.png" width="28" height="26">
-
+</c:if>
 <c:if test="${companyInfo.licence==null}">
 <label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;
 餐饮许可证

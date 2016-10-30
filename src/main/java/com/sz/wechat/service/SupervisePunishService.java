@@ -28,7 +28,6 @@ public class SupervisePunishService {
 		return this.supervisePunishMapper.getSuperviseByCompanyName(supervisePunish);
 	}
 	public int getCountByCompanyName(String unlawfulcompanyname){
-		System.out.println("companyName:" + unlawfulcompanyname + ":");
 		return this.supervisePunishMapper.getCountByCompanyName(unlawfulcompanyname);
 	}
 }

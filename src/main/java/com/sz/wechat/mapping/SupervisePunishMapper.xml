@@ -26,6 +26,6 @@
 		SELECT <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
 	</select>
 	<select id="getCountByCompanyName" resultType="java.lang.Integer" parameterType="java.lang.String">
-		select count(*) from SODA_FDADATA_CATERINGPUNISH where UNLAWFULCOMPANYNAME=#{unlawfulcompanyname,jdbcType=VARCHAR}
+		select count(*) from SODA_FDADATA_CATERINGPUNISH where UNLAWFULCOMPANYNAME like '%${unlawfulcompanyname}%'
 	</select>
 </mapper>
