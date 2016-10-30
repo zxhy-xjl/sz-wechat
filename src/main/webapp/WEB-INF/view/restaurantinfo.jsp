@@ -163,7 +163,7 @@ ${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbs
 <br>
 <label style="font-size: 20px;">
 <c:if test="${superviseCount>0 }">
-<a href="getSuperviseByCompanyName.do?companyname="${companyInfo.companyname }">&nbsp;&nbsp;处罚信息</a>
+<a href="getSuperviseByCompanyName.do?companyname=${companyInfo.companyname }">&nbsp;&nbsp;处罚信息</a>
 </c:if>
 <c:if test="${superviseCount==0 }">
 &nbsp;&nbsp;行政处罚   
