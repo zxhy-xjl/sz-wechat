@@ -151,6 +151,7 @@ public class ConsumerecService {
 				Consumerec consumerec = consumerecList.get(0);
 				order.setOpenId(consumerec.getOpenid());
 				order.setCompanyCode(consumerec.getCompanycode());
+				
 				String companyName = this.companyInfoMapper.getCompanyByCode(order.getCompanyCode()).getCompanyname();
 				order.setCompanyName(companyName);
 				order.setOrderDate(consumerec.getOddTime());

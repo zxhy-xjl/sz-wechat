@@ -19,13 +19,19 @@ public class RuntimeModel {
 		if (localDevModel){
 			return this.localOpenId;
 		}
-		return request.getParameter("openid");
+		
+		String openId = request.getParameter("openid");
+		if (StringUtils.isBlank(openId)){
+			return this.getOpenId(request.getSession());
+		} else {
+			return openId;
+		}
 	}
-	public String getOpenId(HttpSession ss){
+	private String getOpenId(HttpSession ss){
 		if (localDevModel){
 			return this.localOpenId;
 		}
-		return ss.getAttribute("openid").toString();
+		return String.valueOf(ss.getAttribute("openid"));
 	}
 	public boolean isLocalDevModel() {
 		return localDevModel;

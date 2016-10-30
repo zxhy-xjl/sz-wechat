@@ -52,8 +52,7 @@ public class UserInfoController {
 	private RuntimeModel runtimeModel;
 	@RequestMapping(value = "/userInfo",method = RequestMethod.GET)
 	public ModelAndView getUsers(HttpServletRequest request,HttpServletResponse response){
-		HttpSession ss = (HttpSession)request.getSession();
-		String openid=this.runtimeModel.getOpenId(ss);
+		String openid=this.runtimeModel.getOpenId(request);
 		//得到所有订单
 		List<Order> orderList = this.consumerecService.getOrderList(openid);
 		//得到所有的投诉
