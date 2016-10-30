@@ -32,7 +32,7 @@ text-align:center;
  */
 $(function(){
 	setOpenid();
-	setTimeout('doInsertFootPrint()',3000)
+	doInsertFootPrint();
 });
 
 /**
@@ -137,10 +137,15 @@ function setOpenid(){
  * 进行记录
  */
 function doInsertFootPrint(){
+	var companName =${CompanyInfo.companyname};
+	companName =companName.replace(/[\r\n]/g,'');
+	var url ='<%=path%>/doInserFootPrint.do?companCode=${CompanyInfo.companycode}&companName='+companName;
 	$.ajax({
 		type:'post',
-		url:'<%=path%>/doInserFootPrint.do',
-		data:{companCode:"${CompanyInfo.companycode}",companyName:"${CompanyInfo.companyname}",score:score,paystatus:"0"},
+		url:url,
+		global:true,
+		contentType:'application/x-www-form-urlencoded;chatset=UTF-8',
+		processData:true,
 		success:function(){}
 	});
 }

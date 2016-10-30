@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>结账</title>
 <!--标准mui.css-->
 <link rel="stylesheet" href="<%=path%>/public/style/mui.min.css">
@@ -62,22 +62,41 @@ BORDER-BOTTOM-STYLE: dotted; BORDER-LEFT-STYLE: dotted; BORDER-RIGHT-STYLE: dott
 	</div>
 	<div style="width:200px;margin-left:20px;"><h2>付款方式:</h2></div>
 	<div>
-		<div class="mui-card" style="width:100%;">
-			<form class="mui-input-group">
-				<div class="mui-input-row mui-radio">
+		 <div class="weui-cells weui-cells_radio">
+           <label class="weui-cell weui-check__label" for="cashpay">
+               <div class="weui-cell__bd">
+                   <p>现金</p>
+               </div>
+               <div class="weui-cell__ft">
+                   <input type="radio" class="weui-check" value="0" name="paytype" id="cashpay">
+                   <span class="weui-icon-checked"></span>
+               </div>
+           </label>
+           <label class="weui-cell weui-check__label" for="wechatpay">
+               <div class="weui-cell__bd">
+                   <p>微信</p>
+               </div>
+               <div class="weui-cell__ft">
+                   <input type="radio" name="paytype" value="1" class="weui-check" id="wechatpay" checked="checked">
+                   <span class="weui-icon-checked"></span>
+               </div>
+           </label>
+       </div>
+		<!-- <div class="mui-card" style="width:100%;">
+				 <div class="mui-input-row mui-radio">
 					<label>现金</label>
 					<input id="cashpay" name="paytype" type="radio" value="0">
 				</div>
 				<div class="mui-input-row mui-radio">
 					<label>微信</label>
 					<input id="wechatpay" name="paytype" type="radio" value="1" checked>
-				</div>
-				<!-- <div class="mui-input-row mui-radio ">
+				</div> 
+				
+				<div class="mui-input-row mui-radio ">
 					<label>支付宝</label>
 					<input id="allpay" name="paytype" type="radio" value="2">
-				</div> -->
-			</form>
-		</div>
+				</div>
+		</div> -->
 	</div>
 	<div style="width:200px;margin-left:20px;"><h2>开发票:</h2></div>
 	<div style="background-color:white;line-height:17px;color:#333;text-align:center;">
