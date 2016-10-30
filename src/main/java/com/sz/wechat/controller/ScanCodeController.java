@@ -116,6 +116,8 @@ public class ScanCodeController {
 				//用于异常名录信息检查
 				findCTQYAbnormal(request, company, code, companyInfo);
 				if(null != companyInfo){
+					//增加一次扫描
+					addVisitScanToFootPrint(request, companyInfo);
 					modelAndView.addObject("CompanyInfo", companyInfo);
 					HttpSession session = request.getSession();
 					session.setAttribute("code",companyInfo.getCompanycode());
@@ -129,6 +131,19 @@ public class ScanCodeController {
 			}
 		} 
 		return modelAndView;
+	}
+
+
+	private void addVisitScanToFootPrint(HttpServletRequest request, CompanyInfo companyInfo) {
+		Footprint footPrint = new Footprint();
+		footPrint.setCompanycode(companyInfo.getCompanycode());
+		footPrint.setCompanyname(companyInfo.getCompanyname());
+		String openId = this.runtimeModel.getOpenId(request);
+		footPrint.setOpenid(openId);
+		footPrint.setPid(UUID.randomUUID().toString());
+		String visitTime =(new SimpleDateFormat("yyyyMMddhhmmss")).format(new Date());
+		footPrint.setVisittime(visitTime);
+		this.footPrintService.doInserFootPrint(footPrint);
 	}
 	
 	/**
