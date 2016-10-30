@@ -38,6 +38,36 @@ public class UserInfo implements Serializable  {
 	 * 扫一扫类型，1-扫桌、2-扫餐具
 	 */
 	private String inserttype;
+	/**
+	 * 用户所在省份
+	 */
+	private String province;
+	/**
+	 * 城市
+	 */
+	private String city;
+	/**
+	 * 用户关注时间
+	 */
+	private String subscribe_time;
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getSubscribe_time() {
+		return subscribe_time;
+	}
+	public void setSubscribe_time(String subscribe_time) {
+		this.subscribe_time = subscribe_time;
+	}
 	public String getOpenid() {
 		return openid;
 	}

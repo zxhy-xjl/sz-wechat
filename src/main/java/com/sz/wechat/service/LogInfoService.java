@@ -3,6 +3,8 @@
  */
 package com.sz.wechat.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,15 @@ public class LogInfoService {
 	public int insertLog(LogInfo loginfo)
 	{
 		return this.logInfoMapper.insertLog(loginfo);
+	}
+	
+	/**
+	 * 根据openid获取日志
+	 * @param openid
+	 * @return
+	 */
+	public List<LogInfo> getLogByOpenid(String openid)
+	{
+		return this.logInfoMapper.getLogByOpenid(openid);
 	}
 }
