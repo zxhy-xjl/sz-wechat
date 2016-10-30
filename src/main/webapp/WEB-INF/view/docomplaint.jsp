@@ -32,7 +32,7 @@ font-family: SimHei;
 <input type="hidden" name="footprintpid" value="${footprintpid}">
 
 <%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
-<textarea id="complaintcontent" name="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;">服务态度非常恶劣，简直无法形容。</textarea><br>
+<textarea id="complaintcontent" name="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;" placeholder="请输入投诉信息"></textarea><br>
 <input type="file" name="camera" accept="image/*"  capture="camera" ><br>
 <br>
 <div style="text-align: center;">
