@@ -11,6 +11,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +27,12 @@ import com.sz.wechat.entity.Footprint;
 import com.sz.wechat.entity.Grade;
 import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
+import com.sz.wechat.service.AbnormalService;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.ComplainService;
 import com.sz.wechat.service.EvaluateService;
 import com.sz.wechat.service.FootprintService;
+import com.sz.wechat.utils.RuntimeModel;
 import com.sz.wechat.utils.ScanCodeUtils;
 import com.sz.wechat.vo.JsonVo;
 
@@ -37,7 +43,7 @@ import com.sz.wechat.vo.JsonVo;
  */
 @Controller
 public class ScanCodeController {
-
+	private static Logger logger = LoggerFactory.getLogger(ScanCodeController.class);
 	/**
 	 * 企业注册数据逻辑层
 	 */
@@ -61,7 +67,10 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private EvaluateService evaluateService;
-	
+	@Autowired
+	private AbnormalService abnormalService;
+	@Autowired
+	private RuntimeModel runtimeModel;
 	/**
 	 * 扫一扫
 	 * @param request
@@ -104,6 +113,8 @@ public class ScanCodeController {
 				String companyCode = companyArr [companyArr.length-companyArr.length];
 				String tablenum = companyArr[companyArr.length-1];
 				CompanyInfo companyInfo = companyInfoService.getCompanyByCodeAndType(companyCode,"1");
+				//用于异常名录信息检查
+				findCTQYAbnormal(request, company, code, companyInfo);
 				if(null != companyInfo){
 					modelAndView.addObject("CompanyInfo", companyInfo);
 					HttpSession session = request.getSession();
@@ -116,7 +127,7 @@ public class ScanCodeController {
 					modelAndView.setViewName("/companyError");
 				}
 			}
-		}
+		} 
 		return modelAndView;
 	}
 	
@@ -458,14 +469,14 @@ public class ScanCodeController {
 		ModelAndView modelAndView = new ModelAndView();
 		if(!"".equals(company)){
 			CompanyInfo companyInfo = companyInfoService.getCompanyByCodeAndType(company,"0");
+			//用于异常名录信息检查
+			findCJQYAbnormal(request, company, code, companyInfo);
 			if(null != companyInfo){
 				Map<String,Object> map = ScanCodeUtils.getScanCode("2","http://www.haoschoool.com/sz-wechat/checkScanCodeTableWare.do?company="+company);
 				modelAndView.addObject("nonceStr", String.valueOf(map.get("nonceStr")));
 				modelAndView.addObject("timestamp", String.valueOf(map.get("timestamp")));
 				modelAndView.addObject("signature",String.valueOf(map.get("signature")));
 				modelAndView.addObject("CompanyInfo", companyInfo);
-				HttpSession httpSession =(HttpSession)request.getSession();
-				String openId = String.valueOf(httpSession.getAttribute("openid"));
 				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(company);
 				if(null != evaluateList && evaluateList.size()>0){
 					int scort = 0;
@@ -488,6 +499,34 @@ public class ScanCodeController {
 			}
 		}
 		return modelAndView;
+	}
+
+
+	private void findCTQYAbnormal(HttpServletRequest request, String company, String code, CompanyInfo companyInfo) {
+		if (companyInfo == null){
+			logger.info("扫描餐厅二维码没有找到对应的企业信息，发出一条异常信息");
+			String openId = this.runtimeModel.getOpenId(request.getSession());
+			this.abnormalService.findAbnormal(openId, code, company, true,true);
+		} else {
+			if (StringUtils.isBlank(companyInfo.getCompanycode()) || StringUtils.isBlank(companyInfo.getLicence())){
+				logger.info("扫描餐厅找到对应的企业信息，但是营业执照和许可证有空的，发出一条异常信息");
+				String openId = this.runtimeModel.getOpenId(request.getSession());
+				this.abnormalService.findAbnormal(openId, code, company, StringUtils.isBlank(companyInfo.getCompanycode()), StringUtils.isBlank(companyInfo.getLicence()));
+			}
+		}
+	}
+	private void findCJQYAbnormal(HttpServletRequest request, String company, String code, CompanyInfo companyInfo) {
+		if (companyInfo == null){
+			logger.info("扫描餐具条码没有找到对应的企业信息，发出一条异常信息");
+			String openId = this.runtimeModel.getOpenId(request.getSession());
+			this.abnormalService.findAbnormal(openId, code, company, true,false);
+		} else {
+			if (StringUtils.isBlank(companyInfo.getCompanycode())){
+				logger.info("扫描餐具条码（二维码）找到对应的企业信息，但是营业执照有空的，发出一条异常信息");
+				String openId = this.runtimeModel.getOpenId(request.getSession());
+				this.abnormalService.findAbnormal(openId, code, company, StringUtils.isBlank(companyInfo.getCompanycode()),false);
+			}
+		}
 	}
 	
 	/**
@@ -519,7 +558,7 @@ public class ScanCodeController {
 	 */
 	@RequestMapping(value = "/setOpenId")
 	public void setOpenId(HttpServletRequest request, HttpServletResponse response){
-		String openid = String.valueOf(request.getParameter("openid"));
+		String openid = this.runtimeModel.getOpenId(request);
 		HttpSession httpSession =(HttpSession)request.getSession();
 		httpSession.setAttribute("openid", openid);
 	}
@@ -531,8 +570,7 @@ public class ScanCodeController {
 	 */
 	@RequestMapping(value = "/doInserFootPrint")
 	public void doInserFootPrint(HttpServletRequest request, HttpServletResponse response){
-		HttpSession httpSession =(HttpSession)request.getSession();
-		String openid = String.valueOf(httpSession.getAttribute("openid"));
+		String openid = this.runtimeModel.getOpenId(request.getSession());
 		String companyCode = request.getParameter("companCode");
 		String companyName = request.getParameter("companyName");
 		Footprint footPring = new Footprint();

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.AbnormalMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.Abnormal">
+		<id column="pid" property="pid" jdbcType="VARCHAR"/>
+		<result column="company_Code" property="companyCode" jdbcType="VARCHAR"/>
+		<result column="company_Name" property="companyName" jdbcType="VARCHAR"/>
+		<result column="open_Id" property="openId" jdbcType="VARCHAR"/>
+		<result column="no_Recode" property="noRecode" jdbcType="VARCHAR"/>
+		<result column="no_Licence" property="noLicence" jdbcType="VARCHAR"/>
+		<result column="error_Address" property="errorAddress" jdbcType="VARCHAR"/>
+		<result column="now_Address" property="nowAddress" jdbcType="VARCHAR"/>
+		<result column="recode_Address" property="recodeAddress" jdbcType="VARCHAR"/>
+		<result column="abnormal_Date" property="abnormalDate" jdbcType="VARCHAR"/>
+		<result column="close_Date" property="closeDate" jdbcType="VARCHAR"/>
+		
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		pid,company_Code,company_Name,open_Id,no_Recode,no_Licence,error_Address,now_Address,recode_Address,abnormal_Date,close_Date
+	</sql>
+	<!-- 查询 -->
+	<select id="getAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM sz_abnormal
+	</select>
+	<insert id="insert" parameterType="com.sz.wechat.entity.Abnormal">
+	insert into sz_abnormal(pid,company_Code,company_Name,open_Id,no_Recode,no_Licence,error_Address,now_Address,recode_Address,abnormal_Date,close_Date)
+	values(#{pid,jdbcType=VARCHAR},#{companyCode,jdbcType=VARCHAR},#{companyName,jdbcType=VARCHAR},#{openId,jdbcType=VARCHAR},#{noRecode,jdbcType=VARCHAR},#{noLicence,jdbcType=VARCHAR},#{errorAddress,jdbcType=VARCHAR},#{nowAddress,jdbcType=VARCHAR},#{recodeAddress,jdbcType=VARCHAR},#{abnormalDate,jdbcType=VARCHAR},#{closeDate,jdbcType=VARCHAR})
+	</insert>
+	<update id="close" parameterType="java.lang.String">
+		update sz_abnormal set close_date=#{closeDate,jdbcType=VARCHAR} where pid=#{pid,jdbcType=VARCHAR}
+	</update>
+</mapper>
