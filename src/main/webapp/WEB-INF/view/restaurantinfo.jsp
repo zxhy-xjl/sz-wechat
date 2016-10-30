@@ -161,7 +161,14 @@ ${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbs
 </c:if>
 
 <br>
-<label style="font-size: 20px;">&nbsp;&nbsp;行政处罚    ${superviseCount }个</label>
+<label style="font-size: 20px;">
+<c:if test="${superviseCount>0 }">
+<a href="getSuperviseByCompanyName.do?companyname="${companyInfo.companyname }">&nbsp;&nbsp;处罚信息</a>
+</c:if>
+<c:if test="${superviseCount==0 }">
+&nbsp;&nbsp;行政处罚   
+</c:if>
+${superviseCount }个</label>
 <label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">餐厅介绍：${companyInfo.companyintro}</label>
