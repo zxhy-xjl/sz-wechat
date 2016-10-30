@@ -60,7 +60,7 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 						<label style="color: #d4a351;">投诉数量:${item.complaintCount}</label>
 						
 					</td>
-					<td width="40px"><label style="color: red; font-size: 20px;">${item.score}分</label><br />
+					<td width="50px"><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>
 				</tr>
 			</c:forEach>
