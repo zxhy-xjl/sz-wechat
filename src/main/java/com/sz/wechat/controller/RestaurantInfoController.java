@@ -76,8 +76,7 @@ public class RestaurantInfoController {
 	@RequestMapping(value = "/toRestaurant",method = RequestMethod.GET)
 	public ModelAndView restartantinfoGet (HttpServletRequest request, HttpServletResponse response)
 	{ 
-		HttpSession ss = (HttpSession)request.getSession();
-		String openid = this.runtimeModel.getOpenId(ss);
+		String openid = this.runtimeModel.getOpenId(request);
 		String companyCode = request.getParameter("companycode");
 		CompanyInfo companyInfo = this.companyInfoService.getCompanyByCode(companyCode);
 		//综合得分
