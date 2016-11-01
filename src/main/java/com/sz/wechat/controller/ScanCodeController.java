@@ -54,8 +54,6 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private ComplainService complainService;
-	
-	
 	/**
 	 * 足迹数据逻辑层
 	 */
@@ -156,7 +154,6 @@ public class ScanCodeController {
 	public JsonVo  proportionCompany(HttpServletRequest request, HttpServletResponse response){
 		String companyCode = request.getParameter("companyCode");
 		JsonVo  jsonVo = new JsonVo();
-		String keyWord="警告";
 		String keyWord_0="罚款";
 		String keyWord_1="没收";
 		String keyword_2="停产停业";
@@ -296,7 +293,6 @@ public class ScanCodeController {
 		JsonVo  jsonVo = new JsonVo();
 		int score = 100;
 		int allscore=0;
-		String keyWord="警告";
 		String keyWord_0="罚款";
 		String keyWord_1="没收";
 		String keyword_2="停产停业";
@@ -425,7 +421,6 @@ public class ScanCodeController {
 				//评分
 				allscore = 0;
 				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
-				//List<Complaint> complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyCode);
 				if(null != evaluateList && evaluateList.size()>0){
 					for(Evaluate evaluate:evaluateList){
 						if(null != evaluate.getEvaluate()){
