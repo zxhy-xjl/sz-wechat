@@ -54,6 +54,9 @@
 	 <select id="selectOddnumberByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT * FROM (SELECT  ODDNUMBER,ODDTIME FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR}  GROUP BY ODDNUMBER,ODDTIME) ORDER BY TO_NUMBER(ODDTIME) DESC
 	 </select>
+	 <select id="selectCompanyCodeByOpenid" resultType="java.lang.String" parameterType="java.lang.String">
+	 	SELECT  COMPANYCODE FROM SZ_CONSUMEREC  WHERE OPENID = #{openid,jdbcType=VARCHAR}  GROUP BY COMPANYCODE
+	 </select>
 	 <select id="selectConsumerByDefaultadd" resultMap="BaseResultMap" parameterType="java.lang.String">
 	 	SELECT <include refid="Base_Column_List"/> FROM SZ_CONSUMEREC WHERE DEFAULTADD=1 AND OPENID = #{0} AND COMPANYCODE = #{1} ORDER BY PAYTIME DESC 
 	 </select>

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sz.wechat.dao.CompanyInfoMapper;
@@ -21,7 +23,7 @@ import com.sz.wechat.entity.SupervisePunish;
  */
 @Service
 public class CompanyInfoService {
-
+	private static Logger logger = LoggerFactory.getLogger(CompanyInfoService.class);
 	 
 	/**
 	 * 餐饮企业实现接口
@@ -164,6 +166,7 @@ public class CompanyInfoService {
 					if("".equals(companyInfo.getLicence()) || null == companyInfo.getLicence()){
 						score = score - 30;
 					}
+					logger.info("过滤资质目前得分：" + score);
 					//处罚类
 					SupervisePunish supervisePunish = new SupervisePunish();
 					supervisePunish.setNlawfulcompanyname(companyInfo.getCompanyname());
@@ -173,29 +176,24 @@ public class CompanyInfoService {
 						for (SupervisePunish _supervisePunish : list) {
 							String illegalType = _supervisePunish.getPenaltytype();
 							//判断是否存在吊销执照
-							if(illegalType.indexOf(KEYWORD_3)!=-1){
+							if(illegalType.indexOf(KEYWORD_3)!=-1 || illegalType.indexOf(KEYWORD_4)!=-1){
 								score = score - 5;
-							}else if(illegalType.indexOf(KEYWORD_4)!=-1){
-								score = score - 5;
-							}
-							//停产停业
-							if(illegalType.indexOf(KEYWORD_2)!=-1){
+							}else if(illegalType.indexOf(KEYWORD_2)!=-1){
+								//吊销
 								score = score - 4;
-							}
-							//没收违法所得
-							if(illegalType.indexOf(KEYWORD_1)!=-1){
+							} else if(illegalType.indexOf(KEYWORD_1)!=-1){
+								//没收
 								score = score - 3;
-							}
-							//罚款
-							if(illegalType.indexOf(KEYWORD_0)!=-1){
+							}else if (illegalType.indexOf(KEYWORD_0)!=-1){
+								//罚款
 								score = score - 2;
-							}
+							} else {
 							//警告
-							if(illegalType.indexOf(KEYWORD)!=-1){
 								score = score - 1;
 							}
 						}
 					}
+					logger.info("过滤处罚目前得分:" + score);
 					//投诉类
 					int allgrade = 5;
 					int gradeStat=0;
@@ -213,6 +211,7 @@ public class CompanyInfoService {
 							}
 						}
 					}
+					logger.info("过滤投诉目前得分:" + score);
 					//评分
 					List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 					if(null != evaluateList && evaluateList.size()>0){
@@ -229,7 +228,9 @@ public class CompanyInfoService {
 							score = 0;
 						}
 						gradeStat=0;
+						
 					}
+					logger.info("过滤评分目前得分:" + score);
 				}
 			}
 		 return score;

@@ -11,7 +11,12 @@
 		<result column="VISITPAGE" property="visitpage" jdbcType="VARCHAR"/>
 		<result column="COUNTRY" property="country" jdbcType="VARCHAR"/>
 	</resultMap>
-
+<sql id="Base_Column_List">
+		NICKNAME, OPENID, SEX, LANGUAGE, INSERTTIME, VISITPAGE, COUNTRY
+	</sql>
+	<select id="getLogByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
+			SELECT <include refid="Base_Column_List"/> FROM SZ_LOG  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
+		</select>
  <insert id="insertLog" parameterType="com.sz.wechat.entity.LogInfo">
   insert into SZ_LOG
    (NICKNAME,OPENID,SEX,LANGUAGE,INSERTTIME,VISITPAGE,COUNTRY)

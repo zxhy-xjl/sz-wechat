@@ -54,13 +54,13 @@ table tr:nth-child(2n){background-color: #e9e9e9}
 			<c:forEach items="${companyList}" var="item" varStatus="status">
 				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.companyCode}')">
 				<td><img src="<%=path%>/public/images/company/${item.companyCode }.png"  height="100px" width="100px" / ></td>
-					<td><label><font size="4px" style="font-weight: bold">&nbsp;&nbsp;${item.companyName}</font></label>
+					<td><label><font size="4px">${item.companyName}</font></label>
 					<br><br>
 						<label style="color: #d4a351;">订单数量:${item.consumerecCount}</label>
 						<label style="color: #d4a351;">投诉数量:${item.complaintCount}</label>
 						
 					</td>
-					<td><label style="color: red; font-size: 20px;">${item.score}分</label><br />
+					<td width="50px"><label style="color: red; font-size: 20px;">${item.score}分</label><br />
 					</td>
 				</tr>
 			</c:forEach>

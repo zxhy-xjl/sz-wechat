@@ -12,16 +12,20 @@
 </head>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 <script type="text/javascript">
-var unlawfulfact = "${SupervisePunish.unlawfulfact}";
+var unlawfulfact = "${SupervisePunishList}";
 $(function(){
-	if(unlawfulfact.length>20){
-		unlawfulfact = unlawfulfact.substring(0,50);
-		$("#unlawfulfact").text(unlawfulfact+"...............");
+	if (unlawfulfact=="[]"){
+		document.getElementById("content").innerHTML="暂时没有处罚";
 	}
 });
 </script>
 <body style="background-color:#E9E9E9">
 <div id="content" > 
+<c:forEach items="${SupervisePunishList}" var="SupervisePunish" varStatus="status">
+<c:if test="${status.index>0 }">
+<hr>
+</c:if>
+
 <table border="0" width="100%" align="center">
 	<tr>
 		<td align="right" width="60%">行政处罚决定书文号：</td>
@@ -64,6 +68,7 @@ $(function(){
 		<td>${SupervisePunish.punishmentdate}</td>
 	</tr>
 </table>
+</c:forEach>
 </div>
 </body>
 </html>

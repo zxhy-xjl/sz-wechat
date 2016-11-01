@@ -20,12 +20,12 @@
 	</sql>
 	<!-- 查询 -->
 	<select id="getSuperviseLikeCompanyName"  resultMap="BaseResultMap" parameterType="com.sz.wechat.entity.SupervisePunish">
-		SELECT  <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE (TO_CHAR(SYSDATE,'yyyymmdd') - REPLACE(PUNISHMENTDATE,'-','')) &lt;= 10000 AND  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
+		SELECT  <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
 	</select>
 	<select id="getSuperviseByCompanyName" resultMap="BaseResultMap" parameterType="com.sz.wechat.entity.SupervisePunish">
 		SELECT <include refid="Base_Column_List"/> FROM SODA_FDADATA_CATERINGPUNISH WHERE  UNLAWFULCOMPANYNAME LIKE '%${nlawfulcompanyname}%'
 	</select>
 	<select id="getCountByCompanyName" resultType="java.lang.Integer" parameterType="java.lang.String">
-		select count(*) from SODA_FDADATA_CATERINGPUNISH where UNLAWFULCOMPANYNAME=#{unlawfulcompanyname,jdbcType=VARCHAR}
+		select count(*) from SODA_FDADATA_CATERINGPUNISH where UNLAWFULCOMPANYNAME like '%${unlawfulcompanyname}%'
 	</select>
 </mapper>

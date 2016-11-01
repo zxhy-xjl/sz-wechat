@@ -128,6 +128,9 @@ public class ConsumerecService {
 		List<Consumerec> oddNumberList = this.consumerecMapper.selectOddnumberByOpenid(openId);
 		return this.toOrderList(oddNumberList);
 	}
+	public List<String> getCompanyCodeList(String openId){
+		return this.consumerecMapper.selectCompanyCodeByOpenid(openId);
+	}
 	/**
 	 * 根据下单人和餐厅得到订单列表
 	 * @param openId

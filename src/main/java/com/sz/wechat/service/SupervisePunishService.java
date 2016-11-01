@@ -1,4 +1,6 @@
 package com.sz.wechat.service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sz.wechat.dao.SupervisePunishMapper;
@@ -22,11 +24,10 @@ public class SupervisePunishService {
 	 * @param companyName
 	 * @return
 	 */
-	public SupervisePunish getSuperviseByCompanyName(SupervisePunish supervisePunish){
+	public List<SupervisePunish> getSuperviseByCompanyName(SupervisePunish supervisePunish){
 		return this.supervisePunishMapper.getSuperviseByCompanyName(supervisePunish);
 	}
 	public int getCountByCompanyName(String unlawfulcompanyname){
-		System.out.println("companyName:" + unlawfulcompanyname + ":");
 		return this.supervisePunishMapper.getCountByCompanyName(unlawfulcompanyname);
 	}
 }

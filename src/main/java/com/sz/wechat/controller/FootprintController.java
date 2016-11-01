@@ -67,13 +67,14 @@ public class FootprintController {
         ss.setAttribute("openid",openid);
         
 		ModelAndView modelAndView = new ModelAndView();
+		List<String> companyCodeList = this.consumerecService.getCompanyCodeList(openid);
 		//根据openid获取足迹列表
-		List<Footprint> footprintlist = this.footprintService.getDisFootprintByOpenid(openid);
 		List<FootPrintCompany> companyList = new ArrayList<>();
-		for (Footprint footprint : footprintlist) {
+		for (String companyCode : companyCodeList) {
 			FootPrintCompany company = new FootPrintCompany();
-			company.setCompanyCode(footprint.getCompanycode());
-			company.setCompanyName(footprint.getCompanyname());
+			company.setCompanyCode(companyCode);
+			String companyName = this.companyInfoService.getCompanyByCode(companyCode).getCompanyname();
+			company.setCompanyName(companyName);
 			//订单数量
 			company.setConsumerecCount(this.consumerecService.selectOddnumberByOpenidandCompanycode(openid,company.getCompanyCode()).size());
 			logger.debug("订单数量:" + company.getConsumerecCount());

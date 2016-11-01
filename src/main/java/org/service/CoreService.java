@@ -25,7 +25,7 @@ public class CoreService {
 		String respMessage = null;
 		try {
 			// 默认返回的文本消息内容
-			String respContent = "";
+			String respContent = "\n";
 
 			// xml请求解析
 			Map<String, String> requestMap = MessageUtil.parseXml(request);

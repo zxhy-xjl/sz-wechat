@@ -71,7 +71,12 @@ public interface ConsumerecMapper {
 	 * @return
 	 */
 	public List<Consumerec> selectOddnumberByOpenid(@Param(value="openid")String openid);
-
+	/**
+	 * 获得餐饮企业的名录
+	 * @param openid
+	 * @return
+	 */
+	public List<String> selectCompanyCodeByOpenid(@Param(value="openid")String openid);
 	/**
 	 * 通过openid查询订单
 	 * @param paytime 下单时间
