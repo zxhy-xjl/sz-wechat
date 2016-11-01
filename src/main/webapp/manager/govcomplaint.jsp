@@ -104,6 +104,21 @@ function stopBubble(e){
     	 return;
 	}
 	
+	
+	function cancelorder(event,feedpid)
+	{
+		stopBubble(event);
+		var tmp = confirm("确认此投诉无效？");
+		if(tmp==true)
+   	  {
+			testMessageBox(event,feedpid,'0');
+   	  }
+     else
+   	  return;
+		
+	}
+	
+	
 	function feedfinish()
 	{
 		
@@ -112,7 +127,7 @@ function stopBubble(e){
 	}
 	
 	//弹出方法
-	function showMessageBox(wTitle, content, wWidth,feedpid)
+	function showMessageBox(wTitle, content, wWidth,feedpid,isvalid)
 
 	{
 
@@ -162,6 +177,7 @@ function stopBubble(e){
 
 		document.body.appendChild(mesW);
         document.getElementById("feedpid").value = feedpid;
+        document.getElementById("isvalid").value = isvalid;
 	}
 
 	//让背景渐渐变暗
@@ -209,11 +225,11 @@ function stopBubble(e){
 	}
 
 	//测试弹出
-	function testMessageBox(event,feedpid)
+	function testMessageBox(event,feedpid,isvalid)
 	{
 		stopBubble(event);
-	messContent = "<div style='padding:30px 0 30px 120px;'><form id=\"feedbackForm\" action='<%=path%>/updategovdetails.do' method=\"post\"> <input type=\"hidden\" id='feedpid' name=\"pid\" value=\"\"><input type=\"hidden\" id='status' name=\"status\" value=\"4\"><label>反馈内容:</label><br/><textarea id='result' name='feedback' row='6' style='height: 300px;width: 300px;'></textarea><br/><br/><br/><input type='submit' style='width:48px;margin-left: 120px;' value='完成' onclick='feedfinish()'/></form></div>";
-		showMessageBox('反馈', messContent, 500,feedpid);
+	messContent = "<div style='padding:30px 0 30px 120px;'><form id=\"feedbackForm\" action='<%=path%>/updategovdetails.do' method=\"post\"> <input type=\"hidden\" id='feedpid' name=\"pid\" value=\"\"><input type=\"hidden\" id='isvalid' name=\"isvalid\" value=\"\"><input type=\"hidden\" id='status' name=\"status\" value=\"4\"><label>反馈内容:</label><br/><textarea id='result' name='feedback' row='6' style='height: 300px;width: 300px;'></textarea><br/><br/><br/><input type='submit' style='width:48px;margin-left: 120px;' value='完成' onclick='feedfinish()'/></form></div>";
+		showMessageBox('反馈', messContent, 500,feedpid,isvalid);
 	}
 </script>
 </head>
@@ -248,12 +264,15 @@ function stopBubble(e){
 	</td>
 	<td ><c:if test="${item.disposestatus == 1}">
 	<input type="button" value="受理" onclick="bizchange(event,this,'${item.pid}','2')">
+	<input type="button" value="无效" onclick="cancelorder(event,'${item.pid}')">
 	</c:if>
 	<c:if test="${item.disposestatus == 2}">
 	<input type="button" value="处理" onclick="bizchange(event,this,'${item.pid}','3')">
+	<input type="button" value="无效" onclick="cancelorder(event,'${item.pid}')">
 	</c:if>
 	<c:if test="${item.disposestatus == 3}">
-	<input type="button" value="反馈" onclick="testMessageBox(event,'${item.pid}');">
+	<input type="button" value="反馈" onclick="testMessageBox(event,'${item.pid}','1');">
+	<input type="button" value="无效" onclick="cancelorder(event,'${item.pid}')">
 	</c:if>
 	<c:if test="${item.disposestatus == 4}">
 	

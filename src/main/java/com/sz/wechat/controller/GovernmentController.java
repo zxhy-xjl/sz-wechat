@@ -92,8 +92,12 @@ public class GovernmentController {
 	public ModelAndView UpdatedetailsGet (HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String pid = request.getParameter("pid");
 		String status = request.getParameter("status");
+		String isvalid = request.getParameter("isvalid");
 		if(status==null )
 			status="";
+		if(isvalid==null )
+			isvalid="";
+		
 		String feedback = request.getParameter("feedback");
 		Date date=new Date();
 		DateFormat format=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -103,6 +107,8 @@ public class GovernmentController {
 		complaint.setDisposestatus(status);
 		complaint.setDisposetime(time);
 		complaint.setDisposeresult(feedback);
+		complaint.setIsvalid(isvalid);
+		complaint.setDisposedep("市场监督管理局");
 		if(status.equals("4"))
 		this.complainService.updateStatusandFeedByPid(complaint);
 		else

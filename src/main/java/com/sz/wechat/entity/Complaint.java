@@ -76,9 +76,18 @@ public class Complaint implements Serializable {
      * 用户反馈
      */
     private String feedback;
+    /**
+     * 是否有效
+     */
+    private String isvalid;
     
 
-
+	public String getIsvalid() {
+		return isvalid;
+	}
+	public void setIsvalid(String isvalid) {
+		this.isvalid = isvalid;
+	}
 	public String getFeedback() {
 		return feedback;
 	}
