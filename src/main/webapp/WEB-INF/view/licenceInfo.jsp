@@ -9,45 +9,48 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>许可证详细信息</title>
+<style type="text/css">
+.td{border:1px solid #EBEBEB;border-width:0px 1px 1px 0px}
+</style>
 </head>
-<body style="background-color:#E9E9E9">
+<body>
 <div id="content" > 
-<table border="0" width="100%" align="center">
+<table width="100%" align="center"  style="border-collapse:collapse;border:1px solid #EBEBEB" >
 	<tr>
-		<td align="right" width="30%">许可证编号：</td>
-		<td>${RepastPublicInfo.repastlicence}</td>
+		<td class="td" align="left" width="30%" style="background-color:#E7E7E7">许可证编号</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.repastlicence}</td>
 	</tr>
 	<tr>
-		<td align="right">名称：</td>
-		<td>${RepastPublicInfo.repastname}</td>
+		<td class="td" align="left" style="background-color:#E7E7E7"> 企业名称</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.repastname}</td>
 	</tr>
 	<tr>
-		<td align="right">经营场所：</td>
-		<td>${RepastPublicInfo.address}</td>
+		<td class="td" align="left" style="background-color:#E7E7E7">经营场所</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.address}</td>
 	</tr>
 	<tr>
-		<td align="right">负责人：</td>
-		<td>${RepastPublicInfo.principal}</td>
+		<td class="td" align="left" style="background-color:#E7E7E7">负责人</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.principal}</td>
 	</tr>
 	<tr>
-		<td align="right">主体类型：</td>
-		<td>${RepastPublicInfo.subjecttype}</td>
+		<td class="td"align="left" style="background-color:#E7E7E7">主体类型</td>
+		<td class="td"style="background-color:#FFFFFF">${RepastPublicInfo.subjecttype}</td>
 	</tr>
 	<tr>
-		<td align="right">许可范围：</td>
-		<td>${RepastPublicInfo.permissionscope}</td>
+		<td class="td"align="left" style="background-color:#E7E7E7">许可范围</td>
+		<td class="td"style="background-color:#FFFFFF">${RepastPublicInfo.permissionscope}</td>
 	</tr>
 	<tr>
-		<td align="right">有效期限：</td>
-		<td>${RepastPublicInfo.validity}</td>
+		<td class="td"align="left" style="background-color:#E7E7E7">有效期限</td>
+		<td class="td"style="background-color:#FFFFFF">${RepastPublicInfo.validity}</td>
 	</tr>
 	<tr>
-		<td align="right">发证机关：</td>
-		<td>${RepastPublicInfo.certificateoffice}</td>
+		<td class="td"align="left" style="background-color:#E7E7E7">发证机关</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.certificateoffice}</td>
 	</tr>
 	<tr>
-		<td align="right">发证日期：</td>
-		<td>${RepastPublicInfo.certificatetime}</td>
+		<td class="td"align="left" style="background-color:#E7E7E7">发证日期</td>
+		<td class="td" style="background-color:#FFFFFF">${RepastPublicInfo.certificatetime}</td>
 	</tr>
 </table>
 </div>
