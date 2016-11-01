@@ -37,7 +37,7 @@ function getScore(){
 	if(score>65 && score<80){
 		scoreHtml = '<font size="6px" color="#629527">'+score+'分</font>';
 	}
-	if(score>80){
+	if(score>=80){
 		scoreHtml = '<font size="6px" color="#63B109">'+score+'分</font>';
 	}
 	$("#head").html(scoreHtml);
