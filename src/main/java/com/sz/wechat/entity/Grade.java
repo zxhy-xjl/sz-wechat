@@ -46,6 +46,11 @@ public class Grade implements Serializable {
 	 */
 	private String url;
 	
+	/**
+	 * 主键
+	 */
+	private String pid;
+	
 	
 	public Grade(){
 	}
@@ -70,6 +75,15 @@ public class Grade implements Serializable {
 		this.result=result;
 		this.error=error;
 	}
+	
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
 	public String getScore() {
 		return score;
 	}

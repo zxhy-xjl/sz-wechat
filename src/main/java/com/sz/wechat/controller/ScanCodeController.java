@@ -410,7 +410,7 @@ public class ScanCodeController {
 							if(score > 2){
 								score = score - 2;
 								allscore = allscore + 2;
-								grade = new Grade("complaint","2","",df.format(new Date()),complaint.getComplaincontent());
+								grade = new Grade("complaint","2","",df.format(new Date()),"<a href='../sz-wechat/lookuserinfo.do?pid="+complaint.getPid()+"&companyname="+companyInfo.getCompanyname()+"' style='text-decoration:none'>"+complaint.getComplaincontent()+"</a>");
 								_mapList.add(grade);
 							}else{
 								score = 0;
