@@ -35,10 +35,22 @@ public class Menu implements Serializable {
 	private byte[] menuphoto;
 	
 	/**
+	 * 企业Code
+	 */
+	private String companycode;
+	
+	/**
 	 * 保存路径
 	 */
 	private String path;
 	
+	
+	public String getCompanycode() {
+		return companycode;
+	}
+	public void setCompanycode(String companycode) {
+		this.companycode = companycode;
+	}
 	public String getMenuid() {
 		return menuid;
 	}
