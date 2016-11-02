@@ -282,11 +282,11 @@ public class MenuController  {
 		}
 		Menu menu = new Menu();
 		menu.setMenuid(newName);
-		menu.setMenuname("麻婆豆腐");
+		menu.setMenuname("珍菌汤包");
 		menu.setMenuphoto(fileBytes);
 		menu.setMenutype("1");
 		menu.setPrice("10");
-		menu.setFeature("介绍：麻辣开胃");
+		menu.setFeature("介绍：珍菌汤包选用猴头菇、茶树菇、雪耳等优质珍菌用排骨烹调,长期食用可增进人体免疫力");
 		menu.setPath(uploadPath);
 		return this.menuService.doInsertBlob(menu);
 	}
