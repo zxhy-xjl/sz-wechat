@@ -59,6 +59,9 @@ function getPercentage(){
 	</div>
 	<div id="ratio" style="width:65%;float:right;margin-top:10%;">
 	</div>
+	<div id="scoreStandard" style="width:30%;float:right;margin-top:15%;">
+		<a>评分规则</a>
+	</div>
 	<div id="hr" style="padding-top:35%;">
 		<hr color="#B9B9B9">
 	</div>
