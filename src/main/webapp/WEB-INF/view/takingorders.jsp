@@ -173,7 +173,7 @@ function doSubmit(){
 				<c:if test="${item.code_id ==  item1.menutype && flag != item1.menutype}">
 					<tr style="height:20px;line-height:5px;">
 						<td colspan="5" ><h2>&nbsp;&nbsp;<c:if test="${item.code_id == '0'}">${item.codedescript}</c:if><c:if test="${item.code_id == '1'}">${item.codedescript}</c:if><c:if test="${item.code_id == '2'}">${item.codedescript}</c:if></h2></td>
-					</tr>
+					</tr> 
 					<c:set  value="${item1.menutype}" var="flag" scope="page"/>
 				</c:if>
 				<c:if test="${item.code_id ==  item1.menutype}">
