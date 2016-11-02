@@ -9,31 +9,38 @@
 <html>
 <head>
 <style type="text/css">
-
+.max{width:100%;height:auto;}
+.min{width:100px;height:auto;}
 html{
 font-family: SimHei;
 }
-div{
-white-space: nowrap;
-}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>投诉详情</title>
+<script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 var flag = null;
 var text = null;
 var xmlHttpRequest = null;
 
+$(function(){
+	$('#img').click(function(){
+
+	$(this).toggleClass('min');
+	$(this).toggleClass('max');
+	});
+	});
 
 </script>
 </head>
 <body style="background-color: #e9e9e9;">
 <div id="baseinfo" style="background-color: #e9e9e9;">
 
-<div>
-<table border="0" width="100%"
-			style="border-collapse: collapse;">
+<div style="width: 100%">
+<table border="0" 
+			style="border-collapse: collapse;width: 100%">
 <tr style="height:40px;">
 <td>
 <label style="font-size: 20px">&nbsp;&nbsp;<font style="font-weight: bold;" size="5">投诉内容</font></label>
@@ -47,7 +54,7 @@ var xmlHttpRequest = null;
 </font></label><br /><br />
 <label >&nbsp;&nbsp;<font style="" size="3">投诉描述：${complaint.complaincontent }</font></label><br /><br />
 <c:if test="${complaint.complainphoto!=null}">
-<img alt="0" src="toLookImage.do?pid=${complaint.pid }" width="100px" height="100px"  >
+<img alt="0" src="toLookImage.do?pid=${complaint.pid }" id="img" class='min'>
 </c:if>
 <c:if test="${complaint.complainphoto==null}">
 <label style="font-weight: bolder;color: red;">&nbsp;&nbsp;没有图片，投诉时附加图片可以增加审核通过率</label>

@@ -33,10 +33,12 @@ font-family: SimHei;
 
 <%-- <img onclick="takephoto();" src="<%=path%>/public/images/camera.jpg" style="width:40px;height:30px;float: right;"/> --%><br>
 <textarea id="complaintcontent" name="complaintcontent" rows="10" cols="40" style="width:100%;margin:0 auto;" placeholder="请输入投诉信息"></textarea><br>
-<input type="file" name="camera" accept="image/*"  capture="camera" ><br>
+<div id="photodiv">
+<input onchange="read();" type="file" id="photofile" name="camera" accept="image/*"  capture="camera" ><br>
+</div>
 <br>
 <div style="text-align: center;">
-<input type="submit" value="投诉"  style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
+<input  type="submit" value="投诉"  style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px">
 </div>
 </form>
 
@@ -94,6 +96,41 @@ function finishcomplaint(companyname,companycode)
 	window.location.href="<%=path%>/doInsertComplaint.do?complaintcontent="+complaintcontent+"&companyname="+companyname+"&companycode="+companycode+"&evaluate=${evaluate}";
 	
 	}
+
+function read(){
+    var fs=document.getElementById('photofile').files[0];
+    if(fs){
+        var reader=new FileReader();
+        reader.readAsDataURL(fs);
+        function li(str){
+            var obj=document.createElement('li');
+            obj.innerHTML=str;
+            document.getElementById("photodiv").appendChild(obj);
+        }
+        reader.onloadstart=function(){
+           // li('开始读取')
+        }
+        reader.onprogress=function(){
+           // li('正在读取.....')
+        }
+        reader.onload=function(e){
+            var img=document.createElement('img');
+            img.src=this.result;
+            img.style.width = "50%";
+            document.getElementById("photodiv").appendChild(img);
+        }
+        reader.onabort=function(){
+            li('读取中断！！')     
+        }
+        reader.onerror=function(){
+            li('读取出现错误！！')
+        }
+        reader.onloadend=function(){
+          //  li('FileReader读取步骤执行完毕')
+        }
+    }
+}
+
 
 </script>
 </body>
