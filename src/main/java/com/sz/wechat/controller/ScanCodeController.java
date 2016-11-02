@@ -230,15 +230,16 @@ public class ScanCodeController {
 					complaintStat = 0;
 				}
 				//评分
+				int length = 0;
 				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
-				//complaintScoreList = this.companyInfoService.getComplaintScoreByCompanyId(companyInfo.getCompanycode());
 				if(null != evaluateList && evaluateList.size()>0){
 					for(Evaluate evaluate:evaluateList){
-						if(null != evaluate.getEvaluate()){
+						if(null != evaluate.getEvaluate()&&Integer.parseInt(evaluate.getEvaluate())<3){
+							length = length+1;
 							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/evaluateList.size();
+					gradeStat = gradeStat/length;
 					gradeStat = grade - gradeStat;
 					if(score > gradeStat){
 						score = score - gradeStat;
@@ -420,14 +421,16 @@ public class ScanCodeController {
 				}
 				//评分
 				allscore = 0;
+				int length = 0;
 				List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 				if(null != evaluateList && evaluateList.size()>0){
 					for(Evaluate evaluate:evaluateList){
-						if(null != evaluate.getEvaluate()){
+						if(null != evaluate.getEvaluate()&&Integer.parseInt(evaluate.getEvaluate())<3){
+							length = length + 1;
 							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/evaluateList.size();
+					gradeStat = gradeStat/length;
 					gradeStat = allgrade  - gradeStat;
 					if(score > gradeStat){
 						score = score - gradeStat;
