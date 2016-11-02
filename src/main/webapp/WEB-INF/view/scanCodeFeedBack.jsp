@@ -159,7 +159,7 @@ function doInsertFootPrint(){
 </form>
 <div id="content" style="height: 100%">
 	<div style="height:50px"></div>
-	<div id="score" style="text-align:center;line-height:230px;">
+	<div id="score" style="text-align:center;line-height:230px;" onclick="javascript:toGradeInfo()">
 	</div>
 	<div id="info" style="text-align:center;line-height:50px;">
 		<a href="javascript:toGradeInfo()" style="font-family:'楷体','楷体_GB2312';font-size:20px;text-decoration:none;color:#4B4B4B">点击查看详情</a>

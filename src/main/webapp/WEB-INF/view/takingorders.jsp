@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -181,7 +182,14 @@ function doSubmit(){
 						<td style="line-height:25px;" width="80%">
 							 <p style="line-height:20px;">${item1.menuname}</p>
 							 <p style="line-height:20px;"><font style="color:#E09D2F">￥${item1.price}</font></p>
-							 <p style="line-height:20px;">${item1.feature}</p>
+							 <p style="line-height:20px;" title="${item1.feature}">
+							 	<c:if test="${fn:length(item1.feature)>9}">
+							 		${fn:substring(item1.feature, 0, 9)}...
+							 	</c:if>
+							 	<c:if test="${fn:length(item1.feature)<=9}">
+							 		${item1.feature}
+							 	</c:if> 
+							 </p>
 						</td>
 						<td  align="right" width="5%">
 							<input type="hidden" id="${item1.menuid}price" value="${item1.price}">
