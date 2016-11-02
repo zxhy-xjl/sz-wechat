@@ -63,7 +63,7 @@
 		}
 	}
 	function doSubmit(){
-		window.location.href="<%=path%>/toTakingOrder.do";
+		window.location.href="<%=path%>/toTakingOrder.do?companyCode=${CompanyInfo.companycode}";
 	}
 	
 	function doInsertEvaluate(size){

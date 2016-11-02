@@ -68,13 +68,13 @@ function getScore(){
 			if(data){
 				score = data.result;
 				if(score<=65){
-					scoreHtml = '<font style="font-size:78px" color="red">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="red">'+score+'</font><font style="font-size:50px" style="font-size:60px">分</font>';
 				}
 				if(score>65 && score<80){
-					scoreHtml = '<font style="font-size:78px" color="#629527">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="#629527">'+score+'</font><font style="font-size:50px"color="#629527">分</font>';
 				}
 				if(score>=80){
-					scoreHtml = '<font style="font-size:78px" color="#63B109">'+score+'分</font>';
+					scoreHtml = '<font style="font-size:78px" color="#63B109">'+score+'</font><font style="font-size:50px" color="#63B109">分</font>';
 				}
 				$("#score").html(scoreHtml);
 				$("#scoreinput").val(score);

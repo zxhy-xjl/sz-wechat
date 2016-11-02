@@ -23,8 +23,8 @@ public class MenuService {
 	 * 菜单服务接口
 	 * @return
 	 */
-	public List<Menu> getMenu(){
-		return this.menuMapper.getMenu();
+	public List<Menu> getMenu(String companyCode){
+		return this.menuMapper.getMenu(companyCode);
 	}
 	
 	/**

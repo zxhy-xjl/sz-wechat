@@ -60,7 +60,8 @@ public class MenuController  {
 	@RequestMapping(value = "/toTakingOrder")
 	public ModelAndView toTakingOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		ModelAndView modelAndView = new ModelAndView();
-		List<Menu> menuList = this.menuService.getMenu();
+		String companyCode = request.getParameter("companyCode");
+		List<Menu> menuList = this.menuService.getMenu(companyCode);
 		if(null!= menuList && menuList.size()>0){
 			for (Menu menu : menuList) {
 					ScanCodeUtils.transferToFile(menu,request);

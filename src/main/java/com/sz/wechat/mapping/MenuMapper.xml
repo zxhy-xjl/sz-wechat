@@ -17,8 +17,8 @@
 		 MENUID, MENUNAME, MENUTYPE, FEATURE, PRICE, MENUPHOTO,PATH,COMPANYCODE
 	</sql>
 	<!-- 查询 -->
-	<select id="getMenu" resultMap="BaseResultMap">
-		SELECT <include refid="Base_Column_List"/> FROM SZ_MENU
+	<select id="getMenu" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_MENU WHERE COMPANYCODE=#{companycode,jdbcType=VARCHAR}
 	</select>
 	<select id="getMenuByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT <include refid="Base_Column_List"/> FROM SZ_MENU WHERE MENUID = #{menuid,jdbcType=VARCHAR}
