@@ -135,6 +135,38 @@ public class RestaurantInfoController {
 		
 	}
 	
+	
+	/**
+	 * 餐厅详情投诉举报列表页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/toComplaintList",method = RequestMethod.GET)
+	public ModelAndView restartantComplaintListGet (HttpServletRequest request, HttpServletResponse response)
+	{ 
+		
+		
+		//String companycode = request.getParameter("companycode");
+		String companycode = request.getParameter("companycode");
+		String companyName = request.getParameter("companyname");
+		List<Complaint> complaintList = this.companyInfoService.getComplaintByCompanyId(companycode, Complaint.DISPOSE_STATUS_FANKUI);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		modelAndView.addObject("complaintList", complaintList);
+		modelAndView.addObject("companyName", companyName);
+		modelAndView.setViewName("/complaintList");
+		
+		return modelAndView;
+		
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 餐厅控制台页面
 	 * @param request

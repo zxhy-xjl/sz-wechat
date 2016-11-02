@@ -25,6 +25,9 @@ span{
 text-align:center; 
 
 }
+  #complaintlabel:active{
+    color:#0000EE;
+  }
 </style>
 <script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 </head>
@@ -81,6 +84,11 @@ function lookcomplaint(pid,companyname)
 	window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname; 
 	
 	}
+
+function getcomplainlist(companycode,companyname)
+{
+	window.location.href = "<%=path%>/toComplaintList.do?companycode="+companycode+"&companyname="+companyname;	
+}
 
 </script>
 
@@ -176,7 +184,12 @@ ${personHealthCount }个</label><label style="font-size: 20px;">&nbsp;&nbsp;&nbs
 &nbsp;&nbsp;行政处罚   
 </c:if>
 ${superviseCount }个</label>
-<label style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
+<c:if test="${complaintcount==0 }">
+<label id="complaintlabel" style="font-size: 20px;" onclick="getcomplainlist('${companyInfo.companycode}','${companyInfo.companyname }')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
+</c:if>
+<c:if test="${complaintcount!=0 }">
+<label id="complaintlabel" style="font-size: 20px;color: #0000EE;" onclick="getcomplainlist('${companyInfo.companycode}','${companyInfo.companyname }')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
+</c:if>
 <hr color="lightgrey"/>
 <label style="font-weight:bold">餐厅介绍：${companyInfo.companyintro}</label>
 <hr color="lightgrey"/>
