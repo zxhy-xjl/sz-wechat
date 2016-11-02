@@ -30,7 +30,7 @@ font-family: SimHei;
 		if(id=='myorder')
 		{
       
-			document.getElementById("myorderbutton").style.background = "blue";
+			document.getElementById("myorderbutton").style.background = "#c1a79d";
 			document.getElementById("mycomplaintbutton").style.background = "";
 			document.getElementById("myorder").style.display = "";
 			document.getElementById("mycomplaint").style.display = "none";
@@ -39,7 +39,7 @@ font-family: SimHei;
 			{
 
 			document.getElementById("myorderbutton").style.background = "";
-			document.getElementById("mycomplaintbutton").style.background = "blue";
+			document.getElementById("mycomplaintbutton").style.background = "#c1a79d";
 			document.getElementById("myorder").style.display = "none";
 			document.getElementById("mycomplaint").style.display = "";
 			}
@@ -75,7 +75,7 @@ font-family: SimHei;
 <body style="background-color: #e9e9e9;">
 <div id="welcomediv">您好，<label id="nickname" style="color: red;"></label><br></div>
 <div style="text-align: center;">
-<input  id="myorderbutton" type="button" onclick="changetable('myorder')" style="background-color: blue;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的订单">
+<input  id="myorderbutton" type="button" onclick="changetable('myorder')" style="background-color: #c1a79d;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的订单">
 <input id="mycomplaintbutton" type="button" onclick="changetable('mycomplaint')" style="background-color: ;font-size:20px;font-family: SimHei;border:none;width:40%;height:35px;" value="我的投诉">
 </div>
 <div id="myorder">
