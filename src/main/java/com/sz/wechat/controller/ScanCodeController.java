@@ -579,4 +579,15 @@ public class ScanCodeController {
 		this.footPrintService.doInserFootPrint(footPring);
 	}
 	
+	
+	/**
+	 * 跳转至评分说明页面
+	 */
+	@RequestMapping(value = "/toScoreStandar")
+	public ModelAndView toScoreStandar(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/scoreStandard");
+		return modelAndView;
+	}
+	
 }
