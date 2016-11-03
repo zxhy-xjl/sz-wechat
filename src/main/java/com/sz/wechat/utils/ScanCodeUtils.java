@@ -16,6 +16,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.sz.wechat.entity.Menu;
+
+import net.coobird.thumbnailator.Thumbnails;
 import net.sf.json.JSONObject;
 
 /**
@@ -182,10 +184,8 @@ public class ScanCodeUtils {
 	 * @param request
 	 */
 	@SuppressWarnings("deprecation")
-	public static void transferToFile(Menu menu,HttpServletRequest request) {
+	public static void transferToFile(Menu menu,String downLoadPath) {
 		// 获得文件路径
-		String path = menu.getPath();
-		String downLoadPath = request.getRealPath("/")+"/"+path;
 		File file = new File(downLoadPath);
 		if(!file.exists()){
 			file.getParentFile().mkdirs();
@@ -203,13 +203,13 @@ public class ScanCodeUtils {
 				IOUtils.closeQuietly(bos);
 				IOUtils.closeQuietly(fos);
 			}
-		}
-		File newFile = new File(request.getRealPath("/")+"/"+path);
-		try {
-			FileUtils.writeByteArrayToFile(newFile, menu.getMenuphoto());
-			//Thumbnails.of(file).scale(0.6f).toFile(newFile);
-		} catch (IOException e) {
-			e.printStackTrace();
+			File newFile = new File(downLoadPath);
+			try {
+				//FileUtils.writeByteArrayToFile(newFile, menu.getMenuphoto());
+				Thumbnails.of(file).scale(0.6f).toFile(newFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	} 
 }

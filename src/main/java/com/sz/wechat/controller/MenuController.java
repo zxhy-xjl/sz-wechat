@@ -57,6 +57,7 @@ public class MenuController  {
 	 * 跳转至点菜页面
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/toTakingOrder")
 	public ModelAndView toTakingOrder(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession){
 		ModelAndView modelAndView = new ModelAndView();
@@ -64,7 +65,7 @@ public class MenuController  {
 		List<Menu> menuList = this.menuService.getMenu(companyCode);
 		if(null!= menuList && menuList.size()>0){
 			for (Menu menu : menuList) {
-					ScanCodeUtils.transferToFile(menu,request);
+				ScanCodeUtils.transferToFile(menu,request.getRealPath("/")+"/"+menu.getPath());
 			}
 		}
 		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
@@ -156,8 +157,7 @@ public class MenuController  {
 				for (Map<String,Object> map : mapList) {
 					menu = new Menu();
 					menu.setMenuphoto((byte[])map.get("menuphoto"));
-					menu.setPath(String.valueOf(map.get("path")));
-					ScanCodeUtils.transferToFile(menu,request);
+					ScanCodeUtils.transferToFile(menu,request.getRealPath("/")+"/"+String.valueOf(map.get("path")));
 				}
 			}
 			
@@ -291,4 +291,6 @@ public class MenuController  {
 		menu.setPath(uploadPath);
 		return this.menuService.doInsertBlob(menu);
 	}
+	
+	
 }
