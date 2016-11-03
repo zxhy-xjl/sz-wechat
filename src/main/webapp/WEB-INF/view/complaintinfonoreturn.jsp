@@ -25,13 +25,7 @@ font-family: SimHei;
 var flag = null;
 var text = null;
 var xmlHttpRequest = null;
-window.onload=function()
-{
-	history.pushState("x-back", null, location.href);	
-	}
-XBack.listen(function(){
-	window.location.href = "<%=path%>/userInfo.do?flag=1";  
-});
+
 $(function(){
 	$('#img').click(function(){
 

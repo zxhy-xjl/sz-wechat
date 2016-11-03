@@ -23,6 +23,16 @@ font-family: SimHei;
 	{
 	    var	nickname = "<%=session.getAttribute("nickname")%>";
 		document.getElementById("nickname").innerText = nickname;
+		var flag = '${flag}';
+		if(flag==1)
+			{
+			document.getElementById("myorderbutton").style.background = "";
+			document.getElementById("mycomplaintbutton").style.background = "#c1a79d";
+			document.getElementById("myorder").style.display = "none";
+			document.getElementById("mycomplaint").style.display = "";
+			
+			}
+		
 	}
 	
 	function changetable(id)
@@ -64,10 +74,10 @@ font-family: SimHei;
 	}
 	
 	
-	function pagejump(pid,companyname)
+	function pagejump(pid,companyname,reflag)
 	{
 		
-		window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname;  		
+		window.location.href="<%=path%>/lookuserinfo.do?pid="+pid+"&companyname="+companyname+"&reflag="+reflag;  		
 	
 	}
 </script>
@@ -118,7 +128,7 @@ font-family: SimHei;
 					</label>
 					</td>
 				</tr>
-				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.pid}','${item.companyName}')">
+				<tr style="background-color: white;height:50px;" onclick="pagejump('${item.pid}','${item.companyName}','1')">
 					<td>
 					<label><font size="4px">&nbsp;&nbsp;${item.complaincontent}</font></label>
 					<c:if test="${item.disposestatus == '4'}">
