@@ -14,7 +14,7 @@ public interface MenuMapper {
 	 * 获取所有菜单信息
 	 * @return
 	 */
-	public List<Menu> getMenu();
+	public List<Menu> getMenu(String companyCode);
 	
 	/**
 	 * 根据主键编号获取菜单信息

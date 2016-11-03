@@ -32,13 +32,13 @@ $(function(){
 function getScore(){
 	var scoreHtml ='';
 	if(score<65){
-		scoreHtml = '<font size="6px" color="red">'+score+'分</font>';
+		scoreHtml = '<font size="6px" color="red">'+score+'</font><font size="4px" color="red">分</font>';
 	} 
 	if(score>65 && score<80){
-		scoreHtml = '<font size="6px" color="#629527">'+score+'分</font>';
+		scoreHtml = '<font size="6px" color="#629527">'+score+'</font><font size="4px" color="#629527">分</font>';
 	}
 	if(score>=80){
-		scoreHtml = '<font size="6px" color="#63B109">'+score+'分</font>';
+		scoreHtml = '<font size="6px" color="#63B109">'+score+'</font><font size="4px" color="#63B109">分</font>';
 	}
 	$("#head").html(scoreHtml);
 }
@@ -51,15 +51,12 @@ function getPercentage(){
 }
 </script>
 <body style="background-color:#E9E9E9">
-<!-- <div>
-      <a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=91310113051219117N" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">afdsfd</a>
-</div> -->
 <div id="content">
 	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%;">
 	</div>
 	<div id="ratio" style="width:65%;float:right;margin-top:10%;">
 	</div>
-	<div id="scoreStandard" style="width:30%;float:right;margin-top:15%;">
+	<div id="scoreStandard" style="width:30%;float:right;margin-top:10%;">
 		<a href="<%=path%>/toScoreStandar.do" style="text-decoration:none;">评分规则</a>
 	</div>
 	<div id="hr" style="padding-top:35%;">
@@ -68,25 +65,32 @@ function getPercentage(){
 	<div id="showMsg"style="font-family:YouYuan;width:100%">
 		<table border="0" align="center" width="100%" style="border-collapse:collapse;" >
 			<c:forEach items="${allgradelist}"  var="item" varStatus="status">
-					<c:set  value="" var="flag" scope="page"/>
-				<c:if test="${flag!=item.type}">
-					<tr style="padding:25px;">
-						<td style="padding-left:3%">${item.allscore}</td>
-					</tr>
-					<c:set  value="${item.type}" var="flag" scope="page"/>
-				</c:if>
+				<tr style="padding:25px;">
+					<td style="padding-left:3%">${item.allscore}</td>
+				</tr>
+				 <c:set var="exitId" value="0"></c:set>
+				 <c:forEach  items="${gradeList}" var="item2" varStatus="status">
+				 	<c:if test="${item.type eq item2.type && exitId ne 1}">
+				 	 <c:set var="exitId" value="1"></c:set>
+				 	</c:if>
+				 </c:forEach>
 				<c:forEach items="${gradeList}" var="item1" varStatus="status">
-				<c:if test="${item.type == item1.type}">
-					<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
-					<tr style="background-color:white">
-						<td style="padding-left:3%"><c:if test="${item1.name != ''}">${item1.name}</c:if><c:if test="${item1.error != ''}">${item1.error}</c:if></td>
-						<td>-${item1.score}</td>
-						<td align="right">${item1.result}</td>
-					</tr>
-					<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
-				</c:if>
+				<c:choose>
+					<c:when test="${item.type == item1.type}">
+						<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
+						<tr style="background-color:white">
+							<td style="padding-left:3%"><c:if test="${item1.name != ''}">${item1.name}</c:if><c:if test="${item1.error != ''}">${item1.error}</c:if></td>
+							<td>-${item1.score}</td>
+							<td align="right">${item1.result}</td>
+						</tr>
+						<tr style="background-color:white;height:10px;"><td colspan="3"></td></tr>
+					</c:when>
+				</c:choose>
 				</c:forEach>
 				<tr height="10px"><td></td></tr>
+				<c:if test="${exitId eq 0}">
+					<tr style="background-color:white;"height="10px"><td colspan="3" style="padding-left:3%">该企业暂无相关数据</td></tr>
+				</c:if>
 			</c:forEach>
 		</table>
 	</div>
