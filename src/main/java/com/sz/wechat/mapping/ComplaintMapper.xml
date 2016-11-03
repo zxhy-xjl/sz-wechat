@@ -105,6 +105,6 @@
 		select count(*) from SZ_COMPLAINT where COMPANYID = #{companyid,jdbcType=VARCHAR} and OPENID = #{openid,jdbcType=VARCHAR}
 		</select>
 		<select id="getComplaintCountByCompanyId" resultType="java.lang.Integer" parameterType="java.lang.String">
-		select count(*) from SZ_COMPLAINT where COMPANYID = #{companyid,jdbcType=VARCHAR} and DISPOSESTATUS=#{status,jdbcType=VARCHAR}
+		select count(*) from SZ_COMPLAINT where COMPANYID = #{companyid,jdbcType=VARCHAR} and DISPOSESTATUS=#{status,jdbcType=VARCHAR} AND ISVALID=1
 		</select>
 </mapper>
