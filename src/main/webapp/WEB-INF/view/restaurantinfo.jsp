@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>餐厅详情</title>
+<script type="text/javascript" src="<%=path%>/public/script/jquery-3.0.0.js"></script>
 <link rel="stylesheet" href="<%=path%>/public/style/weui.css"/>
 
 <style type="text/css">
@@ -43,6 +44,8 @@ function doStar(obj){
 	}
 	var id = obj.id;
 	var size = id.substring(id.length-1,id.length);
+	$("#star").val(size);
+	doInsertEvaluate(size);
 	if(obj.alt == 0){
 		$('#stars img').each(function(){
 			if($(this).attr("id").substring(id.length-1,id.length) <=size){
@@ -59,6 +62,14 @@ function doStar(obj){
 		});
 	}
 	 
+}
+
+function doInsertEvaluate(size){
+	$.ajax({
+		type:'post',
+		url:'<%=path%>/doInsertEvaluate.do?companyCode=${companyInfo.companycode}&evaluate='+size,
+		success:function(){}
+	});
 }
 
 function pagejump(companyname,companycode,footprintpid)
@@ -233,7 +244,7 @@ ${superviseCount }个</label>
 <div id="buttondiv" style="text-align: center;">
 <br>
 <input id="wannacomplain" type="button" value="我要投诉" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 15px" onclick="pagejump('${companyInfo.companyname}','${companyInfo.companycode}','${pid}')"/>
-
+<input id="star" name="evaluate" type="hidden" value="0"/>
 </div>
 
 </body>
