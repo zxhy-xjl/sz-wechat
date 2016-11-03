@@ -329,7 +329,7 @@ public class ScanCodeController {
 					_mapList.add(grade);
 				}
 				//总分
-				grade = new Grade("aptitude","资质"+"-"+String.valueOf(allscore));
+				grade = new Grade("aptitude","资质"+" -"+String.valueOf(allscore));
 				_mapList1.add(grade);
 				//健康类
 				/*List<PersonHealth> personHealthList = personHealthService.getPersonHealthByCompanyCode(companyInfo.getCompanycode());
@@ -390,10 +390,10 @@ public class ScanCodeController {
 						}
 						
 					}
-					//总分
-					grade = new Grade("punish","处罚"+"-"+String.valueOf(allscore));
-					_mapList1.add(grade);
 				}
+				//总分
+				grade = new Grade("punish","处罚"+" -"+String.valueOf(allscore));
+				_mapList1.add(grade);
 				//投诉类
 				int allgrade = 5;
 				int gradeStat=0;
@@ -415,10 +415,10 @@ public class ScanCodeController {
 							}
 						}
 					}
-					//总分
-					grade = new Grade("complaint","投诉"+"-"+String.valueOf(allscore));
-					_mapList1.add(grade);
 				}
+				//投诉总分
+				grade = new Grade("complaint","投诉"+" -"+String.valueOf(allscore));
+				_mapList1.add(grade);
 				//评分
 				allscore = 0;
 				int length = 0;
@@ -441,10 +441,10 @@ public class ScanCodeController {
 						score = 0;
 					}
 					gradeStat=0;
-					//总分
-					grade = new Grade("grade","评分"+"-"+String.valueOf(allscore));
-					_mapList1.add(grade);
 				}
+				//评分总分
+				grade = new Grade("grade","评分"+" -"+String.valueOf(allscore));
+				_mapList1.add(grade);
 			}
 			 httpSession.setAttribute("_mapList", _mapList);  
 			 httpSession.setAttribute("_mapList1", _mapList1); 
