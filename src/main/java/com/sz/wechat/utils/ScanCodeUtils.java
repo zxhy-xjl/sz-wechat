@@ -209,7 +209,7 @@ public class ScanCodeUtils {
 				Thumbnails.of(file).scale(0.6f).toFile(newFile);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}  
 		}
 	} 
 }
