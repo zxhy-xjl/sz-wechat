@@ -53,6 +53,11 @@ public class UserInfoController {
 	@RequestMapping(value = "/userInfo",method = RequestMethod.GET)
 	public ModelAndView getUsers(HttpServletRequest request,HttpServletResponse response){
 		String openid=this.runtimeModel.getOpenId(request);
+		//String openid = "oehpaw8_fgOEWtPk0S0gLidH60xg";
+		//判断是否是我的投诉页面返回
+		String flag="";
+		if(request.getParameter("flag")!=null)
+		 flag = request.getParameter("flag");
 		//得到所有订单
 		List<Order> orderList = this.consumerecService.getOrderList(openid);
 		//得到所有的投诉
@@ -70,6 +75,7 @@ public class UserInfoController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("orderList", orderList);
 		modelAndView.addObject("complaintlist", complaintlist);
+		modelAndView.addObject("flag", flag);
 		modelAndView.setViewName("/userinfo");
 		return modelAndView;
 	}
@@ -78,13 +84,20 @@ public class UserInfoController {
 	public ModelAndView lookUserinfo(HttpServletRequest request,HttpServletResponse response){
 		String pid =  request.getParameter("pid");
 		String companyname =  request.getParameter("companyname");
+		//判断是我的页面调用/一般其他页面调用
+		String reflag = "";
+		if(request.getParameter("reflag")!=null)
+			reflag = request.getParameter("reflag");
 		Complaint complaint = this.companyInfoService.getComplaintInfoByPid(pid);
 		ModelAndView modelAndView = new ModelAndView();
 		
 		modelAndView.addObject("complaint", complaint);
 		modelAndView.addObject("pid", pid);
 		modelAndView.addObject("companyname", companyname);
+		if(reflag!="")
 		modelAndView.setViewName("/complaintinfo");
+		else
+			modelAndView.setViewName("/complaintinfonoreturn");
 		return modelAndView;
 		
 		

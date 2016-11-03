@@ -87,7 +87,7 @@ html,body {
 			 <span style="color:#FBEBED;">${buyNum}道</span>
 		</td>
 		
-		<td align="center" style="background-color:#D0021B;">
+		<td align="center" style="background-color:#26C94D;">
 		<c:if test="${needPlayFlag}">
 		<a href="javascript:doSubmit();" style="text-decoration:none;color:#FBEBED;">结算</a>
 		</c:if>
