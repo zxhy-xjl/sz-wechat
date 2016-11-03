@@ -63,7 +63,17 @@
 		}
 	}
 	function doSubmit(){
-		window.location.href="<%=path%>/toTakingOrder.do?companyCode=${CompanyInfo.companycode}";
+		var codeObj = $("#codei");
+		if(codeObj.val() == "null"){
+			$.messager.confirm("操作提示", "您目前还没有扫桌,请先扫一扫桌!", function (data) {  
+	            if (data) { 
+	            	window.location.href="http://www.haoschoool.com/sz-wechat/scanCode.jsp?flag=4";
+	            }   
+	        });
+		}else{
+			window.location.href="<%=path%>/toTakingOrder.do?companyCode="+codeObj.val();
+		}
+		
 	}
 	
 	function doInsertEvaluate(size){

@@ -82,6 +82,10 @@ wx.ready(function(){
 	                $("#id_securityCode_input").val(url);
 	            }
 	            
+	            if(4 == flag[flag]){
+	            	window.location.href="<%=path%>/toTakingOrder.do?companyCode="+$('#id_securityCode_input').val();
+	            	return;
+	            }
 	            if(3 == flag['flag']){
 	            	window.location.href="<%=path%>/toComplain.do?companycode="+$('#id_securityCode_input').val()+"&flag=2";
 	            	return;

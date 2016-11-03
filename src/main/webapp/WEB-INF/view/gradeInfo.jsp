@@ -51,15 +51,12 @@ function getPercentage(){
 }
 </script>
 <body style="background-color:#E9E9E9">
-<!-- <div>
-      <a class="example-image-link" href="http://218.242.124.22:8081/businessCheck/viewLicence_view_20151215.do?attribute13=91310113051219117N" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">afdsfd</a>
-</div> -->
 <div id="content">
 	<div id="head" style="float:left;text-align:center;line-height:100px;margin-left:3%;">
 	</div>
 	<div id="ratio" style="width:65%;float:right;margin-top:10%;">
 	</div>
-	<div id="scoreStandard" style="width:30%;float:right;margin-top:15%;">
+	<div id="scoreStandard" style="width:30%;float:right;margin-top:10%;">
 		<a href="<%=path%>/toScoreStandar.do" style="text-decoration:none;">评分规则</a>
 	</div>
 	<div id="hr" style="padding-top:35%;">
