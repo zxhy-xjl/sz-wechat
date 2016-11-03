@@ -103,8 +103,18 @@ function getcomplainlist(companycode,companyname)
 </td>
 <td width="15%">
 	<div id="score" style="text-align:center;line-height:220px;position:relative;top:0px;">
+	  <c:if test="${score<=65}">
 		<font style="font-size:40px;position: relative;bottom: 65px;" color="red">&nbsp;${score}</font>
 		<font style="font-size:18px;position: relative;bottom: 65px;" color="red">分</font>
+	</c:if>
+		  <c:if test="${score>=80}">
+		<font style="font-size:40px;position: relative;bottom: 65px;" color="#63B109">&nbsp;${score}</font>
+		<font style="font-size:18px;position: relative;bottom: 65px;" color="#63B109">分</font>
+	</c:if>
+		  <c:if test="${score>65 && score<80 }">
+		<font style="font-size:40px;position: relative;bottom: 65px;" color="#629527">&nbsp;${score}</font>
+		<font style="font-size:18px;position: relative;bottom: 65px;" color="#629527">分</font>
+	</c:if>
 	</div>
  </td>
  <td width="70%">
