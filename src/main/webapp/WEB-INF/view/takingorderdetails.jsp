@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sz" uri="/WEB-INF/BaseTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -54,7 +55,7 @@ html,body {
 			<c:forEach items="${menuList}" var="item1" varStatus="status">
 				<c:if test="${item.code_id ==  item1.menutype && flag != item1.menutype}">
 					<tr style="height:20px;line-height:5px;">
-						<td colspan="5" ><h2>&nbsp;&nbsp;<c:if test="${item.code_id == '0'}">${item.codedescript}</c:if><c:if test="${item.code_id == '1'}">${item.codedescript}</c:if></h2></td>
+						<td colspan="5" ><h2>&nbsp;&nbsp;${sz:parseDict(item.codetype,item.code_id)}</h2></td>
 					</tr>
 					<c:set  value="${item1.menutype}" var="flag" scope="page"/>
 				</c:if>

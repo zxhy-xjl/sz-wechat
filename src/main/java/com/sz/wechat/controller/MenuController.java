@@ -11,7 +11,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sz.wechat.basic.DictCommon;
 import com.sz.wechat.entity.CodeDict;
 import com.sz.wechat.entity.Consumerec;
 import com.sz.wechat.entity.Menu;
-import com.sz.wechat.service.CodeDictService;
 import com.sz.wechat.service.ConsumerecService;
 import com.sz.wechat.service.MenuService;
 import com.sz.wechat.utils.ScanCodeUtils;
@@ -41,11 +41,6 @@ public class MenuController  {
 	 */
 	@Autowired
 	private MenuService menuService;
-	/**
-	 * 字典数据逻辑层
-	 */
-	@Autowired
-	private CodeDictService codeDictService;
 	/**
 	 * 订单数据逻辑层
 	 */
@@ -68,7 +63,7 @@ public class MenuController  {
 				ScanCodeUtils.transferToFile(menu,request.getRealPath("/")+"/"+menu.getPath());
 			}
 		}
-		List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
+		List<CodeDict> dictList = DictCommon.getDictListEn("MENUTYPE");
 		modelAndView.addObject("dictList", dictList);
 		modelAndView.addObject("menuList",menuList);
 		modelAndView.addObject("companyCode",request.getParameter("companyCode"));
@@ -123,6 +118,7 @@ public class MenuController  {
 	 * 跳转至查看下单页面
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/toMenuView")
 	public ModelAndView toDownMenu(HttpServletRequest request, HttpServletResponse response){
 		String oddNumber = request.getParameter("oddNumber");
@@ -161,7 +157,7 @@ public class MenuController  {
 				}
 			}
 			
-			List<CodeDict> dictList = this.codeDictService.getDictByType("MENUTYPE");
+			List<CodeDict> dictList = DictCommon.getDictListEn("MENUTYPE");
 			modelAndView.addObject("dictList", dictList);
 			modelAndView.addObject("menuList", mapList);
 			modelAndView.addObject("allPrice", allPrice);

@@ -44,6 +44,7 @@
         <!-- 内存中的最大值 -->
         <property name="maxInMemorySize" value="40960" />  
     </bean> 
+<<<<<<< HEAD
 	<mvc:interceptors>
 		<!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
 		<!-- <bean class="com.host.app.web.interceptor.AllInterceptor"/> -->
@@ -60,4 +61,5 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<bean  class="com.sz.wechat.basic.DictCommon"/>
+
 </beans>
