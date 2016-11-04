@@ -15,5 +15,12 @@ public interface CodeDictMapper {
 	 * @return
 	 */
 	public List<CodeDict> getDictByType(String type);
+	
+	
+	/**
+	 * 获取所有字典信息
+	 * @return
+	 */
+	public  List<CodeDict> getAllDict();
 
 }
