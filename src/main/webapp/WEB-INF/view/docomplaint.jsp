@@ -49,6 +49,7 @@ font-family: SimHei;
 
 <script type="text/javascript">
 var flag = null;
+var execflag = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
 	if(""!="${complaintcontent}"){
@@ -114,10 +115,19 @@ function read(){
            // li('正在读取.....')
         }
         reader.onload=function(e){
-            var img=document.createElement('img');
+        	if(execflag==null)
+        	{ var img=document.createElement('img');
             img.src=this.result;
             img.style.width = "50%";
             document.getElementById("photodiv").appendChild(img);
+            execflag="true";
+        	}
+        	else
+        		{
+        		document.getElementById("photodiv").children[2].src = this.result;
+        		document.getElementById("photodiv").children[2].style.width = "50%";
+        		
+        		}
         }
         reader.onabort=function(){
             li('读取中断！！')     

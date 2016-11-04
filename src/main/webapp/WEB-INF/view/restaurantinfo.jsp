@@ -150,6 +150,9 @@ function getcomplainlist(companycode,companyname)
 </tr>
 </table>
 <label style="font-weight:bold">&nbsp;&nbsp;${companyInfo.companyaddress}  &nbsp;</label>
+<hr color="lightgrey"/><br>
+<label style="font-weight:bold">&nbsp;&nbsp;餐厅介绍：${companyInfo.companyintro}</label><br><br>
+
 <hr color="lightgrey"/>
 <c:if test="${companyInfo.companyrecode==null}">
 <label style="font-size: 20px;">
@@ -212,8 +215,8 @@ ${superviseCount }个</label>
 <label id="complaintlabel" style="font-size: 20px;color: #0000EE;" onclick="getcomplainlist('${companyInfo.companycode}','${companyInfo.companyname }')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投诉举报    ${complaintcount }个</label>
 </c:if>
 <hr color="lightgrey"/>
-<label style="font-weight:bold">餐厅介绍：${companyInfo.companyintro}</label>
-<hr color="lightgrey"/>
+<%-- <label style="font-weight:bold">餐厅介绍：${companyInfo.companyintro}</label>
+<hr color="lightgrey"/> --%>
 <label style="font-weight:bold">消费合计：</label><label style="float: right;">【${orderCount }个订单】【合计】<font color="red"> ${orderTotalMoney} </font>元</label><br>
   <c:forEach items="${orderList}" var="item" varStatus="status">
  <label onclick="detailsinfo('${item.orderNo}')">
