@@ -4,21 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.servlet.ServletContext;
-
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.ServletContextAware;
-
 import com.sz.wechat.entity.CodeDict;
 import com.sz.wechat.service.CodeDictService;
-import com.sz.wechat.utils.StringUtils;
 
 /**
  * 字典基本信息服务操作类
