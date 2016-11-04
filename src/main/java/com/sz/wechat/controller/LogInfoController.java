@@ -3,6 +3,9 @@ package com.sz.wechat.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +64,7 @@ public class LogInfoController {
 		this.logInfoService.insertLog(loginfo);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/userconsole",method = RequestMethod.GET)
 	public ModelAndView visitUserGet (HttpServletRequest request, HttpServletResponse response){
 		String appId = "wx4203dd1ae2c80664";
@@ -80,7 +84,7 @@ public class LogInfoController {
 		String openidUrl = "";
 		JSONObject openidObject = new JSONObject();
 		Long time = 1L;
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 	    String subtime = "";
 		for(int i=0;i<openidarray.size();i++)
 		{	UserInfo userinfo = new UserInfo();
@@ -97,7 +101,18 @@ public class LogInfoController {
 		    userinfo.setSubscribe_time(subtime);
 		    userlist.add(userinfo);
 		}
-		
+	    Comparator timecomparator = new Comparator()
+	    		{
+
+					@Override
+					public int compare(Object o1, Object o2) {
+						// TODO Auto-generated method stub
+						
+						return ( Long.parseLong(((UserInfo) o1).getSubscribe_time()) > Long.parseLong(((UserInfo) o2).getSubscribe_time()) ? -1 :  
+           (((UserInfo) o1).getSubscribe_time() ==((UserInfo) o2).getSubscribe_time() ? 0 : 1));  
+
+					}};
+					Collections.sort(userlist, timecomparator);
 		System.out.println(openidarray.get(0).toString());
 		ModelAndView modelAndView = new ModelAndView();
         //System.out.println(at.getToken());
