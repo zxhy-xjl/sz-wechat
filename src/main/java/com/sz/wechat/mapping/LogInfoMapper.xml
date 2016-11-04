@@ -10,17 +10,21 @@
 		<result column="INSERTTIME" property="inserttime" jdbcType="VARCHAR"/>
 		<result column="VISITPAGE" property="visitpage" jdbcType="VARCHAR"/>
 		<result column="COUNTRY" property="country" jdbcType="VARCHAR"/>
+		<result column="CITY" property="city" jdbcType="VARCHAR"/>
+		<result column="PROVINCE" property="province" jdbcType="VARCHAR"/>
+		<result column="HEADIMGURL" property="headimgurl" jdbcType="VARCHAR"/>
+		<result column="SUBSCRIBE_TIME" property="subscribe_time" jdbcType="VARCHAR"/>
 	</resultMap>
 <sql id="Base_Column_List">
-		NICKNAME, OPENID, SEX, LANGUAGE, INSERTTIME, VISITPAGE, COUNTRY
+		NICKNAME, OPENID, SEX, LANGUAGE, INSERTTIME, VISITPAGE, COUNTRY,CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME
 	</sql>
 	<select id="getLogByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
 			SELECT <include refid="Base_Column_List"/> FROM SZ_LOG  WHERE  OPENID = #{openid,jdbcType=VARCHAR}
 		</select>
  <insert id="insertLog" parameterType="com.sz.wechat.entity.LogInfo">
   insert into SZ_LOG
-   (NICKNAME,OPENID,SEX,LANGUAGE,INSERTTIME,VISITPAGE,COUNTRY)
+   (NICKNAME,OPENID,SEX,LANGUAGE,INSERTTIME,VISITPAGE,COUNTRY,CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME)
     values
-   (#{nickname},#{openid},#{sex},#{language},#{inserttime},#{visitpage},#{country})
+   (#{nickname},#{openid},#{sex},#{language},#{inserttime},#{visitpage},#{country},#{city},#{province},#{headimgurl},#{subscribe_time})
  </insert>
 </mapper>

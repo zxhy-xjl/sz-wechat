@@ -50,6 +50,17 @@ public class UserInfo implements Serializable  {
 	 * 用户关注时间
 	 */
 	private String subscribe_time;
+	/**
+	 * 用户头像url
+	 */
+	private String headimgurl;
+	
+	public String getHeadimgurl() {
+		return headimgurl;
+	}
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
+	}
 	public String getProvince() {
 		return province;
 	}

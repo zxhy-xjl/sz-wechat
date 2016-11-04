@@ -66,6 +66,14 @@ public class Oauth2Servlet {
 	        HttpSession ss = (HttpSession)request.getSession();
 	        ss.setAttribute("openid",userinfoObject.get("openid")); 
 	        ss.setAttribute("nickname",userinfoObject.get("nickname")); 
+	        ss.setAttribute("sex",userinfoObject.get("sex")); 
+	        ss.setAttribute("province",userinfoObject.get("province")); 
+	        ss.setAttribute("city",userinfoObject.get("city")); 
+	        ss.setAttribute("headimgurl",userinfoObject.get("headimgurl")); 
+	        ss.setAttribute("country",userinfoObject.get("country")); 
+	        ss.setAttribute("subscribe_time",userinfoObject.get("subscribe_time")); 
+	        
+	        
 	        PrintWriter out = response.getWriter();
 	   /*     out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 	        out.println("<HTML>");

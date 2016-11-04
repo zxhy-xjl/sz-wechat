@@ -20,9 +20,41 @@ public class LogInfo {
 	private String visitpage;
 	//国家
 	private String country;
+	//城市
+	private String city;
+	//省份
+	private String province;
+	//用户头像url
+	private String headimgurl;
+	//最近一次关注时间
+	private String subscribe_time;
 	
 	
 	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getHeadimgurl() {
+		return headimgurl;
+	}
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
+	}
+	public String getSubscribe_time() {
+		return subscribe_time;
+	}
+	public void setSubscribe_time(String subscribe_time) {
+		this.subscribe_time = subscribe_time;
+	}
 	public String getNickname() {
 		return nickname;
 	}

@@ -56,10 +56,10 @@ function getuserdetails(openid)
 <body style="background-color: #e9e9e9;">
 <table class="hovertable">
 <tr>
-	<th colspan="6" ><font style="font-weight: bolder">关注用户列表</font></th>
+	<th colspan="7" ><font style="font-weight: bolder">关注用户列表</font></th>
 </tr>
 <tr>
-	<th>openid</th><th>昵称</th><th>性别</th><th>城市</th><th>省份</th><th>关注时间</th>
+	<th>openid</th><th>昵称</th><th>性别</th><th>城市</th><th>省份</th><th>关注时间</th><th>头像</th>
 </tr>
 <c:forEach items="${userlist}" var="item" varStatus="status">
 <tr onclick="getuserdetails('${item.openid }')" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
@@ -88,6 +88,9 @@ function getuserdetails(openid)
     </td> 
       <td>
     ${item.subscribe_time }
+    </td> 
+      <td>
+   <img src="${item.headimgurl }" width="60px"> 
     </td> 
 </tr>
 </c:forEach>

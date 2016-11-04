@@ -91,6 +91,7 @@ public class LogInfoController {
 		    userinfo.setNickname(openidObject.getString("nickname"));
 		    userinfo.setCity(openidObject.getString("city"));
 		    userinfo.setProvince(openidObject.getString("province"));
+		    userinfo.setHeadimgurl(openidObject.getString("headimgurl"));
 		    time = Long.parseLong(openidObject.getString("subscribe_time"));
 		    subtime = sdf.format(new Date(time*1000L)); 
 		    userinfo.setSubscribe_time(subtime);
