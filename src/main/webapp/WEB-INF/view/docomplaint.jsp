@@ -52,9 +52,9 @@ var flag = null;
 var execflag = null;
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
-	if(""!="${complaintcontent}"){
+/* 	if(""!="${complaintcontent}"){
 		document.getElementById("complaintcontent").value="${complaintcontent}";
-	}
+	} */
 	flag = "<%=request.getParameter("flag")%>";
 	if(flag==1)
 		document.getElementById("shadowdiv").style.display="block";

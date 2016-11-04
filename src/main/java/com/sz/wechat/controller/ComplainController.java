@@ -50,7 +50,9 @@ public class ComplainController {
 	public ModelAndView toComplainGet (HttpServletRequest request, HttpServletResponse response)
 	{   String companyname = request.getParameter("companyname");
 	    String companycode = request.getParameter("companycode");
-	    String complaintcontent = request.getParameter("complaintcontent");
+	    String complaintcontent ="";
+	    if(request.getParameter("complaintcontent")!=null)
+	    complaintcontent = request.getParameter("complaintcontent");
 	    String evaluate = request.getParameter("evaluate");
 	    String footprintpid = request.getParameter("footprintpid");
 		ModelAndView modelAndView = new ModelAndView();
