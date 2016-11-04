@@ -26,6 +26,16 @@ public class DictCommon implements  ServletContextAware{
 	@Autowired
 	private CodeDictService codeDictService;
 	
+
+	/**
+	 * 初始化
+	 */
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		if(null == dictListMap){
+			dictListMap=codeDictService.loadAllDicInfo();
+		}
+	}
 	/**
 	 *	根据字典类型和字典代码获取字典值
 	 *	@param type字典类型
@@ -89,16 +99,5 @@ public class DictCommon implements  ServletContextAware{
 	public static void clearDictMap(){
 		dictListMap.clear();
 		dictListMap=null;
-	}
-
-
-	/**
-	 * 初始化
-	 */
-	@Override
-	public void setServletContext(ServletContext servletContext) {
-		if(null == dictListMap){
-			dictListMap=codeDictService.loadAllDicInfo();
-		}
 	}
 }
