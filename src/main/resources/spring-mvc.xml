@@ -45,20 +45,15 @@
         <property name="maxInMemorySize" value="40960" />  
     </bean> 
 	 <mvc:interceptors>
-		
-		
-		<mvc:interceptor>
+				<mvc:interceptor>
 			<mvc:mapping path="/toFootprint.do"/>
 			<mvc:mapping path="/toComplain.do"/>
 			<mvc:mapping path="/doInsertComplaint.do"/>
 			<mvc:mapping path="/getComplaintByOpenid.do"/>
 			<mvc:mapping path="/toRestaurant.do"/>
 			<mvc:mapping path="/toComplaintList.do"/>
-
-		
 			<bean class="com.sz.wechat.interceptor.FootprintInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors> 
 	<bean  class="com.sz.wechat.basic.DictCommon"/>
-
 </beans>
