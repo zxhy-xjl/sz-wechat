@@ -241,12 +241,14 @@ public class ScanCodeController {
 							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/length;
-					gradeStat = grade - gradeStat;
-					if(score > gradeStat){
-						score = score - gradeStat;
-					}else{
-						score = 0;
+					if(length>0){
+						gradeStat = gradeStat/length;
+						gradeStat = grade - gradeStat;
+						if(score > gradeStat){
+							score = score - gradeStat;
+						}else{
+							score = 0;
+						}
 					}
 					gradeStat=0;
 				}
@@ -432,15 +434,17 @@ public class ScanCodeController {
 							gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 						}
 					}
-					gradeStat = gradeStat/length;
-					gradeStat = allgrade  - gradeStat;
-					if(score > gradeStat){
-						score = score - gradeStat;
-						allscore = allscore + gradeStat;
-						grade = new Grade("grade",String.valueOf(gradeStat),"评分","实时","");
-						_mapList.add(grade);
-					}else{
-						score = 0;
+					if(length>0){
+						gradeStat = gradeStat/length;
+						gradeStat = allgrade  - gradeStat;
+						if(score > gradeStat){
+							score = score - gradeStat;
+							allscore = allscore + gradeStat;
+							grade = new Grade("grade",String.valueOf(gradeStat),"评分","实时","");
+							_mapList.add(grade);
+						}else{
+							score = 0;
+						}
 					}
 					gradeStat=0;
 				}

@@ -212,20 +212,24 @@ public class CompanyInfoService {
 						}
 					}
 					logger.info("过滤投诉目前得分:" + score);
+					int length = 0;
 					//评分
 					List<Evaluate> evaluateList = this.evaluateService.getEvaluateByOpenIdAndCompanyCode(companyCode);
 					if(null != evaluateList && evaluateList.size()>0){
 						for(Evaluate evaluate:evaluateList){
-							if(null != evaluate.getEvaluate()){
+							if(null != evaluate.getEvaluate()&&Integer.parseInt(evaluate.getEvaluate())<3){
+								length = length+1;
 								gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 							}
 						}
-						gradeStat = gradeStat/evaluateList.size();
-						gradeStat = allgrade  - gradeStat;
-						if(score > gradeStat){
-							score = score - gradeStat;
-						}else{
-							score = 0;
+						if(length>0){
+							gradeStat = gradeStat/length;
+							gradeStat = allgrade  - gradeStat;
+							if(score > gradeStat){
+								score = score - gradeStat;
+							}else{
+								score = 0;
+							}
 						}
 						gradeStat=0;
 						
