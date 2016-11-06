@@ -66,6 +66,7 @@ public class MenuController  {
 		List<CodeDict> dictList = DictCommon.getDictListEn("MENUTYPE");
 		modelAndView.addObject("dictList", dictList);
 		modelAndView.addObject("menuList",menuList);
+		modelAndView.addObject("chntitle","开始点菜");
 		modelAndView.addObject("companyCode",request.getParameter("companyCode"));
 		httpSession.setAttribute("companyCode", request.getParameter("companyCode"));
 		modelAndView.setViewName("/takingorders");
@@ -108,6 +109,7 @@ public class MenuController  {
 			}
 			this.consumerecService.batchInsertConsumerec(list);
 			modelAndView.addObject("oddNumber", oddNumber);
+			modelAndView.addObject("chntitle", "点菜成功");
 			modelAndView.addObject("companyCode",companyCode);
 			modelAndView.setViewName("/takingordersucceed");
 		}
@@ -160,6 +162,7 @@ public class MenuController  {
 			List<CodeDict> dictList = DictCommon.getDictListEn("MENUTYPE");
 			modelAndView.addObject("dictList", dictList);
 			modelAndView.addObject("menuList", mapList);
+			modelAndView.addObject("chntitle", "订单详情");
 			modelAndView.addObject("allPrice", allPrice);
 			modelAndView.addObject("buyNum", buyNum);
 			modelAndView.addObject("oddNumber", oddNumber);
@@ -204,6 +207,7 @@ public class MenuController  {
 			}
 			modelAndView.addObject("menuList", mapList);
 			modelAndView.addObject("allPrice", allPrice);
+			modelAndView.addObject("chntitle", "结账");
 			modelAndView.addObject("billunit",billunit);
 			modelAndView.addObject("oddNumber", oddNumber);
 			modelAndView.setViewName("/takingordersa");
@@ -234,6 +238,7 @@ public class MenuController  {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HHmm:ss");
 		modelAndView.setViewName("/doPay");
 		modelAndView.addObject("allprice", request.getParameter("allprice"));
+		modelAndView.addObject("chntitle", "微支付");
 		modelAndView.addObject("oddNumber",oddNumber);
 		modelAndView.addObject("paytime",df.format(new Date()));
 		return modelAndView;

@@ -74,6 +74,7 @@ public class UserInfoController {
 		}
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("orderList", orderList);
+		modelAndView.addObject("chntitle", "我的");
 		modelAndView.addObject("complaintlist", complaintlist);
 		modelAndView.addObject("flag", flag);
 		modelAndView.setViewName("/userinfo");
@@ -95,9 +96,14 @@ public class UserInfoController {
 		modelAndView.addObject("pid", pid);
 		modelAndView.addObject("companyname", companyname);
 		if(reflag!="")
+		{
+			modelAndView.addObject("chntitle", "投诉详情");
 		modelAndView.setViewName("/complaintinfo");
-		else
+		}else
+		{
+			modelAndView.addObject("chntitle", "我的");
 			modelAndView.setViewName("/complaintinfonoreturn");
+		}
 		return modelAndView;
 		
 		

@@ -40,6 +40,7 @@ public class SupervisePunishController {
 		supervisePunish.setNlawfulcompanyname(nlawfulcompanyname);
 		List<SupervisePunish> _supervisePunishList = this.supervisorPunishService.getSuperviseByCompanyName(supervisePunish);
 		modelAndView.addObject("SupervisePunishList",_supervisePunishList);
+		modelAndView.addObject("chntitle","行政处罚信息");
 		modelAndView.setViewName("/punishInfo");
 		return modelAndView;
 	}

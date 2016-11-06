@@ -123,9 +123,11 @@ public class ScanCodeController {
 					session.setAttribute("code",companyInfo.getCompanycode());
 					session.setAttribute("open_code", code);
 					modelAndView.addObject("tableNum",tablenum);
+					modelAndView.addObject("chntitle","二维码扫餐桌反馈");
 					modelAndView.setViewName("/scanCodeFeedBack");
 				}else{
 					modelAndView.addObject("companyCode", companyCode);
+					modelAndView.addObject("chntitle", "暂无此企业信息");
 					modelAndView.setViewName("/companyError");
 				}
 			}
@@ -496,9 +498,11 @@ public class ScanCodeController {
 				}
 				HttpSession session = request.getSession();
 				session.setAttribute("open_code", code);
+				modelAndView.addObject("chntitle", "餐具信息");
 				modelAndView.setViewName("/tableware");
 			}else{
 				modelAndView.addObject("companyCode", company);
+				modelAndView.addObject("chntitle", "暂无此企业信息");
 				modelAndView.setViewName("/companyError");
 			}
 		}
@@ -592,6 +596,7 @@ public class ScanCodeController {
 	@RequestMapping(value = "/toScoreStandar")
 	public ModelAndView toScoreStandar(){
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("chntitle", "评分标准");
 		modelAndView.setViewName("/scoreStandard");
 		return modelAndView;
 	}

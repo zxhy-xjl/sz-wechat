@@ -52,6 +52,18 @@
 			<mvc:mapping path="/getComplaintByOpenid.do"/>
 			<mvc:mapping path="/toRestaurant.do"/>
 			<mvc:mapping path="/toComplaintList.do"/>
+			<mvc:mapping path="/doPay.do"/>
+			<mvc:mapping path="/toMenuOrder.do"/>
+			<mvc:mapping path="/toMenuView.do"/>
+			<mvc:mapping path="/doAddMenu.do"/>
+			<mvc:mapping path="/toTakingOrder.do"/>
+			<mvc:mapping path="/getPublicInfo.do"/>
+			<mvc:mapping path="/checkScanCode.do"/>
+			<mvc:mapping path="/checkScanCodeTableWare.do"/>
+			<mvc:mapping path="/toScoreStandar.do"/>
+			<mvc:mapping path="/getSuperviseByCompanyName.do"/>
+			<mvc:mapping path="/userInfo.do"/>
+			<mvc:mapping path="/lookuserinfo.do"/>			
 			<bean class="com.sz.wechat.interceptor.FootprintInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors> 

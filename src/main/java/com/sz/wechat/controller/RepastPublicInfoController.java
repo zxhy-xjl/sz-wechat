@@ -30,7 +30,8 @@ public class RepastPublicInfoController {
 		String repastlicence = request.getParameter("repastlicence");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("RepastPublicInfo", this.repastPublicInfoService.getPublicInfo(repastlicence));
-		modelAndView.setViewName("/licenceInfo");
+		modelAndView.addObject("chntitle", "许可证详细信息");
+				modelAndView.setViewName("/licenceInfo");
 		return modelAndView;
 	}
 	

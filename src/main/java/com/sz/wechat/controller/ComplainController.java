@@ -130,6 +130,7 @@ public class ComplainController {
 		List<Complaint> complaintList = this.complainService.getComplaintScoreByCompanyId(companyCode,Complaint.DISPOSE_STATUS_FANKUI);
 		modelAndView.addObject("complaintList", complaintList);
 		modelAndView.addObject("companyName", companyName);
+		modelAndView.addObject("chntitle", "投诉列表");
 		modelAndView.setViewName("/complaintList");
 		return modelAndView;
 	}

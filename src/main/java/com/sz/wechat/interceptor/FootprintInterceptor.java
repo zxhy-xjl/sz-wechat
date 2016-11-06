@@ -65,6 +65,11 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 			companycode = request.getParameter("companycode");
 			companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
 		}
+		if(request.getParameter("companyCode")!=null)
+		{
+			companycode = request.getParameter("companyCode");
+			companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
+		}
 	    if(modelAndView.getModel().get("chntitle")!=null)
 		chntitle=modelAndView.getModel().get("chntitle").toString();
 		HttpSession ss = (HttpSession)request.getSession();
