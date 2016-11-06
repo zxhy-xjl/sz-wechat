@@ -87,7 +87,7 @@ function getuserdetails(openid)
     ${item.province }
     </td> 
       <td>
-    ${item.subscribe_time }
+      ${fn:substring(item.subscribe_time,0,4)}-${fn:substring(item.subscribe_time,4,6)}-${fn:substring(item.subscribe_time,6,8)} ${fn:substring(item.subscribe_time,8,10)}:${fn:substring(item.subscribe_time,10,12)}
     </td> 
       <td>
    <img src="${item.headimgurl }" width="60px"> 

@@ -4,19 +4,20 @@
 	<!-- 实体对象 -->
 	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.UserInfo">
 		<id column="OPENID" property="openid" jdbcType="VARCHAR"/>
-		<result column="USERID" property="userid" jdbcType="VARCHAR"/>
 		<result column="NICKNAME"  property="nickname" jdbcType="VARCHAR"/>
 		<result column="SEX" property="sex" jdbcType="VARCHAR"/>
 		<result column="LANGUAGE"  property="language" jdbcType="VARCHAR"/>
-		<result column="INSERTTIME"  property="inserttime" jdbcType="VARCHAR"/>
-		<result column="INSERTTYPE"  property="inserttype" jdbcType="VARCHAR"/>
+		<result column="CITY"  property="city" jdbcType="VARCHAR"/>
+		<result column="PROVINCE"  property="province" jdbcType="VARCHAR"/>
+		<result column="HEADIMGURL"  property="headimgurl" jdbcType="VARCHAR"/>
+		<result column="SUBSCRIBE_TIME"  property="subscribe_time" jdbcType="VARCHAR"/>
 	</resultMap>
 	<!-- 数据字段 -->
 	<sql id="Base_Column_List">
-		 OPENID, USERID, NICKNAME, SEX, LANGUAGE, INSERTTIME, INSERTTYPE 
+		 OPENID, NICKNAME, SEX, LANGUAGE, CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME
 	</sql>
 	<!-- 查询 -->
 	<select id="getUsers" resultMap="BaseResultMap">
-		SELECT <include refid="Base_Column_List"/> FROM SZ_USERINFO
+		SELECT <include refid="Base_Column_List"/> FROM SZ_USERINFO ORDER BY SUBSCRIBE_TIME DESC
 	</select>
 </mapper>
