@@ -29,5 +29,6 @@
    (NICKNAME,OPENID,SEX,LANGUAGE,INSERTTIME,VISITPAGE,COUNTRY,CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME,CHNTITLE,COMPANYNAME,OTHERPARAM)
     values
    (#{nickname},#{openid},#{sex},#{language},#{inserttime},#{visitpage},#{country},#{city},#{province},#{headimgurl},#{subscribe_time,jdbcType=VARCHAR},#{chntitle,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{otherparam,jdbcType=VARCHAR})
+
  </insert>
 </mapper>
