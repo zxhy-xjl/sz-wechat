@@ -220,16 +220,16 @@ ${superviseCount }个</label>
 <label style="font-weight:bold">消费合计：</label><label style="float: right;">【${orderCount }个订单】【合计】<font color="red"> ${orderTotalMoney} </font>元</label><br>
   <c:forEach items="${orderList}" var="item" varStatus="status">
  <label onclick="detailsinfo('${item.orderNo}')">
- <label>${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日&nbsp;&nbsp;${item.orderCount }道菜&nbsp;&nbsp;<font color="red"> ${item.orderTotalMoney}</font>元 </label><label style="float: right;">   ${item.orderStatus }</label>
+ <span>${fn:substring(item.orderDate,4,6)}月${fn:substring(item.orderDate,6,8)}日&nbsp;&nbsp;${item.orderCount }道菜&nbsp;&nbsp;<font color="red"> ${item.orderTotalMoney}</font>元 </span><span style="float: right;">   ${item.orderStatus }</span>
  </label><br>
  </c:forEach> 
 </div>
 <br>
   <c:forEach items="${complainList}" var="item" varStatus="status">
  <label onclick="lookcomplaint('${item.pid}','${companyInfo.companyname }')">
- <label>${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日  
+ <span>${fn:substring(item.complaintime,4,6)}月${fn:substring(item.complaintime,6,8)}日  
   <font color="red">${item.complaincontent}</font>  
-  </label><label style="float: right;"> 
+  </span><span style="float: right;"> 
   <c:if test="${item.disposestatus=='1' }">
   待受理
   </c:if>
@@ -242,7 +242,7 @@ ${superviseCount }个</label>
   <c:if test="${item.disposestatus=='4' }">
   已反馈
   </c:if>
-  </label></label><br>
+  </span></label><br>
  </c:forEach> 
 <div id="buttondiv" style="text-align: center;">
 <br>
@@ -253,6 +253,6 @@ ${superviseCount }个</label>
 </body>
 <script type="text/javascript">
 
-doStar(document.getElementById("star" + ${star}));
+doStar(document.getElementById("star" + '${star}'));
 </script>
 </html>
