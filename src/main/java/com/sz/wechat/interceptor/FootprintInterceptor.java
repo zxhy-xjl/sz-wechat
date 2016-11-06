@@ -7,6 +7,8 @@ package com.sz.wechat.interceptor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.LogInfo;
+import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.LogInfoService;
 
 /**
@@ -28,6 +31,8 @@ public class FootprintInterceptor implements HandlerInterceptor  {
      
 	@Autowired
 	private LogInfoService logInfoService;
+	@Autowired
+	private CompanyInfoService companyInfoService;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -42,6 +47,26 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("拦截器运行中------");
+		String otherparam = "";
+		//Map<String, String[]> paramMap =  request.getParameterMap();
+		Enumeration<String>  enum1=request.getParameterNames();  
+		       while(enum1.hasMoreElements()){  
+		                  String  paramName=(String)enum1.nextElement();                      
+		                  String[]  values=request.getParameterValues(paramName);  
+		                  for(int  i=0;i<values.length;i++){  
+		                	  otherparam =otherparam+("["+i+"]   "+paramName+"  "+values[i]+"\n"); 
+		                  } 
+		       }
+		String companycode = "";
+		String companyname = "";
+		String chntitle = "";
+		if(request.getParameter("companycode")!=null)
+		{
+			companycode = request.getParameter("companycode");
+			companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
+		}
+	    if(modelAndView.getModel().get("chntitle")!=null)
+		chntitle=modelAndView.getModel().get("chntitle").toString();
 		HttpSession ss = (HttpSession)request.getSession();
 		//System.out.println("openid:"+ss.getAttribute("openid"));
 		String visiturl = modelAndView.getViewName()+".jsp";
@@ -91,6 +116,9 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 		loginfo.setSex(sex);
 		loginfo.setSubscribe_time(subscribe_time);
 		loginfo.setVisitpage(visiturl);
+		loginfo.setCompanyname(companyname);
+		loginfo.setChntitle(chntitle);
+		loginfo.setOtherparam(otherparam);
 		this.logInfoService.insertLog(loginfo);
 	}
 
@@ -98,7 +126,8 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("拦截器准备结束------");
+	//System.out.println(request.getParameter("chntitle"));
+		
 	}
   
 	

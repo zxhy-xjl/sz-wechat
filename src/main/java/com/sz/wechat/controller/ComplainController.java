@@ -61,6 +61,7 @@ public class ComplainController {
 		modelAndView.addObject("complaintcontent", complaintcontent);
 		modelAndView.addObject("evaluate",evaluate);
 		modelAndView.addObject("footprintpid",footprintpid);
+		modelAndView.addObject("chntitle","投诉");
 		modelAndView.setViewName("/docomplaint");
 		return modelAndView;
 		
@@ -105,6 +106,8 @@ public class ComplainController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pid", complaint.getPid());
 		modelAndView.addObject("companyname", companyname);
+		modelAndView.addObject("chntitle", "投诉成功");
+		
 		modelAndView.setViewName("/complaintsuccess");
 		return modelAndView;
 		

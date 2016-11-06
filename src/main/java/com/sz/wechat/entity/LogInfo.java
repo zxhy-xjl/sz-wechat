@@ -28,9 +28,33 @@ public class LogInfo {
 	private String headimgurl;
 	//最近一次关注时间
 	private String subscribe_time;
+	//访问页面名字
+	private String chntitle;
+	//访问餐厅名称
+	private String companyname;
+	//其他参数
+	private String otherparam;
 	
 	
 	
+	public String getChntitle() {
+		return chntitle;
+	}
+	public void setChntitle(String chntitle) {
+		this.chntitle = chntitle;
+	}
+	public String getCompanyname() {
+		return companyname;
+	}
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
+	public String getOtherparam() {
+		return otherparam;
+	}
+	public void setOtherparam(String otherparam) {
+		this.otherparam = otherparam;
+	}
 	public String getCity() {
 		return city;
 	}

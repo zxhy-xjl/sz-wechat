@@ -66,7 +66,8 @@ public class FootprintController {
 		//存入session，以便其他地方直接从session中获取openid
 		HttpSession ss = (HttpSession)request.getSession();
         ss.setAttribute("openid",openid);
-        
+    
+       
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> companyCodeList = this.consumerecService.getCompanyCodeList(openid);
 		//根据openid获取足迹列表
@@ -92,7 +93,7 @@ public class FootprintController {
 		}		
 		modelAndView.addObject("companyList", companyList);
 		modelAndView.addObject("companyListCount", companyList.size());
-		
+		modelAndView.addObject("chntitle","足迹");
 		modelAndView.setViewName("/footprint");
 	 
 		return modelAndView;

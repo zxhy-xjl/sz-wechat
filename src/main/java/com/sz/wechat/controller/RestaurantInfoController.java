@@ -112,8 +112,8 @@ public class RestaurantInfoController {
 		}
 		//我在这个餐厅的投诉列表
 		List<Complaint> complainList = this.complainService.getComplaintScoreByCompanyIdAndOpenid(companyCode, openid);
-		
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("chntitle", "餐厅详情");
 		modelAndView.addObject("companyInfo", companyInfo);
 		modelAndView.addObject("score", score);
 		modelAndView.addObject("scanCount", scanCount);
@@ -121,8 +121,7 @@ public class RestaurantInfoController {
 		modelAndView.addObject("personHealthCount", personHealthCount);
 		modelAndView.addObject("superviseCount", superviseCount);
 		modelAndView.addObject("complaintcount", complaintcount);
-		modelAndView.addObject("face", face);
-		
+		modelAndView.addObject("face", face);	
 		modelAndView.addObject("orderCount", orderCount);
 		modelAndView.addObject("orderTotalMoney", orderTotalMoney);
 		modelAndView.addObject("orderList", orderList);
@@ -157,6 +156,7 @@ public class RestaurantInfoController {
 		
 		modelAndView.addObject("complaintList", complaintList);
 		modelAndView.addObject("companyName", companyName);
+		modelAndView.addObject("chntitle", "投诉列表");
 		modelAndView.setViewName("/complaintList");
 		
 		return modelAndView;
