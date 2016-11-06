@@ -222,12 +222,14 @@ public class CompanyInfoService {
 								gradeStat = Integer.parseInt(evaluate.getEvaluate())+gradeStat;
 							}
 						}
-						gradeStat = gradeStat/length;
-						gradeStat = allgrade  - gradeStat;
-						if(score > gradeStat){
-							score = score - gradeStat;
-						}else{
-							score = 0;
+						if(length>0){
+							gradeStat = gradeStat/length;
+							gradeStat = allgrade  - gradeStat;
+							if(score > gradeStat){
+								score = score - gradeStat;
+							}else{
+								score = 0;
+							}
 						}
 						gradeStat=0;
 						
