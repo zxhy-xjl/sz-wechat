@@ -52,10 +52,10 @@ font-family: SimHei;
 <body style="background-color: #e9e9e9;">
 <table class="hovertable">
 <tr>
-	<th colspan="5" ><font style="font-weight: bolder">关注用户列表</font></th>
+	<th colspan="8" ><font style="font-weight: bolder">关注用户列表</font></th>
 </tr>
 <tr>
-	<th>openid</th><th>昵称</th><th>性别</th><th>访问时间</th><th>访问页面</th>
+	<th>openid</th><th>昵称</th><th>性别</th><th>访问时间</th><th>访问页面地址</th><th>访问页面名称</th><th>访问餐厅名称</th><th>其他参数名称</th>
 </tr>
 <c:forEach items="${loginfolist}" var="item" varStatus="status">
 <tr onclick="" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
@@ -82,6 +82,15 @@ font-family: SimHei;
     </td> 
       <td>
     ${item.visitpage }
+    </td> 
+      <td>
+    ${item.chntitle }
+    </td> 
+      <td>
+    ${item.companyname }
+    </td> 
+      <td>
+    ${item.otherparam }
     </td> 
 </tr>
 </c:forEach>
