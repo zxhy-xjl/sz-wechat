@@ -20,4 +20,18 @@
 	<select id="getUsers" resultMap="BaseResultMap">
 		SELECT <include refid="Base_Column_List"/> FROM SZ_USERINFO ORDER BY SUBSCRIBE_TIME DESC
 	</select>
+		<select id="getUsersByOpenid" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_USERINFO WHERE OPENID=#{openid,jdbcType=VARCHAR} 
+	</select>
+	<!-- 插入 -->
+	<insert id="insertUserInfo" parameterType="com.sz.wechat.entity.UserInfo">
+  insert into SZ_USERINFO
+   (OPENID,NICKNAME,SEX,LANGUAGE,CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME)
+    values
+   (#{openid,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{language,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{province,jdbcType=VARCHAR},#{headimgurl,jdbcType=VARCHAR},#{subscribe_time,jdbcType=VARCHAR})
+ </insert>
+    <!-- 修改 -->
+    <update id="updateUserInfo" parameterType="com.sz.wechat.entity.UserInfo">
+	 	update SZ_USERINFO set NICKNAME = #{nickname,jdbcType=VARCHAR},SEX = #{sex,jdbcType=VARCHAR},LANGUAGE = #{language,jdbcType=VARCHAR},CITY = #{city,jdbcType=VARCHAR},PROVINCE = #{province,jdbcType=VARCHAR},HEADIMGURL = #{headimgurl,jdbcType=VARCHAR},SUBSCRIBE_TIME = #{subscribe_time,jdbcType=VARCHAR} WHERE OPENID=#{openid,jdbcType=VARCHAR}
+	</update>
 </mapper>

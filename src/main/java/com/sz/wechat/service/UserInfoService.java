@@ -25,8 +25,34 @@ public class UserInfoService {
 	 * 获取所有用户信息 
 	 * @return 用户信息集合
 	 */
-	public List<UserInfo> getUsers(int page, int pageSize){
-		PageHelper.startPage(page, pageSize);
+	public List<UserInfo> getUsers(){
+		
 		return this.userInfoMapper.getUsers();
 	}
+	/**
+	 * 根据openid获取用户
+	 * @return 用户集合
+	 */
+	public UserInfo getUsersByOpenid(String openid)
+	{
+		return this.userInfoMapper.getUsersByOpenid(openid);
+	}
+	/**
+	 * 插入关注用户信息
+	 * @param userInfo 
+	 * @return
+	 */
+	public int insertUserInfo(UserInfo userInfo)
+	{
+		return this.userInfoMapper.insertUserInfo(userInfo);	
+	}
+    /**
+     * 通过openid修改关注用户信息
+     * @param userInfo
+     */
+    public int updateUserInfo(UserInfo userInfo)
+    {
+    	return this.userInfoMapper.updateUserInfo(userInfo);    	
+    }
+	
 }
