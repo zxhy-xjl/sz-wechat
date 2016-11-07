@@ -493,7 +493,9 @@ public class ScanCodeController {
 							scort = scort + Integer.parseInt(evaluate.getEvaluate());
 						}
 					}
-					scort = scort / length;
+					if(length>0){
+						scort = scort / length;
+					}
 					modelAndView.addObject("score", scort);
 				}
 				HttpSession session = request.getSession();
