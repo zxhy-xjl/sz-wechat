@@ -40,8 +40,8 @@ public class LogInfoController {
 
 	@Autowired
 	private LogInfoService logInfoService;
-	
-
+	@Autowired
+    private UserInfoService userInfoService;
 	@ResponseBody
 	@RequestMapping(value = "/insertLog",method = RequestMethod.GET)
 	public void insertLogPost (HttpServletRequest request, HttpServletResponse response){
@@ -67,7 +67,7 @@ public class LogInfoController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/userconsole",method = RequestMethod.GET)
 	public ModelAndView visitUserGet (HttpServletRequest request, HttpServletResponse response){
-		String appId = "wx4203dd1ae2c80664";
+		/*String appId = "wx4203dd1ae2c80664";
 		// 第三方用户唯一凭证密钥
 		String appSecret = "68e330a8bc86b7ddc369e0f3da4a893e";
 
@@ -113,7 +113,9 @@ public class LogInfoController {
 
 					}};
 					Collections.sort(userlist, timecomparator);
-		System.out.println(openidarray.get(0).toString());
+		System.out.println(openidarray.get(0).toString());*/
+		 List<UserInfo> userlist = this.userInfoService.getUsers();
+		
 		ModelAndView modelAndView = new ModelAndView();
         //System.out.println(at.getToken());
 		modelAndView.addObject("userlist", userlist);
