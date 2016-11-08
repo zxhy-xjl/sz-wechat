@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.wechat.dao.PageInfoMapper">
+	<!-- 实体对象 -->
+	<resultMap id="BaseResultMap" type="com.sz.wechat.entity.PageInfo">
+		<result column="ACTIONNAME"  property="actionname" jdbcType="VARCHAR"/>
+		<result column="VISITPAGE" property="visitpage" jdbcType="VARCHAR"/>
+		<result column="DESCRIPTION"  property="description" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 数据字段 -->
+	<sql id="Base_Column_List">
+		 ACTIONNAME, VISITPAGE, DESCRIPTION
+	</sql>
+	<!-- 查询 -->
+
+		<select id="getPagenameByAction" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT <include refid="Base_Column_List"/> FROM SZ_PAGE WHERE ACTIONNAME=#{actionname,jdbcType=VARCHAR} 
+	</select>
+	<!-- 插入 -->
+	
+</mapper>

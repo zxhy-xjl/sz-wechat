@@ -109,7 +109,7 @@ font-family: SimHei;
 					</td>
 					
 					<td><c:if test="${item.orderStatus == '待支付'}">
-					<input type="button" value="去结算" onclick="detailsinfo('${item.orderNo}')"></c:if>
+					<input type="button" value="去结算" onclick="detailsinfo('${item.orderNo}')" style="background: #f3be67;width:90px;height:40px;font-family: SimHei;font-weight: bold;font-size: 20px"></c:if>
 					<c:if test="${item.orderStatus == '已支付'}"><label  style="height:25px;width:60px;color: #a59171;font-family: SimHei;font-size: 20px" >已付款</label></c:if>
 					<br />
 					</td>

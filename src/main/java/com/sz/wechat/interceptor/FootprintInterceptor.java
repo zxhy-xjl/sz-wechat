@@ -19,8 +19,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sz.wechat.entity.LogInfo;
+import com.sz.wechat.entity.PageInfo;
 import com.sz.wechat.service.CompanyInfoService;
 import com.sz.wechat.service.LogInfoService;
+import com.sz.wechat.service.PageInfoService;
 
 /**
  * 足迹拦截器
@@ -33,12 +35,18 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 	private LogInfoService logInfoService;
 	@Autowired
 	private CompanyInfoService companyInfoService;
+	@Autowired
+	private PageInfoService pageInfoService;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
+		String aaa= request.getRequestURI();
 		System.out.println("拦截器准备数据中----");
-		System.out.println("请求地址---"+request.getRequestURI()+"；上下文---"+request.getContextPath());
+		System.out.println("请求地址---"+aaa+"；上下文---"+request.getContextPath());
+		
+
+		
 		return true;
 	}
 
@@ -47,7 +55,7 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("拦截器运行中------");
-		String otherparam = "";
+		/*String otherparam = "";
 		//Map<String, String[]> paramMap =  request.getParameterMap();
 		Enumeration<String>  enum1=request.getParameterNames();  
 		       while(enum1.hasMoreElements()){  
@@ -60,12 +68,12 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 		String companycode = "";
 		String companyname = "";
 		String chntitle = "";
-		if(request.getParameter("companycode")!=null)
+		if(request.getParameter("companycode")!=null && !request.getParameter("companycode").equals(""))
 		{
 			companycode = request.getParameter("companycode");
 			companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
 		}
-		if(request.getParameter("companyCode")!=null)
+		if(request.getParameter("companyCode")!=null && !request.getParameter("companyCode").equals(""))
 		{
 			companycode = request.getParameter("companyCode");
 			companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
@@ -124,15 +132,104 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 		loginfo.setCompanyname(companyname);
 		loginfo.setChntitle(chntitle);
 		loginfo.setOtherparam(otherparam);
-		this.logInfoService.insertLog(loginfo);
+		loginfo.setLanguage(request.getRequestURI());
+		this.logInfoService.insertLog(loginfo);*/
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-	//System.out.println(request.getParameter("chntitle"));
-		
+	System.out.println("--------------------");
+	String otherparam = "";
+	Enumeration<String>  enum1=request.getParameterNames();  
+	       while(enum1.hasMoreElements()){  
+	                  String  paramName=(String)enum1.nextElement();                      
+	                  String[]  values=request.getParameterValues(paramName);  
+	                  for(int  i=0;i<values.length;i++){  
+	                	  otherparam =otherparam+("["+i+"]   "+paramName+"  "+values[i]+"\n"); 
+	                  } 
+	       }
+	String companycode = "";
+	String companyname = "";
+	String chntitle = "";
+	if(request.getParameter("companycode")!=null && !request.getParameter("companycode").equals(""))
+	{
+		companycode = request.getParameter("companycode");
+		companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
+	}
+	if(request.getParameter("companyCode")!=null && !request.getParameter("companyCode").equals(""))
+	{
+		companycode = request.getParameter("companyCode");
+		companyname = this.companyInfoService.getCompanyByCode(companycode).getCompanyname();
+	}
+	if(request.getParameter("companyname")!=null && !request.getParameter("companyname").equals(""))
+	{
+		companyname = request.getParameter("companyname");
+	}
+	HttpSession ss = (HttpSession)request.getSession();
+	//System.out.println("openid:"+ss.getAttribute("openid"));
+	String visiturl = "";
+	LogInfo loginfo = new LogInfo();
+	Date date=new Date();
+	DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Long timetmp = 1L;
+	String time=format.format(date);
+	String city = "";
+	if(ss.getAttribute("city")!=null)
+		city = ss.getAttribute("city").toString();
+	String country = "";
+	if(ss.getAttribute("country")!=null)
+		country = ss.getAttribute("country").toString();
+	String headimgurl = "";
+	if(ss.getAttribute("headimgurl")!=null)
+		headimgurl = ss.getAttribute("headimgurl").toString();
+	String language = "";
+	if(ss.getAttribute("language")!=null)
+		language = ss.getAttribute("language").toString();
+	String nickname = "";
+	if(ss.getAttribute("nickname")!=null)
+		nickname = ss.getAttribute("nickname").toString();
+	String province = "";
+	if(ss.getAttribute("province")!=null)
+	province = ss.getAttribute("province").toString();
+	String sex = "";
+	if(ss.getAttribute("sex")!=null)
+		sex = ss.getAttribute("sex").toString();
+	String subscribe_time = "";
+	if(ss.getAttribute("subscribe_time")!=null)
+		{subscribe_time = ss.getAttribute("subscribe_time").toString();			
+		timetmp = Long.parseLong(subscribe_time);
+		subscribe_time = format.format(new Date(timetmp*1000L)); 
+		}
+	String openid = "";
+	if(ss.getAttribute("openid")!=null)
+		openid = ss.getAttribute("openid").toString();	
+	PageInfo pageinfo = new PageInfo();
+	if(this.pageInfoService.getPagenameByAction(request.getRequestURI())!=null)
+			{
+		pageinfo = this.pageInfoService.getPagenameByAction(request.getRequestURI());
+		loginfo.setVisitpage(pageinfo.getVisitpage());
+		loginfo.setChntitle(pageinfo.getDescription());
+		loginfo.setLanguage(pageinfo.getActionname());
+			}else
+			{
+				loginfo.setVisitpage(visiturl);
+				loginfo.setChntitle(chntitle);
+				loginfo.setLanguage("");
+			}
+	loginfo.setOpenid(openid);
+	loginfo.setCity(city);
+	loginfo.setCountry(country);
+	loginfo.setHeadimgurl(headimgurl);
+	loginfo.setInserttime(time);
+	loginfo.setNickname(nickname);
+	loginfo.setProvince(province);
+	loginfo.setSex(sex);
+	loginfo.setSubscribe_time(subscribe_time);
+	loginfo.setCompanyname(companyname);
+	loginfo.setOtherparam(otherparam);
+	this.logInfoService.insertLog(loginfo);
 	}
   
 	

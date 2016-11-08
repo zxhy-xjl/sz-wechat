@@ -28,7 +28,7 @@
   insert into SZ_LOG
    (NICKNAME,OPENID,SEX,LANGUAGE,INSERTTIME,VISITPAGE,COUNTRY,CITY,PROVINCE,HEADIMGURL,SUBSCRIBE_TIME,CHNTITLE,COMPANYNAME,OTHERPARAM)
     values
-   (#{nickname},#{openid},#{sex},#{language},#{inserttime},#{visitpage},#{country},#{city},#{province},#{headimgurl},#{subscribe_time,jdbcType=VARCHAR},#{chntitle,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{otherparam,jdbcType=VARCHAR})
+   (#{nickname,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{language,jdbcType=VARCHAR},#{inserttime,jdbcType=VARCHAR},#{visitpage,jdbcType=VARCHAR},#{country,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{province,jdbcType=VARCHAR},#{headimgurl,jdbcType=VARCHAR},#{subscribe_time,jdbcType=VARCHAR},#{chntitle,jdbcType=VARCHAR},#{companyname,jdbcType=VARCHAR},#{otherparam,jdbcType=VARCHAR})
 
  </insert>
 </mapper>
