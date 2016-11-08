@@ -26,7 +26,7 @@ table.hovertable th {
 	padding: 8px;
 	border-style: solid;
 	border-color: #a9c6c9;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bolder;
 }
 table.hovertable tr {
@@ -37,6 +37,7 @@ table.hovertable td {
 	padding: 8px;
 	border-style: solid;
 	border-color: #a9c6c9;
+	width: 105px;
 }
 html{
 font-family: SimHei;
@@ -52,10 +53,10 @@ font-family: SimHei;
 <body style="background-color: #e9e9e9;">
 <table class="hovertable">
 <tr>
-	<th colspan="8" ><font style="font-weight: bolder">关注用户列表</font></th>
+	<th colspan="9" ><font style="font-weight: bolder">用户访问记录</font></th>
 </tr>
 <tr>
-	<th>openid</th><th>昵称</th><th>性别</th><th>访问时间</th><th>访问页面地址</th><th>访问页面名称</th><th>访问餐厅名称</th><th>其他参数名称</th>
+	<th>openid</th><th>昵称</th><th>性别</th><th>访问时间</th><th>调用action</th><th>访问页面地址</th><th>访问页面名称</th><th>访问餐厅名称</th><th>其他参数名称</th>
 </tr>
 <c:forEach items="${loginfolist}" var="item" varStatus="status">
 <tr onclick="" onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
@@ -79,6 +80,9 @@ font-family: SimHei;
 
    <td>
     ${item.inserttime }
+    </td> 
+       <td>
+    ${item.language }
     </td> 
       <td>
     ${item.visitpage }
