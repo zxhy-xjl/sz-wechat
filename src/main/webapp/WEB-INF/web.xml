@@ -33,6 +33,10 @@
     <filter-name>logs</filter-name>
     <url-pattern>*.html</url-pattern>
 </filter-mapping>
+<filter-mapping>
+    <filter-name>logs</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+</filter-mapping>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>

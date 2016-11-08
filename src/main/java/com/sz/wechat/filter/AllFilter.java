@@ -36,6 +36,8 @@ public class AllFilter implements Filter {
 	
 	@Autowired
 	private LogInfoService logInfoService;
+	@Autowired
+	private PageInfoService pageInfoService;
 
     /**
      * Default constructor. 
@@ -75,25 +77,25 @@ Users users = this.usersService.queryByOpenid(openid);
 	    XmlWebApplicationContext cxt = (XmlWebApplicationContext)WebApplicationContextUtils.getWebApplicationContext(sc); 
 	    if(cxt != null && cxt.getBean("logInfoService") != null && logInfoService == null)  
 	    	logInfoService = (LogInfoService) cxt.getBean("logInfoService");    
+	    if(cxt != null && cxt.getBean("pageInfoService") != null && pageInfoService == null)  
+	    	pageInfoService = (PageInfoService) cxt.getBean("pageInfoService");    
 	    System.out.println(httpservletreq.getRequestURI());
 	    Date date=new Date();
 		DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time=format.format(date);
 	    LogInfo loginfo = new LogInfo();
-		loginfo.setVisitpage(httpservletreq.getRequestURI());
-		loginfo.setChntitle("扫桌主页面");
-		loginfo.setCity("");
-		loginfo.setCompanyname("");
-		loginfo.setCountry("");
-		loginfo.setHeadimgurl("");
-		loginfo.setInserttime(time);
-		loginfo.setLanguage("");
-		loginfo.setNickname("");
-		loginfo.setOpenid("");
-		loginfo.setOtherparam("");
-		loginfo.setProvince("");
-		loginfo.setSex("");
-		loginfo.setSubscribe_time("");
+	    PageInfo pageinfo = new PageInfo();
+	    if(this.pageInfoService.getPagenameByAction(httpservletreq.getRequestURI())!=null)
+	    {
+	    	pageinfo = this.pageInfoService.getPagenameByAction(httpservletreq.getRequestURI());
+	    	loginfo.setVisitpage(pageinfo.getVisitpage());
+	    	loginfo.setChntitle(pageinfo.getDescription());
+	    }
+	    else{
+	    	loginfo.setVisitpage(httpservletreq.getRequestURI());
+	    	loginfo.setChntitle("");
+	    }
+        loginfo.setInserttime(time);
 		//logInfoService = new LogInfoService();
 		this.logInfoService.insertLog(loginfo);
 		// pass the request along the filter chain
