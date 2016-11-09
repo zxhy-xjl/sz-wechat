@@ -53,32 +53,42 @@ public class CoreService {
 			// 文本消息
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
 				respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
 			// 图片消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "您发送的是图片消息！";
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
 			else if(userContent.contains("餐具"))
 			{
 				respContent = "  如何辨别餐具是否消毒合格?\n1.看包装。上面应印有生产厂家的明确信息，如厂址、电话等；\n2.观察是否注明出厂日期或保质期；\n3.将餐具打开，先闻闻，有无刺鼻、发霉味道。";
-				
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
 			// 地理位置消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
 				respContent = "您发送的是地理位置消息！";
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
 			// 链接消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
 				respContent = "您发送的是链接消息！";
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
 			// 音频消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
 				respContent = "您发送的是音频消息！";
+				textMessage.setContent(respContent);
+				respMessage = MessageUtil.textMessageToXml(textMessage);
 				
 			}
-			textMessage.setContent(respContent);
-			respMessage = MessageUtil.textMessageToXml(textMessage);
-			if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT))
+			
+			else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT))
 			{
 				// 事件类型
 				String eventType = requestMap.get("Event");
@@ -122,7 +132,7 @@ public class CoreService {
 					 newsMessage.setArticles(articleList);  
 					 // 将图文消息对象转换成xml字符串  
 					 respMessage = MessageUtil.newsMessageToXml(newsMessage);  		
-					 return respMessage;
+					
 				}
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
