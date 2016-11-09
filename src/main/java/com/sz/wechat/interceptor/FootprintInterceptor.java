@@ -135,7 +135,10 @@ public class FootprintInterceptor implements HandlerInterceptor  {
 		loginfo.setLanguage(request.getRequestURI());
 		this.logInfoService.insertLog(loginfo);*/
 	}
-
+    /*
+     * 对所有*.do进行拦截
+     * @author linhd
+     */
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {

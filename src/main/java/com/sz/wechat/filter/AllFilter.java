@@ -28,7 +28,8 @@ import com.sz.wechat.service.LogInfoService;
 import com.sz.wechat.service.PageInfoService;
 
 /**
- * Servlet Filter implementation class AllFilter
+ * 过滤器，用于过滤所有单独html，jsp访问请求
+ * @author linhd
  */
 @WebFilter("/AllFilter")
 public class AllFilter implements Filter {
@@ -64,7 +65,7 @@ Users users = this.usersService.queryByOpenid(openid);
 	}*/
 
 	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 * 对html，jsp进行过滤
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
