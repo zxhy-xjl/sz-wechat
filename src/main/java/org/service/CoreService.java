@@ -26,7 +26,7 @@ public class CoreService {
 	 * @return
 	 */
 	public static String processRequest(HttpServletRequest request) {
-		String respMessage = null;
+		String respMessage = "回复“餐具”可以获得小知识哦！";
 		try {
 			// 默认返回的文本消息内容
 			String respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
@@ -121,7 +121,8 @@ public class CoreService {
 					 // 设置图文消息包含的图文集合  
 					 newsMessage.setArticles(articleList);  
 					 // 将图文消息对象转换成xml字符串  
-					 respMessage = MessageUtil.newsMessageToXml(newsMessage);  				
+					 respMessage = MessageUtil.newsMessageToXml(newsMessage);  		
+					 return respMessage;
 				}
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
