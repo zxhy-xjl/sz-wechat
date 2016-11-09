@@ -26,10 +26,10 @@ public class CoreService {
 	 * @return
 	 */
 	public static String processRequest(HttpServletRequest request) {
-		String respMessage = "回复“餐具”可以获得小知识哦！";
+		String respMessage = "回复“餐具”可以获得小知识哦!！";
 		try {
 			// 默认返回的文本消息内容
-			String respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
+			String respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦!！";
 
 			// xml请求解析
 			Map<String, String> requestMap = MessageUtil.parseXml(request);
@@ -52,7 +52,7 @@ public class CoreService {
          
 			// 文本消息
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
-				respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
+				respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦!！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -96,13 +96,15 @@ public class CoreService {
 				newsMessage.setToUserName(fromUserName);  
 			    newsMessage.setFromUserName(toUserName);  
 	            newsMessage.setCreateTime(new Date().getTime());  
-				newsMessage.setMsgType("news");  
+				newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);  
 				newsMessage.setFuncFlag(0);  
 				List<Article> articleList = new ArrayList<Article>();  
 				// 订阅
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
 					respContent = "谢谢您的关注！";
-					 Article article = new Article();  
+					textMessage.setContent(respContent);
+					respMessage = MessageUtil.textMessageToXml(textMessage);
+					 /*Article article = new Article();  
 					 article.setTitle("扫桌使用手册");  
 					 article.setDescription("民以食为天，食品安全一直是老百姓最关心的话题之一。");  
 					 article.setPicUrl("http://mmbiz.qpic.cn/mmbiz_jpg/m9NmvaEsfOmdFV2XJZYclQ0DcxdJVPav70r15PjN00hAESaSlXPRSLtqIa4kj2F32lgEym5QnJvPAonM1yHSibA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");  
@@ -131,13 +133,20 @@ public class CoreService {
 					 // 设置图文消息包含的图文集合  
 					 newsMessage.setArticles(articleList);  
 					 // 将图文消息对象转换成xml字符串  
-					 respMessage = MessageUtil.newsMessageToXml(newsMessage);  		
+					 respMessage = MessageUtil.newsMessageToXml(newsMessage);  		*/
 					
 				}
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					// TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
-				}		
+					respContent = "谢谢您的关注！";
+					textMessage.setContent(respContent);
+					respMessage = MessageUtil.textMessageToXml(textMessage);
+				}		else{
+					respContent = "谢谢您的关注！";
+					textMessage.setContent(respContent);
+					respMessage = MessageUtil.textMessageToXml(textMessage);
+				}
 			}
 	/*		// 事件推送
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
