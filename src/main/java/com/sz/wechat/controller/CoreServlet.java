@@ -65,6 +65,7 @@ public class CoreServlet {
 		// 响应消息
 		PrintWriter out = response.getWriter();
 		out.print(respMessage);
+		out.flush();
 		out.close();
 	}
 

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.message.resp.Article;
 import org.message.resp.NewsMessage;
 import org.message.resp.TextMessage;
@@ -19,6 +20,7 @@ import org.util.MessageUtil;
  * @date 2013-05-20
  */
 public class CoreService {
+	private static Logger log = Logger.getLogger(CoreService.class);
 	/**
 	 * 处理微信发来的请求
 	 * 
@@ -26,10 +28,10 @@ public class CoreService {
 	 * @return
 	 */
 	public static String processRequest(HttpServletRequest request) {
-		String respMessage = "回复“餐具”可以获得小知识哦!！";
+		String respMessage = "回复“餐具”可以获得小知识哦！";
 		try {
 			// 默认返回的文本消息内容
-			String respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦!！";
+			String respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
 
 			// xml请求解析
 			Map<String, String> requestMap = MessageUtil.parseXml(request);
@@ -49,42 +51,50 @@ public class CoreService {
 			textMessage.setCreateTime(new Date().getTime());
 			textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 			textMessage.setFuncFlag(0);
-         
+            log.info(msgType);
+            log.info(userContent);
+            log.info(requestMap.get("Event"));
 			// 文本消息
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT) && !userContent.contains("餐具") ) {
-				respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦!！";
+				respContent = "您好，这里是扫桌！回复“餐具”可以获得小知识哦！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 			}
 			// 图片消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "您发送的是图片消息！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 			}
 			else if(userContent.contains("餐具"))
 			{
 				respContent = "  如何辨别餐具是否消毒合格?\n1.看包装。上面应印有生产厂家的明确信息，如厂址、电话等；\n2.观察是否注明出厂日期或保质期；\n3.将餐具打开，先闻闻，有无刺鼻、发霉味道。";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 			}
 			// 地理位置消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
 				respContent = "您发送的是地理位置消息！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 			}
 			// 链接消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
 				respContent = "您发送的是链接消息！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 			}
 			// 音频消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
 				respContent = "您发送的是音频消息！";
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
+				log.info(respContent);
 				
 			}
 			
@@ -92,6 +102,7 @@ public class CoreService {
 			{
 				// 事件类型
 				String eventType = requestMap.get("Event");
+				log.info(eventType);
 				NewsMessage newsMessage = new NewsMessage();  
 				newsMessage.setToUserName(fromUserName);  
 			    newsMessage.setFromUserName(toUserName);  
@@ -139,14 +150,7 @@ public class CoreService {
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					// TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
-					respContent = "谢谢您的关注！";
-					textMessage.setContent(respContent);
-					respMessage = MessageUtil.textMessageToXml(textMessage);
-				}		else{
-					respContent = "谢谢您的关注！";
-					textMessage.setContent(respContent);
-					respMessage = MessageUtil.textMessageToXml(textMessage);
-				}
+				}		
 			}
 	/*		// 事件推送
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
