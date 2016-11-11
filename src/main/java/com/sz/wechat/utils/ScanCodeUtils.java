@@ -147,7 +147,6 @@ public class ScanCodeUtils {
 	
 	/**
 	 * 得到文件上传的相对路径
-	 * 
 	 * @param fileName
 	 *            文件名
 	 * @return
@@ -183,7 +182,6 @@ public class ScanCodeUtils {
 	 * @param menu
 	 * @param request
 	 */
-	@SuppressWarnings("deprecation")
 	public static void transferToFile(Menu menu,String downLoadPath) {
 		// 获得文件路径
 		File file = new File(downLoadPath);

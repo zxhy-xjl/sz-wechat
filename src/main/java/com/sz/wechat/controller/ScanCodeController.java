@@ -7,11 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sz.wechat.basic.DictCommon;
 import com.sz.wechat.entity.CompanyInfo;
 import com.sz.wechat.entity.Complaint;
 import com.sz.wechat.entity.Evaluate;
@@ -31,7 +27,6 @@ import com.sz.wechat.entity.ScanCode;
 import com.sz.wechat.entity.SupervisePunish;
 import com.sz.wechat.service.AbnormalService;
 import com.sz.wechat.service.CompanyInfoService;
-import com.sz.wechat.service.ComplainService;
 import com.sz.wechat.service.EvaluateService;
 import com.sz.wechat.service.FootprintService;
 import com.sz.wechat.utils.RuntimeModel;
@@ -51,11 +46,6 @@ public class ScanCodeController {
 	 */
 	@Autowired
 	private CompanyInfoService companyInfoService;
-	/**
-	 * 投诉反馈数据逻辑层
-	 */
-	@Autowired
-	private ComplainService complainService;
 	/**
 	 * 足迹数据逻辑层
 	 */

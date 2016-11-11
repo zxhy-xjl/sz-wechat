@@ -47,5 +47,5 @@ public class RquestURI extends BodyTagSupport{
 		rquestURI=null;
 		return super.doEndTag();
 	}
-	
+
 }
