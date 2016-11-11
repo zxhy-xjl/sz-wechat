@@ -2,6 +2,7 @@ package org.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,16 @@ public class CoreService {
 			String toUserName = requestMap.get("ToUserName");
 			// 消息类型
 			String msgType = requestMap.get("MsgType");
-
+			Enumeration<String>  enum1=request.getParameterNames();  
+		       while(enum1.hasMoreElements()){  
+		                  String  paramName=(String)enum1.nextElement();                      
+		                  String[]  values=request.getParameterValues(paramName);  
+		                  for(int  i=0;i<values.length;i++){  
+		                	  log.info("["+i+"]   "+paramName+"  "+values[i]+"\n"); 
+		                  } 
+		       }
+	
+			log.info(msgType);
 			// 回复文本消息
 			TextMessage textMessage = new TextMessage();
 			textMessage.setToUserName(fromUserName);
