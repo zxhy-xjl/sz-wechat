@@ -46,6 +46,7 @@ font-family: SimHei;
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>用户列表</title>
 <script type="text/javascript">
+var url = "<%=application.getRealPath("/")%>";
 function getuserdetails(openid)
 {
 	window.location.href="<%=path%>/userdetail.do?openid="+openid;
