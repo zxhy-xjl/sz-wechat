@@ -14,7 +14,7 @@ import net.sf.json.JSONObject;
 
 /**
  * 发送HttpClient请求以及接收结果过程
- * @author sway
+ * @author Arthur
  *
  */
 @SuppressWarnings("deprecation")

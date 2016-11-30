@@ -77,5 +77,4 @@
 		</mvc:interceptor> -->
 		<bean class="com.sz.wechat.interceptor.FootprintInterceptor"/>
 	</mvc:interceptors> 
-	<bean  class="com.sz.wechat.basic.DictCommon"/>
 </beans>

@@ -15,7 +15,7 @@ import com.sz.wechat.service.CodeDictService;
  * 字典基本信息服务操作类
  * @author sway
  */
-@Component
+@Component("dictCommon")
 public class DictCommon implements  ServletContextAware{
 	
 	public static List<Map<String,LinkedHashMap<String,CodeDict>>> dictListMap = null;

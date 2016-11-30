@@ -55,5 +55,5 @@
 		<property name="basePackage" value="com.sz.wechat.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-    <bean class="com.sz.wechat.basic.DictCommon"/>
+	<bean  class="com.sz.wechat.basic.DictCommon"/>
 </beans>

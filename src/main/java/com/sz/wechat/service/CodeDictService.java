@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.sz.wechat.dao.CodeDictMapper;
 import com.sz.wechat.entity.CodeDict;
 /**
@@ -17,7 +15,7 @@ import com.sz.wechat.entity.CodeDict;
  *
  */
 @Component("codeDictService")  
-public class CodeDictService implements CodeDictMapper  {
+public class CodeDictService implements CodeDictMapper{
 	/*创建日志输出文件*/
 	private static Logger log=Logger.getLogger(CodeDictService.class);
 	
@@ -77,8 +75,6 @@ public class CodeDictService implements CodeDictMapper  {
 	@Override
 	public List<CodeDict> getAllDict() {
 		// TODO Auto-generated method stub
-		System.out.println(this.codeDictMapper);
 		return null;
 	}
-
 }
